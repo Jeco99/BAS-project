@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.labelInput {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 500;
+    color: #111827;
+}
+
+.inputUser{
+    background-color: #F9FAFB;
+    border-color: #D1D5DB;
+    color: #111827;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    border-radius: 0.5rem;
+    display: block;
+    width: 100%;
+    padding: 0.625rem;
+}
+
+.inputUser:focus{
+    --ring-color: #2563EB;
+
+}
+
+.Img {
+    width: 381px;
+    height: 294px;
+}
+
+.Login {
+    background-color: #407C87;
+    margin: 0px;
+    padding: 0px;
+}
+
+.btn {
+    width: 172px;
+    height: 44px;
+    background-color: #A5DBDD ;
+}
