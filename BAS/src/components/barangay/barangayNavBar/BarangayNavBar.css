@@ -30,9 +30,10 @@ button {
     cursor: pointer;
     transition: border-color 0.25s;
 }
-button:hover {
+
+/* button:hover {
     color: #a5dbdd;
-}
+} */
 
 .navbar-logo {
   margin-top: 5px;
