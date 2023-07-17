@@ -28,15 +28,11 @@
 
 }
 
-.Img {
-    width: 381px;
-    height: 294px;
-}
-
 .Login {
     background-color: #407C87;
     margin: 0px;
     padding: 0px;
+    width: 100%;
 }
 
 .btn {
