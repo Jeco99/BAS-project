@@ -1,4 +1,5 @@
 import headerData from './historyHeader'
+import { GrLinkNext } from "react-icons/gr";
 
 export default function History(){
     return(
@@ -8,7 +9,7 @@ export default function History(){
             <thead>
                 <tr>
                   {headerData.map( (data) => (
-                    <th key={data.header}>{data.header}</th>
+                    <th key={data.header} className='text-center'>{data.header}</th>
                   ))}
                 </tr>
             </thead>
@@ -19,8 +20,19 @@ export default function History(){
                   ))}
                 </tr>
             </tbody>
-                <button>Next</button>
+            
+               
             </table>
+            <div className=' flex justify-center items-center gap-4 '>
+              <p className='items-center pt-4'> Page 1</p>  
+              <button className='bg-morningGlory px-5 py-2 mt-4 flex gap-2'>
+                Next
+                <GrLinkNext className='mt-1' size="20px"/>
+                </button>
+
+                 
+                 
+              </div>  
 
             
         </div>
