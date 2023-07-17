@@ -1,4 +1,3 @@
-
 // import LogIn from "./LogIn";
 // import BrgyNavbar from "./components/barangay/barangayNavBar/BarangayNavBar";
 // import BarangayDashboard from "./components/barangay/barangayDashboard/barangayDashboard";
@@ -17,6 +16,8 @@ import BarangaySignUp from "./components/barangay/barangaySignup.jsx/BarangaySig
 function App() {
   return (
     <>
+   <UserNavbar />
+   <UserSidebar />
      {/* <LogIn />       */}
       {/* <BrgyNavbar/> */}
       {/* <BarangayDashboard /> */}

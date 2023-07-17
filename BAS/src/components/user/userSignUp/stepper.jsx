@@ -1,4 +1,5 @@
 function Stepper(){
+    const steps = ['Account Info', 'Personal Details']
     return(
         <div className="flex justify-center items-center mx-40 my-20 "> 
         <ol className="flex items-center w-full text-sm font-medium text-center text-gray-500 dark:text-gray-400 sm:text-base">
