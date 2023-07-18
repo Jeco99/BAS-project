@@ -1,4 +1,4 @@
-import BASlogo from "/src/assets/images/BAS-Logo-1.2.png";
+import BASlogo from "./BAS-Logo-1.2.png";
 
 export default function Navbartst() {
   return (

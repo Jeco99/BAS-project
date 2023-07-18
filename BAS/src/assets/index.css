@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 .labelInput {
     display: block;
     margin-bottom: 0.5rem;
@@ -28,15 +29,11 @@
 
 }
 
-.Img {
-    width: 381px;
-    height: 294px;
-}
-
 .Login {
     background-color: #407C87;
     margin: 0px;
     padding: 0px;
+    width: 100%;
 }
 
 .btn {
