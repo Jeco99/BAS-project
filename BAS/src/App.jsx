@@ -4,12 +4,15 @@ import BarangayDashboard from "./components/barangay/barangayDashboard/barangayD
 import AccountDetails from "./components/user/userSignUp/accountDetails";
 import UserNavbar from "./components/user/userNavbar/navBar"
 import UserSidebar from "./components/user/userSidebar/sideBar"
+import BarangaySignUp from "./components/barangay/barangaySignup.jsx/BarangaySignUp";
 
 function App() {
   return (
     <>
-   <UserNavbar />
+    <LogIn/>
+   {/* <UserNavbar />
    <UserSidebar />
+   <BarangaySignUp/> */}
     </>
   );
 }
