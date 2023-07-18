@@ -18,6 +18,19 @@ function AccountDetails() {
           <ImageUpload />
           <div>
             <div className="mb-2 block">
+              <label htmlFor="userName" value="Your email">
+                Username
+              </label>
+            </div>
+            <input
+              className="w-full p-2.5 text-black-500 bg-white border rounded-md shadow-sm outline-none appearance-none focus:border-indigo-600"
+              id="userName"
+              required
+              type="text"
+            />
+          </div>
+          <div>
+            <div className="mb-2 block">
               <label htmlFor="email" value="Your email">
                 Email
               </label>
