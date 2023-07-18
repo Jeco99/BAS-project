@@ -1,8 +1,4 @@
-/* .custom-navbar {
-    background-color: #407C87;
-  } */
-
-  a {
+.logo-name {
     color: #000;
     text-align: center;
     font-family: Poppins;
@@ -11,7 +7,7 @@
     font-weight: 400;
     line-height: normal;
 }
-a:hover {
+.logo-name:hover {
   color: #a5dbdd;
 }
 
@@ -35,7 +31,8 @@ button:hover {
 }
 
 .navbar-logo {
-  margin-top: 5px;
+  height: 3rem;
+  width: auto;
 }
 
 .bell-icon {
@@ -44,4 +41,40 @@ button:hover {
 
 .bell-icon:hover {
   color: #a5dbdd;
+}
+
+/* Media Queries for Mobile and Tablet View */
+@media (max-width: 768px) {
+  .logo-name {
+    font-size: 18px;
+    margin-bottom: 2px;
+  }
+
+  .welcome-note{
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 425px) {
+  .logo-name {
+    display: none;
+  }
+  .bell-icon {
+    display: none;
+  }
+  .welcome-note{
+    font-size: 12px;
+  }
+  span.dropdown-items {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 320px) {
+  .welcome-note{
+    font-size: 10px;
+  }
+  span.dropdown-items {
+    font-size: 9px;
+  }
 }
