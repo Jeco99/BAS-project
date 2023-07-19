@@ -2,9 +2,9 @@ import { Dropdown, Navbar, Avatar } from 'flowbite-react';
 import { BellIcon } from "@heroicons/react/24/solid";
 import logoImage from '/src/assets/images/BAS-Logo-1.2.png';
 import logoImage2 from '/src/assets/images/CodeVerts-logo-2.png';
-import './BarangayNavBar.css';
+import './Navbar.css';
 
-export default function BrgyNavbar() {
+export default function NavbarComponent() {
   return (
     <div className='flex-1 changeborder'>
       <Navbar fluid style={{ backgroundColor: '#407C87', caretColor: 'transparent' }}>
