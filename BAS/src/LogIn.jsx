@@ -45,14 +45,14 @@ const LogIn = () => {
           <Link 
             to="/userdashboard"
             type="button"
-            className="rounded-full text-xl h-11 text-white bg-morningGlory w-full sm:w-auto mb-4 sm:mb-2"
+            className="flex justify-center items-center rounded-full text-xl h-11 text-white bg-morningGlory w-full sm:w-auto mb-4 sm:mb-2"
           >
             Log In
           </Link>
           <Link
             to="/createaccount"
             type="button"
-            className="rounded-full text-xl h-11 text-white bg-morningGlory w-full sm:w-auto"
+            className="flex justify-center items-center rounded-full  text-xl h-11 text-white bg-morningGlory w-full sm:w-auto"
           >
             Create Account
           </Link>
