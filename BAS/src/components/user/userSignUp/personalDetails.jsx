@@ -14,15 +14,10 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 function PersonalDetails() {
-  const [back, setBack] = useState(false);
   const [startDate, setStartDate] = useState(new Date());
 
-  if (back) {
-    return <AccountDetails />;
-  }
   return (
-    <>
-      <Stepper />
+
       <div className="block m-8 p-6 sm:m-32 bg-white border border-gray-200 rounded-lg shadow">
         <h1 className="text-center text-2xl font-semibold">Personal Details</h1>
         <div>
@@ -185,23 +180,7 @@ function PersonalDetails() {
             </div>
           </form>
         </div>
-        <div className="flex justify-between mt-2">
-          <button
-            type="button"
-           className="bg-morningGlory text-black px-5 py-2 border rounded-md"
-            onClick={() => {
-              setBack(true);
-            }}
-          >
-            Back
-          </button>
-
-          <button type="button" className="bg-morningGlory text-black px-5 py-2 border rounded-md">
-            Submit
-          </button>
-        </div>
       </div>
-    </>
   );
 }
 

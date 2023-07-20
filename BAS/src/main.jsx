@@ -11,8 +11,9 @@ import LogIn from "./LogIn.jsx";
 import AccountDetails from "./components/user/userSignUp/accountDetails";
 import BarangayDashboard from "./components/barangay/barangayDashboard/barangayDashboard";
 import UserDashboard from "./components/user/userDashboard/userDashboard";
+import CreateaAccount from "./components/user/userSignUp/createAccount";
 
-import ErrorPage from "./errorPage.jsx/errorpage";
+import ErrorPage from "./errorPage/errorpage";
 
 
 const router = createBrowserRouter([
@@ -23,7 +24,7 @@ const router = createBrowserRouter([
   },
   {
     path:"/createaccount",
-    element:<AccountDetails />,
+    element:<CreateaAccount />,
     errorElement: <ErrorPage />
   },
   {
