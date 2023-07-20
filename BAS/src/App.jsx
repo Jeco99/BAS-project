@@ -11,19 +11,11 @@ import AccountDetails from "./components/user/userSignUp/accountDetails";
 import History from "./components/user/userHistory/history";
 import BarangayAddPost from "./components/barangay/barangayDashboard/addpost";
 import BarangaySignUp from "./components/barangay/barangaySignup.jsx/BarangaySignUp";
-
-
+import AppointmentDisplay from "./components/user/appointmentDisplay/appointmentDisplay";
 function App() {
   return (
     <>
-   <UserNavbar />
-   <UserSidebar />
-     {/* <LogIn />       */}
-      {/* <BrgyNavbar/> */}
-      {/* <BarangayDashboard /> */}
-      {/* <AccountDetails /> */}
-      <History />
-      <BarangaySignUp />
+  <AppointmentDisplay />
     </>
   );
 }
