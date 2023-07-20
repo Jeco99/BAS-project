@@ -1,3 +1,5 @@
+
+import { Link } from "react-router-dom";
 import logoImage from "/src/assets/images/BAS-Logo-1.png";
 
 const LogIn = () => {
@@ -39,18 +41,21 @@ const LogIn = () => {
         </div>
 
         <div className="flex flex-col  justify-center">
-          <button
+
+          <Link 
+            to="/userdashboard"
             type="button"
             className="rounded-full text-xl h-11 text-white bg-morningGlory w-full sm:w-auto mb-4 sm:mb-2"
           >
             Log In
-          </button>
-          <button
+          </Link>
+          <Link
+            to="/createaccount"
             type="button"
             className="rounded-full text-xl h-11 text-white bg-morningGlory w-full sm:w-auto"
           >
             Create Account
-          </button>
+          </Link>
         </div>
       </form>
     </div>

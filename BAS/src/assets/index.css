@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-/* *{
-    border: 1px solid red;
+/*
+li {
+    background-color: #a5dbdd;
+    border: 1px;
+    border-color: black;
+    border-style: solid;
+    text-align: center;
 } */
