@@ -7,9 +7,7 @@ function AccountDetails() {
     <>
       <div className="container mx-auto">
         <div className="mt-8 pr-8">
-          <button className="bg-blue-500 text-white font-bold py-2 px-4 rounded">
-            Update Profile
-          </button>
+          <p className=" text-black font-bold text-xl">Update Profile</p>
         </div>
         <header className="flex mt-8 mb-8 justify-center">
           <nav className="mx-8 h-81 w-362">
