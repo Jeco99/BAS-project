@@ -12,6 +12,7 @@ import AccountDetails from "./components/user/userSignUp/accountDetails";
 import BarangayDashboard from "./components/barangay/barangayDashboard/barangayDashboard";
 import UserDashboard from "./components/user/userDashboard/userDashboard";
 import CreateaAccount from "./components/user/userSignUp/createAccount";
+import AppointmentDisplay from "./components/user/appointmentDisplay/appointmentDisplay";
 
 import ErrorPage from "./errorPage/errorpage";
 
@@ -35,6 +36,11 @@ const router = createBrowserRouter([
   {
     path:'/userdashboard',
     element: <UserDashboard/>, //create children based on the user sidebar
+    errorElement: <ErrorPage />
+  },
+  {
+    path:'/appointment',
+    element: <AppointmentDisplay/>, //create children based on the user sidebar
     errorElement: <ErrorPage />
   },
 
