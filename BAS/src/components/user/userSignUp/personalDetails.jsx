@@ -18,24 +18,6 @@ function PersonalDetails() {
 
   return (
     <>
-      <div className="container mx-auto">
-        <div className="mt-8 pr-8">
-          <p className=" text-black font-bold text-xl">Update Profile</p>
-        </div>
-        <header className="flex mt-8 mb-8 justify-center">
-          <nav className="mx-8 h-81 w-362">
-            <button className="block w-full bg-gray-200 hover:bg-gray-300 font-bold py-4 px-8 rounded-t">
-              Account
-            </button>
-          </nav>
-          <nav className="mx-8 h-81 w-362">
-            <button className="block w-full bg-gray-200 hover:bg-gray-300 font-bold py-4 px-8 rounded-t">
-              Personal
-            </button>
-          </nav>
-        </header>
-        <hr className="border-b-2 border-black w-5/6 m-auto" />
-      </div>
       <div className="block m-8 p-6 sm:m-32 bg-white border border-gray-200 rounded-lg shadow">
         <h1 className="text-center text-2xl font-semibold">Personal Details</h1>
         <div>
@@ -198,17 +180,6 @@ function PersonalDetails() {
             </div>
           </form>
         </div>
-      </div>
-      <div className="container mx-auto">
-        <div className="flex justify-end mt-8 pr-8">
-          <button className="mr-4 bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">
-            Cancel
-          </button>
-          <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
-            Update
-          </button>
-        </div>
-        <header className="flex mt-8 mb-8"></header>
       </div>
     </>
   );
