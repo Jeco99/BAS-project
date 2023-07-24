@@ -1,0 +1,22 @@
+/* .sidebar-button {
+    background-color: #407C87;
+} */
+
+.sidebar-content{
+    background-color: #EEF1F6;
+    caret-color: transparent;
+}
+
+.sidebar-button {
+    background-color: #407C87;
+    margin-bottom: 5px;
+}
+
+.sidebar-button:hover {
+    background-color: #A5DBDD;
+}
+
+.active {
+    color: black;
+    background-color: #A5DBDD;
+}
