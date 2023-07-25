@@ -30,7 +30,6 @@ export default function CreateaAccount() {
     zipcode:""     
   });
 
-
   const display = () => {
     switch (activeStep) {
       case 0: {
@@ -59,7 +58,10 @@ export default function CreateaAccount() {
   //data validation
 
   // TODO: Where the handle next will validate the data before going next form
-  const handleNext = () => !isLastStep && setActiveStep((cur) => cur + 1);
+  const handleNext = () => {
+    !isLastStep && setActiveStep((cur) => cur + 1);
+  }
+
   const handlePrev = () => !isFirstStep && setActiveStep((cur) => cur - 1);
 
   return (

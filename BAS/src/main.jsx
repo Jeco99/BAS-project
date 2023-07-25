@@ -14,6 +14,9 @@ import UserDashboard from "./components/user/userDashboard/userDashboard";
 import CreateaAccount from "./components/user/userSignUp/createAccount";
 import AppointmentDisplay from "./components/user/appointmentDisplay/appointmentDisplay";
 
+import DataValidationExample from "./sample_LogIn";
+import YourFormComponent from "./sample_nextButton";
+
 import ErrorPage from "./errorPage/errorpage";
 
 
@@ -43,6 +46,17 @@ const router = createBrowserRouter([
     element: <AppointmentDisplay/>, //create children based on the user sidebar
     errorElement: <ErrorPage />
   },
+  // path for test pages -- nvm
+  {
+    path:'/datavalidation',
+    element: <DataValidationExample/>, //create children based on the user sidebar
+    errorElement: <ErrorPage />
+  },
+  {
+    path:'/formcomponent',
+    element: <YourFormComponent/>, //create children based on the user sidebar
+    errorElement: <ErrorPage />
+  }
 
 ])
 

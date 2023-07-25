@@ -4,6 +4,7 @@ import logoImage from "/src/assets/images/BAS-Logo-1.png";
 import { useState } from "react";
 
 const LogIn = () => {
+  const [showPassword, setShowPassword] = useState(false);
 
   const [logInData, setLogInData] = useState({
     username:'',
@@ -43,6 +44,11 @@ const LogIn = () => {
     setError(newErrors);
   }
 
+  const toggleShowPassword = () => {
+    setShowPassword((prevShowPassword) => !prevShowPassword);
+  };
+
+  // how to log in must be directed for the user.
 
   return (
     <div className="fixed inset-0 flex flex-col sm:flex-row items-center justify-center bg-beetleGreen  px-2 sm:p-12">
@@ -55,7 +61,7 @@ const LogIn = () => {
         <div className="mb-4">
           <div>
             <label htmlFor="username" className="text-xl">
-              Username:
+              Username <sup>*</sup>
             </label>
           </div>
           <input
@@ -63,39 +69,44 @@ const LogIn = () => {
             id="username"
             name="username"
             placeholder=""
-            required
+            // required
             type="text"
             onChange={handleChange}
           />
-          {errors.username && (<div>{errors.username}</div>)}
+          {errors.username && (<small>{errors.username}</small>)}
         </div>
 
         <div className="mb-4">
           <div>
             <label htmlFor="password" className="text-xl">
-              Password:
+              Password <sup>*</sup>
             </label>
           </div>
           <input
             className="w-full text-black bg-white border rounded-md shadow-sm outline-none appearance-none focus:border-indigo-600"
             id="password"
             name="password"
-            required
-            type="password"
+            // required
+            type={showPassword ? 'text' : 'password'}
             onChange={handleChange}
           />
-           {errors.password && <div>{errors.password}</div>}
+          <div>
+          {errors.password && <small>{errors.password}</small>}
+          </div>
+           
+         <input type="checkbox" onClick={toggleShowPassword}/>
+         <label htmlFor="showPassword"> Show Password</label>
+
         </div>
 
         <div className="flex flex-col  justify-center">
 
-          <Link 
-            to={logInData.username.toLocaleLowerCase() === 'admin' ? '/barangaydashboard' : '/userdashboard'}
+          <button 
             type="submit"
             className="flex justify-center items-center rounded-full text-xl h-11 text-white bg-morningGlory w-full sm:w-auto mb-4 sm:mb-2"
           >
             Log In
-          </Link>
+          </button>
           <Link
             to="/createaccount"
             type="button"
