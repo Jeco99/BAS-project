@@ -101,12 +101,14 @@ const LogIn = () => {
 
         <div className="flex flex-col  justify-center">
 
-          <button 
-            type="submit"
+
+          <Link 
+            to="/dashboard"
+            type="button"
             className="flex justify-center items-center rounded-full text-xl h-11 text-white bg-morningGlory w-full sm:w-auto mb-4 sm:mb-2"
           >
             Log In
-          </button>
+          </Link>
           <Link
             to="/createaccount"
             type="button"

@@ -3,7 +3,7 @@
 
 const withMT = require("@material-tailwind/react/utils/withMT");
 module.exports = withMT({
-  content: [
+  content: ["./index.html",
     './src/**/*.{js,jsx,ts,tsx}',
     'node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}'
   ],
@@ -18,5 +18,5 @@ module.exports = withMT({
       sans: ['Poppins']
     }
   },
-  plugins: [require('flowbite/plugin')],
+  plugins: [require("tailwind-scrollbar"), require("flowbite/plugin")]
 })

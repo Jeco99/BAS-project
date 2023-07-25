@@ -8,11 +8,14 @@ import {
 
 
 import LogIn from "./LogIn.jsx";
-import AccountDetails from "./components/user/userSignUp/accountDetails";
+// import AccountDetails from "./components/user/userSignUp/accountDetails";
 import BarangayDashboard from "./components/barangay/barangayDashboard/barangayDashboard";
-import UserDashboard from "./components/user/userDashboard/userDashboard";
+// import UserDashboard from "./components/user/userDashboard/userDashboard";
 import CreateaAccount from "./components/user/userSignUp/createAccount";
+import RootLayout from "./layouts/Layout";
+// import AppointmentDisplay from "./components/user/appointmentDisplay/appointmentDisplay";
 import AppointmentDisplay from "./components/user/appointmentDisplay/appointmentDisplay";
+
 
 import DataValidationExample from "./sample_LogIn";
 import YourFormComponent from "./sample_nextButton";
@@ -38,32 +41,22 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />
   },
   {
-    path:'/userdashboard',
-    element: <UserDashboard/>, //create children based on the user sidebar
-    errorElement: <ErrorPage />
+    path:'/dashboard',
+    element: <RootLayout />, //create children based on the user sidebar
+    errorElement: <ErrorPage />,
+    // children: [
+    //   {
+    //     path: 'main/appointment',
+    //     element: <AppointmentDisplay />,
+    //   },
+    // ]
   },
   {
     path:'/appointment',
     element: <AppointmentDisplay/>, //create children based on the user sidebar
     errorElement: <ErrorPage />
   },
-  // path for test pages -- nvm
-  {
-    path:'/datavalidation',
-    element: <DataValidationExample/>, //create children based on the user sidebar
-    errorElement: <ErrorPage />
-  },
-  {
-    path:'/formcomponent',
-    element: <YourFormComponent/>, //create children based on the user sidebar
-    errorElement: <ErrorPage />
-  },
-  {
-    path:'/settings',
-    element: <Settings/>, //create children based on the user sidebar
-    errorElement: <ErrorPage />
-  },
-  
+   
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
