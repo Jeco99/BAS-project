@@ -6,6 +6,7 @@ function AppointmentDisplay() {
   const [startDate, setStartDate] = useState(new Date());
   const [request, setRequest] = useState('');
   const [purpose, setPurpose] = useState('');
+  const [selectTime, setSelectTime] = useState('');
   const [showModal, setShowModal] = useState(false);
 
   const handleDateChange = (date) => {
@@ -16,18 +17,6 @@ function AppointmentDisplay() {
     // Exclude weekends (Saturday and Sunday)
     const day = date.getDay();
     return day !== 0 && day !== 6;
-  };
-
-  const minTime = new Date();
-  minTime.setHours(8, 0, 0);
-
-  const maxTime = new Date();
-  maxTime.setHours(16, 0, 0);
-
-  const filterPassedTime = (time) => {
-    const currentDate = new Date();
-    const selectedDate = new Date(time);
-    return currentDate.getTime() < selectedDate.getTime();
   };
 
   const handleSubmit = (e) => {
@@ -41,20 +30,20 @@ function AppointmentDisplay() {
 
   return (
     <div>
-    <form className="space-y-10 mt-32 p-4 mx-auto max-w-lg" onSubmit={handleSubmit}>
+    <form className="space-y-10 mt-24 p-4 mx-auto max-w-lg" onSubmit={handleSubmit}>
       <div>
-        <label htmlFor="dropdown" className="block text-gray-700">
+        <label htmlFor="RequestList" className="block text-gray-700">
           Request:
         </label>
         <select
-          id="dropdown"
-          name="dropdown"
-          className="w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md focus:border-blue-500 focus:ring-blue-500" 
+          id="RequestList"
+          name="RequestList"
+          className="w-full flex px-4 py-2 mt-2 text-gray-700 bg-gray-50 border border-gray-300 rounded-md focus:border-blue-500 focus:ring-blue-500 overflow-y-auto" 
           required
           value={request}
           onChange={(e) => setRequest(e.target.value)}
           >
-          <option value="">Select an option</option>
+          <option value="">--Select an option--</option>
             <option value="Barangay Clearance">Barangay Clearance</option>
             <option value="Barangay Certificate">Barangay Certificate</option>
             <option value="Barangay Permit">Barangay Permit</option>
@@ -68,7 +57,7 @@ function AppointmentDisplay() {
         <textarea
           id="purpose"
           rows="4"
-          className="block w-full p-2.5 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+          className="w-full flex px-4 py-2 mt-2 text-gray-700 bg-gray-50 border border-gray-300 rounded-md focus:border-blue-500 focus:ring-blue-500 overflow-y-auto" 
           required
           value={purpose}
           onChange={(e) => setPurpose(e.target.value)}
@@ -76,24 +65,28 @@ function AppointmentDisplay() {
           </textarea>
       </div>
       <div>
-        <label htmlFor="datepicker" className="block text-gray-700">
-          Select time:
+        <label htmlFor="SelectTime" className="block text-gray-700">
+          Select time (8:00 - 5:00)
         </label>
-        <DatePicker
-          id="datepicker"
-          selected={startDate}
-          onChange={(date) => setStartDate(date)}
-          showTimeSelect
-          showTimeSelectOnly
-          timeIntervals={30}
-          timeCaption="Time"
-          dateFormat="h:mm aa"
-          filterTime={filterPassedTime}
-          minTime={minTime}
-          maxTime={maxTime}
-          className="w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md focus:border-blue-500 focus:ring-blue-500"
+        <select
+          id="SelectTime"
+          name="SelectTime"
+          className="w-full flex px-4 py-2 mt-2 text-gray-700 bg-gray-50 border border-gray-300 rounded-md focus:border-blue-500 focus:ring-blue-500 overflow-y-auto" 
           required
-        />        
+          value={selectTime}
+          onChange={(e) => setSelectTime(e.target.value)}
+          >
+          <option value="">--Select an option--</option>
+            <option value="8:00 - 9:00">8:00 - 9:00</option>
+            <option>9:00 - 10:00</option>
+            <option>10:00 - 11:00</option>
+            <option>11:00 - 12:00</option>
+            <option>12:00 - 1:00</option>
+            <option>1:00 - 2:00</option>
+            <option>2:00 - 3:00</option>
+            <option>3:00 - 4:00</option>
+            <option>4:00 - 5:00</option>
+        </select>
       </div>
       <div>
         <label htmlFor="datepicker" className="block text-gray-700">
@@ -105,8 +98,10 @@ function AppointmentDisplay() {
           onChange={handleDateChange}
           dateFormat="MMMM d, yyyy"
           filterDate={weekDays}
+          minDate={new Date()}
+          maxDate={new Date("2023-8-31")}
           withPortal
-          className="w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md focus:border-blue-500 focus:ring-blue-500"
+          className="w-full px-4 py-2 mt-2 text-gray-700 bg-gray-50 border border-gray-300 rounded-md focus:border-blue-500 focus:ring-blue-500"
           required
         />
       </div>
@@ -122,11 +117,12 @@ function AppointmentDisplay() {
 
     {showModal && (
         <div className="fixed block inset-0 flex items-center justify-center z-50 bg-teal-700 opacity-100 overflow-x-hidden overflow-y-auto">
-          <div className="bg-white p-6 rounded-lg mx-8">
+          <div className="bg-gray-50 p-6 rounded-lg mx-8">
             <h2 className="text-lg font-semibold mb-4">Summary</h2>
             <p>Request: {request}</p>
             <p>Purpose: {purpose}</p>
-            <p>Date and Time: {startDate.toString()}</p>
+            <p>Time: {selectTime}</p>
+            <p>Date: {startDate.toDateString()}</p>
             <div className="pt-8">
             <button 
             type="button" 
@@ -137,7 +133,7 @@ function AppointmentDisplay() {
               </button>
             <button 
             type="button" 
-            class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+            class="text-gray-500 bg-gray-50 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
             onClick={closeModal}
             >
               Back
