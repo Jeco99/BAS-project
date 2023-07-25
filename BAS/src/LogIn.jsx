@@ -43,7 +43,7 @@ const LogIn = () => {
         <div className="flex flex-col  justify-center">
 
           <Link 
-            to="/userdashboard"
+            to="/dashboard"
             type="button"
             className="flex justify-center items-center rounded-full text-xl h-11 text-white bg-morningGlory w-full sm:w-auto mb-4 sm:mb-2"
           >

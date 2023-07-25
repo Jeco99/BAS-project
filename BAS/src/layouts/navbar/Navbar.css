@@ -27,9 +27,9 @@ button {
     transition: border-color 0.25s;
 }
 
-/* button:hover {
+button:hover {
     color: #a5dbdd;
-} */
+}
 
 .navbar-logo {
   height: 3rem;
@@ -44,14 +44,42 @@ button {
   color: #a5dbdd;
 }
 
+.dropdown-items {
+  font-size: 17px;
+}
+
+.welcome-note{
+  font-size: 18px;
+}
+
+.button-link {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #407C87;
+  color: #ffffff;
+  text-decoration: none;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.button-link:focus {
+  outline: none;
+}
+
+
 /* Media Queries for Mobile and Tablet View */
 @media (max-width: 768px) {
   .logo-name {
-    font-size: 18px;
+    font-size: 20px;
     margin-bottom: 2px;
   }
 
   .welcome-note{
+    font-size: 14px;
+  }
+
+  .dropdown-items {
     font-size: 14px;
   }
 }
@@ -64,18 +92,18 @@ button {
     display: none;
   }
   .welcome-note{
-    font-size: 12px;
+    font-size: 15px;
   }
-  span.dropdown-items {
-    font-size: 11px;
+ .dropdown-items {
+    font-size: 12px;
   }
 }
 
 @media (max-width: 320px) {
   .welcome-note{
-    font-size: 10px;
+    font-size: 11px;
   }
-  span.dropdown-items {
-    font-size: 9px;
+ .dropdown-items {
+    font-size: 11px;
   }
 }
