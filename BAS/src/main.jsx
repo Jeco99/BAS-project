@@ -17,6 +17,7 @@ import AppointmentDisplay from "./components/user/appointmentDisplay/appointment
 import DataValidationExample from "./sample_LogIn";
 import YourFormComponent from "./sample_nextButton";
 
+import Settings from "./components/settings/settings";
 import ErrorPage from "./errorPage/errorpage";
 
 
@@ -56,8 +57,13 @@ const router = createBrowserRouter([
     path:'/formcomponent',
     element: <YourFormComponent/>, //create children based on the user sidebar
     errorElement: <ErrorPage />
-  }
-
+  },
+  {
+    path:'/settings',
+    element: <Settings/>, //create children based on the user sidebar
+    errorElement: <ErrorPage />
+  },
+  
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
