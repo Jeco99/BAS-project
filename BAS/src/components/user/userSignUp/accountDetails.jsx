@@ -2,13 +2,12 @@ import { useState } from "react";
 import ImageUpload from "./imageUpload";
 import PersonalDetails from "./personalDetails";
 
-
 function AccountDetails() {
- 
   return (
     <>
-
-      <h1 className="text-center text-2xl font-semibold">Account Details</h1>
+      <h1 className="text-center text-2xl font-semibold mt-8">
+        Account Details
+      </h1>
       <div className="block m-8 p-6 sm:m-32 bg-white border border-gray-200 rounded-lg shadow">
         <form className="flex flex-col gap-4 w-full" action="">
           <ImageUpload />

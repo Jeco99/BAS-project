@@ -17,7 +17,7 @@ function PersonalDetails() {
   const [startDate, setStartDate] = useState(new Date());
 
   return (
-
+    <>
       <div className="block m-8 p-6 sm:m-32 bg-white border border-gray-200 rounded-lg shadow">
         <h1 className="text-center text-2xl font-semibold">Personal Details</h1>
         <div>
@@ -181,6 +181,7 @@ function PersonalDetails() {
           </form>
         </div>
       </div>
+    </>
   );
 }
 
