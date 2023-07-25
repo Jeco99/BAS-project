@@ -2,14 +2,14 @@
 
 import { useState } from "react";
 
-import GenderDropdown from "./genderDropdown";
-import CivilStatusDropdown from "./civilstatusDropdown";
-import MunicipalDropdown from "./municipalDropdown";
-import BarangayDropdown from "./barangayDropdown";
-import ProvinceDropdown from "./provinceDropdown";
 
 import { Button } from "@material-tailwind/react";
 
+import BarangayDropdown from "../../dropdown/barangayDropdown";
+import CivilStatusDropdown from "../../dropdown/civilstatusDropdown";
+import GenderDropdown from "../../dropdown/genderDropdown";
+import ProvinceDropdown from "../../dropdown/provinceDropdown";
+import MunicipalDropdown from "../../dropdown/municipalDropdown";
 
 function PersonalDetails({ getData, setGetData, handleNext, handlePrev, activeStep, isFirstStep }) {
 

@@ -56,6 +56,11 @@ const router = createBrowserRouter([
     element: <AppointmentDisplay/>, //create children based on the user sidebar
     errorElement: <ErrorPage />
   },
+  {
+    path:'/setting',
+    element: <Settings/>, //create children based on the user sidebar
+    errorElement: <ErrorPage />
+  },
    
 ])
 

@@ -1,5 +1,6 @@
 import { useState } from "react";
-import ImageUpload from "./imageUpload";
+
+import ImageUpload from "../../imageUpload/imageUpload";
 
 import { Button } from "@material-tailwind/react";
 
