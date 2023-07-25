@@ -14,7 +14,13 @@ import BarangayDashboard from "./components/barangay/barangayDashboard/barangayD
 import CreateaAccount from "./components/user/userSignUp/createAccount";
 import RootLayout from "./layouts/Layout";
 // import AppointmentDisplay from "./components/user/appointmentDisplay/appointmentDisplay";
+import AppointmentDisplay from "./components/user/appointmentDisplay/appointmentDisplay";
 
+
+import DataValidationExample from "./sample_LogIn";
+import YourFormComponent from "./sample_nextButton";
+
+import Settings from "./components/settings/settings";
 import ErrorPage from "./errorPage/errorpage";
 
 
@@ -45,6 +51,12 @@ const router = createBrowserRouter([
     //   },
     // ]
   },
+  {
+    path:'/appointment',
+    element: <AppointmentDisplay/>, //create children based on the user sidebar
+    errorElement: <ErrorPage />
+  },
+   
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(

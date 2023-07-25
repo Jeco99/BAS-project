@@ -10,3 +10,8 @@ li {
     border-style: solid;
     text-align: center;
 } */
+
+small, 
+sup{
+    color: red;
+}
