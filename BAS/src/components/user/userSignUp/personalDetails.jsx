@@ -11,8 +11,6 @@ import GenderDropdown from "../../dropdown/genderDropdown";
 import ProvinceDropdown from "../../dropdown/provinceDropdown";
 import MunicipalDropdown from "../../dropdown/municipalDropdown";
 
-function PersonalDetails({ getData, setGetData, handleNext, handlePrev, activeStep, isFirstStep }) {
-
 function PersonalDetails({
   getData,
   setGetData,
