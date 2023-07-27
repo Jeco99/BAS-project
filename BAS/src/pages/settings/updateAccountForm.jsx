@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-import ImageUpload from "../imageUpload/imageUpload";
-import UpdateButton from "../button/updateButton";
+import ImageUpload from "../../components/imageUpload/imageUpload"
+import UpdateButton from "../../components/button/updateButton";
 
 // import updateAccountInput from "./updateAccountInput";
 

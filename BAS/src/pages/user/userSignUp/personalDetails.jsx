@@ -2,30 +2,24 @@
 
 import { useState } from "react";
 
-import BarangayDropdown from "../dropdown/barangayDropdown";
-import ProvinceDropdown from "../dropdown/provinceDropdown";
-import GenderDropdown from "../dropdown/genderDropdown";
-import CivilStatusDropdown from "../dropdown/civilstatusDropdown";
-import MunicipalDropdown from "../dropdown/municipalDropdown";
 
-import UpdateButton from "../button/updateButton";
+import { Button } from "@material-tailwind/react";
 
-function UpdatePersonalDetails() {
-  const [getData, setGetData] = useState({
-    firstname: "",
-    middlename: "",
-    lastname: "",
-    sex: "",
-    dateofbirth: "",
-    civilstatus: "",
-    barangay: "",
-    municipal: "",
-    province: "",
-    zone: "",
-    street: "",
-    zipcode: "",
-  });
+import BarangayDropdown from "../../../components/dropdown/barangayDropdown";
+import CivilStatusDropdown from "../../../components/dropdown/civilstatusDropdown";
+import GenderDropdown from "../../../components/dropdown/genderDropdown";
+import ProvinceDropdown from "../../../components/dropdown/provinceDropdown";
+import MunicipalDropdown from "../../../components/dropdown/municipalDropdown";
 
+function PersonalDetails({
+  getData,
+  setGetData,
+  handleNext,
+  handlePrev,
+  activeStep,
+  isFirstStep,
+}) {
+  
   const handleChange = (e) => {
     e.preventDefault();
     const { name, value } = e.target;
@@ -36,18 +30,18 @@ function UpdatePersonalDetails() {
   };
 
   const [errors, setErrors] = useState({
-    firstname: "",
-    middlename: "",
-    lastname: "",
-    sex: "",
-    dateofbirth: "",
-    civilstatus: "",
-    barangay: "",
-    municipal: "",
-    province: "",
-    zone: "",
-    street: "",
-    zipcode: "",
+    firstname: null,
+    middlename: null,
+    lastname: null,
+    sex: null,
+    dateofbirth: null,
+    civilstatus: null,
+    barangay: null,
+    municipal: null,
+    province: null,
+    zone: null,
+    street: null,
+    zipcode: null,
   });
 
   const handleSubmit = (e) => {
@@ -134,7 +128,26 @@ function UpdatePersonalDetails() {
     }
 
     setErrors(newErrors);
+
+    if(errors.firstname === '' && 
+      errors.middlename === '' &&
+      errors.lastname === '' &&
+      errors.sex === '' &&
+      errors.dateofbirth === '' &&
+      errors.civilstatus === '' &&
+      errors.barangay === '' &&
+      errors.municipal === '' &&
+      errors.province === '' &&
+      errors.zone === '' &&
+      errors.street === '' &&
+      errors.zipcode === ''
+    ){
+      alert('Form Submitted');
+      //redirect to user dashboard
+    }
   };
+
+  console.log(errors)
 
   return (
     <div>
@@ -156,6 +169,7 @@ function UpdatePersonalDetails() {
                 name="firstname"
                 type="text"
                 onChange={handleChange}
+                value={getData.firstname}
               />
               {errors.firstname && <small>First Name is required!</small>}
             </div>
@@ -172,6 +186,7 @@ function UpdatePersonalDetails() {
                 name="middlename"
                 type="text"
                 onChange={handleChange}
+                value={getData.middlename}
               />
               {errors.middlename && <small>Middle Name is required!</small>}
             </div>
@@ -188,6 +203,7 @@ function UpdatePersonalDetails() {
                 name="lastname"
                 type="text"
                 onChange={handleChange}
+                value={getData.lastname}
               />
               {errors.lastname && <small>Last Name is required!</small>}
             </div>
@@ -202,6 +218,7 @@ function UpdatePersonalDetails() {
                 name="suffix"
                 type="text"
                 onChange={handleChange}
+                value={getData.suffix}
               />
             </div>
 
@@ -227,6 +244,7 @@ function UpdatePersonalDetails() {
                 id="dateofbirth"
                 className="w-full p-2.5 text-black-500 bg-white border rounded-md shadow-sm outline-none appearance-none focus:border-indigo-600"
                 onChange={handleChange}
+                value={getData.dateofbirth}
               />
               {errors.dateofbirth && <small>Birthday is required!</small>}
             </div>
@@ -283,6 +301,7 @@ function UpdatePersonalDetails() {
                 name="zone"
                 type="text"
                 onChange={handleChange}
+                value={getData.zone}
               />
               {errors.zone && <small>Zone is required!</small>}
             </div>
@@ -299,6 +318,7 @@ function UpdatePersonalDetails() {
                 name="street"
                 type="text"
                 onChange={handleChange}
+                value={getData.street}
               />
               {errors.street && <small>Street is required!</small>}
             </div>
@@ -315,16 +335,26 @@ function UpdatePersonalDetails() {
                 name="zipcode"
                 type="text"
                 onChange={handleChange}
+                value={getData.zipcode}
               />
               {errors.zipcode && <small>Zip Code is required!</small>}
             </div>
           </div>
-
-          <UpdateButton />
+          <div className="mt-16 flex justify-between">
+            <Button onClick={handlePrev} disabled={isFirstStep}>
+              Prev
+            </Button>
+            <Button
+              onClick={handleNext}
+              type={activeStep == 0 ? "button" : "submit"}
+            >
+              {activeStep == 0 ? "Next" : "Submit"}
+            </Button>
+          </div>
         </form>
       </div>
     </div>
   );
 }
 
-export default UpdatePersonalDetails;
+export default PersonalDetails;

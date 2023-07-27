@@ -6,17 +6,17 @@ import {
   RouterProvider,
 } from "react-router-dom";
 
-import LogIn from "./LogIn.jsx";
-import CreateaAccount from "./components/user/userSignUp/createAccount";
-import ErrorPage from "./errorPage/errorpage";
+import LogIn from "./pages/LogIn.jsx";
+import CreateaAccount from "./pages/user/userSignUp/createAccount";
+import ErrorPage from "./pages/errorPage/errorpage";
 
-import AppointmentDisplay from "./components/user/appointmentDisplay/appointmentDisplay";
+import AppointmentDisplay from "./pages/user/appointmentDisplay/appointmentDisplay";
 // import BarangayDashboard from "./components/barangay/barangayDashboard/barangayDashboard";
-import History from "./components/user/userHistory/history";
-import Settings from "./components/settings/settings";
+import History from "./pages/user/userHistory/history";
+import Settings from "./pages/settings/settings";
 import RootLayout from "./layouts/Layout";
 import Root from "./layouts/Root";
-import UserDashboard from "./components/user/userDashboard/userDashboard";
+import UserDashboard from "./pages/user/userDashboard/userDashboard";
 
 
 const router = createBrowserRouter([
