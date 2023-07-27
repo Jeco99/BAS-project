@@ -1,17 +1,16 @@
 import { useEffect, useState } from "react";
 import { useRef } from "react";
 import { motion } from "framer-motion";
-import "./Sidebar.css"
+import "./Sidebar.css";
 
 // * React icons
-import { SlSettings } from "react-icons/sl";
 import { AiOutlineAppstore } from "react-icons/ai";
 import { BsPerson } from "react-icons/bs";
-import { HiOutlineDatabase } from "react-icons/hi";
+import { HiOutlineDatabase, HiUserCircle } from "react-icons/hi";
 import { useMediaQuery } from "react-responsive";
 import { MdMenu } from "react-icons/md";
-import { HiUserCircle } from 'react-icons/hi';
-import { Link } from "react-router-dom";
+import { RiSettingsLine } from "react-icons/ri";
+import { NavLink } from "react-router-dom";
 
 const Sidebar = () => {
   let isTabletMid = useMediaQuery({ query: "(max-width: 767px)" });
@@ -68,36 +67,34 @@ const Sidebar = () => {
         animate={open ? "open" : "closed"}
         className="sidebar-content text-gray shadow-xl z-[999] max-w-[25rem] w-[25rem] overflow-hidden md:relative fixed h-screen"
       >
-
         <div className="flex flex-col  h-full">
-          <div className='user-logo' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-            <HiUserCircle size={250} color="black" className='items-center my-20' />
+          <div className="user-logo" style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+            <HiUserCircle size={250} color="black" className="items-center my-20" />
           </div>
           <ul className="whitespace-pre px-2.5 text-[0.9rem] py-5 flex flex-col gap-1 font-medium overflow-x-hidden scrollbar-thin scrollbar-track-white scrollbar-thumb-slate-100   md:h-[68%] h-[70%]">
             <li>
-              <Link to={"/appointment"} className="link sidebar-button">
+              <NavLink to={"dashboard"} className="link sidebar-button">
                 <AiOutlineAppstore size={35} className="min-w-max" />
                 Dashboard
-              </Link>
+              </NavLink>
             </li>
             <li>
-              <Link to={"/appointment"} className="link sidebar-button">
+              <NavLink to={"appointment"} className="link sidebar-button">
                 <BsPerson size={35} className="min-w-max" />
                 Appointment
-              </Link>
+              </NavLink>
             </li>
             <li>
-              <Link to={"/history"} className="link sidebar-button">
+              <NavLink to={"history"} className="link sidebar-button">
                 <HiOutlineDatabase size={35} className="min-w-max" />
                 History
-              </Link>
+              </NavLink>
             </li>
-
             <li>
-              <Link to={"/settings"} className="link sidebar-button">
-                <SlSettings size={35} className="min-w-max" />
+              <NavLink to={"settings"} className="link sidebar-button">
+                <RiSettingsLine size={35} className="min-w-max" />
                 Account Settings
-              </Link>
+              </NavLink>
             </li>
           </ul>
         </div>

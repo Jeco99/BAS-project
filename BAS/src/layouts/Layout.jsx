@@ -1,13 +1,16 @@
 import Sidebar from "./sidebar/Sidebar"
 import NavbarComponent from "./navbar/Navbar";
+import { Outlet } from "react-router-dom";
 
 // eslint-disable-next-line react/prop-types
 function RootLayout() {
   return (
-    <div className="w-full fixed">
-        <NavbarComponent />
-        <Sidebar />
-        {/* <main className="max-w-5xl flex-1 mx-auto py-4">{children}</main> */}
+    <div className="w-full">
+      <nav><NavbarComponent /></nav>
+        <aside className="h-full flex">
+          <Sidebar />
+          <main className="w-full m-10"><Outlet /></main>
+        </aside>
     </div>
   );
 }

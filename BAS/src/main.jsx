@@ -6,22 +6,17 @@ import {
   RouterProvider,
 } from "react-router-dom";
 
-
 import LogIn from "./LogIn.jsx";
-// import AccountDetails from "./components/user/userSignUp/accountDetails";
-import BarangayDashboard from "./components/barangay/barangayDashboard/barangayDashboard";
-// import UserDashboard from "./components/user/userDashboard/userDashboard";
 import CreateaAccount from "./components/user/userSignUp/createAccount";
-import RootLayout from "./layouts/Layout";
-// import AppointmentDisplay from "./components/user/appointmentDisplay/appointmentDisplay";
-import AppointmentDisplay from "./components/user/appointmentDisplay/appointmentDisplay";
-
-
-import DataValidationExample from "./sample_LogIn";
-import YourFormComponent from "./sample_nextButton";
-
-import Settings from "./components/settings/settings";
 import ErrorPage from "./errorPage/errorpage";
+
+import AppointmentDisplay from "./components/user/appointmentDisplay/appointmentDisplay";
+// import BarangayDashboard from "./components/barangay/barangayDashboard/barangayDashboard";
+import History from "./components/user/userHistory/history";
+import Settings from "./components/settings/settings";
+import RootLayout from "./layouts/Layout";
+import Root from "./layouts/Root";
+import UserDashboard from "./components/user/userDashboard/userDashboard";
 
 
 const router = createBrowserRouter([
@@ -36,31 +31,37 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />
   },
   {
-    path:'/barangaydashboard',
-    element: <BarangayDashboard/>, //create children based on the barangay sidebar
+    path:"/root",
+    element:<Root />,
     errorElement: <ErrorPage />
   },
   {
-    path:'/dashboard',
+    path:"/root",
     element: <RootLayout />, //create children based on the user sidebar
     errorElement: <ErrorPage />,
-    // children: [
-    //   {
-    //     path: 'main/appointment',
-    //     element: <AppointmentDisplay />,
-    //   },
-    // ]
+    children: [
+      {
+        path: 'dashboard',
+        element: <UserDashboard />,
+      },
+      {
+        path: 'appointment',
+        element: <AppointmentDisplay />,
+      },
+      {
+        path: 'history',
+        element: <History />,
+      },
+      {
+        path: 'settings',
+        element: <Settings />,
+      },
+    ]
   },
-  {
-    path:'/appointment',
-    element: <AppointmentDisplay/>, //create children based on the user sidebar
-    errorElement: <ErrorPage />
-  },
-   
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <RouterProvider router={router} />
-  </React.StrictMode>,
+  </React.StrictMode>
 )

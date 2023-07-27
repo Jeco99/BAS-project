@@ -10,10 +10,12 @@ export default function NavbarComponent() {
     <div className='flex-1 changeborder'>
       <Navbar fluid style={{ backgroundColor: '#407C87', caretColor: 'transparent' }}>
         <Navbar.Brand href="">
-          <div className="flex items-center">
-            <img alt="BAS Logo" className="navbar-logo mr-3 h-12" src={logoImage} />
-            <span className="logo-name">Barangay Appointment System</span>
-          </div>
+        <Link to={"/root"}>
+            <div className="flex items-center">
+              <img alt="BAS Logo" className="navbar-logo mr-3 h-12" src={logoImage} />
+              <span className="logo-name">Barangay Appointment System</span>
+            </div>
+          </Link>
         </Navbar.Brand>
         <div className="flex items-center md:order-2">
           <BellIcon className="bell-icon mr-1 h-6 w-6" />
