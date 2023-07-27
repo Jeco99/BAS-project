@@ -103,14 +103,14 @@ const LogIn = () => {
 
 
           <Link 
-            to="/dashboard"
+            to="root"
             type="button"
             className="flex justify-center items-center rounded-full text-xl h-11 text-white bg-morningGlory w-full sm:w-auto mb-4 sm:mb-2"
           >
             Log In
           </Link>
           <Link
-            to="/createaccount"
+            to="createaccount"
             type="button"
             className="flex justify-center items-center rounded-full  text-xl h-11 text-white bg-morningGlory w-full sm:w-auto"
           >
