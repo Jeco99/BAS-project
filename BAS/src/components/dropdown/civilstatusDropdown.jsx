@@ -1,4 +1,5 @@
 export default function CivilStatusDropdown({getData, setGetData}) {
+    const civilstatusOption = ['Select', 'Single', 'Married', 'Divorced', 'Widowed', 'Separated', 'Domestic Partnership/Civil Union']
     const handleChange = (e) => {
         e.preventDefault();
         const { name, value } = e.target;
@@ -15,10 +16,9 @@ export default function CivilStatusDropdown({getData, setGetData}) {
                onChange={handleChange}
                name="civilstatus"
             >
-                <option>Select</option>
-                <option>Single</option>
-                <option>Married</option>
-                <option>Select3</option>
+                {civilstatusOption.map((value) => (
+                    <option key={value}>{value}</option>
+                ) )}
             </select>
         </div>
     );

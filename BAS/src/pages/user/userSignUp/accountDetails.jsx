@@ -23,11 +23,11 @@ function AccountDetails({
   };
 
   return (
-    <div>
-      <h1 className="text-center text-2xl sm:text-4xl py-4 font-semibold">
+    <div className="mx-none xl:mx-96">
+      <h1 className="text-center text-2xl sm:text-4xl font-semibold">
         Account Details
       </h1>
-      <div className="block mt-8 p-6  bg-white border border-gray-200 rounded-lg shadow">
+      <div className="block mt-8 p-6 bg-white border border-gray-200 rounded-lg shadow">
         <div className="w-full">
           <div className="flex flex-col gap-4 ">
             <ImageUpload getData={getData} setGetData={setGetData} />
@@ -100,8 +100,9 @@ function AccountDetails({
           </div>
 
           <div className="mt-16 flex justify-between">
-            <Button onClick={handlePrev} disabled={isFirstStep}>
-              Prev
+            <Button 
+              onClick={handlePrev} >
+              {activeStep == 0 ? "Back" : "Prev"}
             </Button>
             <Button
               onClick={handleNext}

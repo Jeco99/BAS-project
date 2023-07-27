@@ -1,7 +1,7 @@
-export default function Footer(){
+export default function FooterCapstone(){
     return(  
-        <div>
+        <footer>
             <h1>Capstone 2023</h1>
-        </div>
+        </footer>
     )
 }

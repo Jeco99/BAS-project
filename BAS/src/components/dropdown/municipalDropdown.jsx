@@ -1,4 +1,34 @@
 export default function MunicipalDropdown({getData, setGetData}) {
+
+    const municipalOption = [
+        'Select',
+        'Ajuy',
+        'Alimodian',
+        'Anilao',
+        'Badiangan',
+        'Balasan',
+        'Banate',
+        'Barotac Nuevo',
+        'Barotac Viejo',
+        'Batad',
+        'Bingawan',
+        'Cabatuan',
+        'Calinog',
+        'Carles',
+        'Concepcion',
+        'Dingle',
+        'Dueñas',
+        'Estancia',
+        'Lemery',
+        'Passi',
+        'San Dionisio',
+        'San Enrique',
+        'San Joaquin',
+        'San Miguel',
+        'San Rafael',
+        'Santa Barbara',
+        'Sara']
+
     const handleChange = (e) => {
         e.preventDefault();
         const { name, value } = e.target;
@@ -16,9 +46,9 @@ export default function MunicipalDropdown({getData, setGetData}) {
                onChange={handleChange}
                name="municipal"
             >
-                <option>Select</option>
-                <option>Male</option>
-                <option>Female</option>
+                 {municipalOption.map((value) => (
+                    <option key={value}>{value}</option>
+                ) )}
             </select>
         </div>
     );

@@ -10,13 +10,19 @@ import LogIn from "./pages/LogIn.jsx";
 import CreateaAccount from "./pages/user/userSignUp/createAccount";
 import ErrorPage from "./pages/errorPage/errorpage";
 
-import AppointmentDisplay from "./pages/user/appointmentDisplay/appointmentDisplay";
-// import BarangayDashboard from "./components/barangay/barangayDashboard/barangayDashboard";
-import History from "./pages/user/userHistory/history";
-import Settings from "./pages/settings/settings";
 import RootLayout from "./layouts/Layout";
 import Root from "./layouts/Root";
+
+import AppointmentDisplay from "./pages/user/appointmentDisplay/appointmentDisplay";
+import History from "./pages/user/userHistory/history";
 import UserDashboard from "./pages/user/userDashboard/userDashboard";
+
+import Admin_Layout from "./layouts/admin_Layout";
+import Admin_Root from "./layouts/adminRoot";
+
+import BarangayDashboard from "./pages/barangay/barangayDashboard/barangayDashboard";
+
+import Settings from "./pages/settings/setting";
 
 
 const router = createBrowserRouter([
@@ -58,11 +64,32 @@ const router = createBrowserRouter([
       },
     ]
   },
+  //admin
   {
-    path:'/setting',
-    element: <Settings/>, //create children based on the user sidebar
+    path:"/admin",
+    element:<Admin_Root />,
     errorElement: <ErrorPage />
   },
+  {
+    path:"/admin",
+    element: <Admin_Layout />, //create children based on the user sidebar
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: 'dashboard',
+        element: <BarangayDashboard />,
+      },
+      {
+        path: 'report',
+        element: <History />,//report
+      },
+      {
+        path: 'settings',
+        element: <Settings />,
+      },
+    ]
+  },
+
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
