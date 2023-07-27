@@ -1,18 +1,27 @@
 import { useState } from "react";
 
-import ImageUpload from "../../imageUpload/imageUpload";
+import ImageUpload from "../imageUpload/imageUpload";
+import UpdateButton from "../button/updateButton";
 
-import { Button } from "@material-tailwind/react";
+// import updateAccountInput from "./updateAccountInput";
 
-function AccountDetails({
-  getData,
-  setGetData,
-  handleNext,
-  handlePrev,
-  activeStep,
-  isFirstStep,
-  errors,
-}) {
+function UpdateAccountDetails() {
+  const [getData, setGetData] = useState({
+    imagefile: "",
+    username: "",
+    email: "",
+    password: "",
+    confirmpassword: "",
+  });
+
+  const [errors, setErrors] = useState({
+    imagefile: "",
+    username: "",
+    email: "",
+    password: "",
+    confirmpassword: "",
+  });
+
   const handleChange = (e) => {
     e.preventDefault();
     const { name, value } = e.target;
@@ -22,15 +31,76 @@ function AccountDetails({
     });
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    let newErrors = { ...errors };
+
+    if (getData.username.trim() == "") {
+      newErrors.username = "Set Username";
+    } else {
+      newErrors.username = "";
+    }
+
+    if (getData.email.trim() == "") {
+      newErrors.email = "Set Email";
+    } else {
+      newErrors.email = "";
+    }
+
+    if(getData.password.trim() !== getData.confirmpassword.trim()){
+        newErrors.password = 'Set Password';
+        newErrors.confirmpassword = "Set Confirm Password";
+        alert('Password not matched!')
+    } else{
+        newErrors.password = "";
+        newErrors.confirmpassword = "";
+    }
+
+    if (getData.password.trim() == "") {
+      newErrors.password = "Set Password";
+    } else {
+      newErrors.password = "";
+    }
+
+    if (getData.confirmpassword.trim() == "") {
+      newErrors.confirmpassword = "Set Confirm Password";
+    } else {
+      newErrors.confirmpassword = "";
+    }
+
+    setErrors(newErrors)
+  };
+
+
   return (
     <div>
       <h1 className="text-center text-2xl sm:text-4xl py-4 font-semibold">
         Account Details
       </h1>
       <div className="block mt-8 p-6  bg-white border border-gray-200 rounded-lg shadow">
-        <div className="w-full">
+        <form className="w-full" onSubmit={handleSubmit}>
           <div className="flex flex-col gap-4 ">
             <ImageUpload getData={getData} setGetData={setGetData} />
+
+            {/* {
+                updateAccountInput.map((elements) => (
+                    <div key={elements.name}>
+                        <div>
+                            <label htmlFor={elements.name}>{elements.label}</label>
+                        </div>
+                        <input 
+                            type={elements.type}
+                            id={elements.name}
+                            name={elements.name}
+                            className={elements.style}
+                            onChange={handleChange}
+                            //error need to dynamic
+                         />
+                    </div>
+                ))
+            }
+           */}
             <div>
               <div className="mb-2 block">
                 <label htmlFor="userName">Username</label>
@@ -39,10 +109,8 @@ function AccountDetails({
                 className="w-full p-2.5 text-black-500 bg-white border rounded-md shadow-sm outline-none appearance-none focus:border-indigo-600"
                 id="username"
                 name="username"
-                required
                 type="text"
                 onChange={handleChange}
-                value={getData.username}
               />
               {errors.username && <small>User Name is required!</small>}
             </div>
@@ -56,10 +124,8 @@ function AccountDetails({
                 className="w-full p-2.5 text-black-500 bg-white border rounded-md shadow-sm outline-none appearance-none focus:border-indigo-600"
                 id="email"
                 name="email"
-                required
                 type="email"
                 onChange={handleChange}
-                value={getData.email}
               />
               {errors.email && <small>Email is required!</small>}
             </div>
@@ -73,10 +139,8 @@ function AccountDetails({
                 className="w-full p-2.5 text-black-500 bg-white border rounded-md shadow-sm outline-none appearance-none focus:border-indigo-600"
                 id="password"
                 name="password"
-                required
                 type="password"
                 onChange={handleChange}
-                value={getData.password}
               />
               {errors.password && <small>Password is required!</small>}
             </div>
@@ -90,30 +154,18 @@ function AccountDetails({
                 className="w-full p-2.5 text-black-500 bg-white border rounded-md shadow-sm outline-none appearance-none focus:border-indigo-600"
                 id="confirmpassword"
                 name="confirmpassword"
-                required
                 type="password"
                 onChange={handleChange}
-                value={getData.confirmpassword}
               />
               {errors.confirmpassword && <small>Password is required!</small>}
             </div>
           </div>
 
-          <div className="mt-16 flex justify-between">
-            <Button onClick={handlePrev} disabled={isFirstStep}>
-              Prev
-            </Button>
-            <Button
-              onClick={handleNext}
-              type={activeStep == 0 ? "button" : "submit"}
-            >
-              {activeStep == 0 ? "Next" : "Submit"}
-            </Button>
-          </div>
-        </div>
+          <UpdateButton />
+        </form>
       </div>
     </div>
   );
 }
 
-export default AccountDetails;
+export default UpdateAccountDetails;
