@@ -30,6 +30,9 @@ function AppointmentDisplay() {
 
   return (
     <div>
+      <div className="mt-8 pr-8">
+          <p className=" text-black font-bold text-xl">Appointment</p>
+        </div>
     <form className="space-y-10 mt-24 p-4 mx-auto max-w-lg" onSubmit={handleSubmit}>
       <div>
         <label htmlFor="RequestList" className="block text-gray-700">
