@@ -4,6 +4,13 @@ import { GrLinkNext } from "react-icons/gr";
 export default function History(){
     return(
         <div>
+          <input
+              type="text"
+              placeholder="Search..."
+              className="px-4 py-2 border rounded-lg mb-2 sm:mb-4"
+              value={""}
+              onChange={""}
+            />
             <h1>History</h1>
             <table className="table-fixed bg-gray-400 min-w-full">
             <thead>
