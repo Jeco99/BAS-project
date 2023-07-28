@@ -1,4 +1,24 @@
 export default function BarangayDropdown({getData, setGetData}) {
+
+    const barangayOption = [
+        'Select',
+        'Agboy Norte',
+        'Agboy Sur',
+        'Agta',
+        'Ambulong',
+        'Anonang',
+        'Apian',
+        'Avanzada',
+        'Awis',
+        'Ayabang',
+        'Ayubo',
+        'Bacolod',
+        'Baje',
+        'Banagan',
+        'Barangbang',
+        'Barasan',
+    ]
+
     const handleChange = (e) => {
         e.preventDefault();
         const { name, value } = e.target;
@@ -15,9 +35,9 @@ export default function BarangayDropdown({getData, setGetData}) {
                 onChange={handleChange}
                 name="barangay"
             >
-                <option>Select</option>
-                <option>Awis</option>
-                <option>Buga</option>
+                  {barangayOption.map((value) => (
+                    <option key={value}>{value}</option>
+                ) )}
             </select>
         </div>
     );

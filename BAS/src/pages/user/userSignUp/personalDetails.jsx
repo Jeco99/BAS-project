@@ -150,8 +150,8 @@ function PersonalDetails({
   console.log(errors)
 
   return (
-    <div>
-      <h1 className="text-center text-2xl sm:text-4xl py-4 font-semibold">
+    <div className="mx-none xl:mx-96">
+      <h1 className="text-center text-2xl sm:text-4xl font-semibold">
         Personal Details
       </h1>
       <div className="block mt-8 p-6  bg-white border border-gray-200 rounded-lg shadow">

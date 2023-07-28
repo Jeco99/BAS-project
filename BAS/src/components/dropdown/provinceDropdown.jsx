@@ -1,6 +1,35 @@
 import { useState } from "react";
 
 export default function ProvinceDropdown({getData, setGetData}) {
+    const provinceOption = [
+        'Select',
+        'Ajuy',
+        'Alimodian',
+        'Anilao',
+        'Badiangan',
+        'Balasan',
+        'Banate',
+        'Barotac Nuevo',
+        'Barotac Viejo',
+        'Batad',
+        'Bingawan',
+        'Cabatuan',
+        'Calinog',
+        'Carles',
+        'Concepcion',
+        'Dingle',
+        'Dueñas',
+        'Estancia',
+        'Lemery',
+        'Passi',
+        'San Dionisio',
+        'San Enrique',
+        'San Joaquin',
+        'San Miguel',
+        'San Rafael',
+        'Santa Barbara',
+        'Sara']
+
     const handleChange = (e) => {
         e.preventDefault();
         const { name, value } = e.target;
@@ -18,9 +47,9 @@ export default function ProvinceDropdown({getData, setGetData}) {
                 onChange={handleChange}
                 name="province"
             >
-                <option>Select</option>
-                <option>Iloilo</option>
-                <option>Antique</option>
+               {provinceOption.map((value) => (
+                    <option key={value}>{value}</option>
+                ) )}
             </select>
         </div>
     );

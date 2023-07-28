@@ -4,6 +4,8 @@ import { Stepper, Step } from "@material-tailwind/react";
 import AccountDetails from "./accountDetails";
 import PersonalDetails from "./personalDetails";
 
+import NavbarComponent from "../../../layouts/navbar/Navbar";
+
 export default function CreateaAccount() {
   const [activeStep, setActiveStep] = useState(0);
   const [isLastStep, setIsLastStep] = useState(false);
@@ -131,21 +133,29 @@ export default function CreateaAccount() {
 
   console.log(errors);
 
-  const handlePrev = () => !isFirstStep && setActiveStep((cur) => cur - 1);
+  const handlePrev = () => {
+    if(activeStep == 0){
+      location.href = '/'
+    }
+
+    return !isFirstStep && setActiveStep((cur) => cur - 1);
+  }
 
   return (
-    <div className="py-4 px-8">
-      <Stepper
-        activeStep={activeStep}
-        isLastStep={(value) => setIsLastStep(value)}
-        isFirstStep={(value) => setIsFirstStep(value)}
-        className="w-full sm:w-7/12 mx-auto"
-      >
-        <Step onClick={() => setActiveStep(0)}>1</Step>
-        <Step onClick={() => setActiveStep(1)}>2</Step>
-      </Stepper>
+    <>
+      <div className="py-4 px-8">
+        <Stepper
+          activeStep={activeStep}
+          isLastStep={(value) => setIsLastStep(value)}
+          isFirstStep={(value) => setIsFirstStep(value)}
+          className="w-full sm:w-7/12 mx-auto"
+        >
+          <Step onClick={() => setActiveStep(0)}>1</Step>
+          <Step onClick={() => setActiveStep(1)}>2</Step>
+        </Stepper>
 
-      {display()}
-    </div>
+        {display()}
+      </div>
+    </>
   );
 }
