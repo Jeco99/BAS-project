@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
 /*
 li {
     background-color: #a5dbdd;
@@ -15,3 +20,10 @@ small,
 sup{
     color: red;
 }
+
+/* h1{
+    font-size: 1.5rem;
+    line-height: 2rem;
+    margin: 1rem 0px;
+    font-weight: bold;
+} */

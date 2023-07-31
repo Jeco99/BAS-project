@@ -1,6 +1,5 @@
 import Sidebar from "./sidebar/Sidebar"
 import NavbarComponent from "./navbar/Navbar";
-// import BarangayDashboard from "../components/barangay/barangayDashboard/barangayDashboard";
 import UserDashboard from "../pages/user/userDashboard/userDashboard";
 
 // eslint-disable-next-line react/prop-types

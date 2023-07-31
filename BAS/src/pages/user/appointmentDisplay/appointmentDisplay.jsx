@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
@@ -30,10 +30,14 @@ function AppointmentDisplay() {
 
   return (
     <div>
-    <form className="space-y-10 mt-24 p-4 mx-auto max-w-lg" onSubmit={handleSubmit}>
+
+     <h1 className="text-2xl sm:text-4xl py-4 font-semibold">Appointment</h1>
+               
+    <form className="space-y-10 mt-10 p-4 mx-auto max-w-lg" onSubmit={handleSubmit}>
+
       <div>
         <label htmlFor="RequestList" className="block text-gray-700">
-          Request:
+          Request
         </label>
         <select
           id="RequestList"
@@ -52,7 +56,7 @@ function AppointmentDisplay() {
 
       <div>
         <label htmlFor="purpose" className="block text-gray-700">
-          Purpose:
+          Purpose
         </label>
         <textarea
           id="purpose"
@@ -90,7 +94,7 @@ function AppointmentDisplay() {
       </div>
       <div>
         <label htmlFor="datepicker" className="block text-gray-700">
-          Select date:
+          Select date
         </label>
         <DatePicker
           id="datepicker"
@@ -108,7 +112,7 @@ function AppointmentDisplay() {
       <div>
         <button
           type="submit"
-          className="w-full px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600"
+          className="w-full px-4 py-2 text-black bg-beetleGreen rounded-md hover:bg-morningGlory hover:text-black"
         >
           Submit
         </button>
@@ -116,8 +120,8 @@ function AppointmentDisplay() {
     </form>
 
     {showModal && (
-        <div className="fixed block inset-0 flex items-center justify-center z-50 bg-teal-700 opacity-100 overflow-x-hidden overflow-y-auto">
-          <div className="bg-gray-50 p-6 rounded-lg mx-8">
+        <div className="fixed block inset-0 flex items-center justify-center bg-gray-50 bg-opacity-75 overflow-x-hidden overflow-y-auto">
+          <div className="bg-gray-50 border-2 p-6 rounded-lg mx-8">
             <h2 className="text-lg font-semibold mb-4">Summary</h2>
             <p>Request: {request}</p>
             <p>Purpose: {purpose}</p>
@@ -126,14 +130,18 @@ function AppointmentDisplay() {
             <div className="pt-8">
             <button 
             type="button" 
-            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+
+            className="text-black bg-beetleGreen hover:bg-morningGlory rounded-lg text-sm px-5 py-2.5 text-center hover:text-black"
+
             onClick={""}
             >
               Proceed
               </button>
             <button 
             type="button" 
-            class="text-gray-500 bg-gray-50 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+
+            className="text-black bg-white hover:bg-gray-100 rounded-lg border border-gray-400 text-sm font-medium px-5 py-2.5 hover:text-black"
+
             onClick={closeModal}
             >
               Back

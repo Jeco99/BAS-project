@@ -1,5 +1,6 @@
-import headerData from './historyHeader'
+import headerData from "./historyHeader";
 import { GrLinkNext } from "react-icons/gr";
+
 
 export default function History(){
     return(
