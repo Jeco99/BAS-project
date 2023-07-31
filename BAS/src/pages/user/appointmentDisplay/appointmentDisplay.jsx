@@ -30,10 +30,11 @@ function AppointmentDisplay() {
 
   return (
     <div>
-      <div className="mt-8 pr-8">
-          <p className=" text-black font-bold text-xl">Appointment</p>
-        </div>
-    <form className="space-y-10 mt-24 p-4 mx-auto max-w-lg" onSubmit={handleSubmit}>
+
+     <h1 className="text-2xl sm:text-4xl py-4 font-semibold">Appointment</h1>
+               
+    <form className="space-y-10 mt-10 p-4 mx-auto max-w-lg" onSubmit={handleSubmit}>
+
       <div>
         <label htmlFor="RequestList" className="block text-gray-700">
           Request
@@ -129,14 +130,18 @@ function AppointmentDisplay() {
             <div className="pt-8">
             <button 
             type="button" 
+
             className="text-black bg-beetleGreen hover:bg-morningGlory rounded-lg text-sm px-5 py-2.5 text-center hover:text-black"
+
             onClick={""}
             >
               Proceed
               </button>
             <button 
             type="button" 
+
             className="text-black bg-white hover:bg-gray-100 rounded-lg border border-gray-400 text-sm font-medium px-5 py-2.5 hover:text-black"
+
             onClick={closeModal}
             >
               Back
