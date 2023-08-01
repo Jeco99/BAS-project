@@ -131,8 +131,6 @@ export default function CreateaAccount() {
     }
   };
 
-  console.log(errors);
-
   const handlePrev = () => {
     if(activeStep == 0){
       location.href = '/'
@@ -143,18 +141,23 @@ export default function CreateaAccount() {
 
   return (
     <>
-      <div className="py-4 px-8">
+      <div className="py-7 px-8 ">
+        <div>
         <Stepper
           activeStep={activeStep}
           isLastStep={(value) => setIsLastStep(value)}
           isFirstStep={(value) => setIsFirstStep(value)}
-          className="w-full sm:w-7/12 mx-auto"
+          className="w-[500px] mx-auto"
         >
           <Step onClick={() => setActiveStep(0)}>1</Step>
           <Step onClick={() => setActiveStep(1)}>2</Step>
         </Stepper>
+        </div>
+      <div>
+      {display()}
+      </div>
 
-        {display()}
+      
       </div>
     </>
   );

@@ -20,7 +20,7 @@ export default function BarangayDashboard() {
     <>
       <div>
         <h1 className="text-2xl sm:text-4xl py-4 font-semibold">Dashboard</h1>
-        <div className="flex gap-4 ml-2">
+        <div className="flex gap-4 ml-2 flex-col md:flex-row">
           <NumberOfFemales />
           <NumberOfMales />
           <BarangayCertificate />
@@ -44,6 +44,18 @@ export default function BarangayDashboard() {
           </button>
         </div>
         <div className="ml-2">
+          <Post />
+          <Post />
+          <Post />
+          <Post />
+          <Post />
+          <Post />
+          <Post />
+          <Post />
+          <Post />
+          <Post />
+          <Post />
+          <Post />
           <Post />
           <Post />
           <Post />

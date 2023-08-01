@@ -114,7 +114,6 @@ const LogIn = () => {
             Log In
           </button>
           <button
-            to="createaccount"
             type="button"
             className="flex justify-center items-center rounded-full  text-xl h-11 text-white bg-morningGlory w-full sm:w-auto"
             onClick={createaccountUser}

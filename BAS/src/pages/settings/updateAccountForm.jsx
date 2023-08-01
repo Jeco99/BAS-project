@@ -1,9 +1,10 @@
 import { useState } from "react";
 
-import ImageUpload from "../../components/imageUpload/imageUpload"
+import ImageUpload from "../../components/imageUpload/imageUpload";
 import UpdateButton from "../../components/button/updateButton";
 
-// import updateAccountInput from "./updateAccountInput";
+import accountInputFormData from "../../components/input/accountInputFormData";
+import FormInput from "../../components/input/formInput";
 
 function UpdateAccountDetails() {
   const [getData, setGetData] = useState({
@@ -15,11 +16,11 @@ function UpdateAccountDetails() {
   });
 
   const [errors, setErrors] = useState({
-    imagefile: "",
-    username: "",
-    email: "",
-    password: "",
-    confirmpassword: "",
+    imagefile: '',
+    username: null,
+    email: null,
+    password: null,
+    confirmpassword: null,
   });
 
   const handleChange = (e) => {
@@ -48,13 +49,13 @@ function UpdateAccountDetails() {
       newErrors.email = "";
     }
 
-    if(getData.password.trim() !== getData.confirmpassword.trim()){
-        newErrors.password = 'Set Password';
-        newErrors.confirmpassword = "Set Confirm Password";
-        alert('Password not matched!')
-    } else{
-        newErrors.password = "";
-        newErrors.confirmpassword = "";
+    if (getData.password.trim() !== getData.confirmpassword.trim()) {
+      newErrors.password = "Set Password";
+      newErrors.confirmpassword = "Set Confirm Password";
+      alert("Password not matched!");
+    } else {
+      newErrors.password = "";
+      newErrors.confirmpassword = "";
     }
 
     if (getData.password.trim() == "") {
@@ -69,8 +70,20 @@ function UpdateAccountDetails() {
       newErrors.confirmpassword = "";
     }
 
-    setErrors(newErrors)
+    setErrors(newErrors);
+
+    if (
+      errors.username === "" &&
+      errors.email === "" &&
+      errors.password === "" &&
+      errors.confirmpassword === ""
+    ) {
+     alert('Account Updated!');
+    }
   };
+  //TODO: errors not updated recheck on the account details
+  console.log(errors)
+  console.log(getData)
 
 
   return (
@@ -82,86 +95,33 @@ function UpdateAccountDetails() {
         <form className="w-full" onSubmit={handleSubmit}>
           <div className="flex flex-col gap-4 ">
             <ImageUpload getData={getData} setGetData={setGetData} />
-
-            {/* {
-                updateAccountInput.map((elements) => (
-                    <div key={elements.name}>
-                        <div>
-                            <label htmlFor={elements.name}>{elements.label}</label>
-                        </div>
-                        <input 
-                            type={elements.type}
-                            id={elements.name}
-                            name={elements.name}
-                            className={elements.style}
-                            onChange={handleChange}
-                            //error need to dynamic
-                         />
-                    </div>
-                ))
-            }
-           */}
-            <div>
-              <div className="mb-2 block">
-                <label htmlFor="userName">Username</label>
-              </div>
-              <input
-                className="w-full p-2.5 text-black-500 bg-white border rounded-md shadow-sm outline-none appearance-none focus:border-indigo-600"
-                id="username"
-                name="username"
-                type="text"
-                onChange={handleChange}
+            {accountInputFormData.map((formElements) => (
+              <FormInput
+                key={formElements.id}
+                id={formElements.id}
+                type={formElements.type}
+                handleChange={handleChange}
+                value={getData[formElements.id]}
+                labelName={formElements.labelName}
+                errors={errors}
+                errorsmessage={formElements.errormessage}
               />
-              {errors.username && <small>User Name is required!</small>}
-            </div>
-            <div>
-              <div className="mb-2 block">
-                <label htmlFor="email" value="Your email">
-                  Email
-                </label>
-              </div>
-              <input
-                className="w-full p-2.5 text-black-500 bg-white border rounded-md shadow-sm outline-none appearance-none focus:border-indigo-600"
-                id="email"
-                name="email"
-                type="email"
-                onChange={handleChange}
-              />
-              {errors.email && <small>Email is required!</small>}
-            </div>
-            <div>
-              <div className="mb-2 block">
-                <label htmlFor="password" value="Your password">
-                  Password
-                </label>
-              </div>
-              <input
-                className="w-full p-2.5 text-black-500 bg-white border rounded-md shadow-sm outline-none appearance-none focus:border-indigo-600"
-                id="password"
-                name="password"
-                type="password"
-                onChange={handleChange}
-              />
-              {errors.password && <small>Password is required!</small>}
-            </div>
-            <div>
-              <div className="mb-2 block">
-                <label htmlFor="confirmpassword" value="Confirm password">
-                  Confirm Password
-                </label>
-              </div>
-              <input
-                className="w-full p-2.5 text-black-500 bg-white border rounded-md shadow-sm outline-none appearance-none focus:border-indigo-600"
-                id="confirmpassword"
-                name="confirmpassword"
-                type="password"
-                onChange={handleChange}
-              />
-              {errors.confirmpassword && <small>Password is required!</small>}
-            </div>
+            ))}
           </div>
-
-          <UpdateButton />
+          <div className="flex justify-end mt-8 pr-8">
+            <button
+              type="button"
+              className="mr-4 border-gray-500 hover:bg-red-600 text-black font-bold py-2 px-4 rounded"
+            >
+              Cancel
+            </button>
+            <button
+              className="bg-beetleGreen hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+              type="submit"
+            >
+              Update
+            </button>
+          </div>
         </form>
       </div>
     </div>
