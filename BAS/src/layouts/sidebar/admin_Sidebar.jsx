@@ -22,7 +22,7 @@ const Admin_Sidebar = ({
     <aside className="h-screen bg-primary">
       <div
         onClick={() => setOpen(false)}
-        className={`md:hidden fixed inset-0 max-h-screen z-[998] bg-accent ${
+        className={`md:hidden fixed inset-0 max-h-screen bg-accent ${
           open ? "block" : "hidden"
         } `}
       ></div>
@@ -31,7 +31,7 @@ const Admin_Sidebar = ({
         variants={Nav_animation}
         initial={{ x: isTabletMid ? -250 : 0 }}
         animate={open ? "open" : "closed"}
-        className="sidebar-content text-gray shadow-xl z-[999] max-w-[25rem] w-[25rem] overflow-hidden md:relative fixed h-screen"
+        className="sidebar-content text-gray shadow-xl max-w-[25rem] w-[25rem] overflow-hidden md:relative fixed h-screen"
       >
         <div className="flex flex-col  h-full">
           <div
