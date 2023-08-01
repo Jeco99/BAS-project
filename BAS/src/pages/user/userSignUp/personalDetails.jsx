@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 
-
 import { Button } from "@material-tailwind/react";
 
 import BarangayDropdown from "../../../components/dropdown/barangayDropdown";
@@ -10,6 +9,9 @@ import CivilStatusDropdown from "../../../components/dropdown/civilstatusDropdow
 import GenderDropdown from "../../../components/dropdown/genderDropdown";
 import ProvinceDropdown from "../../../components/dropdown/provinceDropdown";
 import MunicipalDropdown from "../../../components/dropdown/municipalDropdown";
+
+import FormInput from "../../../components/input/formInput";
+import FormLabel from "../../../components/label/formLabel";
 
 function PersonalDetails({
   getData,
@@ -19,7 +21,6 @@ function PersonalDetails({
   activeStep,
   isFirstStep,
 }) {
-  
   const handleChange = (e) => {
     e.preventDefault();
     const { name, value } = e.target;
@@ -129,84 +130,65 @@ function PersonalDetails({
 
     setErrors(newErrors);
 
-    if(errors.firstname === '' && 
-      errors.middlename === '' &&
-      errors.lastname === '' &&
-      errors.sex === '' &&
-      errors.dateofbirth === '' &&
-      errors.civilstatus === '' &&
-      errors.barangay === '' &&
-      errors.municipal === '' &&
-      errors.province === '' &&
-      errors.zone === '' &&
-      errors.street === '' &&
-      errors.zipcode === ''
-    ){
-      alert('Form Submitted');
+    if (
+      errors.firstname === "" &&
+      errors.middlename === "" &&
+      errors.lastname === "" &&
+      errors.sex === "" &&
+      errors.dateofbirth === "" &&
+      errors.civilstatus === "" &&
+      errors.barangay === "" &&
+      errors.municipal === "" &&
+      errors.province === "" &&
+      errors.zone === "" &&
+      errors.street === "" &&
+      errors.zipcode === ""
+    ) {
+      alert("Form Submitted");
       //redirect to user dashboard
     }
   };
 
-  console.log(errors)
+  console.log(errors);
 
   return (
-    <div className="mx-none xl:mx-96">
+    <div className="mx-[700px]">
       <h1 className="text-center text-2xl sm:text-4xl font-semibold">
         Personal Details
       </h1>
       <div className="block mt-8 p-6  bg-white border border-gray-200 rounded-lg shadow">
         <form className="w-full" onSubmit={handleSubmit}>
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-            <div>
-              <div className="mb-2 block">
-                <label htmlFor="firstName">
-                  First Name <sup>*</sup>
-                </label>
-              </div>
-              <input
-                className="w-full p-2.5 text-black-500 bg-white border rounded-md shadow-sm outline-none appearance-none focus:border-indigo-600"
-                id="firstname"
-                name="firstname"
-                type="text"
-                onChange={handleChange}
-                value={getData.firstname}
-              />
-              {errors.firstname && <small>First Name is required!</small>}
-            </div>
-
-            <div>
-              <div className="mb-2 block">
-                <label htmlFor="middleName">
-                  Middle Name<sup>*</sup>
-                </label>
-              </div>
-              <input
-                className="w-full p-2.5 text-black-500 bg-white border rounded-md shadow-sm outline-none appearance-none focus:border-indigo-600"
-                id="middlename"
-                name="middlename"
-                type="text"
-                onChange={handleChange}
-                value={getData.middlename}
-              />
-              {errors.middlename && <small>Middle Name is required!</small>}
-            </div>
-
-            <div>
-              <div className="mb-2 block">
-                <label htmlFor="lastName">
-                  Last Name<sup>*</sup>
-                </label>
-              </div>
-              <input
-                className="w-full p-2.5 text-black-500 bg-white border rounded-md shadow-sm outline-none appearance-none focus:border-indigo-600"
-                id="lastname"
-                name="lastname"
-                type="text"
-                onChange={handleChange}
-                value={getData.lastname}
-              />
-              {errors.lastname && <small>Last Name is required!</small>}
-            </div>
+            <FormInput
+              handleChange={handleChange}
+              labelName="First Name"
+              errors={errors}
+              errorsmessage="First Name is required!"
+              id="firstname"
+              type="text"
+              onChange={handleChange}
+              value={getData.firstname}
+            />
+            <FormInput
+              handleChange={handleChange}
+              labelName="Middle Name"
+              errors={errors}
+              errorsmessage="Middle Name is required!"
+              id="middlename"
+              type="text"
+              onChange={handleChange}
+              value={getData.middlename}
+            />
+            <FormInput
+              handleChange={handleChange}
+              labelName="Last Name"
+              errors={errors}
+              errorsmessage="Last Name is required!"
+              id="lastname"
+              type="text"
+              onChange={handleChange}
+              value={getData.lastname}
+            />
 
             <div>
               <div className="mb-2 block">
@@ -222,123 +204,79 @@ function PersonalDetails({
               />
             </div>
 
-            <div className="mb-2">
-              <div className="mb-2 block ">
-                <label htmlFor="sex">
-                  Sex <sup>*</sup>
-                </label>
-              </div>
+            <div>
+              <FormLabel labelName='Sex' id='sex' />
               <GenderDropdown getData={getData} setGetData={setGetData} />
               {errors.sex && <small>Sex is required!</small>}
             </div>
 
-            <div>
-              <div className="mb-2 block">
-                <label htmlFor="dateofbirth">
-                  Date Of Birth<sup>*</sup>
-                </label>
-              </div>
-              <input
-                type="date"
-                name="dateofbirth"
-                id="dateofbirth"
-                className="w-full p-2.5 text-black-500 bg-white border rounded-md shadow-sm outline-none appearance-none focus:border-indigo-600"
-                onChange={handleChange}
-                value={getData.dateofbirth}
-              />
-              {errors.dateofbirth && <small>Birthday is required!</small>}
-            </div>
+            <FormInput
+              handleChange={handleChange}
+              labelName="Date of Birth"
+              errors={errors}
+              errorsmessage="Birthday is required!"
+              id="dateofbirth"
+              type="date"
+              onChange={handleChange}
+              value={getData.dateofbirth}
+            />
 
-            <div className="mb-2">
-              <div className="mb-2 block">
-                <label htmlFor="civilStatus">
-                  Civil Status<sup>*</sup>
-                </label>
-              </div>
+            <div>
+              <FormLabel labelName='Civil Status' id='civilstatus' />
               <CivilStatusDropdown getData={getData} setGetData={setGetData} />
               {errors.civilstatus && <small>Civil Status is required!</small>}
             </div>
 
-            <div className="mb-2">
-              <div className="mb-2 block ">
-                <label htmlFor="barangay">
-                  Barangay<sup>*</sup>
-                </label>
-              </div>
+            <div>
+               <FormLabel labelName='Barangay' id='barangay' />
               <BarangayDropdown getData={getData} setGetData={setGetData} />
               {errors.barangay && <small>Barangay is required!</small>}
             </div>
 
-            <div className="mb-2">
-              <div className="mb-2 block ">
-                <label htmlFor="municipal">
-                  Municipality<sup>*</sup>
-                </label>
-              </div>
+            <div>
+              <FormLabel labelName='Municipality' id='municipal' />
               <MunicipalDropdown getData={getData} setGetData={setGetData} />
               {errors.municipal && <small>Municipal is required!</small>}
             </div>
 
-            <div className="mb-2">
-              <div className="mb-2 block ">
-                <label htmlFor="province">
-                  Province<sup>*</sup>
-                </label>
-              </div>
+            <div>
+              <FormLabel labelName='Province' id='province' />
               <ProvinceDropdown getData={getData} setGetData={setGetData} />
               {errors.province && <small>Province is required!</small>}
             </div>
 
-            <div>
-              <div className="mb-2 block">
-                <label htmlFor="zone">
-                  Zone<sup>*</sup>
-                </label>
-              </div>
-              <input
-                className="w-full p-2.5 text-black-500 bg-white border rounded-md shadow-sm outline-none appearance-none focus:border-indigo-600"
-                id="zone"
-                name="zone"
-                type="text"
-                onChange={handleChange}
-                value={getData.zone}
-              />
-              {errors.zone && <small>Zone is required!</small>}
-            </div>
+            <FormInput
+              handleChange={handleChange}
+              labelName="Zone"
+              errors={errors}
+              errorsmessage="Zone is required!"
+              id="zone"
+              type="text"
+              onChange={handleChange}
+              value={getData.zone}
+            />
 
-            <div>
-              <div className="mb-2 block">
-                <label htmlFor="street">
-                  Street<sup>*</sup>
-                </label>
-              </div>
-              <input
-                className="w-full p-2.5 text-black-500 bg-white border rounded-md shadow-sm outline-none appearance-none focus:border-indigo-600"
-                id="street"
-                name="street"
-                type="text"
-                onChange={handleChange}
-                value={getData.street}
-              />
-              {errors.street && <small>Street is required!</small>}
-            </div>
+            <FormInput
+              handleChange={handleChange}
+              labelName="Street"
+              errors={errors}
+              errorsmessage="Street is required!"
+              id="street"
+              type="text"
+              onChange={handleChange}
+              value={getData.street}
+            />
 
-            <div>
-              <div className="mb-2 block">
-                <label htmlFor="zipCode">
-                  Zip Code<sup>*</sup>
-                </label>
-              </div>
-              <input
-                className="w-full p-2.5 text-black-500 bg-white border rounded-md shadow-sm outline-none appearance-none focus:border-indigo-600"
-                id="zipcode"
-                name="zipcode"
-                type="text"
-                onChange={handleChange}
-                value={getData.zipcode}
-              />
-              {errors.zipcode && <small>Zip Code is required!</small>}
-            </div>
+            <FormInput
+              handleChange={handleChange}
+              labelName="Zip Code"
+              errors={errors}
+              errorsmessage="Zip Code is required!"
+              id="zipcode"
+              type="number"
+              onChange={handleChange}
+              value={getData.zipcode}
+            />
           </div>
           <div className="mt-16 flex justify-between">
             <Button onClick={handlePrev} disabled={isFirstStep}>

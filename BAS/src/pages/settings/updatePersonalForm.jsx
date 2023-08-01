@@ -136,6 +136,8 @@ function UpdatePersonalDetails() {
     setErrors(newErrors);
   };
 
+  console.log(errors);
+
   return (
     <div>
       <h1 className="text-center text-2xl sm:text-4xl py-4 font-semibold">

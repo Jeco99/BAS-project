@@ -25,6 +25,15 @@ export default function UserDashboard(){
                 <Post />
                 <Post />
                 <Post />
+                <Post />
+                <Post />
+                <Post />
+                <Post />
+                <Post />
+                <Post />
+                <Post />
+                <Post />
+                <Post />
                </div>
             </div>
         </>
