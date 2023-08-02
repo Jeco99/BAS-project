@@ -48,11 +48,14 @@ function AccountDetails({
             }
           </div> 
           <div className="mt-16 flex justify-between">
-            <Button onClick={handlePrev}>
+            <Button onClick={handlePrev}
+            className="btn"
+            >
               {activeStep == 0 ? "Back" : "Prev"}
             </Button>
             <Button
               onClick={handleNext}
+              className="btn"
               type={activeStep == 0 ? "button" : "submit"}
             >
               {activeStep == 0 ? "Next" : "Submit"}

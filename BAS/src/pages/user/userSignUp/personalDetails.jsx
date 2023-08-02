@@ -279,11 +279,12 @@ function PersonalDetails({
             />
           </div>
           <div className="mt-16 flex justify-between">
-            <Button onClick={handlePrev} disabled={isFirstStep}>
+            <Button onClick={handlePrev} disabled={isFirstStep}  className="btn">
               Prev
             </Button>
             <Button
               onClick={handleNext}
+              className="btn"
               type={activeStep == 0 ? "button" : "submit"}
             >
               {activeStep == 0 ? "Next" : "Submit"}
