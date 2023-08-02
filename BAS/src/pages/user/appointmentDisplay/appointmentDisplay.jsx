@@ -29,11 +29,11 @@ function AppointmentDisplay() {
   };
 
   return (
-    <div>
+    <div className='text-xl'>
 
-     <h1 className="text-2xl sm:text-4xl py-4 font-semibold">Appointment</h1>
-               
-    <form className="space-y-10 mt-10 p-4 mx-auto max-w-lg" onSubmit={handleSubmit}>
+     <h1 className="heading text-left font-bold text-2xl m-5 text-gray-800">Appointment</h1>        
+    <form className="space-y-10 editor mx-auto w-10/12 flex flex-col text-gray-800 border border-gray-300 p-4 rounded-lg shadow-lg max-w-2xl" 
+    onSubmit={handleSubmit}>
 
       <div>
         <label htmlFor="RequestList" className="block text-gray-700">
@@ -42,7 +42,7 @@ function AppointmentDisplay() {
         <select
           id="RequestList"
           name="RequestList"
-          className="w-full flex px-4 py-2 mt-2 text-gray-700 bg-gray-50 border border-gray-300 rounded-md focus:border-blue-500 focus:ring-blue-500 overflow-y-auto" 
+          className="w-full flex px-4 py-2 mt-2 text-xl text-gray-700 bg-gray-50 border border-gray-300 rounded-md focus:border-blue-500 focus:ring-blue-500 overflow-y-auto" 
           required
           value={request}
           onChange={(e) => setRequest(e.target.value)}
@@ -61,7 +61,7 @@ function AppointmentDisplay() {
         <textarea
           id="purpose"
           rows="4"
-          className="w-full flex px-4 py-2 mt-2 text-gray-700 bg-gray-50 border border-gray-300 rounded-md focus:border-blue-500 focus:ring-blue-500 overflow-y-auto" 
+          className="w-full text-xl flex px-4 py-2 mt-2 text-gray-700 bg-gray-50 border border-gray-300 rounded-md focus:border-blue-500 focus:ring-blue-500 overflow-y-auto" 
           required
           value={purpose}
           onChange={(e) => setPurpose(e.target.value)}
@@ -75,7 +75,7 @@ function AppointmentDisplay() {
         <select
           id="SelectTime"
           name="SelectTime"
-          className="w-full flex px-4 py-2 mt-2 text-gray-700 bg-gray-50 border border-gray-300 rounded-md focus:border-blue-500 focus:ring-blue-500 overflow-y-auto" 
+          className="w-full text-xl flex px-4 py-2 mt-2 text-gray-700 bg-gray-50 border border-gray-300 rounded-md focus:border-blue-500 focus:ring-blue-500 overflow-y-auto" 
           required
           value={selectTime}
           onChange={(e) => setSelectTime(e.target.value)}
@@ -105,7 +105,7 @@ function AppointmentDisplay() {
           minDate={new Date()}
           maxDate={new Date("2023-8-31")}
           withPortal
-          className="w-full px-4 py-2 mt-2 text-gray-700 bg-gray-50 border border-gray-300 rounded-md focus:border-blue-500 focus:ring-blue-500"
+          className="w-full text-xl px-4 py-2 mt-2 text-gray-700 bg-gray-50 border border-gray-300 rounded-md focus:border-blue-500 focus:ring-blue-500"
           required
         />
       </div>
@@ -121,8 +121,8 @@ function AppointmentDisplay() {
 
     {showModal && (
         <div className="fixed block inset-0 flex items-center justify-center bg-gray-50 bg-opacity-75 overflow-x-hidden overflow-y-auto">
-          <div className="bg-gray-50 border-2 p-6 rounded-lg mx-8">
-            <h2 className="text-lg font-semibold mb-4">Summary</h2>
+          <div className="fixed mx-auto w-10/12 flex flex-col text-xl text-gray-800 bg-gray-50 border border-gray-300 rounded-lg p-4 shadow-lg max-w-2xl text-xl">
+            <h2 className="text-2xl font-semibold mb-4">Summary</h2>
             <p>Request: {request}</p>
             <p>Purpose: {purpose}</p>
             <p>Time: {selectTime}</p>
@@ -131,7 +131,7 @@ function AppointmentDisplay() {
             <button 
             type="button" 
 
-            className="text-black bg-beetleGreen hover:bg-morningGlory rounded-lg text-sm px-5 py-2.5 text-center hover:text-black"
+            className="text-black bg-beetleGreen hover:bg-morningGlory rounded-lg text-sm px-5 py-2.5 text-center hover:text-black mx-2"
 
             onClick={""}
             >
