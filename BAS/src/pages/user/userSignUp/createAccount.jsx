@@ -132,32 +132,42 @@ export default function CreateaAccount() {
   };
 
   const handlePrev = () => {
-    if(activeStep == 0){
-      location.href = '/'
+    if (activeStep == 0) {
+      location.href = "/";
     }
 
     return !isFirstStep && setActiveStep((cur) => cur - 1);
-  }
+  };
 
+ 
   return (
     <>
       <div className="py-7 px-8 ">
         <div>
-        <Stepper
-          activeStep={activeStep}
-          isLastStep={(value) => setIsLastStep(value)}
-          isFirstStep={(value) => setIsFirstStep(value)}
-          className="w-[500px] mx-auto"
-        >
-          <Step onClick={() => setActiveStep(0)}>1</Step>
-          <Step onClick={() => setActiveStep(1)}>2</Step>
-        </Stepper>
+          <Stepper
+            activeStep={activeStep}
+            isLastStep={(value) => setIsLastStep(value)}
+            isFirstStep={(value) => setIsFirstStep(value)}
+            activeLineClassName="bg-beetleGreen"
+            className="w-[500px] mx-auto"
+          >
+            <Step
+              activeClassName="ring-0 !bg-beetleGreen text-white"
+              completedClassName="bg-beetleGreen text-black"
+              onClick={() => setActiveStep(0)}
+            >
+              1
+            </Step>
+            <Step
+             activeClassName="ring-0 !bg-beetleGreen text-white"
+             completedClassName="bg-beetleGreen text-black"
+              onClick={() => setActiveStep(1)}
+            >
+              2
+            </Step>
+          </Stepper>
         </div>
-      <div>
-      {display()}
-      </div>
-
-      
+        <div>{display()}</div>
       </div>
     </>
   );
