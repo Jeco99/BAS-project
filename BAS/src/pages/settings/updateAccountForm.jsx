@@ -16,7 +16,7 @@ function UpdateAccountDetails() {
   });
 
   const [errors, setErrors] = useState({
-    imagefile: '',
+    imagefile: "",
     username: null,
     email: null,
     password: null,
@@ -78,20 +78,19 @@ function UpdateAccountDetails() {
       errors.password === "" &&
       errors.confirmpassword === ""
     ) {
-     alert('Account Updated!');
+      alert("Account Updated!");
     }
   };
   //TODO: errors not updated recheck on the account details
-  console.log(errors)
-  console.log(getData)
-
+  console.log(errors);
+  console.log(getData);
 
   return (
     <div>
       <h1 className="text-center text-2xl sm:text-4xl py-4 font-semibold">
         Account Details
       </h1>
-      <div className="block mt-8 p-6  bg-white border border-gray-200 rounded-lg shadow">
+      <div className="block mt-8 mx-96 p-6  bg-white border border-gray-200 rounded-lg shadow ">
         <form className="w-full" onSubmit={handleSubmit}>
           <div className="flex flex-col gap-4 ">
             <ImageUpload getData={getData} setGetData={setGetData} />
@@ -111,12 +110,12 @@ function UpdateAccountDetails() {
           <div className="flex justify-end mt-8 pr-8">
             <button
               type="button"
-              className="mr-4 border-gray-500 hover:bg-red-600 text-black font-bold py-2 px-4 rounded"
+              className="mr-4 bg-beetleGreen hover:bg-morningGlory hover:text-black text-black font-bold py-2 px-4 rounded"
             >
               Cancel
             </button>
             <button
-              className="bg-beetleGreen hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+              className="bg-beetleGreen hover:bg-morningGlory hover:text-black text-black font-bold py-2 px-4 rounded"
               type="submit"
             >
               Update
