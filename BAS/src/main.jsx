@@ -23,6 +23,7 @@ import Admin_Root from "./layouts/adminRoot";
 import BarangayDashboard from "./pages/barangay/barangayDashboard/barangayDashboard";
 
 import Settings from "./pages/settings/setting";
+import Report from "./pages/user/reportPage/reportPage";
 
 
 const router = createBrowserRouter([
@@ -81,7 +82,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'report',
-        element: <History />,//report
+        element: <Report />,//report
       },
       {
         path: 'settings',
