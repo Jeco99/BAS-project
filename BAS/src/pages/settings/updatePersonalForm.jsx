@@ -143,7 +143,7 @@ function UpdatePersonalDetails() {
       <h1 className="text-center text-2xl sm:text-4xl py-4 font-semibold">
         Personal Details
       </h1>
-      <div className="block mt-8 p-6  bg-white border border-gray-200 rounded-lg shadow">
+      <div className="block mt-8 mx-52 p-6  bg-white border border-gray-200 rounded-lg shadow ">
         <form className="w-full" onSubmit={handleSubmit}>
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             <div>

@@ -12,7 +12,7 @@ export default function History(){
               value={""}
               onChange={""}
             />
-            <h1>History</h1>
+            <h1 className="pageHeader">History</h1>
             <table className="table-fixed bg-gray-400 min-w-full">
             <thead>
                 <tr>

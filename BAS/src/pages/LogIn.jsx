@@ -57,7 +57,7 @@ const LogIn = () => {
   };
 
   return (
-    <div className="fixed inset-0 flex flex-col sm:flex-row items-center justify-center bg-beetleGreen  px-2 sm:p-12">
+    <div className="fixed inset-0 flex flex-col sm:flex-row items-center justify-center bg-beetleGreen  px-2 sm:p-0">
       <img
         className=" w-6/12 sm:w-5/12"
         src={logoImage}
@@ -65,10 +65,10 @@ const LogIn = () => {
       />
 
       <form
-        className="bg-beetleGreen block border border-black rounded-lg shadow w-full p-2 sm:p-12 m-24"
+        className="bg-beetleGreen block border border-black rounded-lg shadow w-1/3 p-1.5 sm:p-6 m-6"
         onSubmit={handleSubmit}
       >
-        <h1 className="text-center text-3xl sm:text-5xl font-extrabold mb-6">
+        <h1 className="text-center text-3xl sm:text-5xl font-extrabold mb-6 text-black drop-shadow-xl">
           Log in
         </h1>
         <div className="mb-4">
@@ -109,13 +109,13 @@ const LogIn = () => {
         <div className="flex flex-col  justify-center">
           <button
             type="submit"
-            className="flex justify-center items-center rounded-full text-xl h-11 text-white bg-morningGlory w-full sm:w-auto mb-4 sm:mb-2"
+            className="flex justify-center items-center rounded-full text-xl h-11 text-black bg-morningGlory sm:w-full mb-4 sm:mb-2"
           >
             Log In
           </button>
           <button
             type="button"
-            className="flex justify-center items-center rounded-full  text-xl h-11 text-white bg-morningGlory w-full sm:w-auto"
+            className="flex justify-center items-center rounded-full  text-xl h-11 text-black bg-morningGlory  sm:w-full"
             onClick={createaccountUser}
           >
             Create Account
