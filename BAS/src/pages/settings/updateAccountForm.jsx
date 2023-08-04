@@ -90,7 +90,7 @@ function UpdateAccountDetails() {
       <h1 className="text-center text-2xl sm:text-4xl py-4 font-semibold">
         Account Details
       </h1>
-      <div className="block mt-8 mx-96 p-6  bg-white border border-gray-200 rounded-lg shadow ">
+      <div className="block mt-8 mx-52 p-6  bg-white border border-gray-200 rounded-lg shadow ">
         <form className="w-full" onSubmit={handleSubmit}>
           <div className="flex flex-col gap-4 ">
             <ImageUpload getData={getData} setGetData={setGetData} />
@@ -107,15 +107,15 @@ function UpdateAccountDetails() {
               />
             ))}
           </div>
-          <div className="flex justify-end mt-8 pr-8">
+          <div className="flex justify-end mt-8 pr-8 rounded-md">
             <button
               type="button"
-              className="mr-4 bg-beetleGreen hover:bg-morningGlory hover:text-black text-black font-bold py-2 px-4 rounded"
+              className="mr-4 bg-beetleGreen rounded-md hover:bg-morningGlory hover:text-black text-black font-bold py-2 px-4"
             >
               Cancel
             </button>
             <button
-              className="bg-beetleGreen hover:bg-morningGlory hover:text-black text-black font-bold py-2 px-4 rounded"
+              className="bg-beetleGreen rounded-md hover:bg-morningGlory hover:text-black text-black font-bold py-2 px-4"
               type="submit"
             >
               Update
