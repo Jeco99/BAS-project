@@ -195,7 +195,7 @@ function PersonalDetails({
                 <label htmlFor="suffix">Suffix (optional)</label>
               </div>
               <input
-                className="w-full p-2.5 text-black-500 bg-white border rounded-md shadow-sm outline-none appearance-none focus:border-indigo-600"
+                className="w-full p-2.5 text-black-500 bg-white border rounded-md shadow-sm outline-none appearance-none focus:border-indigo-600 text-2xl"
                 id="suffix"
                 name="suffix"
                 type="text"

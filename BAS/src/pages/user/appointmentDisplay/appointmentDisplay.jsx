@@ -29,9 +29,9 @@ function AppointmentDisplay() {
   };
 
   return (
-    <div className='text-xl'>
+    <div className='marginMain'>
 
-     <h1 className="heading text-left font-bold text-2xl m-5 text-gray-800">Appointment</h1>        
+     <h1 className='pageHeader'>Appointment</h1>        
     <form className="space-y-10 editor mx-auto w-10/12 flex flex-col text-gray-800 border border-gray-300 p-4 rounded-lg shadow-lg max-w-2xl" 
     onSubmit={handleSubmit}>
 
