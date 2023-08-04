@@ -12,14 +12,14 @@ import Post from "../../../components/post/post";
 export default function BarangayDashboard() {
   const [addPost, setAddPost] = useState(false);
 
-  if (addPost) {
-    return <BarangayAddPost />;
-  }
+  // if (addPost) {
+  //   return <BarangayAddPost />;
+  // }
 
   return (
-    <>
+    <div className="marginMain">
       <div>
-        <h1 className="text-2xl sm:text-4xl py-4 font-semibold">Dashboard</h1>
+        <h1>Dashboard</h1>
         <div className="flex gap-4 ml-2 flex-col md:flex-row">
           <NumberOfFemales />
           <NumberOfMales />
@@ -30,19 +30,29 @@ export default function BarangayDashboard() {
       </div>
       <div>
         <div>
-          <h1 className="text-2xl sm:text-4xl py-4 font-semibold">
+          <h1 >
             Latest News/Events
           </h1>
-          <button
-            className="block text-white bg-beetleGreen hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            type="button"
-            onClick={() => {
-              setAddPost(true);
-            }}
-          >
-            Add Post
-          </button>
+          <div className="flex justify-center space-x-2">
+            <input
+              type="search"
+              className='btnRadius w-3/12'
+              onClick={() => {
+                setAddPost(true);
+              }}
+            />
+            <button
+              className="block btn btnRadius p-2"
+              type="button"
+              onClick={() => {
+                setAddPost(true);
+              }}
+            >
+              Add Post
+            </button>
+          </div>
         </div>
+        {addPost && <BarangayAddPost setAddPost={setAddPost} />}
         <div className="ml-2">
           <Post />
           <Post />
@@ -61,6 +71,6 @@ export default function BarangayDashboard() {
           <Post />
         </div>
       </div>
-    </>
+    </div>
   );
 }

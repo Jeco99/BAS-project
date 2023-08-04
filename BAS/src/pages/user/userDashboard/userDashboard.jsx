@@ -8,9 +8,9 @@ import Post from "../../../components/post/post";
 
 export default function UserDashboard(){
     return(
-        <>
+        <div className="marginMain">
             <div>
-                <h1 className="text-2xl sm:text-4xl py-4 font-semibold">Dashboard</h1>
+                <h1 className="pageHeader">Dashboard</h1>
                 <div className="flex gap-4 ml-2">
                     <NumberOfFemales />
                     <NumberOfMales />
@@ -20,7 +20,7 @@ export default function UserDashboard(){
                 </div>
             </div>
             <div>
-                <h1 className="text-2xl sm:text-4xl py-4 font-semibold">Latest News/Events</h1>
+                <h1 className="pageHeader">Latest News/Events</h1>
                <div className="ml-2">
                 <Post />
                 <Post />
@@ -36,6 +36,6 @@ export default function UserDashboard(){
                 <Post />
                </div>
             </div>
-        </>
+        </div>
     )
 }
