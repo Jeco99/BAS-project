@@ -9,6 +9,10 @@ import UpdatePersonalDetails from "./updatePersonalForm";
 
 export default function Settings() {
   return (
+    <div className='marginMain'>
+    <h1 className='pageHeader'> Update Profile
+    </h1>
+   
     <Tabs.Group
       aria-label="Tabs with icons"
       style="underline"
@@ -27,6 +31,7 @@ export default function Settings() {
        <UpdatePersonalDetails />
       </Tabs.Item>
     </Tabs.Group>
+    </div>
   )
 }
 

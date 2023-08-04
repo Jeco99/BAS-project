@@ -21,6 +21,11 @@ sup{
     color: red;
 }
 
+small{
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+}
+
 
 /* .sidebar-content{
     background-color: #EEF1F6;
@@ -47,18 +52,25 @@ sup{
     color: black;
     background-color: #A5DBDD;
 } */
+/* //classnames */
 
-h1{
-    font-size: 1.5rem;
-    line-height: 2rem;
-    font-weight: bold;
+
+/* margin */
+.marginMain{
+    margin: 20px;
 }
+/* header */
+.pageHeader{
+    font-size: 2.25rem;
+    line-height: 2.5rem; 
+    font-weight: bold;
+    margin: 20px 0px;
+}
+/* text */
 
 label{
     font-size: 1.3rem;
 }
-
-
 
 .btnRadius{
     border-radius: 0.375rem;
@@ -84,8 +96,3 @@ label{
     bottom: 0;
     z-index: 100;
 } */
-
-
-label{
-    font-size: 1.3rem;
-}

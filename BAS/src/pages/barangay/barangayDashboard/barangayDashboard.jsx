@@ -17,9 +17,9 @@ export default function BarangayDashboard() {
   // }
 
   return (
-    <>
+    <div className="marginMain">
       <div>
-        <h1 className="text-2xl sm:text-4xl py-4 font-semibold">Dashboard</h1>
+        <h1>Dashboard</h1>
         <div className="flex gap-4 ml-2 flex-col md:flex-row">
           <NumberOfFemales />
           <NumberOfMales />
@@ -30,7 +30,7 @@ export default function BarangayDashboard() {
       </div>
       <div>
         <div>
-          <h1 className="text-2xl sm:text-4xl py-4 font-semibold">
+          <h1 >
             Latest News/Events
           </h1>
           <div className="flex justify-center space-x-2">
@@ -71,6 +71,6 @@ export default function BarangayDashboard() {
           <Post />
         </div>
       </div>
-    </>
+    </div>
   );
 }
