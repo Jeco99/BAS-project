@@ -30,7 +30,7 @@ export default function BarangayDropdown({getData, setGetData}) {
     return (
         <div className="relative w-full ">
             <select
-               className="w-full p-2.5 text-black-500 text-2xl bg-white border rounded-md shadow-sm outline-none appearance-none focus:border-indigo-600"
+               className="w-full p-2.5 text-black-500 bg-white border rounded-md shadow-sm outline-none appearance-none focus:border-indigo-600 text-small md:text-medium lg:text-lg"
                value={getData["barangay"]}
                 onChange={handleChange}
                 name="barangay"

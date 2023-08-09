@@ -1,6 +1,6 @@
 export default function FormLabel({labelName, id}){
     return(
-        <div className="mb-2 block ">
+        <div className="mb-2 block labelText">
         <label htmlFor={id}>
           {labelName} <sup>*</sup>
         </label>
