@@ -7,7 +7,8 @@ export default function FormInput({ value, handleChange, type, id, labelName, er
         <FormLabel labelName={labelName} id={id}/>
       </div>
       <input
-        className="w-full p-2.5 text-black-500 bg-white border rounded-md shadow-sm outline-none appearance-none focus:border-indigo-600 text-2xl"
+        // className="w-full p-2.5 text-black-500 bg-white border rounded-md shadow-sm outline-none appearance-none focus:border-indigo-600 text-xs md:text-sm lg:text-base"
+        className="inputText"
         id={id}
         name={id}
         type={type}

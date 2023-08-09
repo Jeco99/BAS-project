@@ -24,7 +24,7 @@ function AccountDetails({
   };
 
   return (
-    <div className="mx-[700px]">
+    <div className="mx-auto md:mx-[100px] lg:mx-[290px] xl:mx-[500px] 2xl:[700px]">
       <h1 className="text-center text-2xl sm:text-4xl font-semibold">
         Account Details
       </h1>

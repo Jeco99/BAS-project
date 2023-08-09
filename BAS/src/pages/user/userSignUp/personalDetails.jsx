@@ -152,7 +152,7 @@ function PersonalDetails({
   console.log(errors);
 
   return (
-    <div className="mx-[700px]">
+    <div className="mx-auto md:mx-[100px] lg:mx-[290px] xl:mx-[500px] 2xl:[700px]">
       <h1 className="text-center text-2xl sm:text-4xl font-semibold">
         Personal Details
       </h1>
@@ -205,7 +205,7 @@ function PersonalDetails({
             </div>
 
             <div>
-              <FormLabel labelName='Sex' id='sex' />
+              <FormLabel labelName="Sex" id="sex" />
               <GenderDropdown getData={getData} setGetData={setGetData} />
               {errors.sex && <small>Sex is required!</small>}
             </div>
@@ -222,27 +222,27 @@ function PersonalDetails({
             />
 
             <div>
-              <FormLabel labelName='Civil Status' id='civilstatus' />
+              <FormLabel labelName="Civil Status" id="civilstatus" />
               <CivilStatusDropdown getData={getData} setGetData={setGetData} />
               {errors.civilstatus && <small>Civil Status is required!</small>}
             </div>
 
             <div>
-               <FormLabel labelName='Barangay' id='barangay' />
-              <BarangayDropdown getData={getData} setGetData={setGetData} />
-              {errors.barangay && <small>Barangay is required!</small>}
+              <FormLabel labelName="Province" id="province" />
+              <ProvinceDropdown getData={getData} setGetData={setGetData} />
+              {errors.province && <small>Province is required!</small>}
             </div>
 
             <div>
-              <FormLabel labelName='Municipality' id='municipal' />
+              <FormLabel labelName="Municipality" id="municipal" />
               <MunicipalDropdown getData={getData} setGetData={setGetData} />
               {errors.municipal && <small>Municipal is required!</small>}
             </div>
 
             <div>
-              <FormLabel labelName='Province' id='province' />
-              <ProvinceDropdown getData={getData} setGetData={setGetData} />
-              {errors.province && <small>Province is required!</small>}
+              <FormLabel labelName="Barangay" id="barangay" />
+              <BarangayDropdown getData={getData} setGetData={setGetData} />
+              {errors.barangay && <small>Barangay is required!</small>}
             </div>
 
             <FormInput
@@ -279,7 +279,7 @@ function PersonalDetails({
             />
           </div>
           <div className="mt-16 flex justify-between">
-            <Button onClick={handlePrev} disabled={isFirstStep}  className="btn">
+            <Button onClick={handlePrev} disabled={isFirstStep} className="btn">
               Prev
             </Button>
             <Button

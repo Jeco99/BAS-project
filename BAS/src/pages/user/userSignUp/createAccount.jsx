@@ -4,8 +4,6 @@ import { Stepper, Step } from "@material-tailwind/react";
 import AccountDetails from "./accountDetails";
 import PersonalDetails from "./personalDetails";
 
-import NavbarComponent from "../../../layouts/navbar/Navbar";
-
 export default function CreateaAccount() {
   const [activeStep, setActiveStep] = useState(0);
   const [isLastStep, setIsLastStep] = useState(false);
@@ -149,7 +147,7 @@ export default function CreateaAccount() {
             isLastStep={(value) => setIsLastStep(value)}
             isFirstStep={(value) => setIsFirstStep(value)}
             activeLineClassName="bg-beetleGreen"
-            className="w-[500px] mx-auto"
+            className="w-auto md:w-[400px] xl:w-[350px] mx-auto mb-5"
           >
             <Step
               activeClassName="ring-0 !bg-beetleGreen text-white"
