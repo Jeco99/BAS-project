@@ -20,7 +20,7 @@ export default function BarangayDashboard() {
     <div className="marginMain">
       <div>
         <h1>Dashboard</h1>
-        <div className="flex gap-4 ml-2 flex-col md:flex-row">
+        <div className="flex gap-4 ml-2 flex-col sm:flex-row">
           <NumberOfFemales />
           <NumberOfMales />
           <BarangayCertificate />
@@ -30,13 +30,11 @@ export default function BarangayDashboard() {
       </div>
       <div>
         <div>
-          <h1 >
-            Latest News/Events
-          </h1>
+          <h1>Latest News/Events</h1>
           <div className="flex justify-center space-x-2">
             <input
               type="search"
-              className='btnRadius w-3/12'
+              className="btnRadius w-3/12"
               onClick={() => {
                 setAddPost(true);
               }}
