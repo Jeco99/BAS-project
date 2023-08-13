@@ -1,17 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import {
+  regions,
+  provinces,
+  cities,
+  barangays,
+} from "select-philippines-address";
+import { useEffect, useState } from "react";
 
 import { Button } from "@material-tailwind/react";
-
-import BarangayDropdown from "../../../components/dropdown/barangayDropdown";
-import CivilStatusDropdown from "../../../components/dropdown/civilstatusDropdown";
-import GenderDropdown from "../../../components/dropdown/genderDropdown";
-import ProvinceDropdown from "../../../components/dropdown/provinceDropdown";
-import MunicipalDropdown from "../../../components/dropdown/municipalDropdown";
-
-import FormInput from "../../../components/input/formInput";
-import FormLabel from "../../../components/label/formLabel";
+import PersonalForm from "../../../components/form";
 
 function PersonalDetails({
   getData,
@@ -29,6 +27,53 @@ function PersonalDetails({
       [name]: value,
     });
   };
+
+  const [regionData, setRegion] = useState([]);
+  const [provinceData, setProvince] = useState([]);
+  const [cityData, setCity] = useState([]);
+  const [barangayData, setBarangay] = useState([]);
+
+  const [regionAddr, setRegionAddr] = useState("");
+  const [provinceAddr, setProvinceAddr] = useState("");
+  const [cityAddr, setCityAddr] = useState("");
+  const [barangayAddr, setBarangayAddr] = useState("");
+
+  const region = () => {
+    regions().then((response) => {
+      setRegion(response);
+    });
+  };
+
+  const province = (e) => {
+    setRegionAddr(e.target.selectedOptions[0].text);
+    provinces(e.target.value).then((response) => {
+      setProvince(response);
+      setCity([]);
+      setBarangay([]);
+    });
+  };
+
+  const city = (e) => {
+    setProvinceAddr(e.target.selectedOptions[0].text);
+    cities(e.target.value).then((response) => {
+      setCity(response);
+    });
+  };
+
+  const barangay = (e) => {
+    setCityAddr(e.target.selectedOptions[0].text);
+    barangays(e.target.value).then((response) => {
+      setBarangay(response);
+    });
+  };
+
+  const brgy = (e) => {
+    setBarangayAddr(e.target.selectedOptions[0].text);
+  };
+
+  useEffect(() => {
+    region();
+  }, []);
 
   const [errors, setErrors] = useState({
     firstname: null,
@@ -159,123 +204,20 @@ function PersonalDetails({
       <div className="block mt-8 p-6  bg-white border border-gray-200 rounded-lg shadow">
         <form className="w-full" onSubmit={handleSubmit}>
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-            <FormInput
+            <PersonalForm
               handleChange={handleChange}
-              labelName="First Name"
               errors={errors}
-              errorsmessage="First Name is required!"
-              id="firstname"
-              type="text"
-              onChange={handleChange}
-              value={getData.firstname}
-            />
-            <FormInput
-              handleChange={handleChange}
-              labelName="Middle Name"
-              errors={errors}
-              errorsmessage="Middle Name is required!"
-              id="middlename"
-              type="text"
-              onChange={handleChange}
-              value={getData.middlename}
-            />
-            <FormInput
-              handleChange={handleChange}
-              labelName="Last Name"
-              errors={errors}
-              errorsmessage="Last Name is required!"
-              id="lastname"
-              type="text"
-              onChange={handleChange}
-              value={getData.lastname}
-            />
-
-            <div>
-              <div className="mb-2 block">
-                <label htmlFor="suffix">Suffix (optional)</label>
-              </div>
-              <input
-                className="w-full p-2.5 text-black-500 bg-white border rounded-md shadow-sm outline-none appearance-none focus:border-indigo-600 text-2xl"
-                id="suffix"
-                name="suffix"
-                type="text"
-                onChange={handleChange}
-                value={getData.suffix}
-              />
-            </div>
-
-            <div>
-              <FormLabel labelName="Sex" id="sex" />
-              <GenderDropdown getData={getData} setGetData={setGetData} />
-              {errors.sex && <small>Sex is required!</small>}
-            </div>
-
-            <FormInput
-              handleChange={handleChange}
-              labelName="Date of Birth"
-              errors={errors}
-              errorsmessage="Birthday is required!"
-              id="dateofbirth"
-              type="date"
-              onChange={handleChange}
-              value={getData.dateofbirth}
-            />
-
-            <div>
-              <FormLabel labelName="Civil Status" id="civilstatus" />
-              <CivilStatusDropdown getData={getData} setGetData={setGetData} />
-              {errors.civilstatus && <small>Civil Status is required!</small>}
-            </div>
-
-            <div>
-              <FormLabel labelName="Province" id="province" />
-              <ProvinceDropdown getData={getData} setGetData={setGetData} />
-              {errors.province && <small>Province is required!</small>}
-            </div>
-
-            <div>
-              <FormLabel labelName="Municipality" id="municipal" />
-              <MunicipalDropdown getData={getData} setGetData={setGetData} />
-              {errors.municipal && <small>Municipal is required!</small>}
-            </div>
-
-            <div>
-              <FormLabel labelName="Barangay" id="barangay" />
-              <BarangayDropdown getData={getData} setGetData={setGetData} />
-              {errors.barangay && <small>Barangay is required!</small>}
-            </div>
-
-            <FormInput
-              handleChange={handleChange}
-              labelName="Zone"
-              errors={errors}
-              errorsmessage="Zone is required!"
-              id="zone"
-              type="text"
-              onChange={handleChange}
-              value={getData.zone}
-            />
-
-            <FormInput
-              handleChange={handleChange}
-              labelName="Street"
-              errors={errors}
-              errorsmessage="Street is required!"
-              id="street"
-              type="text"
-              onChange={handleChange}
-              value={getData.street}
-            />
-
-            <FormInput
-              handleChange={handleChange}
-              labelName="Zip Code"
-              errors={errors}
-              errorsmessage="Zip Code is required!"
-              id="zipcode"
-              type="number"
-              onChange={handleChange}
-              value={getData.zipcode}
+              getData={getData}
+              setGetData={setGetData}
+              province={province}
+              onSelect={region}
+              regionData={regionData}
+              city={city}
+              provinceData={provinceData}
+              barangay={barangay}
+              cityData={cityData}
+              brgy={brgy}
+              barangayData={barangayData}
             />
           </div>
           <div className="mt-16 flex justify-between">

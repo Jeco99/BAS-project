@@ -1,3 +1,5 @@
+import FormLabel from "../label/formLabel";
+
 export default function GenderDropdown({ getData, setGetData }) {
   const handleChange = (e) => {
     e.preventDefault();
@@ -9,8 +11,9 @@ export default function GenderDropdown({ getData, setGetData }) {
   };
   return (
     <div className="relative w-full ">
+      <FormLabel labelName="Sex" id="sex" />
       <select 
-       className="w-full p-2.5 text-black-500 bg-white border rounded-md shadow-sm outline-none appearance-none focus:border-indigo-600 text-small md:text-medium lg:text-lg"
+      className="inputText"
       value={getData["sex"]}
       onChange={handleChange}
       name="sex"
