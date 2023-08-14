@@ -11,13 +11,16 @@ import UpdatePersonalDetails from "./updatePersonalForm";
 
 export default function Settings() {
   return (
-    <Tabs.Group aria-label="Tabs with icons" style="underline">
-      <Tabs.Item active icon={MdAccountBox} title="Account Details">
-        <UpdateAccountDetails />
-      </Tabs.Item>
-      <Tabs.Item icon={BsPersonVcardFill} title="Personal Details">
-        <UpdatePersonalDetails />
-      </Tabs.Item>
-    </Tabs.Group>
+    <div className="main-container">
+      <h1 className="main-title">Update Setting</h1>
+      <Tabs.Group aria-label="Tabs with icons" style="underline">
+        <Tabs.Item active icon={MdAccountBox} title="Account Details">
+          <UpdateAccountDetails />
+        </Tabs.Item>
+        <Tabs.Item icon={BsPersonVcardFill} title="Personal Details">
+          <UpdatePersonalDetails />
+        </Tabs.Item>
+      </Tabs.Group>
+    </div>
   );
 }
