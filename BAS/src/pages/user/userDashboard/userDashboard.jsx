@@ -8,12 +8,12 @@ import Post from "../../../components/post/post";
 
 export default function UserDashboard() {
   return (
-    <>
+    <div className="main-container">
       <div>
-        <h1 className="text-2xl sm:text-5xl py-4 font-semibold ml-6 mb-4 mt-2 ">
+        <h1 className="main-title">
           Dashboard
         </h1>
-        <div className="flex gap-4 ml-6 mb-4 text-2xl flex-col sm:flex-row">
+        <div className="grid grid-cols-1 sm:grid-cols-5 gap-4 ml-4 mb-4 text-2xl">
           <NumberOfFemales />
           <NumberOfMales />
           <BarangayCertificate />
@@ -22,7 +22,7 @@ export default function UserDashboard() {
         </div>
       </div>
       <div>
-        <h1 className="text-2xl sm:text-5xl py-4 font-semibold ml-6">
+        <h1 className="main-title">
           Latest News/Events
         </h1>
         <div className="ml-4 text-2xl">
@@ -40,6 +40,6 @@ export default function UserDashboard() {
           <Post />
         </div>
       </div>
-    </>
+    </div>
   );
 }
