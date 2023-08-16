@@ -9,7 +9,7 @@ import {
 import { useEffect, useState } from "react";
 
 import { Button } from "@material-tailwind/react";
-import PersonalForm from "../../../components/form";
+import PersonalForm from "../../../components/form/form";
 
 function PersonalDetails({
   getData,
@@ -33,11 +33,6 @@ function PersonalDetails({
   const [cityData, setCity] = useState([]);
   const [barangayData, setBarangay] = useState([]);
 
-  const [regionAddr, setRegionAddr] = useState("");
-  const [provinceAddr, setProvinceAddr] = useState("");
-  const [cityAddr, setCityAddr] = useState("");
-  const [barangayAddr, setBarangayAddr] = useState("");
-
   const region = () => {
     regions().then((response) => {
       setRegion(response);
@@ -45,7 +40,7 @@ function PersonalDetails({
   };
 
   const province = (e) => {
-    setRegionAddr(e.target.selectedOptions[0].text);
+    setGetData({ ...getData, ["region"]: e.target.selectedOptions[0].text });
     provinces(e.target.value).then((response) => {
       setProvince(response);
       setCity([]);
@@ -53,41 +48,44 @@ function PersonalDetails({
     });
   };
 
-  const city = (e) => {
-    setProvinceAddr(e.target.selectedOptions[0].text);
+  const municipal = (e) => {
+    setGetData({ ...getData, ["province"]: e.target.selectedOptions[0].text });
     cities(e.target.value).then((response) => {
       setCity(response);
     });
   };
 
   const barangay = (e) => {
-    setCityAddr(e.target.selectedOptions[0].text);
+    setGetData({ ...getData, ["municipal"]: e.target.selectedOptions[0].text });
     barangays(e.target.value).then((response) => {
       setBarangay(response);
     });
   };
 
   const brgy = (e) => {
-    setBarangayAddr(e.target.selectedOptions[0].text);
+    // setBarangayAddr(e.target.selectedOptions[0].text);
+    setGetData({ ...getData, ["barangay"]: e.target.selectedOptions[0].text });
   };
 
   useEffect(() => {
     region();
   }, []);
 
+  console.log(getData);
+
   const [errors, setErrors] = useState({
     firstname: null,
     middlename: null,
     lastname: null,
-    sex: null,
     dateofbirth: null,
+    contactnumber: null,
+    sex: null,
     civilstatus: null,
-    barangay: null,
-    municipal: null,
     province: null,
+    municipal: null,
+    barangay: null,
     zone: null,
     street: null,
-    zipcode: null,
   });
 
   const handleSubmit = (e) => {
@@ -113,16 +111,16 @@ function PersonalDetails({
       newErrors.lastname = "";
     }
 
-    if (getData.sex.trim() == "") {
-      newErrors.sex = "Set Sex";
-    } else {
-      newErrors.sex = "";
-    }
-
     if (getData.dateofbirth.trim() == "") {
       newErrors.dateofbirth = "Set Birthday";
     } else {
       newErrors.dateofbirth = "";
+    }
+
+    if (getData.sex.trim() == "") {
+      newErrors.sex = "Set Sex";
+    } else {
+      newErrors.sex = "";
     }
 
     if (getData.civilstatus.trim() == "") {
@@ -131,28 +129,28 @@ function PersonalDetails({
       newErrors.civilstatus = "";
     }
 
-    if (getData.barangay.trim() == "") {
-      newErrors.barangay = "Set Barangay";
+    if (getData.region.trim() == "") {
+      newErrors.region = "Set Region";
     } else {
-      newErrors.barangay = "";
-    }
-
-    if (getData.municipal.trim() == "") {
-      newErrors.municipal = "Set Municipal";
-    } else {
-      newErrors.municipal = "";
-    }
-
-    if (getData.municipal.trim() == "") {
-      newErrors.municipal = "Set Municipal";
-    } else {
-      newErrors.municipal = "";
+      newErrors.region = "";
     }
 
     if (getData.province.trim() == "") {
       newErrors.province = "Set Province";
     } else {
       newErrors.province = "";
+    }
+
+    if (getData.municipal.trim() == "") {
+      newErrors.municipal = "Set Municipal";
+    } else {
+      newErrors.municipal = "";
+    }
+
+    if (getData.barangay.trim() == "") {
+      newErrors.barangay = "Set Barangay";
+    } else {
+      newErrors.barangay = "";
     }
 
     if (getData.zone.trim() == "") {
@@ -167,12 +165,6 @@ function PersonalDetails({
       newErrors.street = "";
     }
 
-    if (getData.zipcode.trim() == "") {
-      newErrors.zipcode = "Set Zipcode";
-    } else {
-      newErrors.zipcode = "";
-    }
-
     setErrors(newErrors);
 
     if (
@@ -181,6 +173,7 @@ function PersonalDetails({
       errors.lastname === "" &&
       errors.sex === "" &&
       errors.dateofbirth === "" &&
+      errors.region === "" &&
       errors.civilstatus === "" &&
       errors.barangay === "" &&
       errors.municipal === "" &&
@@ -193,8 +186,6 @@ function PersonalDetails({
       //redirect to user dashboard
     }
   };
-
-  console.log(errors);
 
   return (
     <div className="mx-auto md:mx-[100px] lg:mx-[290px] xl:mx-[500px] 2xl:[700px]">
@@ -212,7 +203,7 @@ function PersonalDetails({
               province={province}
               onSelect={region}
               regionData={regionData}
-              city={city}
+              municipal={municipal}
               provinceData={provinceData}
               barangay={barangay}
               cityData={cityData}
@@ -220,7 +211,7 @@ function PersonalDetails({
               barangayData={barangayData}
             />
           </div>
-          <div className="mt-16 flex justify-between">
+          <div className="mt-5 flex justify-between">
             <Button onClick={handlePrev} disabled={isFirstStep} className="btn">
               Prev
             </Button>

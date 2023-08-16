@@ -19,15 +19,16 @@ export default function CreateaAccount() {
     middlename: "",
     lastname: "",
     suffix: "",
-    sex: "",
     dateofbirth: "",
+    contactnumber: "",
+    sex: "",
     civilstatus: "",
-    barangay: "",
-    municipal: "",
+    region:"",
     province: "",
+    municipal: "",
+    barangay: "",
     zone: "",
-    street: "",
-    zipcode: "",
+    street: ""
   });
 
   const [errors, setErrors] = useState({
