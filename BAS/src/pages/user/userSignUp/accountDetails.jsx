@@ -43,11 +43,12 @@ function AccountDetails({
                   labelName={formElements.labelName}
                   errors={errors}
                   errorsmessage={formElements.errormessage}
+                  showRequired={formElements.showRequired}
                 />
               ))
             }
           </div> 
-          <div className="mt-16 flex justify-between">
+          <div className="mt-5 flex justify-between">
             <Button onClick={handlePrev}
             className="btn"
             >

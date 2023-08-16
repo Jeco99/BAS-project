@@ -1,7 +1,6 @@
 export default [
     {
         id:'firstname',
-        formInput: true,
         type: 'text',
         labelName: 'First Name',
         errormessage:'First Name is required!',
@@ -9,7 +8,6 @@ export default [
     }, 
     {
         id:'middlename',
-        formInput: true,
         type: 'text',
         labelName: 'Middle Name',
         errormessage:'Middle Name is required!',
@@ -17,28 +15,28 @@ export default [
     }, 
     {
         id:'lastname',
-        formInput: true,
         type: 'text',
         labelName: 'Last Name',
         errormessage:'Last Name is required!',
         showRequired: true
     }, 
     {
-        id:'Suffix',
-        formInput: true,
+        id:'suffix',
         type: 'text',
         labelName: 'Suffix',
         showRequired: false
     }, 
     {
-        id:'sex',
-        formInput: false,
-        type: 'text',
-        labelName: 'Sex',
-        errormessage:'Sex is required!',
-        showRequired: true,
-        optionData:[
-            'Male', 'Female'
-        ]
-    }, 
+        id:'dateofbirth',
+        type:'date',
+        labelName: "Date of Birth",
+        errormessage: "Birthday is required!",
+        showRequired: true
+    },
+    {
+        id:'contactnumber',
+        type:'number',
+        labelName: "Contact Number",
+        showRequired: false
+    }
 ]
