@@ -209,6 +209,7 @@ function PersonalDetails({
               cityData={cityData}
               brgy={brgy}
               barangayData={barangayData}
+              region={region}
             />
           </div>
           <div className="mt-5 flex justify-between">
