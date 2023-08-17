@@ -2,11 +2,11 @@
 
 import { useState } from "react";
 
-import BarangayDropdown from "../../components/dropdown/barangayDropdown";
+// import BarangayDropdown from "../../components/dropdown/barangayDropdown";
 import CivilStatusDropdown from "../../components/dropdown/civilstatusDropdown";
 import GenderDropdown from "../../components/dropdown/genderDropdown";
-import ProvinceDropdown from "../../components/dropdown/provinceDropdown";
-import MunicipalDropdown from "../../components/dropdown/municipalDropdown";
+// import ProvinceDropdown from "../../components/dropdown/provinceDropdown";
+// import MunicipalDropdown from "../../components/dropdown/municipalDropdown";
 
 import UpdateButton from "../../components/button/updateButton";
 
@@ -241,36 +241,6 @@ function UpdatePersonalDetails() {
               </div>
               <CivilStatusDropdown getData={getData} setGetData={setGetData} />
               {errors.civilstatus && <small>Civil Status is required!</small>}
-            </div>
-
-            <div className="mb-2">
-              <div className="mb-2 block ">
-                <label htmlFor="barangay">
-                  Barangay<sup>*</sup>
-                </label>
-              </div>
-              <BarangayDropdown getData={getData} setGetData={setGetData} />
-              {errors.barangay && <small>Barangay is required!</small>}
-            </div>
-
-            <div className="mb-2">
-              <div className="mb-2 block ">
-                <label htmlFor="municipal">
-                  Municipality<sup>*</sup>
-                </label>
-              </div>
-              <MunicipalDropdown getData={getData} setGetData={setGetData} />
-              {errors.municipal && <small>Municipal is required!</small>}
-            </div>
-
-            <div className="mb-2">
-              <div className="mb-2 block ">
-                <label htmlFor="province">
-                  Province<sup>*</sup>
-                </label>
-              </div>
-              <ProvinceDropdown getData={getData} setGetData={setGetData} />
-              {errors.province && <small>Province is required!</small>}
             </div>
 
             <div>

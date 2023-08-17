@@ -1,18 +1,10 @@
 import FormLabel from "../label/formLabel";
 
-export default function CivilStatusDropdown({getData, setGetData}) {
+export default function CivilStatusDropdown({getData, handleChange}) {
     const civilstatusOption = ['Select', 'Single', 'Married', 'Divorced', 'Widowed', 'Separated', 'Domestic Partnership/Civil Union']
-    const handleChange = (e) => {
-        e.preventDefault();
-        const { name, value } = e.target;
-        setGetData({
-          ...getData,
-          [name]: value,
-        });
-      };
     return (
         <div className="relative w-full">
-            <FormLabel labelName="Civil Status" id="civilstatus" />
+            <FormLabel labelName="Civil Status" id="civilstatus" showRequired={true}/>
             <select
                className="inputText"
                value={getData["civilstatus"]}

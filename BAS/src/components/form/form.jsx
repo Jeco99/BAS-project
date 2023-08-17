@@ -1,18 +1,19 @@
-import FormInput from "../components/input/formInput";
-import FormLabel from "../components/label/formLabel";
+import FormInput from "../input/formInput";
+import FormLabel from "../label/formLabel";
 
-import CivilStatusDropdown from "../components/dropdown/civilstatusDropdown.jsx";
-import GenderDropdown from "../components/dropdown/genderDropdown";
+import CivilStatusDropdown from "../dropdown/civilstatusDropdown.jsx";
+import GenderDropdown from "../dropdown/genderDropdown";
+
+import personalInputFormData from "../input/personalInputFormData";
 
 export default function PersonalForm({
   handleChange,
   errors,
   getData,
-  setGetData,
   province,
   region,
   regionData,
-  city,
+  municipal,
   provinceData,
   barangay,
   cityData,
@@ -21,74 +22,34 @@ export default function PersonalForm({
 }) {
   return (
     <>
-      <FormInput
+    {
+      personalInputFormData.map( (formElements) => (
+        <FormInput
+        key={formElements.id}
         handleChange={handleChange}
-        labelName="First Name"
+        labelName={formElements.labelName}
         errors={errors}
-        errorsmessage="First Name is required!"
-        id="firstname"
-        type="text"
-        onChange={handleChange}
-        value={getData.firstname}
+        errorsmessage={formElements.errormessage}
+        id={formElements.id}
+        type={formElements.type}
+        value={getData[formElements.id]}
+        showRequired={formElements.showRequired}
       />
-      <FormInput
-        handleChange={handleChange}
-        labelName="Middle Name"
-        errors={errors}
-        errorsmessage="Middle Name is required!"
-        id="middlename"
-        type="text"
-        onChange={handleChange}
-        value={getData.middlename}
-      />
-      <FormInput
-        handleChange={handleChange}
-        labelName="Last Name"
-        errors={errors}
-        errorsmessage="Last Name is required!"
-        id="lastname"
-        type="text"
-        onChange={handleChange}
-        value={getData.lastname}
-      />
-
+      ) )
+    }
+      
       <div>
-        <div className="mb-2 block">
-          <label htmlFor="suffix" className="labelText">Suffix (optional)</label>
-        </div>
-        <input
-          className="inputText"
-          id="suffix"
-          name="suffix"
-          type="text"
-          onChange={handleChange}
-          value={getData.suffix}
-        />
-      </div>
-
-      <div>
-        <GenderDropdown getData={getData} setGetData={setGetData} />
+        <GenderDropdown getData={getData} handleChange={handleChange}/>
         {errors.sex && <small>Sex is required!</small>}
       </div>
 
-      <FormInput
-        handleChange={handleChange}
-        labelName="Date of Birth"
-        errors={errors}
-        errorsmessage="Birthday is required!"
-        id="dateofbirth"
-        type="date"
-        onChange={handleChange}
-        value={getData.dateofbirth}
-      />
-
       <div>
-        <CivilStatusDropdown getData={getData} setGetData={setGetData} />
+        <CivilStatusDropdown getData={getData} handleChange={handleChange}/>
         {errors.civilstatus && <small>Civil Status is required!</small>}
       </div>
 
       <div>
-        <FormLabel labelName="Region" id="region" />
+        <FormLabel labelName="Region" id="region" showRequired={true}/>
         <select
           onChange={province}
           onSelect={region}
@@ -103,14 +64,15 @@ export default function PersonalForm({
               </option>
             ))}
         </select>
+        {errors.region && <small>Region is required!</small>}
       </div>
       <div>
-        <FormLabel labelName="Province" id="province" />
+        <FormLabel labelName="Province" id="province" showRequired={true}/>
         <select
-          onChange={city}
+          onChange={municipal}
           className="inputText"
         >
-          <option disabled>Select Province</option>
+          <option>Select Province</option>
           {provinceData &&
             provinceData.length > 0 &&
             provinceData.map((item) => (
@@ -119,14 +81,15 @@ export default function PersonalForm({
               </option>
             ))}
         </select>
+        {errors.province && <small>Province is required!</small>}
       </div>
       <div>
-        <FormLabel labelName="Municipality" id="municipality" />
+        <FormLabel labelName="Municipality" id="municipal" showRequired={true}/>
         <select
           onChange={barangay}
           className="inputText"
         >
-          <option disabled>Select City</option>
+          <option>Select Municipal</option>
           {cityData &&
             cityData.length > 0 &&
             cityData.map((item) => (
@@ -135,14 +98,15 @@ export default function PersonalForm({
               </option>
             ))}
         </select>
+        {errors.municipal && <small>Municipality is required!</small>}
       </div>
       <div>
-        <FormLabel labelName="Barangay" id="barangay" />
+        <FormLabel labelName="Barangay" id="barangay" showRequired={true}/>
         <select
           onChange={brgy}
           className="inputText"
         >
-          <option disabled>Select Barangay</option>
+          <option>Select Barangay</option>
           {barangayData &&
             barangayData.length > 0 &&
             barangayData.map((item) => (
@@ -151,7 +115,9 @@ export default function PersonalForm({
               </option>
             ))}
         </select>
+        {errors.province && <small>Barangay is required!</small>}
       </div>
+
       <FormInput
         handleChange={handleChange}
         labelName="Zone"
@@ -161,6 +127,7 @@ export default function PersonalForm({
         type="text"
         onChange={handleChange}
         value={getData.zone}
+        showRequired={true}
       />
 
       <FormInput
@@ -172,17 +139,7 @@ export default function PersonalForm({
         type="text"
         onChange={handleChange}
         value={getData.street}
-      />
-
-      <FormInput
-        handleChange={handleChange}
-        labelName="Zip Code"
-        errors={errors}
-        errorsmessage="Zip Code is required!"
-        id="zipcode"
-        type="number"
-        onChange={handleChange}
-        value={getData.zipcode}
+        showRequired={true}
       />
     </>
   );

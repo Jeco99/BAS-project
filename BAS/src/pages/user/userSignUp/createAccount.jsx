@@ -8,6 +8,7 @@ export default function CreateaAccount() {
   const [activeStep, setActiveStep] = useState(0);
   const [isLastStep, setIsLastStep] = useState(false);
   const [isFirstStep, setIsFirstStep] = useState(false);
+  
 
   const [getData, setGetData] = useState({
     imagefile: "",
@@ -19,15 +20,16 @@ export default function CreateaAccount() {
     middlename: "",
     lastname: "",
     suffix: "",
-    sex: "",
     dateofbirth: "",
+    contactnumber: "",
+    sex: "",
     civilstatus: "",
-    barangay: "",
-    municipal: "",
+    region:"",
     province: "",
+    municipal: "",
+    barangay: "",
     zone: "",
-    street: "",
-    zipcode: "",
+    street: ""
   });
 
   const [errors, setErrors] = useState({
