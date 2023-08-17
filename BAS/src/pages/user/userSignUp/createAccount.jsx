@@ -148,6 +148,7 @@ export default function CreateaAccount() {
             isFirstStep={(value) => setIsFirstStep(value)}
             activeLineClassName="bg-beetleGreen"
             className="w-auto md:w-[400px] xl:w-[350px] mx-auto mb-5"
+            aria-disabled={true}
           >
             <Step
               activeClassName="ring-0 !bg-beetleGreen text-white"

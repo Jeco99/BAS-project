@@ -21,7 +21,7 @@ import BarangayDashboard from "./pages/barangay/barangayDashboard/barangayDashbo
 
 import Settings from "./pages/settings/setting";
 import Report from "./pages/user/reportPage/reportPage";
-import adminSignUp from "./pages/user/userSignUp/adminSignUp";
+import AdminSignUp from "./pages/user/userSignUp/adminSignUp";
 
 const router = createBrowserRouter([
   {
@@ -85,11 +85,12 @@ const router = createBrowserRouter([
         path: "settings",
         element: <Settings />,
       },
-      {
-        path: "adminSignUp",
-        element: <adminSignUp />,
-      },
     ],
+  },
+  {
+    path: "/adminSignUp",
+    element: <AdminSignUp />,
+    errorElement: <ErrorPage />,
   },
 ]);
 

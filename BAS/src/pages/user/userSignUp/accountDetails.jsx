@@ -32,25 +32,29 @@ function AccountDetails({
         <div className="w-full">
           <div className="flex flex-col gap-4 ">
             <ImageUpload getData={getData} setGetData={setGetData} />
-            {
-              accountInputFormData.map((formElements) => (
-                <FormInput 
-                  key={formElements.id}
-                  id={formElements.id}
-                  type={formElements.type}
-                  handleChange={handleChange}
-                  value={getData[formElements.id]}
-                  labelName={formElements.labelName}
-                  errors={errors}
-                  errorsmessage={formElements.errormessage}
-                />
-              ))
-            }
-          </div> 
-          <div className="mt-16 flex justify-between">
-            <Button onClick={handlePrev}
-            className="btn"
-            >
+            <div className="flex space-x-3">
+              <p>Are you an official?</p>
+              <input type="radio" id="yes" name="isOfficial" value="Yes" />
+              <label htmlFor="yes">Yes</label>
+              <input type="radio" id="no" name="isOfficial" value="No" />
+              <label htmlFor="no">No</label>
+            </div>
+            {accountInputFormData.map((formElements) => (
+              <FormInput
+                key={formElements.id}
+                id={formElements.id}
+                type={formElements.type}
+                handleChange={handleChange}
+                value={getData[formElements.id]}
+                labelName={formElements.labelName}
+                errors={errors}
+                errorsmessage={formElements.errormessage}
+                showRequired={formElements.showRequired}
+              />
+            ))}
+          </div>
+          <div className="mt-5 flex justify-between">
+            <Button onClick={handlePrev} className="btn">
               {activeStep == 0 ? "Back" : "Prev"}
             </Button>
             <Button
