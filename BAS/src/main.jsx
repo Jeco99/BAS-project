@@ -1,10 +1,7 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom/client";
-import './assets/index.css'
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
+import "./assets/index.css";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import LogIn from "./pages/LogIn.jsx";
 import CreateaAccount from "./pages/user/userSignUp/createAccount";
@@ -24,76 +21,81 @@ import BarangayDashboard from "./pages/barangay/barangayDashboard/barangayDashbo
 
 import Settings from "./pages/settings/setting";
 import Report from "./pages/user/reportPage/reportPage";
-
+import AdminSignUp from "./pages/user/userSignUp/adminSignUp";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <LogIn/>,
-    errorElement: <ErrorPage />
+    element: <LogIn />,
+    errorElement: <ErrorPage />,
   },
   {
-    path:"/createaccount",
-    element:<CreateaAccount />,
-    errorElement: <ErrorPage />
+    path: "/createaccount",
+    element: <CreateaAccount />,
+    errorElement: <ErrorPage />,
   },
   {
-    path:"/root",
-    element:<Root />,
-    errorElement: <ErrorPage />
+    path: "/root",
+    element: <Root />,
+    errorElement: <ErrorPage />,
   },
   {
-    path:"/root",
+    path: "/root",
     element: <RootLayout />, //create children based on the user sidebar
     errorElement: <ErrorPage />,
     children: [
       {
-        path: 'dashboard',
+        path: "dashboard",
         element: <UserDashboard />,
       },
       {
-        path: 'appointment',
+        path: "appointment",
         element: <AppointmentDisplay />,
       },
       {
-        path: 'history',
+        path: "history",
         element: <History />,
       },
       {
-        path: 'settings',
+        path: "settings",
         element: <Settings />,
       },
-    ]
+    ],
   },
   //admin
   {
-    path:"/admin",
-    element:<Admin_Root />,
-    errorElement: <ErrorPage />
+    path: "/admin",
+    element: <Admin_Root />,
+    errorElement: <ErrorPage />,
   },
   {
-    path:"/admin",
+    path: "/admin",
     element: <Admin_Layout />, //create children based on the user sidebar
     errorElement: <ErrorPage />,
     children: [
       {
-        path: 'dashboard',
+        path: "dashboard",
         element: <BarangayDashboard />,
       },
       {
-        path: 'report',
-        element: <Report />,//report
+        path: "report",
+        element: <Report />, //report
       },
       {
-        path: 'settings',
+        path: "settings",
         element: <Settings />,
       },
-    ]
+    ],
   },
-])
+  {
+    path: "/adminSignUp",
+    element: <AdminSignUp />,
+    errorElement: <ErrorPage />,
+  },
+]);
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <RouterProvider router={router} />
   </React.StrictMode>
-)
+);

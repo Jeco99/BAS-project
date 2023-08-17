@@ -3,9 +3,13 @@ import { useState } from "react";
 import { Button } from "@material-tailwind/react";
 
 import ImageUpload from "../../../components/imageUpload/imageUpload";
-import FormInput from "../../../components/input/formInput";
+// import FormInput from "../../../components/input/formInput";
 
-import accountInputFormData from "../../../components/input/accountInputFormData";
+// import accountInputFormData from "../../../components/input/accountInputFormData";
+import AdminSignUp from "./adminSignUp";
+
+import UserAccount from "./acount";
+
 function AccountDetails({
   getData,
   setGetData,
@@ -14,6 +18,8 @@ function AccountDetails({
   activeStep,
   errors,
 }) {
+
+  const [isOfficial, setIsOffial] = useState(false);
   const handleChange = (e) => {
     e.preventDefault();
     const { name, value } = e.target;
@@ -23,6 +29,13 @@ function AccountDetails({
     });
   };
 
+  // const isBrgyOfficial = (e) =>{
+  //   e.preventDefault();
+  //   const officialVal = e.target.value;
+  //   officialVal == 'Yes' ? setIsOffial(true) : setIsOffial(false);
+  // }
+
+  console.log(isOfficial);
   return (
     <div className="mx-auto md:mx-[100px] lg:mx-[290px] xl:mx-[500px] 2xl:[700px]">
       <h1 className="text-center text-2xl sm:text-4xl font-semibold">
@@ -32,26 +45,17 @@ function AccountDetails({
         <div className="w-full">
           <div className="flex flex-col gap-4 ">
             <ImageUpload getData={getData} setGetData={setGetData} />
-            {
-              accountInputFormData.map((formElements) => (
-                <FormInput 
-                  key={formElements.id}
-                  id={formElements.id}
-                  type={formElements.type}
-                  handleChange={handleChange}
-                  value={getData[formElements.id]}
-                  labelName={formElements.labelName}
-                  errors={errors}
-                  errorsmessage={formElements.errormessage}
-                  showRequired={formElements.showRequired}
-                />
-              ))
-            }
-          </div> 
+            <div className="flex space-x-3">
+              <p>Are you an official?</p>
+              <input type="radio" id="yes" name="isOfficial" value="Yes" onChange={()=>{setIsOffial(true)}}/>
+              <label htmlFor="yes">Yes</label>
+              <input type="radio" id="no" name="isOfficial" value="No" onChange={()=>{setIsOffial(false)}}/>
+              <label htmlFor="no">No</label>
+            </div>
+            {isOfficial ? <AdminSignUp/> :   <UserAccount handleChange={handleChange} getData={getData} errors={errors}/>}
+          </div>
           <div className="mt-5 flex justify-between">
-            <Button onClick={handlePrev}
-            className="btn"
-            >
+            <Button onClick={handlePrev} className="btn">
               {activeStep == 0 ? "Back" : "Prev"}
             </Button>
             <Button
