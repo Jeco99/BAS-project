@@ -1,5 +1,4 @@
 import FormLabel from "../label/formLabel";
-import Input from "./input";
 
 export default function FormInput({
   value,
@@ -9,14 +8,21 @@ export default function FormInput({
   labelName,
   errors,
   errorsmessage,
-  showRequired,
+  showRequired
 }) {
   return (
     <div>
       <div className="mb-2 block">
         <FormLabel labelName={labelName} id={id} showRequired={showRequired} />
       </div>
-      <Input id={id} type={type} handleChange={handleChange} value={value} />
+      <input
+      className="inputText"
+      id={id}
+      name={id}
+      type={type}
+      onChange={handleChange}
+      value={value}
+    />
       {errors[id] && <small>{errorsmessage}</small>}
     </div>
   );
