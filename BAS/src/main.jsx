@@ -4,7 +4,7 @@ import "./assets/index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import LogIn from "./pages/LogIn.jsx";
-import CreateaAccount from "./pages/user/userSignUp/createAccount";
+import CreateAccount from "./pages/user/userSignUp/createAccount";
 import ErrorPage from "./pages/errorPage/errorpage";
 
 import RootLayout from "./layouts/Layout";
@@ -21,7 +21,6 @@ import BarangayDashboard from "./pages/barangay/barangayDashboard/barangayDashbo
 
 import Settings from "./pages/settings/setting";
 import Report from "./pages/user/reportPage/reportPage";
-import AdminSignUp from "./pages/user/userSignUp/adminSignUp";
 
 const router = createBrowserRouter([
   {
@@ -31,7 +30,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/createaccount",
-    element: <CreateaAccount />,
+    element: <CreateAccount />,
     errorElement: <ErrorPage />,
   },
   {
@@ -86,11 +85,6 @@ const router = createBrowserRouter([
         element: <Settings />,
       },
     ],
-  },
-  {
-    path: "/adminSignUp",
-    element: <AdminSignUp />,
-    errorElement: <ErrorPage />,
   },
 ]);
 

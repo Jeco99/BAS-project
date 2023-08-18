@@ -1,30 +1,36 @@
 export default [
     {
-        id:'username',
+        id:'firstname',
         type: 'text',
-        labelName: 'User Name',
-        showRequired: true,
-        errormessage:'User Name is required!'
+        labelName: 'First Name',
+        errormessage:'First Name is required!',
+        showRequired: true
     }, 
     {
-        id:'email',
+        id:'middlename',
         type: 'text',
-        labelName: 'Email',
-        showRequired: true,
-        errormessage:'Email is required!'
+        labelName: 'Middle Name',
+        errormessage:'Middle Name is required!',
+        showRequired: true
     }, 
     {
-        id:'password',
-        type: 'password',
-        labelName: 'Password',
-        showRequired: true,
-        errormessage:'Password is required!'
+        id:'lastname',
+        type: 'text',
+        labelName: 'Last Name',
+        errormessage:'Last Name is required!',
+        showRequired: true
     }, 
     {
-        id:'confirmpassword',
-        type: 'password',
-        labelName: 'Confirm Password',
-        showRequired: true,
-        errormessage:'Confirm Password is required!'
+        id:'suffix',
+        type: 'text',
+        labelName: 'Suffix',
+        showRequired: false
     }, 
+    {
+        id:'dateofbirth',
+        type:'date',
+        labelName: "Date of Birth",
+        errormessage: "Birthday is required!",
+        showRequired: true
+    }
 ]
