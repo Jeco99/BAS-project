@@ -50,7 +50,7 @@ function Root() {
       <nav className="w-full relative"><NavbarComponent setOpen={setOpen}/></nav>
       <div className="flex">
           <aside className="h-screen">  <Sidebar open={open} setOpen={setOpen} sidebarRef={sidebarRef} Nav_animation={Nav_animation} isTabletMid={isTabletMid}/>  </aside>
-          <main className="w-full m-10 leftCol"><UserDashboard/></main>
+          <main className="w-full leftCol"><UserDashboard/></main>
       </div>
       
        

@@ -40,7 +40,7 @@ export default function NavbarComponent({ setOpen }) {
             </span>
           </Dropdown.Header>
           <Dropdown.Item>
-            <Link to="/">Sign out</Link>
+            <button type="button" className='btn btnRadius p-2' onClick={()=> location.href="/"}>Sign Out</button>
           </Dropdown.Item>
         </Dropdown>
       </div>
