@@ -144,8 +144,8 @@ function reportPage() {
   });
 
   return (
-    <div className=" space-y-6 mt-4 p-2 mx-auto max-w-6xl">
-      <h1 className="text-3xl mx-auto">Reports</h1>
+    <div className="main-container">
+      <h1 className="main-title">Reports</h1>
       <div className="flex flex-col sm:flex-row items-center mb-4">
         <div className="relative">
           <Input

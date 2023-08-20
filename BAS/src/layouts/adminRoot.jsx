@@ -51,7 +51,7 @@ function Admin_Root() {
       <nav className="w-full relative"><NavbarComponent setOpen={setOpen}/></nav>
       <div className="flex">
           <aside className="h-screen">  <Admin_Sidebar open={open} setOpen={setOpen} sidebarRef={sidebarRef} Nav_animation={Nav_animation} isTabletMid={isTabletMid}/>  </aside>
-          <main className="w-full m-10 leftCol"><BarangayDashboard/></main>
+          <main className="w-full leftCol"><BarangayDashboard/></main>
       </div>
       
        

@@ -17,10 +17,12 @@ export default function BarangayDashboard() {
   // }
 
   return (
-    <div className="marginMain">
+    <div className="main-container">
       <div>
-        <h1>Dashboard</h1>
-        <div className="flex gap-4 ml-2 flex-col sm:flex-row">
+        <h1 className="main-title">
+          Dashboard
+        </h1>
+        <div className="grid grid-cols-1 sm:grid-cols-5 gap-4 ml-4 mb-4 text-2xl">
           <NumberOfFemales />
           <NumberOfMales />
           <BarangayCertificate />
@@ -30,7 +32,7 @@ export default function BarangayDashboard() {
       </div>
       <div>
         <div>
-          <h1>Latest News/Events</h1>
+          <h1 className="main-title">Latest News/Events</h1>
           <div className="flex justify-center space-x-2">
             <input
               type="search"
@@ -51,7 +53,7 @@ export default function BarangayDashboard() {
           </div>
         </div>
         {addPost && <BarangayAddPost setAddPost={setAddPost} />}
-        <div className="ml-2">
+        <div className="ml-4 text-2xl">
           <Post />
           <Post />
           <Post />
