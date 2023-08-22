@@ -18,9 +18,11 @@ import Admin_Layout from "./layouts/admin_Layout";
 import Admin_Root from "./layouts/adminRoot";
 
 import BarangayDashboard from "./pages/barangay/barangayDashboard/barangayDashboard";
-
-import UserSettings from "./pages/settings/setting";
 import Report from "./pages/user/reportPage/reportPage";
+
+import AdminSettings from "./pages/settings/AdminSetting";
+import UserSettings from "./pages/settings/UserSetting";
+
 
 const router = createBrowserRouter([
   {
@@ -82,7 +84,7 @@ const router = createBrowserRouter([
       },
       {
         path: "settings",
-        element: <UserSettings />,
+        element: <AdminSettings />,
       },
     ],
   },
