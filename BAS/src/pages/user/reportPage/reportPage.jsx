@@ -2,104 +2,13 @@ import { useState } from "react";
 /* import { GrLinkNext } from "react-icons/gr"; */
 import { CgSearch } from "react-icons/cg";
 import { Input } from "@material-tailwind/react";
+import reportData from "./reportData";
+import ActionButton from "./actionButton";
 
-function reportPage() {
-  const data = [
-    {
-      col1: "January 9, 2020",
-      col2: "Edward Newgate",
-      col3: "Barangay Clearance",
-      col4: "12:00-1:00",
-      col5: "Requirement for NBI",
-      col6: "",
-      col7: "Done"
-    },
-    {
-      col1: "March 2, 2021",
-      col2: "Edward Newgate",
-      col3: "Certificate of Residence",
-      col4: "8:00-9:00",
-      col5: "Application of credit card",
-      col6: "",
-      col7: "done",
-    },
-    {
-      col1: "July 25, 2023",
-      col2: "Edward Newgate",
-      col3: "Barangay clearance",
-      col4: "1:00-2:00",
-      col5: "Find OnePiece",
-      col6: "y/n",
-      col7: "done",
-    },
-    {
-      col1: "February 25, 2023",
-      col2: "Edward Newgate",
-      col3: "Barangay clearance",
-      col4: "10:00-11:00",
-      col5: "Go to laugh tale",
-      col6: "y/n",
-      col7: "done",
-    },
-    {
-      col1: "December 2, 2022",
-      col2: "Edward Newgate",
-      col3: "Barangay clearance",
-      col4: "4:00-5:00",
-      col5: "for elbaf",
-      col6: "y/n",
-      col7: "expired",
-    },
-    {
-      col1: "January 9, 2020",
-      col2: "Edward Newgate",
-      col3: "Barangay Clearance",
-      col4: "12:00-1:00",
-      col5: "Requirement for NBI",
-      col6: "y/n",
-      col7: "expired",
-    },
-    {
-      col1: "March 2, 2021",
-      col2: "Edward Newgate",
-      col3: "Certificate of Residence",
-      col4: "8:00-9:00",
-      col5: "Application of credit card",
-      col6: "y/n",
-      col7: "done"
-    },
-    {
-      col1: "July 25, 2023",
-      col2: "Edward Newgate",
-      col3: "Barangay clearance",
-      col4: "1:00-2:00",
-      col5: "Find OnePiece",
-      col6: "y/n",
-      col7: "done",
-    },
-    {
-      col1: "February 25, 2023",
-      col2: "Edward Newgate",
-      col3: "Barangay clearance",
-      col4: "10:00-11:00",
-      col5: "Go to laugh tale",
-      col6: "y/n",
-      col7: "done",
-    },
-    {
-      col1: "December 2, 2022",
-      col2: "Edward Newgate",
-      col3: "Barangay clearance",
-      col4: "4:00-5:00",
-      col5: "for elbaf",
-      col6: "y/n",
-      col7: "expired",
-    },
-    // Add more data objects here];
-  ];
-
+function ReportPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const [filterValue, setFilterValue] = useState("all");
+  const [requestData, setRequestData] = useState(reportData);
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value.toLowerCase());
@@ -108,38 +17,38 @@ function reportPage() {
     setFilterValue(event.target.value.toLowerCase());
   };
 
-  const filteredData = data.filter((item) => {
+  const filteredData = requestData.filter((item) => {
     if (filterValue === "date") {
-      return item.col1.toLowerCase().includes(searchTerm);
+      return item.timestamp.toLowerCase().includes(searchTerm);
     }
     if (filterValue === "type of request") {
-      return item.col3.toLowerCase().includes(searchTerm);
+      return item.type0fRequest.toLowerCase().includes(searchTerm);
     }
 
-    const col1Lower = item.col1.toLowerCase();
-    const col2Lower = item.col2.toLowerCase();
-    const col3Lower = item.col3.toLowerCase();
-    const col4Lower = item.col4.toString().toLowerCase();
-    const col5Lower = item.col5.toLowerCase();
-    const col6Lower = item.col6.toLowerCase();
-    const col7Lower = item.col7.toLowerCase();
+    const timestampLower = item.timestamp.toLowerCase();
+    const nameLower = item.name.toLowerCase();
+    const type0fRequestLower = item.type0fRequest.toLowerCase();
+    const timeOfRequestLower = item.timeOfRequest.toString().toLowerCase();
+    const purposeLower = item.purpose.toLowerCase();
+    const actionButtonLower = item.actionButton.toLowerCase();
+    const requestStatusLower = item.requestStatus.toLowerCase();
 
     return (
-      (col1Lower.includes(searchTerm) ||
-        col2Lower.includes(searchTerm) ||
-        col3Lower.includes(searchTerm) ||
-        col4Lower.includes(searchTerm) ||
-        col5Lower.includes(searchTerm) ||
-        col6Lower.includes(searchTerm) ||
-        col7Lower.includes(searchTerm)) &&
+      (timestampLower.includes(searchTerm) ||
+        nameLower.includes(searchTerm) ||
+        type0fRequestLower.includes(searchTerm) ||
+        timeOfRequestLower.includes(searchTerm) ||
+        purposeLower.includes(searchTerm) ||
+        actionButtonLower.includes(searchTerm) ||
+        requestStatusLower.includes(searchTerm)) &&
       (filterValue === "all" ||
-        col1Lower.includes(filterValue) ||
-        col2Lower.includes(filterValue) ||
-        col3Lower.includes(filterValue) ||
-        col4Lower.includes(filterValue) ||
-        col5Lower.includes(filterValue) ||
-        col6Lower.includes(filterValue) ||
-        col7Lower.includes(filterValue) )
+        timestampLower.includes(filterValue) ||
+        nameLower.includes(filterValue) ||
+        type0fRequestLower.includes(filterValue) ||
+        timeOfRequestLower.includes(filterValue) ||
+        purposeLower.includes(filterValue) ||
+        actionButtonLower.includes(filterValue) ||
+        requestStatusLower.includes(filterValue))
     );
   });
 
@@ -158,18 +67,16 @@ function reportPage() {
           </div>
         </div>
         <div className="relative pl-2">
-          <form>
-            <select
-              id="filter"
-              className="px-4 py-2 px-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-              value={filterValue}
-              onChange={handleFilter}
-            >
-              <option value="all">All</option>
-              <option value="date">Date</option>
-              <option value="type of request">Type of request</option>
-            </select>
-          </form>
+          <select
+            id="filter"
+            className="px-4 py-2 px-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+            value={filterValue}
+            onChange={handleFilter}
+          >
+            <option value="all">All</option>
+            <option value="date">Date</option>
+            <option value="type of request">Type of request</option>
+          </select>
         </div>
       </div>
 
@@ -188,16 +95,17 @@ function reportPage() {
             </tr>
           </thead>
           <tbody>
-            
-            {filteredData.map((item, index) => (
-              <tr key={index}>
-                <td className="border px-4 py-2">{item.col1}</td>
-                <td className="border px-4 py-2">{item.col2}</td>
-                <td className="border px-4 py-2">{item.col3}</td>
-                <td className="border px-4 py-2">{item.col4}</td>
-                <td className="border px-4 py-2">{item.col5}</td>
-                <td className="border px-4 py-2">{item.col6}</td>
-                <td className="border px-4 py-2">{item.col7}</td>
+            {filteredData.map((item) => (
+              <tr key={item.id}>
+                <td className="border px-4 py-2">{item.timestamp}</td>
+                <td className="border px-4 py-2">{item.name}</td>
+                <td className="border px-4 py-2">{item.type0fRequest}</td>
+                <td className="border px-4 py-2">{item.timeOfRequest}</td>
+                <td className="border px-4 py-2">{item.purpose}</td>
+                <td className="border px-4 py-2">
+                  <ActionButton setRequestData={setRequestData} id={item.id} />
+                </td>
+                <td className="border px-4 py-2">{item.requestStatus}</td>
                 {/* Add more table data (td) elements here */}
               </tr>
             ))}
@@ -206,11 +114,10 @@ function reportPage() {
       </div>
       <div className="flex flex-col items-center">
         <span className="text-sm text-gray-700 dark:text-gray-400">
-          Page 1 {" "}
+          Page 1{" "}
         </span>
         <div className="inline-flex mt-2 xs:mt-0">
-          <button 
-          className="flex items-center justify-center px-3 h-8 text-sm font-medium text-white bg-beetleGreen rounded-l hover:bg-morningGlory hover:text-black">
+          <button className="flex items-center justify-center px-3 h-8 text-sm font-medium text-white bg-beetleGreen rounded-l hover:bg-morningGlory hover:text-black">
             <svg
               className="w-3.5 h-3.5 mr-2"
               aria-hidden="true"
@@ -228,8 +135,7 @@ function reportPage() {
             </svg>
             Prev
           </button>
-          <button 
-          className="flex items-center justify-center px-3 h-8 text-sm font-medium text-white bg-beetleGreen border-0 border-l border-gray-700 rounded-r hover:bg-morningGlory hover:text-black">
+          <button className="flex items-center justify-center px-3 h-8 text-sm font-medium text-white bg-beetleGreen border-0 border-l border-gray-700 rounded-r hover:bg-morningGlory hover:text-black">
             Next
             <svg
               className="w-3.5 h-3.5 ml-2"
@@ -253,4 +159,4 @@ function reportPage() {
   );
 }
 
-export default reportPage;
+export default ReportPage;
