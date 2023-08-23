@@ -1,12 +1,14 @@
-import { useState } from 'react';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
+import { useState } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+
+import FormLabel from "../../../components/label/formLabel";
 
 function AppointmentDisplay() {
   const [startDate, setStartDate] = useState(new Date());
-  const [request, setRequest] = useState('');
-  const [purpose, setPurpose] = useState('');
-  const [selectTime, setSelectTime] = useState('');
+  const [request, setRequest] = useState("");
+  const [purpose, setPurpose] = useState("");
+  const [selectTime, setSelectTime] = useState("");
   const [showModal, setShowModal] = useState(false);
 
   const handleDateChange = (date) => {
@@ -29,58 +31,51 @@ function AppointmentDisplay() {
   };
 
   return (
-    <div className='main-container'>
-
-     <h1 className='main-title'>Appointment</h1>        
-    <form className="space-y-10 editor mx-auto w-10/12 flex flex-col text-gray-800 border border-gray-300 p-4 rounded-lg shadow-lg max-w-2xl" 
-    onSubmit={handleSubmit}>
-
-      <div>
-        <label htmlFor="RequestList" className="block text-gray-700">
-          Request
-        </label>
-        <select
-          id="RequestList"
-          name="RequestList"
-          className="w-full flex px-4 py-2 mt-2 text-xl text-gray-700 bg-gray-50 border border-gray-300 rounded-md focus:border-blue-500 focus:ring-blue-500 overflow-y-auto" 
-          required
-          value={request}
-          onChange={(e) => setRequest(e.target.value)}
+    <div className="main-container">
+      <h1 className="main-title">Appointment</h1>
+      <form
+        className="space-y-10 editor mx-auto w-auto sm:w-4/12 md:w-6/12 flex flex-col text-gray-800 border border-gray-300 p-4 rounded-lg shadow-lg max-w-2xl"
+        onSubmit={handleSubmit}
+      >
+        <div>
+          <FormLabel labelName={'Request'} id={'requestList'} showRequired/>
+          <select
+            id="RequestList"
+            name="RequestList"
+            className="inputText"
+            required
+            value={request}
+            onChange={(e) => setRequest(e.target.value)}
           >
-          <option value="">--Select an option--</option>
+            <option value="">--Select an option--</option>
             <option value="Barangay Clearance">Barangay Clearance</option>
             <option value="Barangay Certificate">Barangay Certificate</option>
             <option value="Barangay Permit">Barangay Permit</option>
-        </select>
-      </div>
+          </select>
+        </div>
 
-      <div>
-        <label htmlFor="purpose" className="block text-gray-700">
-          Purpose
-        </label>
-        <textarea
-          id="purpose"
-          rows="4"
-          className="w-full text-xl flex px-4 py-2 mt-2 text-gray-700 bg-gray-50 border border-gray-300 rounded-md focus:border-blue-500 focus:ring-blue-500 overflow-y-auto" 
-          required
-          value={purpose}
-          onChange={(e) => setPurpose(e.target.value)}
+        <div>
+        <FormLabel labelName={'Purpose'} id={'purpose'} showRequired/>
+          <textarea
+            id="purpose"
+            rows="4"
+          className="inputText"
+            required
+            value={purpose}
+            onChange={(e) => setPurpose(e.target.value)}
+          ></textarea>
+        </div>
+        <div>
+        <FormLabel labelName={' Select time (8:00 - 5:00)'} id={'SelectTime'} showRequired/>
+          <select
+            id="SelectTime"
+            name="SelectTime"
+           className="inputText"
+            required
+            value={selectTime}
+            onChange={(e) => setSelectTime(e.target.value)}
           >
-          </textarea>
-      </div>
-      <div>
-        <label htmlFor="SelectTime" className="block text-gray-700">
-          Select time (8:00 - 5:00)
-        </label>
-        <select
-          id="SelectTime"
-          name="SelectTime"
-          className="w-full text-xl flex px-4 py-2 mt-2 text-gray-700 bg-gray-50 border border-gray-300 rounded-md focus:border-blue-500 focus:ring-blue-500 overflow-y-auto" 
-          required
-          value={selectTime}
-          onChange={(e) => setSelectTime(e.target.value)}
-          >
-          <option value="">--Select an option--</option>
+            <option value="">--Select an option--</option>
             <option value="8:00 - 9:00">8:00 - 9:00</option>
             <option>9:00 - 10:00</option>
             <option>10:00 - 11:00</option>
@@ -90,36 +85,34 @@ function AppointmentDisplay() {
             <option>2:00 - 3:00</option>
             <option>3:00 - 4:00</option>
             <option>4:00 - 5:00</option>
-        </select>
-      </div>
-      <div>
-        <label htmlFor="datepicker" className="block text-gray-700">
-          Select date
-        </label>
-        <DatePicker
-          id="datepicker"
-          selected={startDate}
-          onChange={handleDateChange}
-          dateFormat="MMMM d, yyyy"
-          filterDate={weekDays}
-          minDate={new Date()}
-          maxDate={new Date("2023-8-31")}
-          withPortal
-          className="w-full text-xl px-4 py-2 mt-2 text-gray-700 bg-gray-50 border border-gray-300 rounded-md focus:border-blue-500 focus:ring-blue-500"
-          required
-        />
-      </div>
-      <div>
-        <button
-          type="submit"
-          className="w-full px-4 py-2 text-black bg-beetleGreen rounded-md hover:bg-morningGlory hover:text-black"
-        >
-          Submit
-        </button>
-      </div>
-    </form>
+          </select>
+        </div>
+        <div>
+          <FormLabel labelName={' Select date'} id={'datepicker'} showRequired/>
+          <DatePicker
+            id="datepicker"
+            selected={startDate}
+            onChange={handleDateChange}
+            dateFormat="MMMM d, yyyy"
+            filterDate={weekDays}
+            minDate={new Date()}
+            maxDate={new Date("2023-8-31")}
+            withPortal
+           className="inputText"
+            required
+          />
+        </div>
+        <div>
+          <button
+            type="submit"
+            className="btn btnRadius"
+          >
+            Submit
+          </button>
+        </div>
+      </form>
 
-    {showModal && (
+      {showModal && (
         <div className="fixed block inset-0 flex items-center justify-center bg-gray-50 bg-opacity-75 overflow-x-hidden overflow-y-auto">
           <div className="fixed mx-auto w-10/12 flex flex-col text-xl text-gray-800 bg-gray-50 border border-gray-300 rounded-lg p-4 shadow-lg max-w-2xl text-xl">
             <h2 className="text-2xl font-semibold mb-4">Summary</h2>
@@ -127,30 +120,26 @@ function AppointmentDisplay() {
             <p>Purpose: {purpose}</p>
             <p>Time: {selectTime}</p>
             <p>Date: {startDate.toDateString()}</p>
-            <div className="pt-8">
-            <button 
-            type="button" 
-
-            className="text-black bg-beetleGreen hover:bg-morningGlory rounded-lg text-sm px-5 py-2.5 text-center hover:text-black mx-2"
-
-            onClick={""}
-            >
-              Proceed
+            <div className="pt-8 flex">
+              <button
+                type="button"
+                className="cancelBtn btnRadius"
+                onClick={closeModal}
+              >
+                Back
               </button>
-            <button 
-            type="button" 
-
-            className="text-black bg-white hover:bg-gray-100 rounded-lg border border-gray-400 text-sm font-medium px-5 py-2.5 hover:text-black"
-
-            onClick={closeModal}
-            >
-              Back
+              <button
+                type="submit"
+                className="btn btnRadius"
+                onClick={""}
+              >
+                Proceed
               </button>
             </div>
           </div>
         </div>
       )}
-</div>
+    </div>
   );
 }
 
