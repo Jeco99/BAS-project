@@ -325,12 +325,12 @@ export default function CreateAccount() {
 
             <div className="flex justify-between gap-4 flex-col sm:flex-row">
               <button
-                className="btn btnRadius w-full"
+                className="cancelBtn"
                 onClick={() => (location.href = "/")}
               >
                 Back
               </button>
-              <button className="btn btnRadius w-full"> Submit</button>
+              <button className="btn btnRadius"> Submit</button>
             </div>
           </form>
         </div>

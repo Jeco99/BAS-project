@@ -57,15 +57,19 @@ const LogIn = () => {
   };
 
   return (
-    <div className="fixed inset-0 flex flex-col sm:flex-row items-center justify-center bg-beetleGreen  px-2 sm:p-0">
+    <div className="block sm:fixed inset-0 flex flex-col sm:flex-row justify-center bg-beetleGreen py-7">
+      {/* fixed inset-0 flex flex-col sm:flex-row items-center justify-center bg-beetleGreen  px-2 sm:p-0 */}
+
       <img
-        className=" w-6/12 sm:w-5/12"
+        className=" w-4/12 sm:w-5/12 mx-auto sm:m-auto"
         src={logoImage}
         alt="Barangay Appointment System Logo"
       />
+      
+ 
 
       <form
-        className="bg-beetleGreen block border border-black rounded-lg shadow w-1/3 p-1.5 sm:p-6 m-6"
+        className="bg-beetleGreen block border border-black rounded-lg shadow w-3/3 sm:w-1/3 p-1.5 sm:p-6 m-auto sm:my-auto"
         onSubmit={handleSubmit}
       >
         <h1 className="text-center text-3xl sm:text-5xl font-extrabold mb-6 text-black drop-shadow-xl">

@@ -12,17 +12,15 @@ import Post from "../../../components/post/post";
 export default function BarangayDashboard() {
   const [addPost, setAddPost] = useState(false);
 
-  // if (addPost) {
-  //   return <BarangayAddPost />;
-  // }
-
   return (
     <div className="main-container">
       <div>
         <h1 className="main-title">
           Dashboard
         </h1>
-        <div className="grid grid-cols-1 sm:grid-cols-5 gap-4 ml-4 mb-4 text-2xl">
+        {/* TODO: dashboard responsiveness */}
+        {/* <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-1 sm:gap-2 md:gap-4 ml-auto sm:ml-4 mb-4"> */}
+       <div className="chartContainer">
           <NumberOfFemales />
           <NumberOfMales />
           <BarangayCertificate />
@@ -33,16 +31,16 @@ export default function BarangayDashboard() {
       <div>
         <div>
           <h1 className="main-title">Latest News/Events</h1>
-          <div className="flex justify-center space-x-2">
+          <div className="flex justify-center space-x-2 mx-auto md:mx-32 lg:mx-40">
             <input
               type="search"
-              className="btnRadius w-3/12"
+              className=" w-full btnRadius w-3/12"
               onClick={() => {
                 setAddPost(true);
               }}
             />
             <button
-              className="block btn btnRadius p-2"
+              className="btn btnRadius"
               type="button"
               onClick={() => {
                 setAddPost(true);
