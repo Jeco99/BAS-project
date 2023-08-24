@@ -5,7 +5,7 @@ export default function NumberOfMales() {
     <div className="chart">
       <h5>20</h5>
       <div>
-        <FaMale size={35} />
+        <FaMale className="imageChart" />
         <p>Male</p>
       </div>
     </div>

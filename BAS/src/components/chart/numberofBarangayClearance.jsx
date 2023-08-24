@@ -5,7 +5,7 @@ export default function BarangayClearance() {
     <div className="chart">
       <h5>20</h5>
       <div>
-        <FaFemale size={35} />
+        <FaFemale className="imageChart" />
         <p>
           Barangay <br /> Clearance
         </p>
