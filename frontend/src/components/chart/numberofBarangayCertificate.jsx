@@ -7,7 +7,7 @@ export default function BarangayCertificate() {
       <div>
         <FaFemale className="imageChart" />
         <p>
-          Barangay <br /> Certificate
+          Brgy Certificate
         </p>
       </div>
     </div>

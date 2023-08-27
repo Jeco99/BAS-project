@@ -7,7 +7,7 @@ export default function BarangayPermit() {
       <div>
         <FaFemale className="imageChart" />
         <p>
-          Barangay <br /> Permit
+          Brgy Permit
         </p>
       </div>
     </div>

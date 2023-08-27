@@ -18,8 +18,6 @@ export default function BarangayDashboard() {
         <h1 className="main-title">
           Dashboard
         </h1>
-        {/* TODO: dashboard responsiveness */}
-        {/* <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-1 sm:gap-2 md:gap-4 ml-auto sm:ml-4 mb-4"> */}
        <div className="chartContainer">
           <NumberOfFemales />
           <NumberOfMales />
