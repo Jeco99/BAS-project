@@ -83,6 +83,7 @@ sup {
 /*chart*/
 .chartContainer {
     display: grid;
+    grid-gap: 1rem;
     grid-template-columns: repeat(5, minmax(0, 1fr));
 }
 
@@ -100,6 +101,7 @@ sup {
     background-color: #E5E7EB;
 }
 
+/* 20 */
 .chart>h5 {
     font-size: 3.75rem;
     line-height: 1;
@@ -109,6 +111,7 @@ sup {
     padding: 1rem 0;
 }
 
+/* details */
 .chart>div {
     display: flex;
     flex-direction: column;
@@ -117,15 +120,17 @@ sup {
     padding-left: 1rem;
 }
 
+/* label */
 .chart>div>p {
-    font-size: 1.125rem;
+    font-size: 1.25rem;
     line-height: 1.75rem;
     color: #374151;
     text-align: center;
 }
 
+/* image */
 .imageChart {
-    height: 3rem;
+    height: 2rem;
 }
 
 
@@ -133,15 +138,25 @@ sup {
 
     .btn,
     .cancelBtn,
-    .inputText .chart>div>p {
+    .inputText {
         font-size: 0.875rem;
         line-height: 1.25rem;
     }
 
-    .labelText,
-    .chart>h5 {
+
+    .labelText {
         font-size: 1rem;
         line-height: 1.5rem;
+    }
+
+    .chart>h5 {
+        font-size: 2.25rem;
+        line-height: 2.5rem;
+    }
+
+    .chart>div>p {
+        font-size: 1.125rem;
+        line-height: 1.75rem;
     }
 
     .imageChart {
@@ -159,16 +174,26 @@ sup {
 
     .btn,
     .cancelBtn,
-    .inputText .chart>div>p {
+    .inputText {
         font-size: 0.75rem;
         line-height: 1rem;
     }
 
-    .labelText,
-    .chart>h5 {
+    .labelText {
         font-size: 0.875rem;
         line-height: 1.25rem;
     }
+
+    .chart>div>p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    .chart>h5 {
+        font-size: 1.5rem;
+        line-height: 2rem;
+    }
+
 
     .imageChart {
         height: 1.5rem;

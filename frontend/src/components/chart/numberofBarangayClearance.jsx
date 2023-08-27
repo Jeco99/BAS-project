@@ -7,7 +7,7 @@ export default function BarangayClearance() {
       <div>
         <FaFemale className="imageChart" />
         <p>
-          Barangay <br /> Clearance
+          Brgy Clearance
         </p>
       </div>
     </div>

@@ -13,7 +13,7 @@ export default function UserDashboard() {
         <h1 className="main-title">
           Dashboard
         </h1>
-        <div className="grid grid-cols-1 sm:grid-cols-5 gap-4 ml-4 mb-4 text-2xl">
+        <div className="chartContainer">
           <NumberOfFemales />
           <NumberOfMales />
           <BarangayCertificate />
