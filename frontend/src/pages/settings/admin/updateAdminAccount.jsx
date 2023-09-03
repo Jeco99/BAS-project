@@ -6,12 +6,19 @@ import {
   barangays,
 } from "select-philippines-address";
 
-import FormInput from "../../components/input/formInput";
-import FormLabel from "../../components/label/formLabel";
-import accountInputFormData from "../../components/input/accountInputFormData";
+import FormInput from "../../../components/input/formInput";
+import FormLabel from "../../../components/label/formLabel";
+import ImageUpload from "../../../components/imageUpload/imageUpload";
+import accountInputFormData from "../../../components/input/accountInputFormData";
 
-export default function UpdatePersonalAccount() {
+export default function UpdateAdminAccount() {
   const [getData, setGetData] = useState({
+    imagefile: "",
+    username: "",
+    email: "",
+    password: "",
+    confirmpassword: "",
+    contactnumber: "",
     firstname: "",
     middlename: "",
     lastname: "",
@@ -29,6 +36,11 @@ export default function UpdatePersonalAccount() {
   });
 
   const [errors, setErrors] = useState({
+    imagefile: null,
+    username: null,
+    email: null,
+    password: null,
+    confirmpassword: null,
     firstname: null,
     middlename: null,
     lastname: null,
@@ -98,7 +110,40 @@ export default function UpdatePersonalAccount() {
 
     let newErrors = { ...errors };
 
-   
+    if (getData.imagefile == "") {
+      newErrors.imagefile = "Set ImageFile";
+    } else {
+      newErrors.imagefile = "";
+    }
+
+    if (getData.username.trim() == "") {
+      newErrors.username = "Set Username";
+    } else {
+      newErrors.username = "";
+    }
+
+    if (getData.email.trim() == "") {
+      newErrors.email = "Set Email";
+    } else {
+      newErrors.email = "";
+    }
+
+    if (getData.password != getData.confirmpassword) {
+      alert("password not match!");
+    }
+
+    if (getData.password.trim() == "") {
+      newErrors.password = "Set Password";
+    } else {
+      newErrors.password = "";
+    }
+
+    if (getData.confirmpassword.trim() == "") {
+      newErrors.confirmpassword = "Set Confirm Password";
+    } else {
+      newErrors.confirmpassword = "";
+    }
+
     if (getData.firstname.trim() == "") {
       newErrors.firstname = "Set FirstName";
     } else {
@@ -180,6 +225,10 @@ export default function UpdatePersonalAccount() {
     setErrors(newErrors);
 
     if (
+      errors.imagefile === "" &&
+      errors.email === "" &&
+      errors.password === "" &&
+      errors.confirmpassword === "" &&
       errors.firstname === "" &&
       errors.middlename === "" &&
       errors.lastname === "" &&
@@ -201,6 +250,11 @@ export default function UpdatePersonalAccount() {
     <div className="block mt-8 p-6 bg-white border border-gray-200 rounded-lg shadow">
       <div className="w-full">
         <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+        <ImageUpload
+            getData={getData}
+            setGetData={setGetData}
+            errors={errors}
+          />
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             {accountInputFormData.map((formElements) => (
               <FormInput
@@ -318,16 +372,15 @@ export default function UpdatePersonalAccount() {
             </div>
           </div>
           <div className="flex justify-between gap-4 flex-col sm:flex-row">
-              <button
-                className="btn btnRadius w-full"
-                onClick={() => (location.href = "/")}
-              >
-                Back
-              </button>
-              <button className="btn btnRadius w-full"> Submit</button>
-            </div>
+            <button
+               className="cancelBtn btnRadius"
+              onClick={() => (location.href = "/")}
+            >
+              Back
+            </button>
+            <button className="btn btnRadius"> Submit</button>
+          </div>
         </form>
-
       </div>
     </div>
   );

@@ -1,8 +1,8 @@
 import { useState } from "react";
-import ImageUpload from "../../components/imageUpload/imageUpload";
+import ImageUpload from "../../../components/imageUpload/imageUpload";
 
-import commonInputFormData from "../../components/input/commonInputFormData";
-import FormInput from "../../components/input/formInput";
+import commonInputFormData from "../../../components/input/commonInputFormData";
+import FormInput from "../../../components/input/formInput";
 
 export default function UpdateUserAccount() {
   const [getData, setGetData] = useState({
@@ -107,12 +107,12 @@ export default function UpdateUserAccount() {
           </div>
           <div className="flex justify-between gap-4 flex-col sm:flex-row">
               <button
-                className="btn btnRadius w-full"
+                 className="cancelBtn btnRadius"
                 onClick={() => (location.href = "/")}
               >
                 Back
               </button>
-              <button className="btn btnRadius w-full"> Submit</button>
+              <button className="btn btnRadius"> Submit</button>
             </div>
         </form>
       </div>

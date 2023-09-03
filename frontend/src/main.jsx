@@ -20,9 +20,10 @@ import Admin_Root from "./layouts/adminRoot";
 import BarangayDashboard from "./pages/barangay/barangayDashboard/barangayDashboard";
 import Report from "./pages/user/reportPage/reportPage";
 
-import AdminSettings from "./pages/settings/AdminSetting";
-import UserSettings from "./pages/settings/UserSetting";
+import AdminSettings from "./pages/settings/admin/AdminSetting";
+import UserSettings from "./pages/settings/user/UserSetting";
 
+// TODO: router when add post
 
 const router = createBrowserRouter([
   {

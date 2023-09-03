@@ -21,30 +21,31 @@ DROP TABLE IF EXISTS notification;
 
 CREATE TABLE user_details (
   user_id SERIAL PRIMARY KEY,
-  user_image TEXT NOT NULL,
-  user_name TEXT NOT NULL,
-  user_email TEXT NOT NULL,
-  user_password TEXT NOT NULL,
-  user_firstname TEXT NOT NULL,
-  user_middlename TEXT NOT NULL,
-  user_lastname TEXT NOT NULL,
+  user_image TEXT NOT NULL, // 
+  user_name VARCHAR(255) NOT NULL,
+  user_email VARCHAR(255) NOT NULL,
+  user_password VARCHAR(255) NOT NULL,
+  user_firstname VARCHAR(255) NOT NULL,
+  user_middlename VARCHAR(255) NOT NULL,
+  user_lastname VARCHAR(255) NOT NULL,
   user_suffix TEXT,
-  user_sex TEXT NOT NULL,
+  user_sex VARCHAR(255) NOT NULL,
   user_date_of_birth DATE NOT NULL,
-  user_civil_status TEXT NOT NULL,
+  user_civil_status VARCHAR(255) NOT NULL,
   user_contact_number INT NOT NULL,
-  user_region TEXT NOT NULL,
-  user_province TEXT NOT NULL,
-  user_municipality TEXT NOT NULL,
-  user_barangay TEXT NOT NULL,
-  user_zone TEXT NOT NULL,
-  user_street TEXT NOT NULL,
-  user_type TEXT NOT NULL
+  user_region VARCHAR(255) NOT NULL,
+  user_province VARCHAR(255) NOT NULL,
+  user_municipality VARCHAR(255) NOT NULL,
+  user_barangay VARCHAR(255) NOT NULL,
+  user_zone VARCHAR(255) NOT NULL,
+  user_street VARCHAR(255) NOT NULL,
+  user_type VARCHAR(255) NOT NULL
 );
 
 ---------
 -----INSERT DATA
 -----------
+
 CREATE TABLE appointment(
   appointment_id SERIAL PRIMARY KEY ,
   request_type TEXT NOT NULL,
