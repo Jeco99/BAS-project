@@ -39,6 +39,7 @@ sup {
     color: black;
     border: 1px solid black;
     width: 100%;
+    padding: 0.5rem 0rem;
 }
 
 .cancelBtn:hover {
@@ -71,6 +72,7 @@ sup {
 }
 
 .main-title {
+    display: flex;
     font-size: 1.875rem;
     line-height: 2.25rem;
     padding-top: 1rem;
@@ -149,6 +151,10 @@ sup {
         line-height: 1.5rem;
     }
 
+    .main-title{
+        justify-content: center;
+    }
+
     .chart>h5 {
         font-size: 2.25rem;
         line-height: 2.5rem;
@@ -187,6 +193,10 @@ sup {
     .chart>div>p {
         font-size: 1rem;
         line-height: 1.5rem;
+    }
+
+    .main-title{
+        justify-content: center;
     }
 
     .chart>h5 {

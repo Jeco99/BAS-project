@@ -1,5 +1,4 @@
 "use client";
-
 import UpdateAdminAccount from "./updateAdminAccount";
 
 export default function AdminSettings() {

@@ -45,6 +45,7 @@ CREATE TABLE user_details (
 ---------
 -----INSERT DATA
 -----------
+
 CREATE TABLE appointment(
   appointment_id SERIAL PRIMARY KEY ,
   request_type TEXT NOT NULL,

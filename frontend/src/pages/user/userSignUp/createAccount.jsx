@@ -250,12 +250,12 @@ export default function CreateAccount() {
   console.log(getData);
   return (
     <div className="m-5 md:mx-[6rem] lg:mx-[15rem] 2xl:mx-[30rem]">
-      <div className="flex items-center">
+      <div className="flex items-center justify-between">
         <AiOutlineCaretLeft
           size={"75px"}
           onClick={() => (location.href = "/")}
         />
-        <h1 className="flex ml-32 text-5xl sm:text-6xl font-semibold">
+        <h1 className="flex mx-auto text-3xl sm:text-6xl font-semibold">
           Create Account
         </h1>
       </div>
@@ -268,7 +268,7 @@ export default function CreateAccount() {
               setGetData={setGetData}
               errors={errors}
             />
-            <div className="flex space-x-3">
+            <div className="flex space-x-3 labelText">
               <p>Are you an official?</p>
               <input
                 type="radio"
@@ -325,7 +325,7 @@ export default function CreateAccount() {
 
             <div className="flex justify-between gap-4 flex-col sm:flex-row">
               <button
-                className="cancelBtn"
+                className="cancelBtn btnRadius"
                 onClick={() => (location.href = "/")}
               >
                 Back

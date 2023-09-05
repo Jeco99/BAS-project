@@ -1,14 +1,8 @@
 import { useState } from "react";
-// import BarangayDashboard from "./barangayDashboard";
 
 //TODO: hide scrollbar
 
 function BarangayAddPost({ setAddPost }) {
-  // const [cancel, setCancel] = useState(false);
-
-  // if(cancel){
-  //     return <BarangayDashboard />
-  // }
 
   const [postDetails, setPostDetails] = useState({
     title: "",
@@ -57,14 +51,14 @@ function BarangayAddPost({ setAddPost }) {
   console.log(postDetails);
   return (
     <div className="fixed block inset-0 flex items-center justify-center bg-gray-50 bg-opacity-90 overflow-hidden">
-      <div className="w-full bg-white mx-[700px]">
-        <h1 className="text-center m-4 text-3 xl">New Post</h1>
+      <div className="w-full mx-[700px]">
+        <h1 className="text-center m-4 text-3xl">New Post</h1>
         <form
-          className=" mx-auto w-11/12 flex flex-col text-gray-800 border border-gray-300 p-4 shadow-lg max-w-2xl"
+          className=" mx-auto w-11/12 flex flex-col text-gray-800 border border-gray-300 p-4 shadow-lg max-w-2xl btnRadius bg-white"
           onSubmit={handleSubmit}
         >
           <input
-            className="bg-gray-100 border border-gray-300 p-3 outline-none text-1xl"
+            className="bg-gray-100 border border-gray-300 p-3 outline-none text-1xl btnRadius"
             spellCheck="false"
             placeholder="Title"
             type="text"
@@ -74,7 +68,7 @@ function BarangayAddPost({ setAddPost }) {
           />
           {errors.title && <small>No Content</small>}
           <textarea
-            className="bg-gray-100 sec p-3 h-60 border border-gray-300 outline-none mt-4 text-1xl"
+            className="bg-gray-100 sec p-3 h-60 border border-gray-300 outline-none mt-4 text-1xl btnRadius"
             spellCheck="false"
             placeholder="Describe everything about this post here"
             onChange={handleChange}
@@ -83,17 +77,16 @@ function BarangayAddPost({ setAddPost }) {
           ></textarea>
           {errors.message && <small>No Content</small>}
 
-          {/* <!-- buttons --> */}
-          <div className="flex mt-2">
+          <div className="flex justify-between gap-1 mt-4">
             <button
-              className="btnRadius border border-gray-300 p-1 px-4 font-semibold cursor-pointer text-gray-500 ml-auto"
+             className="cancelBtn btnRadius"
               type="button"
               onClick={() => setAddPost(false)}
             >
               Cancel
             </button>
             <button
-              className="btnRadius btn p-1 px-4 font-semibold cursor-pointer text-gray-200 ml-2 bg-beetleGreen"
+              className="btnRadius btn"
               type="submit"
             >
               Post

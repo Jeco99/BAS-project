@@ -13,8 +13,7 @@ const ImageUpload = ({ getData, setGetData, errors }) => {
               ? "https://static.thenounproject.com/png/4035887-200.png"
               : URL.createObjectURL(selectedImage)
           }
-          className="shadow-md border rounded-lg"
-          width={"250px"}
+          className="shadow-md border rounded-lg object-fill"
         />
         {selectedImage && (
           <div className="text-center my-4">
@@ -28,7 +27,6 @@ const ImageUpload = ({ getData, setGetData, errors }) => {
           name="imagefile"
           className="text-[12px] truncate"
           onChange={(event) => {
-            // console.log(event.target.files[0]);
             setSelectedImage(event.target.files[0]);
             setGetData({
               ...getData,

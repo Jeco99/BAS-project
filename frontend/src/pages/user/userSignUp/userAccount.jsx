@@ -1,5 +1,9 @@
 import commonInputFormData from "../../../components/input/commonInputFormData";
 import accountInputFormData from "../../../components/input/accountInputFormData";
+
+import CivilStatusDropdown from "../../../components/dropdown/civilstatusDropdown";
+import GenderDropdown from "../../../components/dropdown/genderDropdown";
+
 import FormInput from "../../../components/input/formInput";
 import FormLabel from "../../../components/label/formLabel";
 
@@ -19,7 +23,7 @@ export default function UserAccount({
 }) {
   return (
     <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-       {commonInputFormData.map((formElements) => (
+      {commonInputFormData.map((formElements) => (
         <FormInput
           key={formElements.id}
           id={formElements.id}
@@ -46,6 +50,10 @@ export default function UserAccount({
           showRequired={formElements.showRequired}
         />
       ))}
+
+      <GenderDropdown getData={getData} handleChange={handleChange} />
+      <CivilStatusDropdown getData={getData} handleChange={handleChange} />
+
       <div>
         <FormLabel labelName="Region" id="region" showRequired={true} />
         <select onChange={province} onSelect={region} className="inputText">
@@ -108,21 +116,21 @@ export default function UserAccount({
       </div>
 
       <div>
-          <FormLabel labelName="Zone" id="zone" showRequired={true} />
-          <input type="text" className="inputText" onChange={handleChange}/>
-          {errors.zone && <small>Zone is required!</small>}
-        </div>
-        <div>
-          <FormLabel labelName="Street" id="street" showRequired={true} />
-          <input type="text" className="inputText" onChange={handleChange}/>
-          {errors.street && <small>Street is required!</small>}
-        </div>
-        
-        <div>
-          <FormLabel labelName="Zipcode" id="zipcode" showRequired={true} />
-          <input type="number" className="inputText" onChange={handleChange}/>
-          {errors.zipcode && <small>Zipcode is required!</small>}
-        </div>
+        <FormLabel labelName="Zone" id="zone" showRequired={true} />
+        <input type="text" className="inputText" onChange={handleChange} />
+        {errors.zone && <small>Zone is required!</small>}
+      </div>
+      <div>
+        <FormLabel labelName="Street" id="street" showRequired={true} />
+        <input type="text" className="inputText" onChange={handleChange} />
+        {errors.street && <small>Street is required!</small>}
+      </div>
+
+      <div>
+        <FormLabel labelName="Zipcode" id="zipcode" showRequired={true} />
+        <input type="number" className="inputText" onChange={handleChange} />
+        {errors.zipcode && <small>Zipcode is required!</small>}
+      </div>
     </div>
   );
 }
