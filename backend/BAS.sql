@@ -21,7 +21,7 @@ DROP TABLE IF EXISTS notification;
 
 CREATE TABLE user_details (
   user_id SERIAL PRIMARY KEY,
-  user_image TEXT NOT NULL, // 
+  user_image TEXT NOT NULL,
   user_name VARCHAR(255) NOT NULL,
   user_email VARCHAR(255) NOT NULL,
   user_password VARCHAR(255) NOT NULL,
