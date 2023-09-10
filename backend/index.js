@@ -13,7 +13,7 @@ app.use(
 );
 app.use(json());
 
-app.get("/report", async (req, res) => {
+app.get("/appointment", async (req, res) => {
   try {
     const appointmentData = await sql`SELECT * FROM appointment`;
     res.json(appointmentData);
@@ -38,10 +38,8 @@ app.post("/appointment/create", async (req, res) => {
         "request_type", 
         "purpose", 
         "appointment_time",
-        "appointment_date",
-        "date_created", 
-        "status" ) VALUES (
-          ${request_type}, ${purpose}, ${appointment_time}, ${appointment_date}, ${date_created}, ${status}) RETURNING *`;
+        "appointment_date" ) VALUES (
+          ${request_type}, ${purpose}, ${appointment_time}, ${appointment_date}) RETURNING *`;
     res.json(newAppointment);
   } catch (err) {
     console.error(err.message);

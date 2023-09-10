@@ -3,8 +3,16 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 import FormLabel from "../../../components/label/formLabel";
+import { useLoaderData } from "react-router-dom";
 
-function AppointmentDisplay() {
+export const appointmentLoader = async () => {
+  const response = await fetch("http://localhost:3001/appointment");
+  const appointmentData = await response.json();
+  return { appointmentData };
+};
+
+export default function AppointmentDisplay() {
+  const appointmentData = useLoaderData();
   const [startDate, setStartDate] = useState(new Date());
   const [request, setRequest] = useState("");
   const [purpose, setPurpose] = useState("");
@@ -15,15 +23,44 @@ function AppointmentDisplay() {
     setStartDate(date);
   };
 
+
+
   const weekDays = (date) => {
     // Exclude weekends (Saturday and Sunday)
     const day = date.getDay();
     return day !== 0 && day !== 6;
   };
 
-  const handleSubmit = (e) => {
+  const handleShowModal= (e) => {
     e.preventDefault();
     setShowModal(true);
+  };
+
+  const handleSubmit = async () => {
+    try {
+      const response = await fetch('http://localhost:3001/appointment/create', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          "request_type" : request,
+          "purpose" : purpose,
+          "appointment_time" : selectTime,
+          "appointment_date" : startDate.toDateString()
+        }),
+      });
+
+      if (response.status === 200) {
+        alert('Data inserted successfully');
+        return location.href = "/root/appointment"
+      } else {
+        alert('Error inserting data');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+
   };
 
   const closeModal = () => {
@@ -35,7 +72,7 @@ function AppointmentDisplay() {
       <h1 className="main-title">Appointment</h1>
       <form
         className="space-y-10 editor mx-auto w-auto sm:w-4/12 md:w-6/12 flex flex-col text-gray-800 border border-gray-300 p-4 rounded-lg shadow-lg max-w-2xl"
-        onSubmit={handleSubmit}
+        onSubmit={handleShowModal}
       >
         <div>
           <FormLabel labelName={'Request'} id={'requestList'} showRequired/>
@@ -113,7 +150,7 @@ function AppointmentDisplay() {
       </form>
 
       {showModal && (
-        <div className="fixed block inset-0 flex items-center justify-center bg-gray-50 bg-opacity-75 overflow-x-hidden overflow-y-auto">
+        <form className="fixed block inset-0 flex items-center justify-center bg-gray-50 bg-opacity-75 overflow-x-hidden overflow-y-auto" onSubmit={handleSubmit} method="POST">
           <div className="fixed mx-auto w-10/12 flex flex-col text-xl text-gray-800 bg-gray-50 border border-gray-300 rounded-lg p-4 shadow-lg max-w-2xl text-xl">
             <h2 className="text-2xl font-semibold mb-4">Summary</h2>
             <p>Request: {request}</p>
@@ -131,16 +168,15 @@ function AppointmentDisplay() {
               <button
                 type="submit"
                 className="btn btnRadius"
-                onClick={""}
               >
                 Proceed
               </button>
             </div>
           </div>
-        </div>
+        </form>
       )}
     </div>
   );
 }
 
-export default AppointmentDisplay;
+
