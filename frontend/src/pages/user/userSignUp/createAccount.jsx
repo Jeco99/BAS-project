@@ -1,3 +1,5 @@
+// TODO: may error sa pag insert
+
 import { useState, useEffect } from "react";
 
 import { AiOutlineCaretLeft } from "react-icons/ai";
@@ -12,8 +14,16 @@ import {
   cities,
   barangays,
 } from "select-philippines-address";
+import { useLoaderData } from "react-router-dom";
+
+export const userLoader = async () =>{
+  const response = await fetch("http://localhost:3001/createaccount");
+  const userData = await response.json();
+  return userData
+}
 
 export default function CreateAccount() {
+  const userGetData = useLoaderData();
   const [getData, setGetData] = useState({
     user_type: "",
     imagefile: "",
@@ -109,16 +119,14 @@ export default function CreateAccount() {
     zipcode: null,
   });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
+  function dataValidation(){
     let newErrors = { ...errors };
 
-    if (getData.imagefile == "") {
-      newErrors.imagefile = "Set ImageFile";
-    } else {
-      newErrors.imagefile = "";
-    }
+    // if (getData.imagefile == "") {
+    //   newErrors.imagefile = "Set ImageFile";
+    // } else {
+    //   newErrors.imagefile = "";
+    // }
 
     if (getData.username.trim() == "") {
       newErrors.username = "Set Username";
@@ -228,22 +236,49 @@ export default function CreateAccount() {
 
     setErrors(newErrors);
 
-    if (
-      errors.firstname === "" &&
-      errors.middlename === "" &&
-      errors.lastname === "" &&
-      errors.sex === "" &&
-      errors.dateofbirth === "" &&
-      errors.region === "" &&
-      errors.civilstatus === "" &&
-      errors.barangay === "" &&
-      errors.municipal === "" &&
-      errors.province === "" &&
-      errors.zone === "" &&
-      errors.street === "" &&
-      errors.zipcode === ""
-    ) {
-      alert("Form Submitted");
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // dataValidation();
+
+   
+    // if (
+    //   errors.firstname === "" &&
+    //   errors.middlename === "" &&
+    //   errors.lastname === "" &&
+    //   errors.sex === "" &&
+    //   errors.dateofbirth === "" &&
+    //   errors.region === "" &&
+    //   errors.civilstatus === "" &&
+    //   errors.barangay === "" &&
+    //   errors.municipal === "" &&
+    //   errors.province === "" &&
+    //   errors.zone === "" &&
+    //   errors.street === "" &&
+    //   errors.zipcode === ""
+    // ) {
+     
+    // }
+
+    try {
+      const response = await fetch('http://localhost:3001/createaccount/create', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(getData),
+      });
+
+      if (response.status === 200) {
+        alert('Data inserted successfully');
+        return location.href = "/root"
+      } else {
+        alert('Error inserting data');
+      }
+    } catch (error) {
+      console.error('Error:', error);
     }
   };
 
@@ -322,6 +357,11 @@ export default function CreateAccount() {
                 errors={errors}
               />
             )}
+            {userGetData.map( (data) => (
+              <div key={data.user_id}>
+                <li>{data.first_name}</li>
+              </div>
+            ))}
 
             <div className="flex justify-between gap-4 flex-col sm:flex-row">
               <button
