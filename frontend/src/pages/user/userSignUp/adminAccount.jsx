@@ -1,6 +1,7 @@
 import FormLabel from "../../../components/label/formLabel";
 import commonInputFormData from "../../../components/input/commonInputFormData";
 import FormInput from "../../../components/input/formInput";
+import places from "../../../components/input/places";
 
 const AdminSignUp = ({
   getData,
@@ -93,22 +94,19 @@ const AdminSignUp = ({
           </select>
           {errors.province && <small>Barangay is required!</small>}
         </div>
-        <div>
-          <FormLabel labelName="Zone" id="zone" showRequired={true} />
-          <input type="text" className="inputText" onChange={handleChange}/>
-          {errors.zone && <small>Zone is required!</small>}
-        </div>
-        <div>
-          <FormLabel labelName="Street" id="street" showRequired={true} />
-          <input type="text" className="inputText" onChange={handleChange}/>
-          {errors.street && <small>Street is required!</small>}
-        </div>
-        
-        <div>
-          <FormLabel labelName="Zipcode" id="zipcode" showRequired={true} />
-          <input type="number" className="inputText" onChange={handleChange}/>
-          {errors.zipcode && <small>Zipcode is required!</small>}
-        </div>
+         {places.map((formElements) => (
+        <FormInput
+          key={formElements.id}
+          id={formElements.id}
+          type={formElements.type}
+          handleChange={handleChange}
+          value={getData[formElements.id]}
+          labelName={formElements.labelName}
+          errors={errors}
+          errorsmessage={formElements.errormessage}
+          showRequired={formElements.showRequired}
+        />
+      ))}
       </div>
     </>
   );

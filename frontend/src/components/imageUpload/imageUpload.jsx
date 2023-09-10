@@ -35,9 +35,9 @@ const ImageUpload = ({ getData, setGetData, errors }) => {
           }}
         />
 
-        {errors.imagefile && (
+        {/* {errors.imagefile && (
           <small className="text-center">Image is required!</small>
-        )}
+        )} */}
       </div>
     </div>
   );
