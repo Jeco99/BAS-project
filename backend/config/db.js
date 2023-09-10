@@ -1,11 +1,6 @@
-const  postgres  =  require("postgres");
+import postgres from "postgres";
+import dotenv from "dotenv";
 
-const sql = postgres({ 
-    host:'localhost',
-    port:5432,
-    database: 'BAS',
-    username: 'postgres',
-    password:'postgres'
-})
+dotenv.config();
 
-module.exports = sql;
+export default postgres(process.env.DATABASE_URL);

@@ -1,144 +1,205 @@
-const express = require("express");
-const sql = require("./config/db");
+import express, { json } from "express";
+import sql from "./config/db.js";
 const app = express();
-const apiRoutes = require("./routes/routes");
-const cors = require("cors");
+// const apiRoutes = require("./routes/routes");
+import cors from "cors";
 
 // app.use('/api', apiRoutes);
 
-app.use(cors());
-app.use(express.json());
+app.use(
+  cors({
+    origin: ["http://localhost:5173"],
+  })
+);
+app.use(json());
 
-app.get("/", async (req, res) => {
-  res.send("Hello There");
+app.get("/report", async (req, res) => {
+  try {
+    const appointmentData = await sql`SELECT * FROM appointment`;
+    res.json(appointmentData);
+  } catch (err) {
+    console.error(err.message);
+  }
 });
 
-app.post("/users/create", async (req, res) => {
-	try {
-	const { firstname, lastname } =  req.body;
-	console.log(req.params);
-	const  newUser  = await  sql`INSERT INTO users ("first_name", "last_name") VALUES(${firstname}, ${lastname}) RETURNING *`;
-	res.json(newUser);
-	} catch (err) {
-		console.error(err.message);
-	}
+app.post("/appointment/create", async (req, res) => {
+  try {
+    const {
+      request_type,
+      purpose,
+      appointment_time,
+      appointment_date,
+      date_created,
+      status,
+    } = req.body;
+    // console.log(req.params);
+    const newAppointment =
+      await sql`INSERT INTO appointment (
+        "request_type", 
+        "purpose", 
+        "appointment_time",
+        "appointment_date",
+        "date_created", 
+        "status" ) VALUES (
+          ${request_type}, ${purpose}, ${appointment_time}, ${appointment_date}, ${date_created}, ${status}) RETURNING *`;
+    res.json(newAppointment);
+  } catch (err) {
+    console.error(err.message);
+  }
 });
 
-app.get("/users", async (req, res) => {
-    try {
-      const  allUsers  =  await  sql`SELECT * FROM users`;
-      res.json(allUsers);
-      
-    } catch (err) {
-      console.error(err.message);
-    }
-  });
+app.get("/createaccount", async (req, res) => {
+  try {
+    const userData = await sql`SELECT * FROM user_details`;
+    res.json(userData);
+  } catch (err) {
+    console.error(err.message);
+  }
+});
 
-  app.get("/users/:id", async (req, res) => {
-    try {
-      const { id } = req.params;
-      const  selectUser  =  await  sql`SELECT * FROM users WHERE user_id = ${id}`;
-      res.json(selectUser);
-    } catch (err) {
-      console.error(err.message);
-    }
-  });
+app.post("/createaccount/create", async (req, res) => {
+  try {
+    const {
+      user_image,
+      user_name,
+      email,
+      password,
+      first_name,
+      middle_name,
+      last_name,
+      suffix,
+      sex,
+      date_of_birth,
+      civil_status,
+      contact_number,
+      region,
+      province,
+      municipality,
+      barangay,
+      zone,
+      street,
+      zipcode,
+      user_type,
+    } = req.body;
+    // console.log(req.params);
+    const newUser = await sql`INSERT INTO user_details ( 
+    "user_image", 
+    "user_name",
+    "email",
+    "password", 
+    "first_name", 
+    "middle_name", 
+    "last_name",
+    "suffix", 
+    "sex", 
+    "date_of_birth",
+    "civil_status", 
+    "contact_number", 
+    "region", 
+    "province", 
+    "municipality", 
+    "barangay", 
+    "zone", 
+    "street", 
+    "zipcode", 
+    "user_type") VALUES(${user_image}, ${user_name}, ${email}, ${password}, ${first_name}, 
+      ${middle_name}, ${last_name}, ${suffix}, ${sex}, ${date_of_birth}, ${civil_status}, 
+      ${contact_number}, ${region},  ${province}, ${municipality}, ${barangay}, ${zone}, ${street}, ${zipcode}, ${user_type}) RETURNING *`;
+    res.json(newUser);
+  } catch (err) {
+    console.error(err.message);
+  }
+});
 
-  app.put("/users/:id", async (req, res) => {
-    try {
-      const { id } = req.params;
-      const { firstname, lastname } = req.body;
-      const  updateUser  =  await  sql`UPDATE users SET "first_name" = ${firstname}, "last_name" = ${lastname} WHERE user_id = ${id}`;
-      res.json(`User id: ${id} was updated!`);
-    } catch (err) {
-      console.error(err.message);
-      res.status(500).send("Server Error");
-    }
-  });
+app.get("/data", async (req, res) => {
+  try {
+    const userData = await sql`SELECT * FROM users`;
+    res.json(userData);
+  } catch (err) {
+    console.error(err.message);
+  }
+})
 
-  app.delete("/users/:id", async (req, res) => {
-    try {
-      const { id } = req.params;
-      const  deleteUser  =  await  sql`DELETE FROM users WHERE user_id = ${id}`;
-      res.json("User was deleted!");
-    } catch (err) {
-      console.error(err.message);
-      res.status(500).send("Server Error");
-    }
-  });
+app.post("/data/create", async (req, res) => {
+  try {
+    const {
+     first_name,
+     last_name
+    } = req.body;
+    console.log(req.params);
+    const newAppointment =
+      await sql`INSERT INTO users (
+      "first_name",  
+        "last_name" ) VALUES (
+          ${first_name}, ${last_name}) RETURNING *`;
+    res.json(newAppointment);
+  } catch (err) {
+    console.error(err.message);
+  }
+})
 
-// app.post("/createaccount", async (req, res) => {
-//   try {
-//     const {
-//       user_image,
-//       user_name,
-//       user_email,
-//       user_password,
-//       user_firstname,
-//       user_middlename,
-//       user_lastname,
-//       user_suffix,
-//       user_sex,
-//       user_date_of_birth,
-//       user_civil_status,
-//       user_contact_number,
-//       user_region,
-//       user_province,
-//       user_municipality,
-//       user_barangay,
-//       user_zone,
-//       user_street,
-//       user_type,
-//     } = req.body;
-//     console.log(req.params);
-//     const newUser = await sql`INSERT INTO users (
-//         "user_image",
-//         "user_name",
-//         "user_email",
-//         "user_password",
-//         "user_firstname",
-//         "user_middlename",
-//         "user_lastname",
-//         "user_suffix",
-//         "user_sex",
-//         "user_date_of_birth",
-//         "user_civil_status",
-//         "user_contact_number",
-//         "user_region",
-//         "user_province",
-//         "user_municipality",
-//         "user_barangay",
-//         "user_zone",
-//         "user_street",
-//         "user_type"
-//       ) VALUES( 
-//         ${user_image},
-//         ${user_name},
-//         ${user_email},
-//         ${user_password},
-//         ${user_firstname},
-//         ${user_middlename},
-//         ${user_lastname},
-//         ${user_suffix},
-//         ${user_sex},
-//         ${user_date_of_birth},
-//         ${user_civil_status},
-//         ${user_contact_number},
-//         ${user_region},
-//         ${user_province},
-//         ${user_municipality},
-//         ${user_barangay},
-//         ${user_zone},
-//         ${user_street},
-//         ${user_type}) RETURNING *`;
-//     res.json(newUser);
-//   } catch (err) {
-//     console.error(err.message);
-//   }
+
+
+
+// app.get("/", async (req, res) => {
+//   res.send("Hello There");
 // });
 
-const PORT = process.env.PORT || 3001;
+// app.post("/users/create", async (req, res) => {
+// 	try {
+// 	const { firstname, lastname } =  req.body;
+// 	console.log(req.params);
+// 	const  newUser  = await  sql`INSERT INTO users ("first_name", "last_name") VALUES(${firstname}, ${lastname}) RETURNING *`;
+// 	res.json(newUser);
+// 	} catch (err) {
+// 		console.error(err.message);
+// 	}
+// });
+
+// app.get("/users", async (req, res) => {
+//     try {
+//       const  allUsers  =  await  sql`SELECT * FROM users`;
+//       res.json(allUsers);
+
+//     } catch (err) {
+//       console.error(err.message);
+//     }
+//   });
+
+//   app.get("/users/:id", async (req, res) => {
+//     try {
+//       const { id } = req.params;
+//       const  selectUser  =  await  sql`SELECT * FROM users WHERE user_id = ${id}`;
+//       res.json(selectUser);
+//     } catch (err) {
+//       console.error(err.message);
+//     }
+//   });
+
+//   app.put("/users/:id", async (req, res) => {
+//     try {
+//       const { id } = req.params;
+//       const { firstname, lastname } = req.body;
+//       const  updateUser  =  await  sql`UPDATE users SET "first_name" = ${firstname}, "last_name" = ${lastname} WHERE user_id = ${id}`;
+//       res.json(`User id: ${id} was updated!`);
+//     } catch (err) {
+//       console.error(err.message);
+//       res.status(500).send("Server Error");
+//     }
+//   });
+
+//   app.delete("/users/:id", async (req, res) => {
+//     try {
+//       const { id } = req.params;
+//       const  deleteUser  =  await  sql`DELETE FROM users WHERE user_id = ${id}`;
+//       res.json("User was deleted!");
+//     } catch (err) {
+//       console.error(err.message);
+//       res.status(500).send("Server Error");
+//     }
+//   });
+
+const PORT = 3001;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
-

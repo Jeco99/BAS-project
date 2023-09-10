@@ -4,7 +4,9 @@ import "./assets/index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import LogIn from "./pages/LogIn.jsx";
-import CreateAccount from "./pages/user/userSignUp/createAccount";
+import CreateAccount,{
+   userLoader
+} from "./pages/user/userSignUp/createAccount";
 import ErrorPage from "./pages/errorPage/errorpage";
 
 import RootLayout from "./layouts/Layout";
@@ -23,7 +25,9 @@ import Report from "./pages/user/reportPage/reportPage";
 import AdminSettings from "./pages/settings/admin/AdminSetting";
 import UserSettings from "./pages/settings/user/UserSetting";
 
-// TODO: router when add post
+import AppointmentDataDisplay, {
+  loader as dataLoader,
+} from "./pages/appoinementData";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +38,7 @@ const router = createBrowserRouter([
   {
     path: "/createaccount",
     element: <CreateAccount />,
+    loader: userLoader,
     errorElement: <ErrorPage />,
   },
   {
@@ -89,6 +94,12 @@ const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path:"/data",
+    loader: dataLoader,
+    element:<AppointmentDataDisplay />
+    
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
