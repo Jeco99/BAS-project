@@ -1,9 +1,34 @@
-export default function Post(){
-    return(
-        <div className="border rounded-lg p-5 m-2">
-        <h1 className="text-base sm:text-xl">Lorem Ipsum</h1>
-        <h6 className="text-sm sm:text-base text-gray-400">2023-07-21 | 6:37 pm</h6>
-        <p className="text-sm sm:text-base">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eligendi ipsa distinctio nam, dolores harum voluptas corrupti aut, voluptates nostrum molestias perferendis quae iure quasi eos labore corporis reiciendis odit laborum.</p>
+import { useEffect, useState } from "react";
+
+const postLoader = async () => {
+  const response = await fetch("http://localhost:3001/post");
+  const postData = await response.json();
+  return postData;
+};
+
+export default function Post() {
+  const [postData, setPostData] = useState([]);
+  useEffect(() => {
+    async function init() {
+      const data = await postLoader();
+      setPostData(data);
+    }
+    init();
+  }, []);
+
+  return (
+    <>
+      {postData.map((items) => (
+        <div className="border rounded-lg p-5 m-2" key={items.post_id}>
+          <h1 className="text-base sm:text-xl" >{items.title}</h1>
+          <h6 className="text-sm sm:text-base text-gray-400">
+           {items.post_date_created} | {items.post_time_created}
+          </h6>
+          <p className="text-sm sm:text-base">
+            {items.description}
+          </p>
         </div>
-    )
+      ))}
+    </>
+  );
 }

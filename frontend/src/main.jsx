@@ -12,9 +12,7 @@ import ErrorPage from "./pages/errorPage/errorpage";
 import RootLayout from "./layouts/Layout";
 import Root from "./layouts/Root";
 
-import AppointmentDisplay,{
-  appointmentLoader
-} from "./pages/user/appointmentDisplay/appointmentDisplay";
+import AppointmentDisplay from "./pages/user/appointmentDisplay/appointmentDisplay";
 import History from "./pages/user/userHistory/history";
 import UserDashboard from "./pages/user/userDashboard/userDashboard";
 
@@ -59,8 +57,7 @@ const router = createBrowserRouter([
       },
       {
         path: "appointment",
-        element: <AppointmentDisplay />,
-        loader:  appointmentLoader      
+        element: <AppointmentDisplay /> 
       },
       {
         path: "history",
@@ -85,7 +82,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "dashboard",
-        element: <BarangayDashboard />,
+        element: <BarangayDashboard />
       },
       {
         path: "report",

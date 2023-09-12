@@ -27,17 +27,6 @@ export default function UserDashboard() {
         </h1>
         <div className="ml-4 text-2xl">
           <Post />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
         </div>
       </div>
     </div>
