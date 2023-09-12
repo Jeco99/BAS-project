@@ -3,16 +3,10 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 import FormLabel from "../../../components/label/formLabel";
-import { useLoaderData } from "react-router-dom";
 
-export const appointmentLoader = async () => {
-  const response = await fetch("http://localhost:3001/appointment");
-  const appointmentData = await response.json();
-  return { appointmentData };
-};
+
 
 export default function AppointmentDisplay() {
-  const appointmentData = useLoaderData();
   const [startDate, setStartDate] = useState(new Date());
   const [request, setRequest] = useState("");
   const [purpose, setPurpose] = useState("");
@@ -133,7 +127,7 @@ export default function AppointmentDisplay() {
             dateFormat="MMMM d, yyyy"
             filterDate={weekDays}
             minDate={new Date()}
-            maxDate={new Date("2023-8-31")}
+            maxDate={new Date("2050-12-31")}
             withPortal
            className="inputText"
             required

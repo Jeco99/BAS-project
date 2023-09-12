@@ -9,11 +9,6 @@ function BarangayAddPost({ setAddPost }) {
     message: "",
   });
 
-  const [errors, setErrors] = useState({
-    title: null,
-    message: null,
-  });
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setPostDetails({
@@ -22,31 +17,30 @@ function BarangayAddPost({ setAddPost }) {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    try {
+      const response = await fetch('http://localhost:3001/post/add', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(postDetails)
+      });
 
-    let newErrors = { ...errors };
-
-    if (postDetails.title.trim() == "") {
-      newErrors.title = "Set Title";
-    } else {
-      newErrors.title = "";
+      if (response.status === 200) {
+        alert('Data inserted successfully');
+        return location.href = "/admin/dashboard"
+      } else {
+        alert('Error inserting data');
+      }
+    } catch (error) {
+      console.error('Error:', error);
     }
 
-    if (postDetails.message.trim() == "") {
-      newErrors.message = "Set Message";
-    } else {
-      newErrors.message = "";
-    }
 
-    setErrors(newErrors);
-
-    if (postDetails.title === "" && postDetails.message === "") {
-      alert("Post Submitted!");
-    }
   };
 
-  console.log(errors);
 
   console.log(postDetails);
   return (
@@ -56,6 +50,7 @@ function BarangayAddPost({ setAddPost }) {
         <form
           className=" mx-auto w-11/12 flex flex-col text-gray-800 border border-gray-300 p-4 shadow-lg max-w-2xl btnRadius bg-white"
           onSubmit={handleSubmit}
+          method="post"
         >
           <input
             className="bg-gray-100 border border-gray-300 p-3 outline-none text-1xl btnRadius"
@@ -66,7 +61,7 @@ function BarangayAddPost({ setAddPost }) {
             name="title"
             id="title"
           />
-          {errors.title && <small>No Content</small>}
+    
           <textarea
             className="bg-gray-100 sec p-3 h-60 border border-gray-300 outline-none mt-4 text-1xl btnRadius"
             spellCheck="false"
@@ -75,7 +70,7 @@ function BarangayAddPost({ setAddPost }) {
             name="message"
             id="message"
           ></textarea>
-          {errors.message && <small>No Content</small>}
+        
 
           <div className="flex justify-between gap-1 mt-4">
             <button

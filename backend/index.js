@@ -33,8 +33,7 @@ app.post("/appointment/create", async (req, res) => {
       status,
     } = req.body;
     // console.log(req.params);
-    const newAppointment =
-      await sql`INSERT INTO appointment (
+    const newAppointment = await sql`INSERT INTO appointment (
         "request_type", 
         "purpose", 
         "appointment_time",
@@ -109,36 +108,53 @@ app.post("/createaccount/create", async (req, res) => {
   }
 });
 
-app.get("/data", async (req, res) => {
+// app.get("/data", async (req, res) => {
+//   try {
+//     const userData = await sql`SELECT * FROM users`;
+//     res.json(userData);
+//   } catch (err) {
+//     console.error(err.message);
+//   }
+// });
+
+// app.post("/data/create", async (req, res) => {
+//   try {
+//     const { first_name, last_name } = req.body;
+//     console.log(req.params);
+//     const newAppointment = await sql`INSERT INTO users (
+//       "first_name",  
+//         "last_name" ) VALUES (
+//           ${first_name}, ${last_name}) RETURNING *`;
+//     res.json(newAppointment);
+//   } catch (err) {
+//     console.error(err.message);
+//   }
+// });
+
+app.get("/post", async (req, res) => {
   try {
-    const userData = await sql`SELECT * FROM users`;
-    res.json(userData);
+    const postData = await sql`SELECT * FROM post`;
+    res.json(postData);
   } catch (err) {
     console.error(err.message);
   }
-})
+});
 
-app.post("/data/create", async (req, res) => {
+app.post("/post/add", async (req, res) => {
   try {
     const {
-     first_name,
-     last_name
+      title, 
+      message
     } = req.body;
-    console.log(req.params);
-    const newAppointment =
-      await sql`INSERT INTO users (
-      "first_name",  
-        "last_name" ) VALUES (
-          ${first_name}, ${last_name}) RETURNING *`;
-    res.json(newAppointment);
+    // console.log(req.params);
+    const newPost = await sql`INSERT INTO post (
+       "title", "description" ) VALUES (
+        ${title}, ${message}) RETURNING *`;
+    res.json(newPost);
   } catch (err) {
     console.error(err.message);
   }
 })
-
-
-
-
 // app.get("/", async (req, res) => {
 //   res.send("Hello There");
 // });
