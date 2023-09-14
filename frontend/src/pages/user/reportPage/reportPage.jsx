@@ -1,14 +1,22 @@
 import { useState } from "react";
-/* import { GrLinkNext } from "react-icons/gr"; */
 import { CgSearch } from "react-icons/cg";
 import { Input } from "@material-tailwind/react";
-import reportData from "./reportData";
 import ActionButton from "./actionButton";
+import { useLoaderData } from "react-router-dom";
+import { convertTo12HoursFormat } from "../../../utils/timeConversion";
+
+
+
+export const appointmentLoader = async () =>{
+  const response = await fetch("http://localhost:3001/appointment");
+  const appointmentData = await response.json();
+  return appointmentData
+}
 
 function ReportPage() {
+  const appointData = useLoaderData();
   const [searchTerm, setSearchTerm] = useState("");
   const [filterValue, setFilterValue] = useState("all");
-  const [requestData, setRequestData] = useState(reportData);
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value.toLowerCase());
@@ -17,40 +25,40 @@ function ReportPage() {
     setFilterValue(event.target.value.toLowerCase());
   };
 
-  const filteredData = requestData.filter((item) => {
-    if (filterValue === "date") {
-      return item.timestamp.toLowerCase().includes(searchTerm);
-    }
-    if (filterValue === "type of request") {
-      return item.type0fRequest.toLowerCase().includes(searchTerm);
-    }
+  // const filteredData = appointData.filter((item) => {
+  //   if (filterValue === "date") {
+  //     return item.appointment_date_created.toLowerCase().includes(searchTerm);
+  //   }
+  //   if (filterValue === "type of request") {
+  //     return item.request_type.toLowerCase().includes(searchTerm);
+  //   }
 
-    const timestampLower = item.timestamp.toLowerCase();
-    const nameLower = item.name.toLowerCase();
-    const type0fRequestLower = item.type0fRequest.toLowerCase();
-    const timeOfRequestLower = item.timeOfRequest.toString().toLowerCase();
-    const purposeLower = item.purpose.toLowerCase();
-    const actionButtonLower = item.actionButton.toLowerCase();
-    const requestStatusLower = item.requestStatus.toLowerCase();
+  //   const timestampLower = item.timestamp.toLowerCase();
+  //   const nameLower = item.name.toLowerCase();
+  //   const type0fRequestLower = item.type0fRequest.toLowerCase();
+  //   const timeOfRequestLower = item.timeOfRequest.toString().toLowerCase();
+  //   const purposeLower = item.purpose.toLowerCase();
+  //   const actionButtonLower = item.actionButton.toLowerCase();
+  //   const requestStatusLower = item.requestStatus.toLowerCase();
 
-    return (
-      (timestampLower.includes(searchTerm) ||
-        nameLower.includes(searchTerm) ||
-        type0fRequestLower.includes(searchTerm) ||
-        timeOfRequestLower.includes(searchTerm) ||
-        purposeLower.includes(searchTerm) ||
-        actionButtonLower.includes(searchTerm) ||
-        requestStatusLower.includes(searchTerm)) &&
-      (filterValue === "all" ||
-        timestampLower.includes(filterValue) ||
-        nameLower.includes(filterValue) ||
-        type0fRequestLower.includes(filterValue) ||
-        timeOfRequestLower.includes(filterValue) ||
-        purposeLower.includes(filterValue) ||
-        actionButtonLower.includes(filterValue) ||
-        requestStatusLower.includes(filterValue))
-    );
-  });
+  //   return (
+  //     (timestampLower.includes(searchTerm) ||
+  //       nameLower.includes(searchTerm) ||
+  //       type0fRequestLower.includes(searchTerm) ||
+  //       timeOfRequestLower.includes(searchTerm) ||
+  //       purposeLower.includes(searchTerm) ||
+  //       actionButtonLower.includes(searchTerm) ||
+  //       requestStatusLower.includes(searchTerm)) &&
+  //     (filterValue === "all" ||
+  //       timestampLower.includes(filterValue) ||
+  //       nameLower.includes(filterValue) ||
+  //       type0fRequestLower.includes(filterValue) ||
+  //       timeOfRequestLower.includes(filterValue) ||
+  //       purposeLower.includes(filterValue) ||
+  //       actionButtonLower.includes(filterValue) ||
+  //       requestStatusLower.includes(filterValue))
+  //   );
+  // });
 
   return (
     <div className="main-container">
@@ -95,17 +103,17 @@ function ReportPage() {
             </tr>
           </thead>
           <tbody className="text-lg">
-            {filteredData.map((item) => (
-              <tr key={item.id}>
-                <td className="border px-4 py-2">{item.timestamp}</td>
-                <td className="border px-4 py-2">{item.name}</td>
-                <td className="border px-4 py-2">{item.type0fRequest}</td>
-                <td className="border px-4 py-2">{item.timeOfRequest}</td>
+            {appointData.map((item) => (
+              <tr key={item.appointment_id}>
+                <td className="border px-4 py-2">{`${item.appointment_date_created.substr(0,10)} ${convertTo12HoursFormat(item.appointment_time_created)}`}</td>
+                <td className="border px-4 py-2">{item.fullname}</td>
+                <td className="border px-4 py-2">{item.request_type}</td>
+                <td className="border px-4 py-2">{item.appointment_time}</td>
                 <td className="border px-4 py-2">{item.purpose}</td>
                 <td className="border">
-                  <ActionButton setRequestData={setRequestData} id={item.id} />
+                  <ActionButton />
                 </td>
-                <td className="border px-4 py-2">{item.requestStatus}</td>
+                <td className="border px-4 py-2">{item.status}</td>
                 {/* Add more table data (td) elements here */}
               </tr>
             ))}
