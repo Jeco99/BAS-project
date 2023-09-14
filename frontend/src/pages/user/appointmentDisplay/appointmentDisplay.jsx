@@ -1,12 +1,14 @@
 import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { useNavigate } from "react-router-dom";
 
 import FormLabel from "../../../components/label/formLabel";
 
 
 
 export default function AppointmentDisplay() {
+  const navigate = useNavigate();
   const [startDate, setStartDate] = useState(new Date());
   const [request, setRequest] = useState("");
   const [purpose, setPurpose] = useState("");
@@ -38,19 +40,21 @@ export default function AppointmentDisplay() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          "request_type" : request,
-          "purpose" : purpose,
-          "appointment_time" : selectTime,
-          "appointment_date" : startDate.toDateString()
+          request_type : request,
+          purpose : purpose,
+          appointment_time : selectTime,
+          appointment_date : startDate.toDateString()
         }),
       });
 
-      if (response.status === 200) {
-        alert('Data inserted successfully');
-        return location.href = "/root/appointment"
-      } else {
-        alert('Error inserting data');
-      }
+      const data = await response.json();
+      console.log(data);
+      // if (response.status === 200) {
+      //   alert('Data inserted successfully');
+      //   navigate("http://localhost:5173/root/appointment")
+      // } else {
+      //   alert('Error inserting data');
+      // }
     } catch (error) {
       console.error('Error:', error);
     }
