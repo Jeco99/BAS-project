@@ -111,7 +111,7 @@ function ReportPage() {
                 <td className="border px-4 py-2">{item.appointment_time}</td>
                 <td className="border px-4 py-2">{item.purpose}</td>
                 <td className="border">
-                  <ActionButton />
+                  <ActionButton id={item.appointment_id} />
                 </td>
                 <td className="border px-4 py-2">{item.status}</td>
                 {/* Add more table data (td) elements here */}

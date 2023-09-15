@@ -86,6 +86,11 @@ const router = createBrowserRouter([
         element: <BarangayDashboard />
       },
       {
+        path: "history",
+        loader: historyLoader,
+        element: <History />,
+      },
+      {
         path: "report",
         loader: appointmentLoader,
         element: <Report />, //report
