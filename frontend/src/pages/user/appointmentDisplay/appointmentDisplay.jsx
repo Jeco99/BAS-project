@@ -1,12 +1,14 @@
 import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { useNavigate } from "react-router-dom";
 
 import FormLabel from "../../../components/label/formLabel";
 
 
 
 export default function AppointmentDisplay() {
+  const navigate = useNavigate();
   const [startDate, setStartDate] = useState(new Date());
   const [request, setRequest] = useState("");
   const [purpose, setPurpose] = useState("");
