@@ -3,16 +3,8 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 import FormLabel from "../../../components/label/formLabel";
-import { useLoaderData } from "react-router-dom";
-
-export const appointmentLoader = async () => {
-  const response = await fetch("http://localhost:3001/appointment");
-  const appointmentData = await response.json();
-  return { appointmentData };
-};
 
 export default function AppointmentDisplay() {
-  const appointmentData = useLoaderData();
   const [startDate, setStartDate] = useState(new Date());
   const [request, setRequest] = useState("");
   const [purpose, setPurpose] = useState("");
@@ -23,44 +15,31 @@ export default function AppointmentDisplay() {
     setStartDate(date);
   };
 
-
-
   const weekDays = (date) => {
-    // Exclude weekends (Saturday and Sunday)
     const day = date.getDay();
     return day !== 0 && day !== 6;
   };
 
-  const handleShowModal= (e) => {
-    e.preventDefault();
+  const handleShowModal = () => {
     setShowModal(true);
   };
 
-  const handleSubmit = async () => {
-    try {
-      const response = await fetch('http://localhost:3001/appointment/create', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          "request_type" : request,
-          "purpose" : purpose,
-          "appointment_time" : selectTime,
-          "appointment_date" : startDate.toDateString()
-        }),
-      });
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await fetch("http://localhost:3001/appointment/create", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        request_type: request,
+        purpose: purpose,
+        appointment_time: selectTime,
+        appointment_date: startDate.toDateString(),
+      }),
+    });
 
-      if (response.status === 200) {
-        alert('Data inserted successfully');
-        return location.href = "/root/appointment"
-      } else {
-        alert('Error inserting data');
-      }
-    } catch (error) {
-      console.error('Error:', error);
-    }
-
+    return (window.location.href = "/root/appointment");
   };
 
   const closeModal = () => {
@@ -70,12 +49,9 @@ export default function AppointmentDisplay() {
   return (
     <div className="main-container">
       <h1 className="main-title">Appointment</h1>
-      <form
-        className="space-y-10 editor mx-auto w-auto sm:w-4/12 md:w-6/12 flex flex-col text-gray-800 border border-gray-300 p-4 rounded-lg shadow-lg max-w-2xl"
-        onSubmit={handleShowModal}
-      >
+      <div className="space-y-10 editor mx-auto w-auto sm:w-4/12 md:w-6/12 flex flex-col text-gray-800 border border-gray-300 p-4 rounded-lg shadow-lg max-w-2xl">
         <div>
-          <FormLabel labelName={'Request'} id={'requestList'} showRequired/>
+          <FormLabel labelName={"Request"} id={"requestList"} showRequired />
           <select
             id="RequestList"
             name="RequestList"
@@ -92,22 +68,26 @@ export default function AppointmentDisplay() {
         </div>
 
         <div>
-        <FormLabel labelName={'Purpose'} id={'purpose'} showRequired/>
+          <FormLabel labelName={"Purpose"} id={"purpose"} showRequired />
           <textarea
             id="purpose"
             rows="4"
-          className="inputText"
+            className="inputText"
             required
             value={purpose}
             onChange={(e) => setPurpose(e.target.value)}
           ></textarea>
         </div>
         <div>
-        <FormLabel labelName={' Select time (8:00 - 5:00)'} id={'SelectTime'} showRequired/>
+          <FormLabel
+            labelName={" Select time (8:00 - 5:00)"}
+            id={"SelectTime"}
+            showRequired
+          />
           <select
             id="SelectTime"
             name="SelectTime"
-           className="inputText"
+            className="inputText"
             required
             value={selectTime}
             onChange={(e) => setSelectTime(e.target.value)}
@@ -125,7 +105,11 @@ export default function AppointmentDisplay() {
           </select>
         </div>
         <div>
-          <FormLabel labelName={' Select date'} id={'datepicker'} showRequired/>
+          <FormLabel
+            labelName={" Select date"}
+            id={"datepicker"}
+            showRequired
+          />
           <DatePicker
             id="datepicker"
             selected={startDate}
@@ -135,22 +119,27 @@ export default function AppointmentDisplay() {
             minDate={new Date()}
             maxDate={new Date("2023-8-31")}
             withPortal
-           className="inputText"
+            className="inputText"
             required
           />
         </div>
         <div>
           <button
-            type="submit"
+            type="button"
             className="btn btnRadius"
+            onClick={handleShowModal}
           >
             Submit
           </button>
         </div>
-      </form>
+      </div>
 
       {showModal && (
-        <form className="fixed block inset-0 flex items-center justify-center bg-gray-50 bg-opacity-75 overflow-x-hidden overflow-y-auto" onSubmit={handleSubmit} method="POST">
+        <form
+          className="fixed block inset-0 flex items-center justify-center bg-gray-50 bg-opacity-75 overflow-x-hidden overflow-y-auto"
+          onSubmit={handleSubmit}
+          method="POST"
+        >
           <div className="fixed mx-auto w-10/12 flex flex-col text-xl text-gray-800 bg-gray-50 border border-gray-300 rounded-lg p-4 shadow-lg max-w-2xl text-xl">
             <h2 className="text-2xl font-semibold mb-4">Summary</h2>
             <p>Request: {request}</p>
@@ -165,10 +154,7 @@ export default function AppointmentDisplay() {
               >
                 Back
               </button>
-              <button
-                type="submit"
-                className="btn btnRadius"
-              >
+              <button type="submit" className="btn btnRadius">
                 Proceed
               </button>
             </div>
@@ -178,5 +164,3 @@ export default function AppointmentDisplay() {
     </div>
   );
 }
-
-
