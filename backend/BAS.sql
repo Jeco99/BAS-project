@@ -49,8 +49,9 @@ CREATE TABLE appointment(
   purpose TEXT NOT NULL,
   appointment_time VARCHAR(255) NOT NULL,
   appointment_date VARCHAR(255) NOT NULL,
-  created_at TIMESTAMP NOT NULL DEFAULT now(),
-  status VARCHAR(255) NOT NULL DEFAULT 'Pending',
+  appointment_time_created TIME NOT NULL DEFAULT now(),
+  appointment_date_created DATE NOT NULL DEFAULT now(),
+  status VARCHAR(255) NOT NULL DEFAULT 'Pending'
 );
 
 ALTER TABLE appointment
@@ -141,3 +142,17 @@ ALTER TABLE appointment
 ADD CONSTRAINT fk_user
 FOREIGN KEY (user_id) 
 REFERENCES user_details(user_id);
+
+
+SELECT 
+appoint.appointment_id AS appointment_id,
+	CONCAT(users.first_name, ' ',SUBSTRING(users.middle_name,1,1),'.',' ', users.last_name) AS Fullname,
+	appoint.appointment_time AS appointment_time,
+	appoint.appointment_date AS appointment_date,
+	appoint.request_type AS request_type,
+	appoint.purpose AS purpose,
+	appoint.appointment_time_created AS appointment_time_created,
+	appoint.appointment_date_created AS appointment_date_created,
+	appoint.status AS status
+FROM appointment AS appoint
+	INNER JOIN user_details AS users ON appoint.appointment_id = users.user_id;

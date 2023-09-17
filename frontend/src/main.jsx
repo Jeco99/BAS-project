@@ -13,14 +13,14 @@ import RootLayout from "./layouts/Layout";
 import Root from "./layouts/Root";
 
 import AppointmentDisplay from "./pages/user/appointmentDisplay/appointmentDisplay";
-import History from "./pages/user/userHistory/history";
+import History,{ historyLoader } from "./pages/user/userHistory/history";
 import UserDashboard from "./pages/user/userDashboard/userDashboard";
 
 import Admin_Layout from "./layouts/admin_Layout";
 import Admin_Root from "./layouts/adminRoot";
 
 import BarangayDashboard from "./pages/barangay/barangayDashboard/barangayDashboard";
-import Report from "./pages/user/reportPage/reportPage";
+import Report, { appointmentLoader } from "./pages/user/reportPage/reportPage";
 
 import AdminSettings from "./pages/settings/admin/AdminSetting";
 import UserSettings from "./pages/settings/user/UserSetting";
@@ -61,6 +61,7 @@ const router = createBrowserRouter([
       },
       {
         path: "history",
+        loader: historyLoader,
         element: <History />,
       },
       {
@@ -85,7 +86,13 @@ const router = createBrowserRouter([
         element: <BarangayDashboard />
       },
       {
+        path: "history",
+        loader: historyLoader,
+        element: <History />,
+      },
+      {
         path: "report",
+        loader: appointmentLoader,
         element: <Report />, //report
       },
       {
