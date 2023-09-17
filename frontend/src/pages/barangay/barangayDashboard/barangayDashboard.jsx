@@ -11,14 +11,11 @@ import Post from "../../../components/post/post";
 
 export default function BarangayDashboard() {
   const [addPost, setAddPost] = useState(false);
-
   return (
     <div className="main-container">
       <div>
-        <h1 className="main-title">
-          Dashboard
-        </h1>
-       <div className="chartContainer">
+        <h1 className="main-title">Dashboard</h1>
+        <div className="chartContainer">
           <NumberOfFemales />
           <NumberOfMales />
           <BarangayCertificate />
@@ -50,20 +47,6 @@ export default function BarangayDashboard() {
         </div>
         {addPost && <BarangayAddPost setAddPost={setAddPost} />}
         <div className="ml-4 text-2xl">
-          <Post />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
           <Post />
         </div>
       </div>

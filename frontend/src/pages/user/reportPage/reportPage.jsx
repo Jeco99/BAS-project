@@ -66,7 +66,7 @@ function ReportPage() {
             <CgSearch className="text-gray-400" />
           </div>
         </div>
-        <div className="relative pl-2">
+        <div className="relative p-2">
           <select
             id="filter"
             className="px-4 py-2 px-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
@@ -94,7 +94,7 @@ function ReportPage() {
               {/* Add more table headers here */}
             </tr>
           </thead>
-          <tbody>
+          <tbody className="text-lg">
             {filteredData.map((item) => (
               <tr key={item.id}>
                 <td className="border px-4 py-2">{item.timestamp}</td>
@@ -102,7 +102,7 @@ function ReportPage() {
                 <td className="border px-4 py-2">{item.type0fRequest}</td>
                 <td className="border px-4 py-2">{item.timeOfRequest}</td>
                 <td className="border px-4 py-2">{item.purpose}</td>
-                <td className="border px-4 py-2">
+                <td className="border">
                   <ActionButton setRequestData={setRequestData} id={item.id} />
                 </td>
                 <td className="border px-4 py-2">{item.requestStatus}</td>

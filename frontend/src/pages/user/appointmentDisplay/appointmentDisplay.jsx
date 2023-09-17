@@ -4,6 +4,8 @@ import "react-datepicker/dist/react-datepicker.css";
 
 import FormLabel from "../../../components/label/formLabel";
 
+
+
 export default function AppointmentDisplay() {
   const [startDate, setStartDate] = useState(new Date());
   const [request, setRequest] = useState("");
@@ -117,7 +119,7 @@ export default function AppointmentDisplay() {
             dateFormat="MMMM d, yyyy"
             filterDate={weekDays}
             minDate={new Date()}
-            maxDate={new Date("2023-8-31")}
+            maxDate={new Date("2050-12-31")}
             withPortal
             className="inputText"
             required

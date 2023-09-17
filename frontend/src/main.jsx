@@ -57,7 +57,7 @@ const router = createBrowserRouter([
       },
       {
         path: "appointment",
-        element: <AppointmentDisplay />  
+        element: <AppointmentDisplay /> 
       },
       {
         path: "history",
@@ -82,7 +82,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "dashboard",
-        element: <BarangayDashboard />,
+        element: <BarangayDashboard />
       },
       {
         path: "report",
