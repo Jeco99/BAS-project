@@ -59,6 +59,12 @@ const Admin_Sidebar = ({
               </NavLink>
             </li>
             <li>
+              <NavLink to={"history"} className="link sidebar-button">
+                <MdAssignment size={35} className="min-w-max" />
+                History
+              </NavLink>
+            </li>
+            <li>
               <NavLink to={"settings"} className="link sidebar-button">
                 <MdSettings size={35} className="min-w-max" />
                 Account Settings
