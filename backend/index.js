@@ -1,4 +1,4 @@
-import express, { json } from "express";
+import express, { json, response } from "express";
 import sql from "./config/db.js";
 const app = express();
 // const apiRoutes = require("./routes/routes");
@@ -28,9 +28,7 @@ app.post("/appointment/create", async (req, res) => {
       request_type,
       purpose,
       appointment_time,
-      appointment_date,
-      date_created,
-      status,
+      appointment_date
     } = req.body;
     // console.log(req.params);
     const newAppointment = await sql`INSERT INTO appointment (
@@ -39,7 +37,9 @@ app.post("/appointment/create", async (req, res) => {
         "appointment_time",
         "appointment_date" ) VALUES (
           ${request_type}, ${purpose}, ${appointment_time}, ${appointment_date}) RETURNING *`;
-    res.json(newAppointment);
+    // res.json(newAppointment);
+    console.log(response.status());
+    res.status(200).json(newAppointment);
   } catch (err) {
     console.error(err.message);
   }
