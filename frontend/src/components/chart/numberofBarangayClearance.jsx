@@ -1,14 +1,30 @@
 import { FaFemale } from "react-icons/fa";
+import { useEffect, useState } from "react";
 
-export default function BarangayClearance() {
+const chartLoader = async () => {
+  const response = await fetch("http://localhost:3001/chart/barangayClearance");
+  const barangayClearanceData = await response.json();
+  return barangayClearanceData;
+};
+
+export default function NumberOfbarangayClearance() {
+  const [barangayClearance, setBarangayClearance] = useState([]);
+  useEffect(() => {
+    async function init() {
+      const data = await chartLoader();
+      setBarangayClearance(data);
+    }
+    init();
+  }, []);
   return (
     <div className="chart">
-      <h5>20</h5>
+      {barangayClearance.map((item) => (
+        <h5 key={item.barangayClearance_cnt}>{item.barangayClearance_cnt}</h5>
+      ))}
+
       <div>
         <FaFemale className="imageChart" />
-        <p>
-          Brgy Clearance
-        </p>
+        <p>barangayClearance</p>
       </div>
     </div>
   );
