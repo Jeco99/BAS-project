@@ -30,7 +30,7 @@ CREATE TABLE user_details (
   last_name VARCHAR(255) NOT NULL,
   suffix VARCHAR(255),
   sex VARCHAR(255) NOT NULL,
-  date_of_birth DATE,
+  date_of_birth VARCHAR(255),
   civil_status VARCHAR(255) NOT NULL,
   contact_number VARCHAR(255) NOT NULL,
   region VARCHAR(255) NOT NULL,
@@ -96,7 +96,7 @@ INSERT INTO user_details(user_image, user_name, email, password, first_name,	mid
 ('http://dummyimage.com/175x100.png/cc0000/ffffff','bleffekb','bleffekb@utexas.edu','lD5~k#.Jg\yx("S{','Barnard','Seres','Leffek','Sr','Male','1990-06-20','Single','63991296626180','Region VI (Western Visayas)','Iloilo','Leon','Buga','1','calampinay',5026,'resident'),
 ('http://dummyimage.com/175x100.png/cc0000/ffffff','tmedinac','tmedinac@ow.ly','aB7~N_oX\)@2','Theodore','Downs','Medina','III','Male','2000-08-11','Widowed','63993460700108','Region VI (Western Visayas)','Iloilo','Leon','Buga','2','calampinay',5026,'resident'),
 ('http://dummyimage.com/175x100.png/cc0000/ffffff','hpostand','hpostand@gov.uk','vR0{Nqm?qtYU7gn!','Hercules','Burtonwood','Postan','III','Male','2002-07-23','Married','63947168115643','Region VI (Western Visayas)','Iloilo','Leon','Buga','5','sitio buklod bugtong',5026,'resident'),
-('http://dummyimage.com/175x100.png/cc0000/ffffff','buga','buga@gmail.com','buga','NA','NA','NA','NA','NA',NULL,'NA','6391267379265','Region VI (Western Visayas)','Iloilo','Leon','Buga','NA','NA',5026,'admin');
+('http://dummyimage.com/175x100.png/cc0000/ffffff','buga','buga@gmail.com','buga','NA','NA','NA','NA','NA','NA','NA','6391267379265','Region VI (Western Visayas)','Iloilo','Leon','Buga','NA','NA',5026,'admin');
 
 
 
