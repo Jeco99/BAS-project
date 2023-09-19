@@ -4,9 +4,7 @@ import "./assets/index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import LogIn from "./pages/LogIn.jsx";
-import CreateAccount,{
-   userLoader
-} from "./pages/user/userSignUp/createAccount";
+import CreateAccount from "./pages/user/userSignUp/createAccount";
 import ErrorPage from "./pages/errorPage/errorpage";
 
 import RootLayout from "./layouts/Layout";
@@ -25,9 +23,16 @@ import Report, { appointmentLoader } from "./pages/user/reportPage/reportPage";
 import AdminSettings from "./pages/settings/admin/AdminSetting";
 import UserSettings from "./pages/settings/user/UserSetting";
 
+
+
+
+/// sample lng ja
 import AppointmentDataDisplay, {
   loader as dataLoader,
 } from "./pages/appoinementData";
+
+import SampleTestForm from "./sample_test_form/sampletestForm";
+
 
 const router = createBrowserRouter([
   {
@@ -38,7 +43,6 @@ const router = createBrowserRouter([
   {
     path: "/createaccount",
     element: <CreateAccount />,
-    loader: userLoader,
     errorElement: <ErrorPage />,
   },
   {
@@ -106,6 +110,10 @@ const router = createBrowserRouter([
     loader: dataLoader,
     element:<AppointmentDataDisplay />
     
+  },
+  {
+    path: "/test",
+    element: <SampleTestForm />
   }
 ]);
 
