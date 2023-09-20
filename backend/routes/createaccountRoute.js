@@ -5,7 +5,7 @@ import sql from '../config/db.js';
 
 const createAccountRouter = express.Router();
 
-createAccountRouter.get("/createaccount", async (req, res) => {
+createAccountRouter.get("/", async (req, res) => {
     try {
       const userData = await sql`SELECT * FROM user_details`;
       res.json(userData);
@@ -14,7 +14,7 @@ createAccountRouter.get("/createaccount", async (req, res) => {
     }
   });
   
-  createAccountRouter.post("/createaccount/create", async (req, res) => {
+  createAccountRouter.post("/create", async (req, res) => {
     try {
       const {
         user_image,
