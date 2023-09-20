@@ -2,7 +2,7 @@ import { FaFemale } from "react-icons/fa";
 import { useEffect, useState } from "react";
 
 const chartLoader = async () => {
-  const response = await fetch("http://localhost:3001/chart/barangayPermit");
+  const response = await fetch("http://localhost:3001/chart/documents");
   const barangayPermitData = await response.json();
   return barangayPermitData;
 };
@@ -19,12 +19,12 @@ export default function NumberOfbarangayPermit() {
   return (
     <div className="chart">
       {barangayPermit.map((item) => (
-        <h5 key={item.barangayPermit_cnt}>{item.barangayPermit_cnt}</h5>
+        <h5 key={item.brgypermit_cnt}>{item.brgypermit_cnt}</h5>
       ))}
 
       <div>
         <FaFemale className="imageChart" />
-        <p>barangayPermit</p>
+        <p>Barangay Permit</p>
       </div>
     </div>
   );

@@ -2,7 +2,7 @@ import { FaFemale } from "react-icons/fa";
 import { useEffect, useState } from "react";
 
 const chartLoader = async () => {
-  const response = await fetch("http://localhost:3001/chart/female");
+  const response = await fetch("http://localhost:3001/chart/sex");
   const femaleData = await response.json();
   return femaleData;
 };

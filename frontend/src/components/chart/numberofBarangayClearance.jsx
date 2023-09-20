@@ -2,7 +2,7 @@ import { FaFemale } from "react-icons/fa";
 import { useEffect, useState } from "react";
 
 const chartLoader = async () => {
-  const response = await fetch("http://localhost:3001/chart/barangayClearance");
+  const response = await fetch( "http://localhost:3001/chart/documents");
   const barangayClearanceData = await response.json();
   return barangayClearanceData;
 };
@@ -19,12 +19,12 @@ export default function NumberOfbarangayClearance() {
   return (
     <div className="chart">
       {barangayClearance.map((item) => (
-        <h5 key={item.barangayClearance_cnt}>{item.barangayClearance_cnt}</h5>
+        <h5 key={item.brgyclearance_cnt}>{item.brgyclearance_cnt}</h5>
       ))}
 
       <div>
         <FaFemale className="imageChart" />
-        <p>barangayClearance</p>
+        <p>Barangay Clearance</p>
       </div>
     </div>
   );

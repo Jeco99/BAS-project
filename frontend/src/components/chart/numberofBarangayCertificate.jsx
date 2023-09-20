@@ -1,9 +1,9 @@
-import { FaFemale } from "react-icons/fa";
+import { HiDocument } from "react-icons/hi";
 import { useEffect, useState } from "react";
 
 const chartLoader = async () => {
   const response = await fetch(
-    "http://localhost:3001/chart/barangayCertificate"
+    "http://localhost:3001/chart/documents"
   );
   const barangayCertificateData = await response.json();
   return barangayCertificateData;
@@ -21,14 +21,14 @@ export default function NumberOfbarangayCertificate() {
   return (
     <div className="chart">
       {barangayCertificate.map((item) => (
-        <h5 key={item.barangayCertificate_cnt}>
-          {item.barangayCertificate_cnt}
+        <h5 key={item.brgycertificate_cnt}>
+          {item.brgycertificate_cnt}
         </h5>
       ))}
 
       <div>
-        <FaFemale className="imageChart" />
-        <p>barangayCertificate</p>
+        <HiDocument className="imageChart" />
+        <p>Barangay Certificate</p>
       </div>
     </div>
   );
