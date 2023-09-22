@@ -5,12 +5,12 @@ const LogIn = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const [logInData, setLogInData] = useState({
-    username: "",
+    user_name: "",
     password: "",
   });
 
   const [errors, setError] = useState({
-    username: "",
+    user_name: "",
     password: "",
   });
 
@@ -27,10 +27,10 @@ const LogIn = () => {
 
     let newErrors = { ...errors };
 
-    if (logInData.username.trim() == "") {
-      newErrors.username = "Name is required";
+    if (logInData.user_name.trim() == "") {
+      newErrors.user_name = "Name is required";
     } else {
-      newErrors.username = "";
+      newErrors.user_name = "";
     }
 
     if (logInData.password.trim() == "") {
@@ -40,10 +40,10 @@ const LogIn = () => {
     }
     setError(newErrors);
 
-    if (logInData.username === "user" && logInData.password === "user") {
+    if (logInData.user_name === "user" && logInData.password === "user") {
       location.href = "/root";
     }
-    if (logInData.username === "admin" && logInData.password === "admin") {
+    if (logInData.user_name === "admin" && logInData.password === "admin") {
       location.href = "/admin";
     }
   };
@@ -75,18 +75,18 @@ const LogIn = () => {
         </h1>
         <div className="mb-4">
           <div>
-            <label htmlFor="username" className="text-xl">
-              Username <sup>*</sup>
+            <label htmlFor="user_name" className="text-xl">
+              user_name <sup>*</sup>
             </label>
           </div>
           <input
             className="w-full text-black bg-white border rounded-md shadow-sm outline-none appearance-none focus:border-indigo-600"
-            id="username"
-            name="username"
+            id="user_name"
+            name="user_name"
             type="text"
             onChange={handleChange}
           />
-          {errors.username && <small>{errors.username}</small>}
+          {errors.user_name && <small>{errors.user_name}</small>}
         </div>
 
         <div className="mb-4">

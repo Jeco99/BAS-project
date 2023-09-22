@@ -6,8 +6,8 @@ import FormInput from "../../../components/input/formInput";
 
 export default function UpdateUserAccount() {
   const [getData, setGetData] = useState({
-    imagefile: "",
-    username: "",
+    user_image: "",
+    user_name: "",
     email: "",
     password: "",
     confirmpassword: "",
@@ -15,8 +15,8 @@ export default function UpdateUserAccount() {
   });
 
   const [errors, setErrors] = useState({
-    imagefile: null,
-    username: null,
+    user_image: null,
+    user_name: null,
     email: null,
     password: null,
     confirmpassword: null,
@@ -36,16 +36,16 @@ export default function UpdateUserAccount() {
 
     let newErrors = { ...errors };
 
-    if (getData.imagefile == "") {
-      newErrors.imagefile = "Set ImageFile";
+    if (getData.user_image == "") {
+      newErrors.user_image = "Set user_image";
     } else {
-      newErrors.imagefile = "";
+      newErrors.user_image = "";
     }
 
-    if (getData.username.trim() == "") {
-      newErrors.username = "Set Username";
+    if (getData.user_name.trim() == "") {
+      newErrors.user_name = "Set user_name";
     } else {
-      newErrors.username = "";
+      newErrors.user_name = "";
     }
 
     if (getData.email.trim() == "") {
@@ -73,7 +73,7 @@ export default function UpdateUserAccount() {
     setErrors(newErrors);
 
     if (
-      errors.imagefile === "" &&
+      errors.user_image === "" &&
       errors.email === "" &&
       errors.password === "" &&
       errors.confirmpassword === ""

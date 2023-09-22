@@ -1,6 +1,6 @@
 export default [
     {
-        id:'username',
+        id:'user_name',
         type: 'text',
         labelName: 'User Name',
         showRequired: true,

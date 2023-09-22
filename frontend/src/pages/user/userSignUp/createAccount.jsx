@@ -18,27 +18,28 @@ import {
 
 export default function CreateAccount() {
   const [getData, setGetData] = useState({
-    user_type: "",
-    imagefile: "",
-    username: "",
-    email: "",
-    password: "",
-    confirmpassword: "",
-    firstname: "",
-    middlename: "",
-    lastname: "",
-    suffix: "",
-    dateofbirth: "",
-    contactnumber: "",
-    sex: "",
-    civilstatus: "",
-    region: "",
-    province: "",
-    municipal: "",
-    barangay: "",
-    zone: "",
-    street: "",
-    zipcode: "",
+    user_type: '',    
+    user_image: '',
+    user_name: '',
+    email: '',
+    password: '',
+    confirmpassword: '',
+    first_name: '',
+    middle_name: '',
+    last_name: '',
+    suffix: '',
+    date_of_birth: '',
+    contactnumber: '',
+    sex: '',
+    civilstatus: '',
+    region: '',
+    province: '',
+    municipal: '',
+    barangay: '',
+    zone: '',
+    street: '',
+    zipcode: '',
+
   });
   const [regionData, setRegion] = useState([]);
   const [provinceData, setProvince] = useState([]);
@@ -92,15 +93,15 @@ export default function CreateAccount() {
   }, []);
 
   const [errors, setErrors] = useState({
-    imagefile: null,
-    username: null,
+    user_image: null,
+    user_name: null,
     email: null,
     password: null,
     confirmpassword: null,
-    firstname: null,
-    middlename: null,
-    lastname: null,
-    dateofbirth: null,
+    first_name: null,
+    middle_name: null,
+    last_name: null,
+    date_of_birth: null,
     contactnumber: null,
     sex: null,
     civilstatus: null,
@@ -117,16 +118,32 @@ export default function CreateAccount() {
     e.preventDefault();
 
     dataValidation(getData, setErrors, errors);
-
-  
+    const formdata = new FormData();
+    formdata.append("user_type",getData.user_type);    
+    formdata.append("user_image",getData.user_image);
+    formdata.append("user_name",getData.user_name);
+    formdata.append("email",getData.email);
+    formdata.append("password",getData.password);
+    formdata.append("first_name",getData.first_name);
+    formdata.append("middle_name",getData.middle_name);
+    formdata.append("last_name",getData.last_name);
+    formdata.append("suffix",getData.suffix);
+    formdata.append("date_of_birth",getData.date_of_birth);
+    formdata.append("contactnumber",getData.contactnumber);
+    formdata.append("sex",getData.sex);
+    formdata.append("civilstatus",getData.civilstatus);
+    formdata.append("region",getData.region);
+    formdata.append("province",getData.province);
+    formdata.append("municipal",getData.municipal);
+    formdata.append("barangay",getData.barangay);
+    formdata.append("zone",getData.zone);
+    formdata.append("street",getData.street);
+    formdata.append("zipcode",getData.zipcode);
   
 
    await fetch('http://localhost:3001/createaccount/create', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(getData),
+        body: formdata
       });
 
       

@@ -24,7 +24,8 @@ const ImageUpload = ({ getData, setGetData, errors }) => {
       <div className="flex flex-col space-y-2">
         <input
           type="file"
-          name="imagefile"
+          name="user_image"
+          id="user_image"
           className="text-[12px] truncate"
           onChange={(event) => {
             setSelectedImage(event.target.files[0]);
@@ -35,7 +36,7 @@ const ImageUpload = ({ getData, setGetData, errors }) => {
           }}
         />
 
-        {/* {errors.imagefile && (
+        {/* {errors.user_image && (
           <small className="text-center">Image is required!</small>
         )} */}
       </div>
