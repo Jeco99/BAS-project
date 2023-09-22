@@ -2,15 +2,18 @@ import { useEffect, useState } from "react";
 
 const imageloader = async () => {
   const response = await fetch("http://localhost:3001/sampletest/images");
-  const appointmentData = await response.json();
-  return appointmentData;
+  const imagesData = await response.json();
+  return imagesData;
 };
 
 export default function SampleTestForm() {
   const [getData, setGetData] = useState({
-    images: "",
+    image: '',
+    email:'',
+    password: '',
+    fullname: ''
   });
-  const [image, setImage] = useState([]);
+  const [imageData, setImage] = useState([]);
 
   useEffect(() => {
     async function init() {
@@ -22,37 +25,38 @@ export default function SampleTestForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const formData = new FormData();
+
+    formData.append("image", getData.image)
+    formData.append("email", getData.email)
+    formData.append("password", getData.password)
+    formData.append("fullname", getData.fullname)    
+
     await fetch("http://localhost:3001/sampletest/uploadImage", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(getData),
+      body: formData,
     });
   };
 
   const handleChange = (e) => {
     e.preventDefaults;
-    const { name, value } = e.target;
-    setGetData({
-      ...getData,
-      [name]: value,
-    });
+    setGetData(e.target.files[0]);
   };
 
-  console.log(getData);
+  console.log(imageData);
 
   return (
     <>
-      {image.map((item) => (
-        <img src={item.image} alt="" key={item.image_id} />
+      {imageData.map((item) => (
+        <img src={"http://localhost:3001/static/" + item.images} alt="" key={item.image_id} />
       ))}
 
       <form
-        action=""
         className="border border-black m-9 p-5 text-center"
         onSubmit={handleSubmit}
         encType="multipart/form-data"
+        method="post"
       >
         <div className="py-2">
           <label htmlFor="images">Upload Image</label>
@@ -64,7 +68,7 @@ export default function SampleTestForm() {
             onChange={handleChange}
           />
         </div>
-        {/* <div className="py-2">
+        <div className="py-2">
                 <label htmlFor="email">Email: </label>
                 <input type="email" name="email" id="email" onChange={handleChange}/>
             </div>
@@ -75,7 +79,7 @@ export default function SampleTestForm() {
             <div className="py-2">
                 <label htmlFor="fullname">Full Name: </label>
                 <input type="text" name="fullname" id="fullname" onChange={handleChange}/>
-            </div> */}
+            </div>
         <button type="submit" className="bg-gray-500">
           Submit
         </button>

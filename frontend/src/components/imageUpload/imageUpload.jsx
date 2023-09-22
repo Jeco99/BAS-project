@@ -25,6 +25,7 @@ const ImageUpload = ({ getData, setGetData, errors }) => {
         <input
           type="file"
           name="imagefile"
+          id="imagefile"
           className="text-[12px] truncate"
           onChange={(event) => {
             setSelectedImage(event.target.files[0]);
