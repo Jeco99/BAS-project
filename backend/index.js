@@ -5,6 +5,7 @@ import createAccountRouter from "./routes/createaccountRoute.js";
 import historyRouter from "./routes/historyRoute.js";
 import appointmentRouter from "./routes/appointmentRoute.js";
 import sample_testRouter from "./routes/sample_test.js";
+import chartRouter from "./routes/chart.js";
 
 const app = express();
 
@@ -22,6 +23,8 @@ app.use('/post', postRouter);
 app.use('/history', historyRouter);
 app.use('/createaccount', createAccountRouter);
 app.use('/sampletest', sample_testRouter)
+app.use('/chart', chartRouter);
+
 
 const PORT = 3001;
 app.listen(PORT, () => {

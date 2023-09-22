@@ -54,10 +54,10 @@ CREATE TABLE appointment(
   status VARCHAR(255) NOT NULL DEFAULT 'Pending'
 );
 
-ALTER TABLE appointment
-ADD CONSTRAINT fk_user_details
-FOREIGN KEY (user_id) 
-REFERENCES user_details (user_id);
+-- ALTER TABLE appointment
+-- ADD CONSTRAINT fk_user_details
+-- FOREIGN KEY (user_id) 
+-- REFERENCES user_details (user_id);
 
 CREATE TABLE request(
   request_id SERIAL PRIMARY KEY,
