@@ -19,16 +19,16 @@ import {
 export default function CreateAccount() {
   const [getData, setGetData] = useState({
     user_type: '',    
-    imagefile: '',
-    username: '',
+    user_image: '',
+    user_name: '',
     email: '',
     password: '',
     confirmpassword: '',
-    firstname: '',
-    middlename: '',
-    lastname: '',
+    first_name: '',
+    middle_name: '',
+    last_name: '',
     suffix: '',
-    dateofbirth: '',
+    date_of_birth: '',
     contactnumber: '',
     sex: '',
     civilstatus: '',
@@ -39,6 +39,7 @@ export default function CreateAccount() {
     zone: '',
     street: '',
     zipcode: '',
+
   });
   const [regionData, setRegion] = useState([]);
   const [provinceData, setProvince] = useState([]);
@@ -92,15 +93,15 @@ export default function CreateAccount() {
   }, []);
 
   const [errors, setErrors] = useState({
-    imagefile: null,
-    username: null,
+    user_image: null,
+    user_name: null,
     email: null,
     password: null,
     confirmpassword: null,
-    firstname: null,
-    middlename: null,
-    lastname: null,
-    dateofbirth: null,
+    first_name: null,
+    middle_name: null,
+    last_name: null,
+    date_of_birth: null,
     contactnumber: null,
     sex: null,
     civilstatus: null,
@@ -119,15 +120,15 @@ export default function CreateAccount() {
     dataValidation(getData, setErrors, errors);
     const formdata = new FormData();
     formdata.append("user_type",getData.user_type);    
-    formdata.append("imagefile",getData.imagefile);
-    formdata.append("username",getData.username);
+    formdata.append("user_image",getData.user_image);
+    formdata.append("user_name",getData.user_name);
     formdata.append("email",getData.email);
     formdata.append("password",getData.password);
-    formdata.append("firstname",getData.firstname);
-    formdata.append("middlename",getData.middlename);
-    formdata.append("lastname",getData.lastname);
+    formdata.append("first_name",getData.first_name);
+    formdata.append("middle_name",getData.middle_name);
+    formdata.append("last_name",getData.last_name);
     formdata.append("suffix",getData.suffix);
-    formdata.append("dateofbirth",getData.dateofbirth);
+    formdata.append("date_of_birth",getData.date_of_birth);
     formdata.append("contactnumber",getData.contactnumber);
     formdata.append("sex",getData.sex);
     formdata.append("civilstatus",getData.civilstatus);

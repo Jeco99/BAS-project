@@ -30,7 +30,7 @@ createAccountRouter.get("/", async (req, res) => {
   });
   
   createAccountRouter.post("/create", 
-  upload.single('imagefile'),
+  upload.single('user_image'),
   async (req, res) => {
     try {
       await sql`INSERT INTO user_details ( 
@@ -57,18 +57,17 @@ createAccountRouter.get("/", async (req, res) => {
       ) VALUES(
         ${req.body.user_type},
         ${req.file.filename},
-        ${req.body.username},
+        ${req.body.user_name},
         ${req.body.email},
         ${req.body.password},
-        ${req.body.confirmpassword},
-        ${req.body.firstname},
-        ${req.body.middlename},
-        ${req.body.lastname},
+        ${req.body.first_name},
+        ${req.body.middle_name},
+        ${req.body.last_name},
         ${req.body.suffix},
-        ${req.body.dateofbirth},
-        ${req.body.contactnumber},
         ${req.body.sex},
+        ${req.body.date_of_birth},
         ${req.body.civilstatus},
+        ${req.body.contactnumber},
         ${req.body.region},
         ${req.body.province},
         ${req.body.municipal},
@@ -78,7 +77,7 @@ createAccountRouter.get("/", async (req, res) => {
         ${req.body.zipcode}
       ) RETURNING *`;
       // res.json(newUser);
-      console.log(newUser);
+      // console.log(newUser);
     } catch (err) {
       console.error(err.message);
     }

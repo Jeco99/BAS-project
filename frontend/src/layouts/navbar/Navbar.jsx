@@ -36,7 +36,7 @@ export default function NavbarComponent({ setOpen }) {
         >
           <Dropdown.Header>
             <span className="truncate text-sm font-medium">
-              username@sample.com
+              user_name@sample.com
             </span>
           </Dropdown.Header>
           <Dropdown.Item>
