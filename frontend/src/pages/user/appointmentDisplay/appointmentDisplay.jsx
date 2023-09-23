@@ -53,7 +53,7 @@ export default function AppointmentDisplay() {
   return (
     <div className="main-container">
       <h1 className="main-title">Appointment</h1>
-      <div className="space-y-10 editor mx-auto w-auto sm:w-4/12 md:w-6/12 flex flex-col text-gray-800 border border-gray-300 p-4 rounded-lg shadow-lg max-w-2xl">
+      <div className="space-y-10 mx-auto w-auto sm:w-4/12 md:w-10/12 lg:w-7/12 flex flex-col border border-gray-300 p-4 rounded-lg shadow-lg ">
         <div>
           <FormLabel labelName={"Request"} id={"requestList"} showRequired />
           <select

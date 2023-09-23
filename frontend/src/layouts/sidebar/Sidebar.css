@@ -1,7 +1,5 @@
 .sidebar-content{
     background-color: #EEF1F6;
-    caret-color: transparent;
-    width: 20px;
 }
 
 .sidebar-button {
@@ -22,5 +20,16 @@
 }
 
 .link {
-    @apply p-2 flex rounded-md gap-5 items-center md:cursor-pointer cursor-default duration-300 font-medium;
+    @apply p-2 flex rounded-md gap-5 items-center md:cursor-pointer cursor-default duration-300;
   }
+
+@media only screen and (max-width: 1024px){
+    .sidebar-button{
+        font-size: 20px;
+    }
+}
+@media only screen and (max-width: 640px){
+    .sidebar-button{
+        font-size: 18px;
+    }
+}
