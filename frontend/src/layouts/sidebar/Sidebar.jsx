@@ -15,9 +15,10 @@ const Sidebar = ({
   sidebarRef,
   Nav_animation,
   isTabletMid,
+  isLaptop
 }) => {
   return (
-    <aside className="h-screen bg-porcelain">
+    <aside className="fixed calcTop z-50">
       <div
         onClick={() => setOpen(false)}
         className={`md:hidden fixed inset-0 max-h-screen bg-black/50 ${
@@ -29,23 +30,18 @@ const Sidebar = ({
         variants={Nav_animation}
         initial={{ x: isTabletMid ? -250 : 0 }}
         animate={open ? "open" : "closed"}
-        className="sidebar-content text-gray shadow-xl max-w-[30rem] w-[30rem] overflow-hidden md:relative fixed h-screen"
+        className="sidebar-content relative
+        text-gray shadow-xl max-w-[30rem] w-[30rem] overflow-hidden md:relative fixed h-screen"
       >
-        <div className="flex flex-col  h-full">
-          <div
-            className="user-logo"
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
+        <div className="flex flex-col h-full">
+
+        
             <HiUserCircle
-              size={210}
+              size={isLaptop ? 210 : isTabletMid ? 150 : 300}
               color="black"
-              className="items-center my-5"
+              className="m-auto"
             />
-          </div>
+       
           <ul className="whitespace-pre px-2.5 text-[0.9rem] py-10 flex flex-col gap-1 font-medium overflow-x-hidden scrollbar-thin scrollbar-track-white scrollbar-thumb-slate-100   md:h-[68%] h-[70%]">
             <li>
               <NavLink to={"dashboard"} className="link sidebar-button">
