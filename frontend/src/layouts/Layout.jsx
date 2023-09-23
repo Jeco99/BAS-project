@@ -6,13 +6,11 @@ import { useEffect, useState } from "react";
 import { useRef } from "react";
 import { useMediaQuery } from "react-responsive";
 
-
-
-// eslint-disable-next-line react/prop-types
 function Layout() {
-  let isTabletMid = useMediaQuery({ query: "(max-width: 767px)" });
+  const isTabletMid = useMediaQuery({ query: "(max-width: 767px)" });
   const [open, setOpen] = useState(isTabletMid ? false : true);
   const sidebarRef = useRef();
+  const isLaptop = useMediaQuery({ query: "(max-width: 1024px)" });
 
   useEffect(() => {
     if (isTabletMid) {
@@ -37,6 +35,15 @@ function Layout() {
           transition: {
             damping: 40,
             delay: 0.15,
+          },
+        },
+      }
+    : isLaptop
+    ? {
+        open: {
+          width: "16rem",
+          transition: {
+            damping: 40,
           },
         },
       }

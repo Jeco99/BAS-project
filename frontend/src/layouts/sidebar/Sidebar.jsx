@@ -1,20 +1,21 @@
+import { HiUserCircle } from "react-icons/hi";
+import {
+  MdOutlineHistoryEdu,
+  MdSpaceDashboard,
+  MdSettings,
+  MdCalendarMonth,
+} from "react-icons/md";
+import { NavLink } from "react-router-dom";
 import { motion } from "framer-motion";
 import "./Sidebar.css";
 
-// * React icons
-import { HiUserCircle } from "react-icons/hi";
-// import { useMediaQuery } from "react-responsive";
-import { MdOutlineHistoryEdu, MdSpaceDashboard, MdSettings, MdCalendarMonth } from "react-icons/md";
-import { NavLink } from "react-router-dom";
-
-import FooterCapstone from "../../components/footer/footer";
-
-const Sidebar = ({  
+const Sidebar = ({
   open,
   setOpen,
   sidebarRef,
   Nav_animation,
   isTabletMid,
+  isLaptop,
 }) => {
   return (
     <aside className="h-screen bg-porcelain">
@@ -31,21 +32,13 @@ const Sidebar = ({
         animate={open ? "open" : "closed"}
         className="sidebar-content text-gray shadow-xl max-w-[30rem] w-[30rem] overflow-hidden md:relative fixed h-screen"
       >
-        <div className="flex flex-col  h-full">
-          <div
-            className="user-logo"
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <HiUserCircle
-              size={210}
-              color="black"
-              className="items-center my-5"
-            />
-          </div>
+        <div className="flex flex-col h-full">
+          <HiUserCircle
+            size={isLaptop ? 210 : isTabletMid ? 150 : 300}
+            color="black"
+            className="m-auto"
+          />
+
           <ul className="whitespace-pre px-2.5 text-[0.9rem] py-10 flex flex-col gap-1 font-medium overflow-x-hidden scrollbar-thin scrollbar-track-white scrollbar-thumb-slate-100   md:h-[68%] h-[70%]">
             <li>
               <NavLink to={"dashboard"} className="link sidebar-button">
@@ -72,8 +65,6 @@ const Sidebar = ({
               </NavLink>
             </li>
           </ul>
-
-          <FooterCapstone />
         </div>
       </motion.div>
     </aside>

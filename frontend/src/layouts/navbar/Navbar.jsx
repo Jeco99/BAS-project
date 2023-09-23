@@ -1,16 +1,16 @@
-import { Dropdown, Navbar, Avatar } from 'flowbite-react'
-import { BellIcon } from '@heroicons/react/24/solid'
-import logoImage from '/src/assets/images/BAS-Logo-1.2.png'
-import logoImage2 from '/src/assets/images/CodeVerts-logo-2.png'
-import { Link } from 'react-router-dom'
-import { MdMenu } from 'react-icons/md'
+import { Dropdown, Navbar, Avatar } from "flowbite-react";
+import { BellIcon } from "@heroicons/react/24/solid";
+import logoImage from "/src/assets/images/BAS-Logo-1.2.png";
+import logoImage2 from "/src/assets/images/CodeVerts-logo-2.png";
+import { Link } from "react-router-dom";
+import { MdMenu } from "react-icons/md";
 // import './Navbar.css';
 
 export default function NavbarComponent({ setOpen }) {
   return (
     <Navbar
       fluid
-      className="bg-beetleGreen caret-transparent p-2 text-sm sm:text-xl w-full "
+      className="bg-beetleGreen fixed caret-transparent p-2 text-sm sm:text-xl w-full z-50"
     >
       <div className="md:hidden" onClick={() => setOpen(true)}>
         <MdMenu size={25} />
@@ -40,10 +40,16 @@ export default function NavbarComponent({ setOpen }) {
             </span>
           </Dropdown.Header>
           <Dropdown.Item>
-            <button type="button" className='btn btnRadius p-2' onClick={()=> location.href="/"}>Sign Out</button>
+            <button
+              type="button"
+              className="btn btnRadius p-2"
+              onClick={() => (location.href = "/")}
+            >
+              Sign Out
+            </button>
           </Dropdown.Item>
         </Dropdown>
       </div>
     </Navbar>
-  )
+  );
 }
