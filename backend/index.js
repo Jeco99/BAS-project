@@ -4,6 +4,7 @@ import postRouter from "./routes/postRoute.js";
 import createAccountRouter from "./routes/createaccountRoute.js";
 import historyRouter from "./routes/historyRoute.js";
 import appointmentRouter from "./routes/appointmentRoute.js";
+import logInRouter from "./routes/loginRoute.js";
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.use('/appointment', appointmentRouter);
 app.use('/post', postRouter);
 app.use('/history', historyRouter);
 app.use('/createaccount', createAccountRouter);
+app.use('/login', logInRouter)
 
 
 const PORT = 3001;
