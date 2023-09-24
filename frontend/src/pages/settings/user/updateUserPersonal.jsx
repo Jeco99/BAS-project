@@ -15,11 +15,11 @@ import GenderDropdown from "../../../components/dropdown/genderDropdown";
 
 export default function UpdatePersonalAccount() {
   const [getData, setGetData] = useState({
-    firstname: "",
-    middlename: "",
-    lastname: "",
+    first_name: "",
+    middle_name: "",
+    last_name: "",
     suffix: "",
-    dateofbirth: "",
+    date_of_birth: "",
     sex: "",
     civilstatus: "",
     region: "",
@@ -32,10 +32,10 @@ export default function UpdatePersonalAccount() {
   });
 
   const [errors, setErrors] = useState({
-    firstname: null,
-    middlename: null,
-    lastname: null,
-    dateofbirth: null,
+    first_name: null,
+    middle_name: null,
+    last_name: null,
+    date_of_birth: null,
     sex: null,
     civilstatus: null,
     province: null,
@@ -101,28 +101,28 @@ export default function UpdatePersonalAccount() {
 
     let newErrors = { ...errors };
 
-    if (getData.firstname.trim() == "") {
-      newErrors.firstname = "Set FirstName";
+    if (getData.first_name.trim() == "") {
+      newErrors.first_name = "Set first_name";
     } else {
-      newErrors.firstname = "";
+      newErrors.first_name = "";
     }
 
-    if (getData.middlename.trim() == "") {
-      newErrors.middlename = "Set MiddleName";
+    if (getData.middle_name.trim() == "") {
+      newErrors.middle_name = "Set middle_name";
     } else {
-      newErrors.middlename = "";
+      newErrors.middle_name = "";
     }
 
-    if (getData.lastname.trim() == "") {
-      newErrors.lastname = "Set LastName";
+    if (getData.last_name.trim() == "") {
+      newErrors.last_name = "Set last_name";
     } else {
-      newErrors.lastname = "";
+      newErrors.last_name = "";
     }
 
-    if (getData.dateofbirth.trim() == "") {
-      newErrors.dateofbirth = "Set Birthday";
+    if (getData.date_of_birth.trim() == "") {
+      newErrors.date_of_birth = "Set Birthday";
     } else {
-      newErrors.dateofbirth = "";
+      newErrors.date_of_birth = "";
     }
 
     if (getData.sex.trim() == "") {
@@ -182,11 +182,11 @@ export default function UpdatePersonalAccount() {
     setErrors(newErrors);
 
     if (
-      errors.firstname === "" &&
-      errors.middlename === "" &&
-      errors.lastname === "" &&
+      errors.first_name === "" &&
+      errors.middle_name === "" &&
+      errors.last_name === "" &&
       errors.sex === "" &&
-      errors.dateofbirth === "" &&
+      errors.date_of_birth === "" &&
       errors.region === "" &&
       errors.civilstatus === "" &&
       errors.barangay === "" &&

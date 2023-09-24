@@ -18,14 +18,14 @@ export default function NavbarComponent({ setOpen, data }) {
       <Navbar.Brand href="/root">
         <div className="flex ">
           <img alt="BAS Logo" className="w-14 sm:w-24" src={logoImage} />
-          <span className="logo-name hover:text-morningGlory self-center text-xl lg:text-3xl font-semibold whitespace-nowrap ml-5 hidden sm:block">
+          <span className="logo-name hover:text-morningGlory self-center text-xl lg:text-3xl font-semibold whitespace-nowrap ml-5 hidden md:block">
             Barangay Appointment System
           </span>
         </div>
       </Navbar.Brand>
       <div className="flex items-center md:order-2">
         <BellIcon className="hover:text-morningGlory mr-2 h-6 w-6" />
-        <div className="welcome-note flex items-center">
+        <div className="welcome-note flex items-center flex-col lg:flex-row">
           <p className="mr-1">Welcome,</p>
           <span className="mr-2">
             {data.user_type == "admin" ? data.barangay : data.first_name}

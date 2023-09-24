@@ -1,14 +1,30 @@
 import { FaFemale } from "react-icons/fa";
+import { useEffect, useState } from "react";
 
-export default function BarangayPermit() {
+const chartLoader = async () => {
+  const response = await fetch("http://localhost:3001/chart/documents");
+  const barangayPermitData = await response.json();
+  return barangayPermitData;
+};
+
+export default function NumberOfbarangayPermit() {
+  const [barangayPermit, setBarangayPermit] = useState([]);
+  useEffect(() => {
+    async function init() {
+      const data = await chartLoader();
+      setBarangayPermit(data);
+    }
+    init();
+  }, []);
   return (
     <div className="chart">
-      <h5>20</h5>
+      {barangayPermit.map((item) => (
+        <h5 key={item.brgypermit_cnt}>{item.brgypermit_cnt}</h5>
+      ))}
+
       <div>
         <FaFemale className="imageChart" />
-        <p>
-          Brgy Permit
-        </p>
+        <p>Barangay Permit</p>
       </div>
     </div>
   );

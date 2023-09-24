@@ -135,6 +135,20 @@ sup {
     height: 2rem;
 }
 
+.calcTop{
+    margin-top: calc(12rem - 5rem);
+}
+
+.calcLeft{
+    margin-left:21rem;
+}
+
+@media only screen and (max-width: 1024px){
+    .calcLeft{
+        margin-left:17rem;
+    }
+}
+
 
 @media only screen and (max-width: 768px) {
 
@@ -171,6 +185,10 @@ sup {
 
     .chartContainer {
         grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .calcLeft{
+        margin-left:17rem !important;
     }
 }
 
@@ -211,6 +229,14 @@ sup {
 
     .chartContainer {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .calcLeft{
+        margin-left: 0rem !important;
+    }
+
+    .calcTop{
+        margin-top: calc(10rem - 5.5rem);
     }
 }
 

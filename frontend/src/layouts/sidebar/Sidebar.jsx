@@ -19,7 +19,7 @@ const Sidebar = ({
   data
 }) => {
   return (
-    <aside className="h-screen bg-porcelain">
+    <aside className="fixed calcTop z-50">
       <div
         onClick={() => setOpen(false)}
         className={`md:hidden fixed inset-0 max-h-screen bg-black/50 ${
@@ -31,7 +31,8 @@ const Sidebar = ({
         variants={Nav_animation}
         initial={{ x: isTabletMid ? -250 : 0 }}
         animate={open ? "open" : "closed"}
-        className="sidebar-content text-gray shadow-xl max-w-[30rem] w-[30rem] overflow-hidden md:relative fixed h-screen"
+        className="sidebar-content relative
+        text-gray shadow-xl max-w-[30rem] w-[30rem] overflow-hidden md:relative fixed h-screen"
       >
         <div className="flex flex-col h-full">
           {/* <HiUserCircle

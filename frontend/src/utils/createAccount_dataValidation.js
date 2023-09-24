@@ -1,16 +1,16 @@
  export function dataValidation(getData, setErrors, errors) {
   let newErrors = { ...errors };
 
-  if (getData.imagefile == "") {
-    newErrors.imagefile = "Set ImageFile";
+  if (getData.user_image == "") {
+    newErrors.user_image = "Set user_image";
   } else {
-    newErrors.imagefile = "";
+    newErrors.user_image = "";
   }
 
-  if (getData.username.trim() == "") {
-    newErrors.username = "Set Username";
+  if (getData.user_name.trim() == "") {
+    newErrors.user_name = "Set user_name";
   } else {
-    newErrors.username = "";
+    newErrors.user_name = "";
   }
 
   if (getData.email.trim() == "") {
@@ -35,28 +35,28 @@
     newErrors.confirmpassword = "";
   }
 
-  if (getData.firstname.trim() == "") {
-    newErrors.firstname = "Set FirstName";
+  if (getData.first_name.trim() == "") {
+    newErrors.first_name = "Set first_name";
   } else {
-    newErrors.firstname = "";
+    newErrors.first_name = "";
   }
 
-  if (getData.middlename.trim() == "") {
-    newErrors.middlename = "Set MiddleName";
+  if (getData.middle_name.trim() == "") {
+    newErrors.middle_name = "Set middle_name";
   } else {
-    newErrors.middlename = "";
+    newErrors.middle_name = "";
   }
 
-  if (getData.lastname.trim() == "") {
-    newErrors.lastname = "Set LastName";
+  if (getData.last_name.trim() == "") {
+    newErrors.last_name = "Set last_name";
   } else {
-    newErrors.lastname = "";
+    newErrors.last_name = "";
   }
 
-  if (getData.dateofbirth.trim() == "") {
-    newErrors.dateofbirth = "Set Birthday";
+  if (getData.date_of_birth.trim() == "") {
+    newErrors.date_of_birth = "Set Birthday";
   } else {
-    newErrors.dateofbirth = "";
+    newErrors.date_of_birth = "";
   }
 
   if (getData.sex.trim() == "") {
