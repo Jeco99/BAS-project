@@ -1,8 +1,11 @@
 import logoImage from "/src/assets/images/BAS-Logo-1.png";
 import { useState } from "react";
+import { logIn_dataValidation } from "../utils/logIn_DataValidation";
+import { useNavigate } from "react-router-dom";
 
 const LogIn = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
 
   const [logInData, setLogInData] = useState({
     user_name: "",
@@ -26,20 +29,7 @@ const LogIn = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    let newErrors = { ...errors };
-
-    if (logInData.user_name.trim() == "") {
-      newErrors.user_name = "Name is required";
-    } else {
-      newErrors.user_name = "";
-    }
-
-    if (logInData.password.trim() == "") {
-      newErrors.password = "Password is required";
-    } else {
-      newErrors.password = "";
-    }
-    setError(newErrors);
+    logIn_dataValidation(logInData, errors, setError)
 
     try {
       const response = await fetch('http://localhost:3001/login/', {
@@ -50,10 +40,12 @@ const LogIn = () => {
         body: JSON.stringify(logInData)
       });
       const result = await response.json();
+      console.log(result);
       setRole(result.user_type);
 
       if(response.status == 200){
-        alert(result.message);
+        const id = result.user_id;
+        navigate('/root/'+id);
       }
       
       if(response.status == 401){
@@ -138,6 +130,12 @@ const LogIn = () => {
           </button>
         </div>
       </form>
+      {role && (
+        <div>
+          <h2>Welcome, {role === 'admin' ? 'Admin' : 'User'}</h2>
+          <p>Your role is: {role}</p>
+        </div>
+      )}
     </div>
   );
 };

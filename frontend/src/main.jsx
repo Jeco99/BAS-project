@@ -46,12 +46,12 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
-    path: "/root",
+    path: "/root/:id",
     element: <Root />,
     errorElement: <ErrorPage />,
   },
   {
-    path: "/root",
+    path: "/root/:id",
     element: <RootLayout />, //create children based on the user sidebar
     errorElement: <ErrorPage />,
     children: [

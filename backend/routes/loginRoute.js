@@ -8,20 +8,18 @@ logInRouter.post("/", async (req, res) => {
 
   try {
     const logInData =
-      await sql`SELECT user_name, password, user_type FROM user_details WHERE user_name = ${user_name}`;
+      await sql`SELECT * FROM user_details WHERE user_name = ${user_name}`;
     if (logInData.length === 0) {
       return res.status(401).json({message: "Invalid credentials"});
     }
 
-    if(password != logInData.password){
+    if(password != logInData[0].password){
         return res.status(401).json({message: "Invalid credentials"});
     }
+    console.log(logInData)
     res
       .status(200)
-      .json({
-        message: "Login Successfully",
-        user_type: logInData[0].user_type
-      });
+      .send(logInData[0]);
   } catch (error) {
     console.error("Error during login:", error);
     res.status(500).send("Internal Server Error");

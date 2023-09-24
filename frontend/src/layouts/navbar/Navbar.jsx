@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { MdMenu } from "react-icons/md";
 // import './Navbar.css';
 
-export default function NavbarComponent({ setOpen }) {
+export default function NavbarComponent({ setOpen, data }) {
   return (
     <Navbar
       fluid
@@ -27,7 +27,9 @@ export default function NavbarComponent({ setOpen }) {
         <BellIcon className="hover:text-morningGlory mr-2 h-6 w-6" />
         <div className="welcome-note flex items-center">
           <p className="mr-1">Welcome,</p>
-          <span className="mr-2">User</span>
+          <span className="mr-2">
+            {data.user_type == "admin" ? data.barangay : data.first_name}
+          </span>
         </div>
         <Dropdown
           className="dropdown-items"
@@ -35,9 +37,7 @@ export default function NavbarComponent({ setOpen }) {
           label={<Avatar alt="User settings" img={logoImage2} rounded />}
         >
           <Dropdown.Header>
-            <span className="truncate text-sm font-medium">
-              username@sample.com
-            </span>
+            <span className="truncate text-sm font-medium">{data.email}</span>
           </Dropdown.Header>
           <Dropdown.Item>
             <button
