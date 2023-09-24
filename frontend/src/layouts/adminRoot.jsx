@@ -1,16 +1,17 @@
+import { useEffect, useState } from "react";
+import { useRef } from "react";
+import { useMediaQuery } from "react-responsive";
+
 import NavbarComponent from "./navbar/Navbar";
 import Admin_Sidebar from "./sidebar/admin_Sidebar";
 
 import BarangayDashboard from "../pages/barangay/barangayDashboard/barangayDashboard";
 
-import { useEffect, useState } from "react";
-import { useRef } from "react";
-import { useMediaQuery } from "react-responsive";
-
 function Admin_Root() {
-  let isTabletMid = useMediaQuery({ query: "(max-width: 767px)" });
+  const isTabletMid = useMediaQuery({ query: "(max-width: 767px)" });
   const [open, setOpen] = useState(isTabletMid ? false : true);
   const sidebarRef = useRef();
+  const isLaptop = useMediaQuery({ query: "(max-width: 1024px)" });
 
   useEffect(() => {
     if (isTabletMid) {
@@ -24,7 +25,7 @@ function Admin_Root() {
     ? {
         open: {
           x: 0,
-          width: "16rem",
+          width: "15rem",
           transition: {
             damping: 40,
           },
@@ -38,6 +39,15 @@ function Admin_Root() {
           },
         },
       }
+    : isLaptop
+    ? {
+        open: {
+          width: "16rem",
+          transition: {
+            damping: 40,
+          },
+        },
+      }
     : {
         open: {
           width: "20rem",
@@ -46,16 +56,27 @@ function Admin_Root() {
           },
         },
       };
+
   return (
-    <>
-      <nav className="w-full relative"><NavbarComponent setOpen={setOpen}/></nav>
+    <div>
+      <nav className="">
+        <NavbarComponent setOpen={setOpen} />
+      </nav>
       <div className="flex">
-          <aside className="h-screen">  <Admin_Sidebar open={open} setOpen={setOpen} sidebarRef={sidebarRef} Nav_animation={Nav_animation} isTabletMid={isTabletMid}/>  </aside>
-          <main className="w-full leftCol"><BarangayDashboard/></main>
+        <Admin_Sidebar
+          open={open}
+          setOpen={setOpen}
+          sidebarRef={sidebarRef}
+          Nav_animation={Nav_animation}
+          isTabletMid={isTabletMid}
+          isLaptop={isLaptop}
+        />
+
+        <main className="w-full calcTop calcLeft">
+          <BarangayDashboard />
+        </main>
       </div>
-      
-       
-    </>
+    </div>
   );
 }
 

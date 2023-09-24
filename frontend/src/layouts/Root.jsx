@@ -1,15 +1,33 @@
-import NavbarComponent from "./navbar/Navbar";
-import Sidebar from "./sidebar/Sidebar";
-import UserDashboard from "../pages/user/userDashboard/userDashboard";
-
 import { useEffect, useState } from "react";
 import { useRef } from "react";
 import { useMediaQuery } from "react-responsive";
 
+import Sidebar from "./sidebar/Sidebar";
+import NavbarComponent from "./navbar/Navbar";
+import UserDashboard from "../pages/user/userDashboard/userDashboard";
+import { useParams } from "react-router-dom";
+
+const userDetails_Selected_Loader = async (id) => {
+  const response = await fetch("http://localhost:3001/root/" + id);
+  const userDetails_data = await response.json();
+  return userDetails_data;
+};
+
 function Root() {
-  let isTabletMid = useMediaQuery({ query: "(max-width: 767px)" });
+  const isTabletMid = useMediaQuery({ query: "(max-width: 767px)" });
   const [open, setOpen] = useState(isTabletMid ? false : true);
   const sidebarRef = useRef();
+  const isLaptop = useMediaQuery({ query: "(max-width: 1024px)" });
+  const { id } = useParams();
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    async function init() {
+      const data = await userDetails_Selected_Loader(id);
+      setData(data);
+    }
+    init();
+  }, []);
 
   useEffect(() => {
     if (isTabletMid) {
@@ -23,7 +41,7 @@ function Root() {
     ? {
         open: {
           x: 0,
-          width: "16rem",
+          width: "15rem",
           transition: {
             damping: 40,
           },
@@ -37,6 +55,15 @@ function Root() {
           },
         },
       }
+    : isLaptop
+    ? {
+        open: {
+          width: "16rem",
+          transition: {
+            damping: 40,
+          },
+        },
+      }
     : {
         open: {
           width: "20rem",
@@ -45,16 +72,29 @@ function Root() {
           },
         },
       };
+
+  console.log(data);
   return (
-    <>
-      <nav className="w-full relative"><NavbarComponent setOpen={setOpen}/></nav>
+    <div>
+      <nav className="">
+        <NavbarComponent setOpen={setOpen} data={data}/>
+      </nav>
       <div className="flex">
-          <aside className="h-screen">  <Sidebar open={open} setOpen={setOpen} sidebarRef={sidebarRef} Nav_animation={Nav_animation} isTabletMid={isTabletMid}/>  </aside>
-          <main className="w-full leftCol"><UserDashboard/></main>
+        <Sidebar
+          open={open}
+          setOpen={setOpen}
+          sidebarRef={sidebarRef}
+          Nav_animation={Nav_animation}
+          isTabletMid={isTabletMid}
+          isLaptop={isLaptop}
+          data={data}
+        />
+
+        <main className="w-full calcTop calcLeft">
+          <UserDashboard />
+        </main>
       </div>
-      
-       
-    </>
+    </div>
   );
 }
 

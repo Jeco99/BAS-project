@@ -1,13 +1,17 @@
 import logoImage from "/src/assets/images/BAS-Logo-1.png";
 import { useState } from "react";
+import { logIn_dataValidation } from "../utils/logIn_DataValidation";
+import { useNavigate } from "react-router-dom";
 
 const LogIn = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
 
   const [logInData, setLogInData] = useState({
     user_name: "",
     password: "",
   });
+  const [role, setRole] = useState('');
 
   const [errors, setError] = useState({
     user_name: "",
@@ -22,30 +26,35 @@ const LogIn = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    let newErrors = { ...errors };
+    logIn_dataValidation(logInData, errors, setError)
 
-    if (logInData.user_name.trim() == "") {
-      newErrors.user_name = "Name is required";
-    } else {
-      newErrors.user_name = "";
+    try {
+      const response = await fetch('http://localhost:3001/login/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(logInData)
+      });
+      const result = await response.json();
+      console.log(result);
+      setRole(result.user_type);
+
+      if(response.status == 200){
+        const id = result.user_id;
+        navigate('/root/'+id);
+      }
+      
+      if(response.status == 401){
+        alert("Status: " + response.status + " "+result.message);
+      }
+    } catch (error) {
+      console.error('Error:', error);
     }
 
-    if (logInData.password.trim() == "") {
-      newErrors.password = "Password is required";
-    } else {
-      newErrors.password = "";
-    }
-    setError(newErrors);
-
-    if (logInData.user_name === "user" && logInData.password === "user") {
-      location.href = "/root";
-    }
-    if (logInData.user_name === "admin" && logInData.password === "admin") {
-      location.href = "/admin";
-    }
   };
 
   const toggleShowPassword = () => {
@@ -58,14 +67,11 @@ const LogIn = () => {
 
   return (
     <div className="block sm:fixed inset-0 flex flex-col sm:flex-row justify-center bg-beetleGreen py-7 h-screen">
-           <img
+      <img
         className=" w-4/12 sm:w-5/12 mx-auto sm:m-auto"
         src={logoImage}
         alt="Barangay Appointment System Logo"
       />
-      
- 
-
       <form
         className="bg-beetleGreen block border border-black rounded-lg shadow w-3/3 sm:w-1/3 p-5 sm:p-6 m-4 sm:m-auto"
         onSubmit={handleSubmit}
@@ -76,7 +82,7 @@ const LogIn = () => {
         <div className="mb-4">
           <div>
             <label htmlFor="user_name" className="text-xl">
-              user_name <sup>*</sup>
+              Username <sup>*</sup>
             </label>
           </div>
           <input
@@ -124,6 +130,12 @@ const LogIn = () => {
           </button>
         </div>
       </form>
+      {role && (
+        <div>
+          <h2>Welcome, {role === 'admin' ? 'Admin' : 'User'}</h2>
+          <p>Your role is: {role}</p>
+        </div>
+      )}
     </div>
   );
 };

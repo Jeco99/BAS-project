@@ -8,7 +8,7 @@ import { useMediaQuery } from "react-responsive";
 
 // eslint-disable-next-line react/prop-types
 function Layout() {
-  let isTabletMid = useMediaQuery({ query: "(max-width: 767px)" });
+  const isTabletMid = useMediaQuery({ query: "(max-width: 767px)" });
   const [open, setOpen] = useState(isTabletMid ? false : true);
   const sidebarRef = useRef();
   let isLaptop = useMediaQuery({ query: "(max-width: 1024px)" });
