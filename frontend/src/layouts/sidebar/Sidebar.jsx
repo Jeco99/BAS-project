@@ -40,13 +40,16 @@ const Sidebar = ({
             color="black"
             className="m-auto"
           /> */}
-          {/* <img src={data.user_image == ''  ? <HiUserCircle
+          <img className="image-holder-sidebar" 
+            srcSet={data.user_image == ''  ? <HiUserCircle
             size={isLaptop ? 210 : isTabletMid ? 150 : 300}
             color="black"
             className="m-auto"
-          /> : 'http://localhost:3001/static'+data.user_image}  alt="" /> */}
+          /> : 'http://localhost:3001/static/'+data.user_image }  alt="" />
 
-          <ul className="whitespace-pre px-2.5 text-[0.9rem] py-10 flex flex-col gap-1 font-medium overflow-x-hidden scrollbar-thin scrollbar-track-white scrollbar-thumb-slate-100   md:h-[68%] h-[70%]">
+          {/* <img srcSet={'http://localhost:3001/static/'+data.user_image} alt="" srcset="" /> */}
+
+          <ul className="whitespace-pre px-2.5 text-[0.9rem] flex flex-col gap-1 font-medium overflow-x-hidden scrollbar-thin scrollbar-track-white scrollbar-thumb-slate-100   md:h-[68%] h-[70%]">
             <li>
               <NavLink to={"dashboard"} className="link sidebar-button">
                 <MdSpaceDashboard size={35} className="min-w-max" />

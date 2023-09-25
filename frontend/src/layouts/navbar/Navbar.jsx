@@ -34,7 +34,11 @@ export default function NavbarComponent({ setOpen, data }) {
         <Dropdown
           className="dropdown-items"
           inline
-          label={<Avatar alt="User settings" img={logoImage2} rounded />}
+          label={<Avatar alt="User settings" img={data.user_image == ''  ? <HiUserCircle
+          size={isLaptop ? 210 : isTabletMid ? 150 : 300}
+          color="black"
+          className="m-auto"
+        /> : 'http://localhost:3001/static/'+data.user_image } rounded />}
         >
           <Dropdown.Header>
             <span className="truncate text-sm font-medium">{data.email}</span>
