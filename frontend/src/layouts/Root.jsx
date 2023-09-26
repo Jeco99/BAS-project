@@ -73,7 +73,7 @@ function Root() {
         },
       };
 
-  console.log(data);
+  // console.log(data.user_image.split('.'));
   return (
     <div>
       <nav className="">

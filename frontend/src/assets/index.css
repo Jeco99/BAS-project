@@ -135,17 +135,34 @@ sup {
     height: 2rem;
 }
 
-.calcTop{
+.calcTop {
     margin-top: calc(12rem - 5rem);
 }
 
-.calcLeft{
-    margin-left:21rem;
+.calcLeft {
+    margin-left: 21rem;
 }
 
-@media only screen and (max-width: 1024px){
-    .calcLeft{
-        margin-left:17rem;
+.image-holder-sidebar {
+    width: 15rem;
+    height: 15rem;
+    border: 1px solid #000000;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: auto;
+}
+
+.image-holder-create-account{
+    width: 15rem;
+    height: 15rem;
+    border: 1px solid #000000;
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+@media only screen and (max-width: 1024px) {
+    .calcLeft {
+        margin-left: 17rem;
     }
 }
 
@@ -165,7 +182,7 @@ sup {
         line-height: 1.5rem;
     }
 
-    .main-title{
+    .main-title {
         justify-content: center;
     }
 
@@ -187,8 +204,8 @@ sup {
         grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
-    .calcLeft{
-        margin-left:17rem !important;
+    .calcLeft {
+        margin-left: 17rem !important;
     }
 }
 
@@ -213,7 +230,7 @@ sup {
         line-height: 1.5rem;
     }
 
-    .main-title{
+    .main-title {
         justify-content: center;
     }
 
@@ -231,27 +248,12 @@ sup {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    .calcLeft{
+    .calcLeft {
         margin-left: 0rem !important;
     }
 
-    .calcTop{
+    .calcTop {
         margin-top: calc(10rem - 5.5rem);
     }
 }
 
-
-
-
-
-
-
-/* .leftCol {
-    position: fixed;
-    width: 100%;
-    overflow-y: scroll;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 100;
-} */

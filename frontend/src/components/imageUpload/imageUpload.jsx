@@ -13,7 +13,7 @@ const ImageUpload = ({ getData, setGetData, errors }) => {
               ? "https://static.thenounproject.com/png/4035887-200.png"
               : URL.createObjectURL(selectedImage)
           }
-          className="shadow-md border rounded-lg object-fill"
+          className="image-holder-create-account"
         />
         {selectedImage && (
           <div className="text-center my-4">

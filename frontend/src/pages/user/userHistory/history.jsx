@@ -38,7 +38,15 @@ export default function History() {
                 <td className="border px-4 py-2">{item.request_type}</td>
                 <td className="border px-4 py-2">{item.appointment_time}</td>
                 <td className="border px-4 py-2">{item.purpose}</td>
-                <td className="border px-4 py-2">{item.status}</td>
+                <td
+                  className={`border px-4 py-2 bg-dark ${
+                    item.status == "Completed"
+                      ? "text-green-500"
+                      : "text-red-500"
+                  }`}
+                >
+                  {item.status}
+                </td>
                 {/* Add more table data (td) elements here */}
               </tr>
             ))}

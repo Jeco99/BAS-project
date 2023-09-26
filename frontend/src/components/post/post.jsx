@@ -32,7 +32,7 @@ export default function Post() {
   return (
     <>
       {postData.map((items) => (
-        <div className="border rounded-lg p-5 m-2" key={items.post_id}>
+        <div className="relative border rounded-lg p-5 m-2" key={items.post_id}>
           <h1 className="text-base sm:text-xl" >{items.title}</h1>
           <h6 className="text-sm sm:text-base text-gray-400">
            {items.post_date_created.substr(0,10)} | {convertTo12HoursFormat(items.post_time_created)}
