@@ -30,7 +30,7 @@ function BarangayAddPost({ setAddPost }) {
 
       if (response.status === 200) {
         alert('Data inserted successfully');
-        return location.href = "/admin/dashboard"
+        return location.href = "/root/:id/dashboard"
       } else {
         alert('Error inserting data');
       }
@@ -44,7 +44,7 @@ function BarangayAddPost({ setAddPost }) {
 
   console.log(postDetails);
   return (
-    <div className="fixed block inset-0 flex items-center justify-center bg-gray-50 bg-opacity-90 overflow-hidden">
+    <div className="fixed block inset-0 flex items-center justify-center bg-gray-50 bg-opacity-90 overflow-hidden z-50">
       <div className="w-full mx-[700px]">
         <h1 className="text-center m-4 text-3xl">New Post</h1>
         <form

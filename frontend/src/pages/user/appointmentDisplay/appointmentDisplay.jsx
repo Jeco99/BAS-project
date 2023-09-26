@@ -140,7 +140,7 @@ export default function AppointmentDisplay() {
 
       {showModal && (
         <form
-          className="fixed block inset-0 flex items-center justify-center bg-gray-50 bg-opacity-75 overflow-x-hidden overflow-y-auto"
+          className="fixed block inset-0 flex items-center justify-center bg-gray-50 bg-opacity-75 overflow-x-hidden overflow-y-auto z-50"
           onSubmit={handleSubmit}
           method="POST"
         >
