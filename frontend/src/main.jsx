@@ -11,27 +11,10 @@ import RootLayout from "./layouts/Layout";
 import Root from "./layouts/Root";
 
 import AppointmentDisplay from "./pages/user/appointmentDisplay/appointmentDisplay";
-import History,{ historyLoader } from "./pages/user/userHistory/history";
+import History, { historyLoader } from "./pages/user/userHistory/history";
 import UserDashboard from "./pages/user/userDashboard/userDashboard";
-
-import Admin_Layout from "./layouts/admin_Layout";
-import Admin_Root from "./layouts/adminRoot";
-
-import BarangayDashboard from "./pages/barangay/barangayDashboard/barangayDashboard";
 import Report, { appointmentLoader } from "./pages/user/reportPage/reportPage";
-
-import AdminSettings from "./pages/settings/admin/AdminSetting";
 import UserSettings from "./pages/settings/user/UserSetting";
-
-
-
-
-/// sample lng ja
-import AppointmentDataDisplay, {
-  loader as dataLoader,
-} from "./pages/appoinementData";
-
-import SampleTestForm from "./sample_test_form/sampletestForm";
 
 
 const router = createBrowserRouter([
@@ -41,18 +24,18 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
-    path: "/createaccount",
-    element: <CreateAccount />,
+    path:"/createaccount",
+    element:<CreateAccount />,
+    errorElement:<ErrorPage />
+  },
+  {
+    path: "/root/:id",
+    element: <Root/>,
     errorElement: <ErrorPage />,
   },
   {
     path: "/root/:id",
-    element: <Root />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/root/:id",
-    element: <RootLayout />, //create children based on the user sidebar
+    element: <RootLayout/>,
     errorElement: <ErrorPage />,
     children: [
       {
@@ -60,8 +43,13 @@ const router = createBrowserRouter([
         element: <UserDashboard />,
       },
       {
+        path: "report",
+        loader: appointmentLoader,
+        element: <Report />,
+      },
+      {
         path: "appointment",
-        element: <AppointmentDisplay /> 
+        element: <AppointmentDisplay />,
       },
       {
         path: "history",
@@ -73,47 +61,6 @@ const router = createBrowserRouter([
         element: <UserSettings />,
       },
     ],
-  },
-  //admin
-  {
-    path: "/admin",
-    element: <Admin_Root />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/admin",
-    element: <Admin_Layout />, //create children based on the user sidebar
-    errorElement: <ErrorPage />,
-    children: [
-      {
-        path: "dashboard",
-        element: <BarangayDashboard />
-      },
-      {
-        path: "history",
-        loader: historyLoader,
-        element: <History />,
-      },
-      {
-        path: "report",
-        loader: appointmentLoader,
-        element: <Report />, //report
-      },
-      {
-        path: "settings",
-        element: <AdminSettings />,
-      },
-    ],
-  },
-  {
-    path:"/data",
-    loader: dataLoader,
-    element:<AppointmentDataDisplay />
-    
-  },
-  {
-    path: "/test",
-    element: <SampleTestForm />
   }
 ]);
 

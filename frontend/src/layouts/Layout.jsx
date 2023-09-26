@@ -5,13 +5,29 @@ import { Outlet } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useRef } from "react";
 import { useMediaQuery } from "react-responsive";
+import { useParams } from "react-router-dom";
 
-// eslint-disable-next-line react/prop-types
-function Layout() {
+const userDetails_Selected_Loader = async (id) => {
+  const response = await fetch("http://localhost:3001/root/" + id);
+  const userDetails_data = await response.json();
+  return userDetails_data;
+};
+
+export default function RootLayout() {
   const isTabletMid = useMediaQuery({ query: "(max-width: 767px)" });
   const [open, setOpen] = useState(isTabletMid ? false : true);
   const sidebarRef = useRef();
   let isLaptop = useMediaQuery({ query: "(max-width: 1024px)" });
+  const { id } = useParams();
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    async function init() {
+      const data = await userDetails_Selected_Loader(id);
+      setData(data);
+    }
+    init();
+  }, []);
 
   useEffect(() => {
     if (isTabletMid) {
@@ -39,28 +55,28 @@ function Layout() {
           },
         },
       }
-    : isLaptop ? {
-      open: {         
-        width:"16rem",     
-       transition: {
-         damping: 40,
-       },
-     },
-        } :{
-          open: {         
-            width:"20rem",     
-           transition: {
-             damping: 40,
-           },
-         }
-        }
-       
-      ;
+    : isLaptop
+    ? {
+        open: {
+          width: "16rem",
+          transition: {
+            damping: 40,
+          },
+        },
+      }
+    : {
+        open: {
+          width: "20rem",
+          transition: {
+            damping: 40,
+          },
+        },
+      };
 
   return (
     <div>
       <nav className="">
-        <NavbarComponent setOpen={setOpen} />
+        <NavbarComponent setOpen={setOpen} data={data} />
       </nav>
       <div className="flex">
         <Sidebar
@@ -70,14 +86,13 @@ function Layout() {
           Nav_animation={Nav_animation}
           isTabletMid={isTabletMid}
           isLaptop={isLaptop}
+          data={data}
         />
 
         <main className="w-full calcTop calcLeft">
-          <Outlet />
+          <Outlet/>
         </main>
       </div>
     </div>
   );
 }
-
-export default Layout;

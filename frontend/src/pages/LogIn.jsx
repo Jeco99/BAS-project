@@ -46,6 +46,7 @@ const LogIn = () => {
       if(response.status == 200){
         const id = result.user_id;
         navigate('/root/'+id);
+    
       }
       
       if(response.status == 401){

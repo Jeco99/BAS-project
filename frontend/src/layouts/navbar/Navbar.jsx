@@ -1,10 +1,9 @@
 import { Dropdown, Navbar, Avatar } from "flowbite-react";
 import { BellIcon } from "@heroicons/react/24/solid";
 import logoImage from "/src/assets/images/BAS-Logo-1.2.png";
-import logoImage2 from "/src/assets/images/CodeVerts-logo-2.png";
-import { Link } from "react-router-dom";
 import { MdMenu } from "react-icons/md";
-// import './Navbar.css';
+import { NavLink } from "react-router-dom";
+import "./Navbar.css";
 
 export default function NavbarComponent({ setOpen, data }) {
   return (
@@ -15,9 +14,9 @@ export default function NavbarComponent({ setOpen, data }) {
       <div className="md:hidden" onClick={() => setOpen(true)}>
         <MdMenu size={25} />
       </div>
-      <Navbar.Brand href="/root">
+      <Navbar.Brand href={"/root/" + data.user_id}>
         <div className="flex ">
-          <img alt="BAS Logo" className="w-14 sm:w-24" src={logoImage} />
+          <img alt="BAS Logo" className="w-14 sm:w-24" srcSet={logoImage} />
           <span className="logo-name hover:text-morningGlory self-center text-xl lg:text-3xl font-semibold whitespace-nowrap ml-5 hidden md:block">
             Barangay Appointment System
           </span>
@@ -34,23 +33,31 @@ export default function NavbarComponent({ setOpen, data }) {
         <Dropdown
           className="dropdown-items"
           inline
-          label={<Avatar alt="User settings" img={data.user_image == ''  ? <HiUserCircle
-          size={isLaptop ? 210 : isTabletMid ? 150 : 300}
-          color="black"
-          className="m-auto"
-        /> : 'http://localhost:3001/static/'+data.user_image } rounded />}
+          label={
+            <Avatar
+              alt="User settings"
+              img={
+                data.user_image == "" ? (
+                  <HiUserCircle
+                    size={isLaptop ? 210 : isTabletMid ? 150 : 300}
+                    color="black"
+                    className="m-auto"
+                  />
+                ) : (
+                  "http://localhost:3001/static/" + data.user_image
+                )
+              }
+              rounded
+            />
+          }
         >
           <Dropdown.Header>
             <span className="truncate text-sm font-medium">{data.email}</span>
           </Dropdown.Header>
           <Dropdown.Item>
-            <button
-              type="button"
-              className="btn btnRadius p-2"
-              onClick={() => (location.href = "/")}
-            >
+            <NavLink to={"/"} className="link sidebar-button">
               Sign Out
-            </button>
+            </NavLink>
           </Dropdown.Item>
         </Dropdown>
       </div>
