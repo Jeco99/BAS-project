@@ -1,23 +1,11 @@
--- Database: BAS
-
--- DROP DATABASE IF EXISTS "BAS";
-
--- CREATE DATABASE "BAS"
---     WITH
---     OWNER = postgres
---     ENCODING = 'UTF8'
---     LC_COLLATE = 'English_United States.1252'
---     LC_CTYPE = 'English_United States.1252'
---     TABLESPACE = pg_default
---     CONNECTION LIMIT = -1
---     IS_TEMPLATE = False;
+ALTER TABLE appointment
+DROP CONSTRAINT fk_user_details CASCADE;
 
 DROP TABLE IF EXISTS user_details;
 DROP TABLE IF EXISTS appointment;
 DROP TABLE IF EXISTS request;
 DROP TABLE IF EXISTS post;
 DROP TABLE IF EXISTS notification;
-
 
 CREATE TABLE user_details (
   user_id SERIAL PRIMARY KEY,
@@ -49,35 +37,11 @@ CREATE TABLE appointment(
   purpose TEXT NOT NULL,
   appointment_time VARCHAR(255) NOT NULL,
   appointment_date VARCHAR(255) NOT NULL,
-  appointment_time_created TIME NOT NULL DEFAULT now(),
-  appointment_date_created DATE NOT NULL DEFAULT now(),
-  status VARCHAR(255) NOT NULL DEFAULT 'Pending'
-);
-
--- ALTER TABLE appointment
--- ADD CONSTRAINT fk_user_details
--- FOREIGN KEY (user_id) 
--- REFERENCES user_details (user_id);
-
-CREATE TABLE request(
-  request_id SERIAL PRIMARY KEY,
-  request_status VARCHAR(255) NOT NULL,
+  appointment_time_date_created TIMESTAMP NOT NULL DEFAULT now(),
+  status VARCHAR(255) NOT NULL DEFAULT 'Pending',
   date_time_approval TIMESTAMP NOT NULL DEFAULT now(),
+  user_id INT NOT NULL
 );
-
-CREATE TABLE post(
-  post_id SERIAL PRIMARY KEY,
-  title VARCHAR(255) NOT NULL,
-  description TEXT NOT NULL,
-  post_time_created TIME NOT NULL DEFAULT now(),
-  post_date_created DATE NOT NULL DEFAULT now()
-);
-
-CREATE TABLE notification(
-  notification_id  SERIAL PRIMARY KEY,
-  notification_type VARCHAR(255)
-);
-
 
 
 -- INSERT user data
@@ -99,25 +63,81 @@ INSERT INTO user_details(user_image, user_name, email, password, first_name,	mid
 ('http://dummyimage.com/175x100.png/cc0000/ffffff','buga','buga@gmail.com','buga','NA','NA','NA','NA','NA','NA','NA','6391267379265','Region VI (Western Visayas)','Iloilo','Leon','Buga','NA','NA',5026,'admin');
 
 
+SELECT * from user_details;
 
 -- INSERT appointment data
-INSERT INTO appointment(request_type,	purpose,	appointment_time,	appointment_date) VALUES
-('barangay certificate',	'to claim important document','8:00 - 9:00',	'2023-09-04'),
-('barangay clearance',	'to work',	'3:00 - 4:00', 	'2023-09-06'),
-('barangay permit',	'to work',	'9:00 - 10:00', 	'2023-09-05'),
-('barangay permit',	'to work',	'4:00 - 5:00', 	'2023-09-07'),
-('barangay permit',	'to work',	'2:00 - 3:00', 	'2023-09-08'),
-('barangay permit',	'to claim important document','1:00 - 2:00',	'2023-09-05'),
-('barangay clearance',	'to claim important document','12:00 - 1:00',	'2023-09-07'),
-('barangay certificate',	'to work',	'10:00 - 11:00', 	'2023-09-04'),
-('barangay permit',	'to claim important document','3:00 - 4:00',	'2023-09-06'),
-('barangay permit',	'to claim important document','8:00 - 9:00',	'2023-09-08'),
-('barangay certificate',	'to work',	'1:00 - 2:00', 	'2023-09-07'),
-('barangay clearance',	'to claim important document','3:00 - 4:00',	'2023-09-07'),
-('barangay clearance',	'to claim important document','10:00 - 11:00',	'2023-09-08'),
-('barangay permit',	'to work',	'8:00 - 9:00', 	'2023-09-07'),
-('barangay clearance',	'to work',	'4:00 - 5:00', 	'2023-09-04');
+INSERT INTO appointment(request_type,	purpose,	appointment_time,	appointment_date, user_id) VALUES
+('barangay certificate',	'to claim important document','8:00 - 9:00',	'2023-09-04', '1'),
+('barangay clearance',	'to work',	'3:00 - 4:00', 	'2023-09-06', '1'),
+('barangay permit',	'to work',	'9:00 - 10:00', 	'2023-09-05', '1'),
+('barangay permit',	'to work',	'4:00 - 5:00', 	'2023-09-07','2'),
+('barangay permit',	'to work',	'2:00 - 3:00', 	'2023-09-08','2'),
+('barangay permit',	'to claim important document','1:00 - 2:00',	'2023-09-05','2'),
+('barangay clearance',	'to claim important document','12:00 - 1:00',	'2023-09-07','3'),
+('barangay certificate',	'to work',	'10:00 - 11:00', 	'2023-09-04','3'),
+('barangay permit',	'to claim important document','3:00 - 4:00',	'2023-09-06','3'),
+('barangay permit',	'to claim important document','8:00 - 9:00',	'2023-09-08','4'),
+('barangay certificate',	'to work',	'1:00 - 2:00', 	'2023-09-07','4'),
+('barangay clearance',	'to claim important document','3:00 - 4:00',	'2023-09-07','4'),
+('barangay clearance',	'to claim important document','10:00 - 11:00',	'2023-09-08','5'),
+('barangay permit',	'to work',	'8:00 - 9:00', 	'2023-09-07','5'),
+('barangay clearance',	'to work',	'4:00 - 5:00', 	'2023-09-04','5');
 
+ALTER TABLE appointment
+ADD CONSTRAINT fk_user_details
+FOREIGN KEY (user_id) 
+REFERENCES user_details (user_id);
+
+-- SELECT * FROM appointment;
+
+--query for report
+SELECT 
+	appoint.appointment_id AS appointment_id,
+	CONCAT(users.first_name, ' ',SUBSTRING(users.middle_name,1,1),'.',' ', users.last_name) AS Fullname,
+	appoint.appointment_time AS appointment_time,
+	appoint.appointment_date AS appointment_date,
+	appoint.request_type AS request_type,
+	appoint.purpose AS purpose,
+	DATE(appointment_time_date_created) AS appointment_date_created,
+	TO_CHAR(appointment_time_date_created, 'HH:MI:SS') AS appointment_time_created,
+	appoint.status AS status 
+FROM appointment AS appoint 
+INNER JOIN user_details AS users 
+ON appoint.user_id =users.user_id
+WHERE status = 'Pending'
+ORDER BY appointment_time_date_created;
+
+--query for history
+SELECT 
+	appoint.appointment_id AS appointment_id,
+	CONCAT(users.first_name, ' ',SUBSTRING(users.middle_name,1,1),'.',' ', users.last_name) AS Fullname,
+	appoint.appointment_time AS appointment_time,
+	appoint.appointment_date AS appointment_date,
+	appoint.request_type AS request_type,
+	appoint.purpose AS purpose,
+	appoint.date_time_approval AS date_time_approval,
+	DATE( date_time_approval) AS approval_date_created,
+	TO_CHAR( date_time_approval, 'HH:MI:SS') AS approval_time_created,
+	appoint.status AS status 
+FROM appointment AS appoint 
+INNER JOIN user_details AS users 
+ON appoint.user_id =users.user_id
+WHERE status IN ('Completed', 'Incomplete')
+ORDER BY date_time_approval;
+
+CREATE TABLE post(
+  post_id SERIAL PRIMARY KEY,
+  title VARCHAR(255) NOT NULL,
+  description TEXT NOT NULL,
+  post_time_date_created TIMESTAMP NOT NULL DEFAULT now()
+--   user_id INT NOT NULL
+);
+
+---query post
+SELECT *,
+	DATE( post_time_date_created) AS post_date_created,
+	TO_CHAR( post_time_date_created, 'HH:MI:SS') AS post_time_created
+FROM post ORDER BY post_time_date_created;
 
 INSERT INTO post(title, description) VALUES 
 ('Safety Technician III',	'Plain Radiography of Right Scapula'),
@@ -136,23 +156,8 @@ INSERT INTO post(title, description) VALUES
 ('Chief Design Engineer',	'Introduce of Liquid Brachy into Cran Cav/Brain, Via Opening'),
 ('Quality Engineer',	'Dilate L Peroneal Art, Bifurc, w 2 Intralum Dev, Perc');
 
-
---Add Foreign Key
-ALTER TABLE appointment 
-ADD CONSTRAINT fk_user
-FOREIGN KEY (user_id) 
-REFERENCES user_details(user_id);
-
-
-SELECT 
-appoint.appointment_id AS appointment_id,
-	CONCAT(users.first_name, ' ',SUBSTRING(users.middle_name,1,1),'.',' ', users.last_name) AS Fullname,
-	appoint.appointment_time AS appointment_time,
-	appoint.appointment_date AS appointment_date,
-	appoint.request_type AS request_type,
-	appoint.purpose AS purpose,
-	appoint.appointment_time_created AS appointment_time_created,
-	appoint.appointment_date_created AS appointment_date_created,
-	appoint.status AS status
-FROM appointment AS appoint
-	INNER JOIN user_details AS users ON appoint.appointment_id = users.user_id;
+------
+CREATE TABLE notification(
+  notification_id  SERIAL PRIMARY KEY,
+  notification_type VARCHAR(255)
+);

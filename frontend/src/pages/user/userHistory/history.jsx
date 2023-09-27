@@ -28,11 +28,11 @@ export default function History() {
           <tbody className="text-lg">
             {historyData.map((item) => (
               <tr key={item.appointment_id}>
-                <td className="border px-4 py-2">{`${item.appointment_date_created.substr(
+                <td className="border px-4 py-2">{`${item.approval_date_created.substr(
                   0,
                   10
                 )} ${convertTo12HoursFormat(
-                  item.appointment_time_created
+                  item.approval_time_created
                 )}`}</td>
                 <td className="border px-4 py-2">{item.fullname}</td>
                 <td className="border px-4 py-2">{item.request_type}</td>
