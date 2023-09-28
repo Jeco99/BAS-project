@@ -23,7 +23,7 @@ export default function NumberOfMales() {
       ))}
 
       <div>
-        <FaMale className="imageChart" />
+        <FaMale  size={45} />
         <p>Male</p>
       </div>
     </div>

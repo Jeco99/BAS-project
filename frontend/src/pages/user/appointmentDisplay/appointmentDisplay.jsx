@@ -39,7 +39,8 @@ export default function AppointmentDisplay() {
         request_type: request,
         purpose: purpose,
         appointment_time: selectTime,
-        appointment_date: startDate.toDateString()
+        appointment_date: startDate.toDateString(),
+        user_id: id
       }),
     });
     

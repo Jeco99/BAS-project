@@ -11,10 +11,12 @@ import RootLayout from "./layouts/Layout";
 import Root from "./layouts/Root";
 
 import AppointmentDisplay from "./pages/user/appointmentDisplay/appointmentDisplay";
-import History from "./pages/user/userHistory/history";
 import UserDashboard from "./pages/user/userDashboard/userDashboard";
 import Report from "./pages/user/reportPage/reportPage";
 import UserSettings from "./pages/settings/user/UserSetting";
+
+import AdminHistory from "./pages/user/userHistory/AdminHistory";
+import UserHistory from "./pages/user/userHistory/UserHistory";
 
 
 const router = createBrowserRouter([
@@ -51,8 +53,12 @@ const router = createBrowserRouter([
         element: <AppointmentDisplay />,
       },
       {
-        path: "history",
-        element: <History />,
+        path: "adminhistory",
+        element: <AdminHistory />,
+      },
+      {
+        path: "userhistory",
+        element: <UserHistory />,
       },
       {
         path: "settings",

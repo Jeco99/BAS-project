@@ -3,12 +3,12 @@ import { convertTo12HoursFormat } from "../../../utils/timeConversion";
 import { useParams } from "react-router-dom";
 
 const historyLoader = async (id) => {
-  const response = await fetch(`http://localhost:3001/history/${id}`);
+  const response = await fetch(`http://localhost:3001/history/user/${id}`);
   const completedStatusData = await response.json();
   return completedStatusData;
 };
 
-export default function History() {
+export default function UserHistory() {
   const [data, setData] = useState([]);
   const { id } = useParams();
   useEffect(() => {
@@ -26,6 +26,7 @@ export default function History() {
           <thead>
             <tr className="table-fixed bg-gray-400 min-w-full">
               <th className="px-4 py-2">Timestamp</th>
+              <th className="px-4 py-2">Name</th>
               <th className="px-4 py-2">Type of Request</th>
               <th className="px-4 py-2">Appointment Time</th>
               <th className="px-4 py-2">Purpose</th>
@@ -39,9 +40,8 @@ export default function History() {
                 <td className="border px-4 py-2">{`${item.approval_date_created.substr(
                   0,
                   10
-                )} ${convertTo12HoursFormat(
-                  item.approval_time_created
-                )}`}</td>
+                )} ${convertTo12HoursFormat(item.approval_time_created)}`}</td>
+                <td className="border px-4 py-2">{item.fullname}</td>
                 <td className="border px-4 py-2">{item.request_type}</td>
                 <td className="border px-4 py-2">{item.appointment_time}</td>
                 <td className="border px-4 py-2">{item.purpose}</td>

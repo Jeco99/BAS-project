@@ -6,7 +6,8 @@ function BarangayAddPost({ setAddPost }) {
 
   const [postDetails, setPostDetails] = useState({
     title: "",
-    message: ""
+    message: "", 
+    user_id: id
   });
 
   const handleChange = (e) => {

@@ -55,7 +55,9 @@ const Sidebar = ({
           </div>
 
           <h2 className="text-center m-4 text-xl">
-            {data.user_type == 'resident' ? data.first_name + " " + data.middle_name + " " + data.last_name : ''}
+            {data.user_type == "resident"
+              ? data.first_name + " " + data.middle_name + " " + data.last_name
+              : ""}
           </h2>
 
           <ul className="whitespace-pre px-2.5 text-[0.9rem] flex flex-col gap-1 font-medium overflow-x-hidden scrollbar-thin scrollbar-track-white scrollbar-thumb-slate-100   md:h-[68%] h-[70%]">
@@ -65,24 +67,27 @@ const Sidebar = ({
                 Dashboard
               </NavLink>
             </li>
-            {data.user_type == "admin" ? (
-              <li>
-                <NavLink to={"report"} className="link sidebar-button">
-                  <MdAssignment size={35} className="min-w-max" />
-                  Report
-                </NavLink>
-              </li>
-            ) : (
-              <li>
-                <NavLink to={"appointment"} className="link sidebar-button">
-                  <MdCalendarMonth size={35} className="min-w-max" />
-                  Appointment
-                </NavLink>
-              </li>
-            )}
 
             <li>
-              <NavLink to={"history"} className="link sidebar-button">
+              <NavLink
+                to={data.user_type == "admin" ? "report" : "appointment"}
+                className="link sidebar-button"
+              >
+                {data.user_type == "admin" ? (
+                  <MdCalendarMonth size={35} className="min-w-max" />
+                ) : (
+                  <MdAssignment size={35} className="min-w-max" />
+                )}
+
+                {data.user_type == "admin" ? "Report" : "Appointment"}
+              </NavLink>
+            </li>
+
+            <li>
+              <NavLink
+                to={data.user_type == "admin" ? "adminhistory" : "userhistory"}
+                className="link sidebar-button"
+              >
                 <MdOutlineHistoryEdu size={35} className="min-w-max" />
                 History
               </NavLink>

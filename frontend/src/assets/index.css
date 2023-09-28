@@ -130,11 +130,6 @@ sup {
     text-align: center;
 }
 
-/* image */
-.imageChart {
-    height: 2rem;
-}
-
 .calcTop {
     margin-top: calc(12rem - 5rem);
 }

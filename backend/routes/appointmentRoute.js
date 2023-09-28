@@ -34,19 +34,20 @@ appointmentRouter.get("/:id", async (req, res) => {
 
 appointmentRouter.post("/create/:id", async (req, res) => {
   try {
-    const {id} = req.params;
+    const { id } = req.params;
     const {
       request_type,
       purpose,
       appointment_time,
       appointment_date,
+      user_id,
     } = req.body;
     const newAppointment = await sql`INSERT INTO appointment (
           request_type, 
           purpose, 
           appointment_time,
           appointment_date, user_id ) VALUES (
-            ${request_type}, ${purpose}, ${appointment_time}, ${appointment_date}, ${id}) RETURNING *`;
+            ${request_type}, ${purpose}, ${appointment_time}, ${appointment_date}, ${user_id}) RETURNING *`;
     res.status(200).json(newAppointment);
   } catch (err) {
     console.error(err.message);
