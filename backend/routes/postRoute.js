@@ -37,17 +37,17 @@ postRouter.post("/add/:id", async (req, res) => {
   }
 });
 
-postRouter.put("/update/:id", async(req, res) => {
-  try{
-    const { id } = req.params;
-    const {title, message, user_id} =req.body;
-    const updatePost = await sql `UPDATE post SET "title" = ${title}, "description"=${message}, "user_id"=${user_id} WHERE post_id = ${id}`;
-    res.json(updatePost);
-    console.log(updatePost);
-    console.log(id);
-  } catch(err){
-    console.error(err.message);
-  }
-})
+// postRouter.put("/update/:id", async(req, res) => {
+//   try{
+//     const { id } = req.params;
+//     const {title, message, user_id} =req.body;
+//     const updatePost = await sql `UPDATE post SET "title" = ${title}, "description"=${message}, "user_id"=${user_id} WHERE post_id = ${id}`;
+//     res.json(updatePost);
+//     console.log(updatePost);
+//     console.log(id);
+//   } catch(err){
+//     console.error(err.message);
+//   }
+// })
 
 export default postRouter;
