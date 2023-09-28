@@ -1,17 +1,19 @@
 import { useEffect, useState } from "react";
 import DashboardMenuBtn from "../../pages/user/userDashboard/DashboardMenuBtn";
+import { useParams } from "react-router-dom";
 
-const postLoader = async () => {
-  const response = await fetch("http://localhost:3001/post");
+const postLoader = async (id) => {
+  const response = await fetch(`http://localhost:3001/post/${id}`);
   const postData = await response.json();
   return postData;
 };
 
 export default function Post() {
   const [postData, setPostData] = useState([]);
+  const {id} = useParams();
   useEffect(() => {
     async function init() {
-      const data = await postLoader();
+      const data = await postLoader(id);
       setPostData(data);
     }
     init();
@@ -45,25 +47,5 @@ export default function Post() {
         </div>
       ))}
     </>
-    /* import DashboardMenuBtn from "../../pages/user/userDashboard/DashboardMenuBtn";
-export default function Post() { */
-    /* return (
-    <div className="relative border rounded-lg p-5 m-2">
-      <div className="absolute right-0 top-0 mb-8 flex px-2 rounded-md">
-        <DashboardMenuBtn />
-      </div>
-
-      <h1 className="text-base sm:text-xl">Lorem Ipsum</h1>
-      <h6 className="text-sm sm:text-base text-gray-400">
-        2023-07-21 | 6:37 pm
-      </h6>
-      <p className="text-sm sm:text-base">
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eligendi ipsa
-        distinctio nam, dolores harum voluptas corrupti aut, voluptates nostrum
-        molestias perferendis quae iure quasi eos labore corporis reiciendis
-        odit laborum.
-      </p>
-    </div>
-    */
   );
 }

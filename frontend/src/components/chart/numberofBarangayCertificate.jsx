@@ -2,9 +2,7 @@ import { HiDocument } from "react-icons/hi";
 import { useEffect, useState } from "react";
 
 const chartLoader = async () => {
-  const response = await fetch(
-    "http://localhost:3001/chart/documents"
-  );
+  const response = await fetch("http://localhost:3001/chart/documents");
   const barangayCertificateData = await response.json();
   return barangayCertificateData;
 };
@@ -21,13 +19,11 @@ export default function NumberOfbarangayCertificate() {
   return (
     <div className="chart">
       {barangayCertificate.map((item) => (
-        <h5 key={item.brgycertificate_cnt}>
-          {item.brgycertificate_cnt}
-        </h5>
+        <h5 key={item.brgycertificate_cnt}>{item.brgycertificate_cnt}</h5>
       ))}
 
       <div>
-        <HiDocument className="imageChart" />
+        <HiDocument size={55} />
         <p>Barangay Certificate</p>
       </div>
     </div>

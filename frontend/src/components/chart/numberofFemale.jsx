@@ -23,7 +23,7 @@ export default function NumberOfFemales() {
       ))}
 
       <div>
-        <FaFemale className="imageChart" />
+        <FaFemale size={45} />
         <p>Female</p>
       </div>
     </div>

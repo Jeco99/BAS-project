@@ -146,7 +146,6 @@ export default function CreateAccount() {
         body: formdata
       });
 
-      
   };
 
   console.log(getData);

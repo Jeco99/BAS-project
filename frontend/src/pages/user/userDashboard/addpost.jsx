@@ -1,12 +1,13 @@
 import { useState } from "react";
-
-//TODO: hide scrollbar
+import { useParams } from "react-router-dom";
 
 function BarangayAddPost({ setAddPost }) {
+  const { id } = useParams();
 
   const [postDetails, setPostDetails] = useState({
     title: "",
-    message: "",
+    message: "", 
+    user_id: id
   });
 
   const handleChange = (e) => {
@@ -20,27 +21,24 @@ function BarangayAddPost({ setAddPost }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:3001/post/add', {
-        method: 'POST',
+      const response = await fetch(`http://localhost:3001/post/add/${id}`, {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(postDetails)
+        body: JSON.stringify(postDetails),
       });
 
       if (response.status === 200) {
-        alert('Data inserted successfully');
-        return location.href = "/root/:id/dashboard"
+        alert("Data inserted successfully");
+        return (location.href = `/root/${id}/dashboard`);
       } else {
-        alert('Error inserting data');
+        alert("Error inserting data");
       }
     } catch (error) {
-      console.error('Error:', error);
+      console.error("Error:", error);
     }
-
-
   };
-
 
   console.log(postDetails);
   return (
@@ -61,7 +59,7 @@ function BarangayAddPost({ setAddPost }) {
             name="title"
             id="title"
           />
-    
+
           <textarea
             className="bg-gray-100 sec p-3 h-60 border border-gray-300 outline-none mt-4 text-1xl btnRadius"
             spellCheck="false"
@@ -70,20 +68,16 @@ function BarangayAddPost({ setAddPost }) {
             name="message"
             id="message"
           ></textarea>
-        
 
           <div className="flex justify-between gap-1 mt-4">
             <button
-             className="cancelBtn btnRadius"
+              className="cancelBtn btnRadius"
               type="button"
               onClick={() => setAddPost(false)}
             >
               Cancel
             </button>
-            <button
-              className="btnRadius btn"
-              type="submit"
-            >
+            <button className="btnRadius btn" type="submit">
               Post
             </button>
           </div>

@@ -1,8 +1,8 @@
-import { FaFemale } from "react-icons/fa";
+import { HiDocument } from "react-icons/hi";
 import { useEffect, useState } from "react";
 
 const chartLoader = async () => {
-  const response = await fetch( "http://localhost:3001/chart/documents");
+  const response = await fetch("http://localhost:3001/chart/documents");
   const barangayClearanceData = await response.json();
   return barangayClearanceData;
 };
@@ -23,7 +23,7 @@ export default function NumberOfbarangayClearance() {
       ))}
 
       <div>
-        <FaFemale className="imageChart" />
+        <HiDocument size={55} />
         <p>Barangay Clearance</p>
       </div>
     </div>

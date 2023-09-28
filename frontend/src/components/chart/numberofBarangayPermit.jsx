@@ -1,4 +1,4 @@
-import { FaFemale } from "react-icons/fa";
+import { HiDocument } from "react-icons/hi";
 import { useEffect, useState } from "react";
 
 const chartLoader = async () => {
@@ -23,7 +23,7 @@ export default function NumberOfbarangayPermit() {
       ))}
 
       <div>
-        <FaFemale className="imageChart" />
+        <HiDocument size={55} />
         <p>Barangay Permit</p>
       </div>
     </div>

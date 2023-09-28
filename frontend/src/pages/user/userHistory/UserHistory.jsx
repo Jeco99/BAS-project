@@ -1,14 +1,23 @@
-import { useLoaderData } from "react-router-dom";
+import { useState, useEffect } from "react";
 import { convertTo12HoursFormat } from "../../../utils/timeConversion";
+import { useParams } from "react-router-dom";
 
-export const historyLoader = async () => {
-  const response = await fetch("http://localhost:3001/history");
+const historyLoader = async (id) => {
+  const response = await fetch(`http://localhost:3001/history/user/${id}`);
   const completedStatusData = await response.json();
   return completedStatusData;
 };
 
-export default function History() {
-  const historyData = useLoaderData();
+export default function UserHistory() {
+  const [data, setData] = useState([]);
+  const { id } = useParams();
+  useEffect(() => {
+    async function init() {
+      const data = await historyLoader(id);
+      setData(data);
+    }
+    init();
+  }, []);
   return (
     <div className="main-container">
       <h1 className="main-title">History</h1>
@@ -26,14 +35,12 @@ export default function History() {
             </tr>
           </thead>
           <tbody className="text-lg">
-            {historyData.map((item) => (
+            {data.map((item) => (
               <tr key={item.appointment_id}>
-                <td className="border px-4 py-2">{`${item.appointment_date_created.substr(
+                <td className="border px-4 py-2">{`${item.approval_date_created.substr(
                   0,
                   10
-                )} ${convertTo12HoursFormat(
-                  item.appointment_time_created
-                )}`}</td>
+                )} ${convertTo12HoursFormat(item.approval_time_created)}`}</td>
                 <td className="border px-4 py-2">{item.fullname}</td>
                 <td className="border px-4 py-2">{item.request_type}</td>
                 <td className="border px-4 py-2">{item.appointment_time}</td>

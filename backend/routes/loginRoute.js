@@ -16,7 +16,7 @@ logInRouter.post("/", async (req, res) => {
     if(password != logInData[0].password){
         return res.status(401).json({message: "Invalid credentials"});
     }
-    console.log(logInData)
+    // console.log(logInData)
     res
       .status(200)
       .send(logInData[0]);

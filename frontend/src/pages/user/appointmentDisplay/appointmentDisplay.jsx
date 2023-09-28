@@ -1,19 +1,19 @@
 import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { useNavigate } from "react-router-dom";
 
 import FormLabel from "../../../components/label/formLabel";
-
+import { useParams } from "react-router-dom";
 
 
 export default function AppointmentDisplay() {
-  const navigate = useNavigate();
   const [startDate, setStartDate] = useState(new Date());
   const [request, setRequest] = useState("");
   const [purpose, setPurpose] = useState("");
   const [selectTime, setSelectTime] = useState("");
   const [showModal, setShowModal] = useState(false);
+  const { id } = useParams();
+
 
   const handleDateChange = (date) => {
     setStartDate(date);
@@ -30,7 +30,7 @@ export default function AppointmentDisplay() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await fetch("http://localhost:3001/appointment/create", {
+    await fetch(`http://localhost:3001/appointment/create/:${id}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -40,10 +40,11 @@ export default function AppointmentDisplay() {
         purpose: purpose,
         appointment_time: selectTime,
         appointment_date: startDate.toDateString(),
+        user_id: id
       }),
     });
-
-    return (window.location.href = "/root/appointment");
+    
+    return window.location.href = `/root/${id}/appointment`
   };
 
   const closeModal = () => {
