@@ -13,7 +13,7 @@ import Post from "../../../components/post/post";
 import { useParams } from "react-router-dom";
 
 const userDetails_Selected_Loader = async (id) => {
-  const response = await fetch("http://localhost:3001/root/" + id);
+  const response = await fetch(`http://localhost:3001/root/${id}`);
   const userDetails_data = await response.json();
   return userDetails_data;
 };
@@ -30,7 +30,7 @@ export default function UserDashboard() {
     init();
   }, []);
 
-  console.log(data);
+  // console.log(data);
   return (
     <div className="main-container">
       <div>

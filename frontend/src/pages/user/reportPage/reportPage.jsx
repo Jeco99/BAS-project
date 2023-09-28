@@ -1,22 +1,30 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { CgSearch } from "react-icons/cg";
 import { Input } from "@material-tailwind/react";
 import ActionButton from "./actionButton";
-import { useLoaderData } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { convertTo12HoursFormat } from "../../../utils/timeConversion";
 
 
-
-export const appointmentLoader = async () =>{
-  const response = await fetch("http://localhost:3001/appointment");
+const appointmentLoader = async (id) =>{
+  const response = await fetch(`http://localhost:3001/appointment/${id}`);
   const appointmentData = await response.json();
   return appointmentData
 }
 
 function ReportPage() {
-  const appointData = useLoaderData();
+  const [data, setData] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [filterValue, setFilterValue] = useState("all");
+  const { id } = useParams();
+
+  useEffect(() => {
+    async function init() {
+      const data = await appointmentLoader(id);
+      setData(data);
+    }
+    init();
+  }, []);
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value.toLowerCase());
@@ -103,7 +111,7 @@ function ReportPage() {
             </tr>
           </thead>
           <tbody className="text-lg">
-            {appointData.map((item) => (
+            {data.map((item) => (
               <tr key={item.appointment_id}>
                 <td className="border px-4 py-2">{`${item.appointment_date_created.substr(0,10)} ${convertTo12HoursFormat(item.appointment_time_created)}`}</td>
                 <td className="border px-4 py-2">{item.fullname}</td>

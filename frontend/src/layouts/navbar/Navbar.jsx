@@ -55,9 +55,11 @@ export default function NavbarComponent({ setOpen, data }) {
             <span className="truncate text-sm font-medium">{data.email}</span>
           </Dropdown.Header>
           <Dropdown.Item>
-            <NavLink to={"/"} className="link sidebar-button">
-              Sign Out
-            </NavLink>
+            <div className="m-auto">
+              <NavLink to={"/"} className="link sidebar-button">
+                Sign Out
+              </NavLink>
+            </div>
           </Dropdown.Item>
         </Dropdown>
       </div>

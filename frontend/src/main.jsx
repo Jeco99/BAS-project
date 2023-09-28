@@ -11,9 +11,9 @@ import RootLayout from "./layouts/Layout";
 import Root from "./layouts/Root";
 
 import AppointmentDisplay from "./pages/user/appointmentDisplay/appointmentDisplay";
-import History, { historyLoader } from "./pages/user/userHistory/history";
+import History from "./pages/user/userHistory/history";
 import UserDashboard from "./pages/user/userDashboard/userDashboard";
-import Report, { appointmentLoader } from "./pages/user/reportPage/reportPage";
+import Report from "./pages/user/reportPage/reportPage";
 import UserSettings from "./pages/settings/user/UserSetting";
 
 
@@ -44,7 +44,6 @@ const router = createBrowserRouter([
       },
       {
         path: "report",
-        loader: appointmentLoader,
         element: <Report />,
       },
       {
@@ -53,7 +52,6 @@ const router = createBrowserRouter([
       },
       {
         path: "history",
-        loader: historyLoader,
         element: <History />,
       },
       {
