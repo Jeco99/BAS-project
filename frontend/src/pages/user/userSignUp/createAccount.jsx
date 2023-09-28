@@ -15,8 +15,10 @@ import {
   cities,
   barangays,
 } from "select-philippines-address";
+import { useNavigate } from "react-router-dom";
 
 export default function CreateAccount() {
+  const navigate = useNavigate();
   const [getData, setGetData] = useState({
     user_type: '',    
     user_image: '',
@@ -141,14 +143,22 @@ export default function CreateAccount() {
     formdata.append("zipcode",getData.zipcode);
   
 
-   await fetch('http://localhost:3001/createaccount/create', {
+   const response = await fetch('http://localhost:3001/createaccount/create', {
         method: 'POST',
         body: formdata
       });
-
+    const result = await response.json();
+    const path = result[0].user_id;
+    if(response.status == 200){
+      navigate(`/root/${path}`)
+    }
+    else{
+      alert('Can\'t be found');
+    }
+    
   };
 
-  console.log(getData);
+  // console.log(getData);
   return (
     <div className="m-5 md:mx-[6rem] lg:mx-[15rem] 2xl:mx-[30rem]">
       <div className="flex items-center justify-between">
