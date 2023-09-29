@@ -40,7 +40,7 @@ export default function Post() {
             {items.post_date_created.substr(0, 10)} |{" "}
             {convertTo12HoursFormat(items.post_time_created)}
             <div className="absolute right-0 top-0 mb-8 flex px-2 rounded-md">
-              <DashboardMenuBtn />
+              <DashboardMenuBtn post_id={items.post_id}/>
             </div>
           </h6>
           <p className="text-sm sm:text-base">{items.description}</p>

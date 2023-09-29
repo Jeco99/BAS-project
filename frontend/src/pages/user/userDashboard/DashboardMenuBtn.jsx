@@ -1,18 +1,17 @@
-import {useState} from 'react';
-import IconButton from '@mui/material/IconButton';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import { useState } from "react";
+import IconButton from "@mui/material/IconButton";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import EditPost from "./editpost";
 
-const options = [
-  'Edit',
-  'Delete'
-];
+const options = ["Edit", "Delete"];
 
-
-export default function DashboardMenuBtn() {
+export default function DashboardMenuBtn({ post_id }) {
   const [anchorEl, selector] = useState(null);
+  const [isEditModalOpen, setEditModalOpen] = useState(false);
   const open = Boolean(anchorEl);
+
   const handleClick = (event) => {
     selector(event.currentTarget);
   };
@@ -20,40 +19,52 @@ export default function DashboardMenuBtn() {
     selector(null);
   };
 
-  const handleEditBtn = (id) => {
-    
+  const handleEditBtn = () => {
+    setEditModalOpen(true);
   };
 
-  const handleDeleteBtn = (id) => {
+  const handleDeleteBtn = async () => {
 
+    try {
+    await fetch(`http://localhost:3001/post/delete/${post_id}`, {
+        method: "DELETE",
+      });
+
+     
+      return (location.href = `/root/${id}/dashboard`);
+      
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   return (
     <div>
       <IconButton
-        id=""
-        aria-controls={open ? 'long-menu' : undefined}
-        aria-expanded={open ? 'true' : undefined}
+        id="ellipsisBtn"
+        aria-controls={open ? "long-menu" : undefined}
+        aria-expanded={open ? "true" : undefined}
         aria-haspopup="true"
         onClick={handleClick}
       >
         <MoreHorizIcon />
       </IconButton>
       <Menu
-        id=""
+        id="long-menu"
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
       >
         {options.map((option) => (
-          <MenuItem key={option} selected={option === ''} onClick={handleClose}>
-            <button type="button">
+          <MenuItem
+            key={option}
+            onClick={option == "Edit" ? handleEditBtn : handleDeleteBtn}
+          >
             {option}
-            </button>
-            
           </MenuItem>
         ))}
       </Menu>
+      {isEditModalOpen && <EditPost post_id={post_id} />}
     </div>
   );
 }

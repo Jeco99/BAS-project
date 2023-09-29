@@ -7,7 +7,6 @@ DROP CONSTRAINT fk_user_details CASCADE;
 
 DROP TABLE IF EXISTS user_details;
 DROP TABLE IF EXISTS appointment;
-DROP TABLE IF EXISTS request;
 DROP TABLE IF EXISTS post;
 DROP TABLE IF EXISTS notification;
 
@@ -188,6 +187,7 @@ CREATE TABLE post(
   title VARCHAR(255) NOT NULL,
   description TEXT NOT NULL,
   post_time_date_created TIMESTAMP NOT NULL DEFAULT now(),
+  update_time_date_created TIMESTAMP NOT NULL DEFAULT now(),
   user_id INT NOT NULL
 );
 
