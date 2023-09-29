@@ -8,7 +8,8 @@ postRouter.get("/:id", async (req, res) => {
     const { id } = req.params;
     const filterAdminBrgy =
       await sql`SELECT barangay FROM user_details WHERE user_id = ${id}`;
-    const postData = await sql`SELECT 
+    const postData = await sql`SELECT
+    post.post_id AS post_id, 
     post.title AS title,
     post.description AS description,
     DATE( post_time_date_created) AS post_date_created,
@@ -37,17 +38,26 @@ postRouter.post("/add/:id", async (req, res) => {
   }
 });
 
-// postRouter.put("/update/:id", async(req, res) => {
-//   try{
-//     const { id } = req.params;
-//     const {title, message, user_id} =req.body;
-//     const updatePost = await sql `UPDATE post SET "title" = ${title}, "description"=${message}, "user_id"=${user_id} WHERE post_id = ${id}`;
-//     res.json(updatePost);
-//     console.log(updatePost);
-//     console.log(id);
-//   } catch(err){
-//     console.error(err.message);
-//   }
-// })
+postRouter.put("/update/:id", async(req, res) => {
+  try{
+    const { id } = req.params;
+    const {title, message, user_id} =req.body;
+    await sql `UPDATE post SET "title" = ${title}, "description"=${message}, "user_id"=${user_id} WHERE post_id = ${id}`;
+    res.send({'message':'Successfully Update'});
+  } catch(err){
+    console.error(err.message);
+  }
+})
+
+postRouter.delete("/delete/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    await  sql`DELETE FROM post WHERE post_id = ${id}`;
+    res.json("User was deleted!");
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
 
 export default postRouter;
