@@ -104,6 +104,7 @@ function ReportPage() {
               <th className="px-4 py-2">Name</th>
               <th className="px-4 py-2">Type of Request</th>
               <th className="px-4 py-2">Appointment Time</th>
+              <th className="px-4 py-2">Appointment Date</th>
               <th className="px-4 py-2">Purpose</th>
               <th className="px-4 py-2">Action</th>
               <th className="px-4 py-2">Status</th>
@@ -117,6 +118,7 @@ function ReportPage() {
                 <td className="border px-4 py-2">{item.fullname}</td>
                 <td className="border px-4 py-2">{item.request_type}</td>
                 <td className="border px-4 py-2">{item.appointment_time}</td>
+                <td className="border px-4 py-2">{item.appointment_date}</td>
                 <td className="border px-4 py-2">{item.purpose}</td>
                 <td className="border">
                   <ActionButton id={item.appointment_id} />
