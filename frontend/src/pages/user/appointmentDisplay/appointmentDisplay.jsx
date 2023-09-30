@@ -4,16 +4,23 @@ import "react-datepicker/dist/react-datepicker.css";
 
 import FormLabel from "../../../components/label/formLabel";
 import { useParams } from "react-router-dom";
+import { appointmentDataValidation } from "../../../utils/appointment_dataValidation";
 
+import { getTomorrowDate, DateFormatted } from "../../../utils/dateConversion";
 
 export default function AppointmentDisplay() {
-  const [startDate, setStartDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(getTomorrowDate());
   const [request, setRequest] = useState("");
   const [purpose, setPurpose] = useState("");
   const [selectTime, setSelectTime] = useState("");
   const [showModal, setShowModal] = useState(false);
   const { id } = useParams();
 
+  const [errors, setErrors] = useState({
+    request: "",
+    purpose: "",
+    selectTime: "",
+  });
 
   const handleDateChange = (date) => {
     setStartDate(date);
@@ -24,8 +31,12 @@ export default function AppointmentDisplay() {
     return day !== 0 && day !== 6;
   };
 
-  const handleShowModal = () => {
-    setShowModal(true);
+  const handleShowModal = (e) => {
+    e.preventDefault();
+    if (request != "" && purpose != "" && selectTime != "") {
+      setShowModal(true);
+    }
+    appointmentDataValidation(errors, request, purpose, selectTime, setErrors);
   };
 
   const handleSubmit = async (e) => {
@@ -40,11 +51,11 @@ export default function AppointmentDisplay() {
         purpose: purpose,
         appointment_time: selectTime,
         appointment_date: startDate.toDateString(),
-        user_id: id
+        user_id: id,
       }),
     });
-    
-    return window.location.href = `/root/${id}/appointment`
+
+    return (window.location.href = `/root/${id}/appointment`);
   };
 
   const closeModal = () => {
@@ -70,6 +81,7 @@ export default function AppointmentDisplay() {
             <option value="Barangay Certificate">Barangay Certificate</option>
             <option value="Barangay Permit">Barangay Permit</option>
           </select>
+          {errors.request && <small>Request is required!</small>}
         </div>
 
         <div>
@@ -82,6 +94,7 @@ export default function AppointmentDisplay() {
             value={purpose}
             onChange={(e) => setPurpose(e.target.value)}
           ></textarea>
+          {errors.purpose && <small>Purpose is required!</small>}
         </div>
         <div>
           <FormLabel
@@ -108,6 +121,7 @@ export default function AppointmentDisplay() {
             <option>3:00 - 4:00</option>
             <option>4:00 - 5:00</option>
           </select>
+          {errors.selectTime && <small>Time is required!</small>}
         </div>
         <div>
           <FormLabel
@@ -127,6 +141,7 @@ export default function AppointmentDisplay() {
             className="inputText"
             required
           />
+          {/* {errors.request && <small>Region is required!</small>} */}
         </div>
         <div>
           <button
@@ -150,7 +165,7 @@ export default function AppointmentDisplay() {
             <p>Request: {request}</p>
             <p>Purpose: {purpose}</p>
             <p>Time: {selectTime}</p>
-            <p>Date: {startDate.toDateString()}</p>
+            <p>Date: {DateFormatted(startDate)}</p>
             <div className="pt-8 flex">
               <button
                 type="button"
