@@ -1,18 +1,39 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ImageUpload from "../../../components/imageUpload/imageUpload";
 
 import commonInputFormData from "../../../components/input/commonInputFormData";
 import FormInput from "../../../components/input/formInput";
 
+import { useParams } from "react-router-dom";
+import { dataValidation } from "../../../utils/createAccount_dataValidation";
+import { useNavigate } from "react-router-dom";
+
+const userDetails_Selected_Loader = async (id) => {
+  const response = await fetch("http://localhost:3001/root/fetch/" + id);
+  const userDetails_data = await response.json();
+  return userDetails_data;
+};
+
 export default function UpdateUserAccount() {
+  const { id } = useParams();
+  const navigate = useNavigate();
   const [getData, setGetData] = useState({
     user_image: "",
     user_name: "",
     email: "",
     password: "",
     confirmpassword: "",
-    contactnumber: "",
+    contactnumber: ""
   });
+
+  useEffect(() => {
+    async function init() {
+      const data = await userDetails_Selected_Loader(id);
+      setGetData(data);
+    }
+    init();
+  }, []);
+  // console.log(getData);
 
   const [errors, setErrors] = useState({
     user_image: null,
@@ -31,55 +52,30 @@ export default function UpdateUserAccount() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
 
-    let newErrors = { ...errors };
+    dataValidation(getData, setErrors, errors);
+    const formdata = new FormData();
 
-    if (getData.user_image == "") {
-      newErrors.user_image = "Set user_image";
-    } else {
-      newErrors.user_image = "";
+    formdata.append("user_image",getData.user_image);
+    formdata.append("user_name",getData.user_name);
+    formdata.append("email",getData.email);
+    formdata.append("password",getData.password);
+    formdata.append("contactnumber",getData.contactnumber);
+
+    const response = await fetch(`http://localhost:3001/root/update/useraccount/${id}`, {
+        method: 'PUT',
+        body: formdata
+      });
+    if(response.status == 200){
+      navigate(`/root/${id}`)
     }
-
-    if (getData.user_name.trim() == "") {
-      newErrors.user_name = "Set user_name";
-    } else {
-      newErrors.user_name = "";
+    else{
+      alert('Can\'t be found');
     }
+    
 
-    if (getData.email.trim() == "") {
-      newErrors.email = "Set Email";
-    } else {
-      newErrors.email = "";
-    }
-
-    if (getData.password != getData.confirmpassword) {
-      alert("password not match!");
-    }
-
-    if (getData.password.trim() == "") {
-      newErrors.password = "Set Password";
-    } else {
-      newErrors.password = "";
-    }
-
-    if (getData.confirmpassword.trim() == "") {
-      newErrors.confirmpassword = "Set Confirm Password";
-    } else {
-      newErrors.confirmpassword = "";
-    }
-
-    setErrors(newErrors);
-
-    if (
-      errors.user_image === "" &&
-      errors.email === "" &&
-      errors.password === "" &&
-      errors.confirmpassword === ""
-    ) {
-      alert("Form Submitted");
-    }
   };
   return (
     <div className="block mt-8 p-6 bg-white border border-gray-200 rounded-lg shadow">

@@ -1,5 +1,3 @@
-//fix the router setup
-
 import express from "express";
 import sql from "../config/db.js";
 import multer from "multer";
