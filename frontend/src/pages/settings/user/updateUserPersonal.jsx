@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import {
   regions,
   provinces,
@@ -12,8 +13,18 @@ import accountInputFormData from "../../../components/input/accountInputFormData
 
 import CivilStatusDropdown from "../../../components/dropdown/civilstatusDropdown";
 import GenderDropdown from "../../../components/dropdown/genderDropdown";
+import { dataValidation } from "../../../utils/createAccount_dataValidation";
+import { useNavigate } from "react-router-dom";
+
+const userDetails_Selected_Loader = async (id) => {
+  const response = await fetch("http://localhost:3001/root/fetch/" + id);
+  const userDetails_data = await response.json();
+  return userDetails_data;
+};
 
 export default function UpdatePersonalAccount() {
+  const { id } = useParams();
+  const navigate = useNavigate();
   const [getData, setGetData] = useState({
     first_name: "",
     middle_name: "",
@@ -28,8 +39,18 @@ export default function UpdatePersonalAccount() {
     barangay: "",
     zone: "",
     street: "",
-    zipcode: "",
+    zipcode: ""
   });
+
+  useEffect(() => {
+    async function init() {
+      const data = await userDetails_Selected_Loader(id);
+      setGetData(data);
+    }
+    init();
+  }, []);
+
+  // console.log(getData);
 
   const [errors, setErrors] = useState({
     first_name: null,
@@ -66,6 +87,7 @@ export default function UpdatePersonalAccount() {
     });
   };
 
+
   const province = (e) => {
     setGetData({ ...getData, ["region"]: e.target.selectedOptions[0].text });
     provinces(e.target.value).then((response) => {
@@ -96,108 +118,24 @@ export default function UpdatePersonalAccount() {
   useEffect(() => {
     region();
   }, []);
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    dataValidation(getData, setErrors, errors);
 
-    let newErrors = { ...errors };
-
-    if (getData.first_name.trim() == "") {
-      newErrors.first_name = "Set first_name";
-    } else {
-      newErrors.first_name = "";
-    }
-
-    if (getData.middle_name.trim() == "") {
-      newErrors.middle_name = "Set middle_name";
-    } else {
-      newErrors.middle_name = "";
-    }
-
-    if (getData.last_name.trim() == "") {
-      newErrors.last_name = "Set last_name";
-    } else {
-      newErrors.last_name = "";
-    }
-
-    if (getData.date_of_birth.trim() == "") {
-      newErrors.date_of_birth = "Set Birthday";
-    } else {
-      newErrors.date_of_birth = "";
-    }
-
-    if (getData.sex.trim() == "") {
-      newErrors.sex = "Set Sex";
-    } else {
-      newErrors.sex = "";
-    }
-
-    if (getData.civilstatus.trim() == "") {
-      newErrors.civilstatus = "Set Civil Status";
-    } else {
-      newErrors.civilstatus = "";
-    }
-
-    if (getData.region.trim() == "") {
-      newErrors.region = "Set Region";
-    } else {
-      newErrors.region = "";
-    }
-
-    if (getData.province.trim() == "") {
-      newErrors.province = "Set Province";
-    } else {
-      newErrors.province = "";
-    }
-
-    if (getData.municipal.trim() == "") {
-      newErrors.municipal = "Set Municipal";
-    } else {
-      newErrors.municipal = "";
-    }
-
-    if (getData.barangay.trim() == "") {
-      newErrors.barangay = "Set Barangay";
-    } else {
-      newErrors.barangay = "";
-    }
-
-    if (getData.zone.trim() == "") {
-      newErrors.zone = "Set Zone";
-    } else {
-      newErrors.zone = "";
-    }
-
-    if (getData.street.trim() == "") {
-      newErrors.street = "Set Street";
-    } else {
-      newErrors.street = "";
-    }
-
-    if (getData.zipcode.trim() == "") {
-      newErrors.zipcode = "Set Zipcode";
-    } else {
-      newErrors.zipcode = "";
-    }
-
-    setErrors(newErrors);
-
-    if (
-      errors.first_name === "" &&
-      errors.middle_name === "" &&
-      errors.last_name === "" &&
-      errors.sex === "" &&
-      errors.date_of_birth === "" &&
-      errors.region === "" &&
-      errors.civilstatus === "" &&
-      errors.barangay === "" &&
-      errors.municipal === "" &&
-      errors.province === "" &&
-      errors.zone === "" &&
-      errors.street === "" &&
-      errors.zipcode === ""
-    ) {
-      alert("Form Submitted");
-    }
+    const response = await fetch(`http://localhost:3001/root/update/userpersonal/${id}`, {
+      method: 'PUT',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(getData),
+    });
+  if(response.status == 200){
+    navigate(`/root/${id}`)
+  }
+  else{
+    alert('Can\'t be found');
+  }
+    
   };
   return (
     <div className="block mt-8 p-6 bg-white border border-gray-200 rounded-lg shadow">
@@ -230,7 +168,8 @@ export default function UpdatePersonalAccount() {
                 onSelect={region}
                 className="inputText"
               >
-                <option>Select Region</option>
+                
+                <option>{getData == "" ? 'Select Region' : getData.region}</option>
                 {regionData &&
                   regionData.length > 0 &&
                   regionData.map((item) => (
@@ -248,7 +187,7 @@ export default function UpdatePersonalAccount() {
                 showRequired={true}
               />
               <select onChange={municipal} className="inputText">
-                <option>Select Province</option>
+                <option>{getData == "" ? 'Select Province' : getData.province}</option>
                 {provinceData &&
                   provinceData.length > 0 &&
                   provinceData.map((item) => (
@@ -266,7 +205,7 @@ export default function UpdatePersonalAccount() {
                 showRequired={true}
               />
               <select onChange={barangay} className="inputText">
-                <option>Select Municipal</option>
+                <option>{getData == "" ? 'Select Municipal' : getData.municipal}</option>
                 {cityData &&
                   cityData.length > 0 &&
                   cityData.map((item) => (
@@ -284,7 +223,7 @@ export default function UpdatePersonalAccount() {
                 showRequired={true}
               />
               <select onChange={brgy} className="inputText">
-                <option>Select Barangay</option>
+                <option>{getData == "" ? 'Select Barangay' : getData.barangay}</option>
                 {barangayData &&
                   barangayData.length > 0 &&
                   barangayData.map((item) => (
@@ -299,6 +238,9 @@ export default function UpdatePersonalAccount() {
             <div>
               <FormLabel labelName="Zone" id="zone" showRequired={true} />
               <input
+                id="zone"
+                name="zone"
+                value={getData['zone']}
                 type="text"
                 className="inputText"
                 onChange={handleChange}
@@ -308,7 +250,10 @@ export default function UpdatePersonalAccount() {
             <div>
               <FormLabel labelName="Street" id="street" showRequired={true} />
               <input
+                id="street"
+                name="street"
                 type="text"
+                value={getData['street']}
                 className="inputText"
                 onChange={handleChange}
               />
@@ -318,7 +263,10 @@ export default function UpdatePersonalAccount() {
             <div>
               <FormLabel labelName="Zipcode" id="zipcode" showRequired={true} />
               <input
+                id="zipcode"
+                name="zipcode"
                 type="number"
+                value={getData['zipcode']}
                 className="inputText"
                 onChange={handleChange}
               />

@@ -6,12 +6,25 @@ import {
   barangays,
 } from "select-philippines-address";
 
+import commonInputFormData from "../../../components/input/commonInputFormData";
+
 import FormInput from "../../../components/input/formInput";
 import FormLabel from "../../../components/label/formLabel";
 import ImageUpload from "../../../components/imageUpload/imageUpload";
-import accountInputFormData from "../../../components/input/accountInputFormData";
+
+import { useParams } from "react-router-dom";
+import { dataValidation } from "../../../utils/createAccount_dataValidation";
+import { useNavigate } from "react-router-dom";
+
+const userDetails_Selected_Loader = async (id) => {
+  const response = await fetch("http://localhost:3001/root/fetch/" + id);
+  const userDetails_data = await response.json();
+  return userDetails_data;
+};
 
 export default function UpdateAdminAccount() {
+  const { id } = useParams();
+  const navigate = useNavigate();
   const [getData, setGetData] = useState({
     user_image: "",
     user_name: "",
@@ -19,13 +32,6 @@ export default function UpdateAdminAccount() {
     password: "",
     confirmpassword: "",
     contactnumber: "",
-    first_name: "",
-    middle_name: "",
-    last_name: "",
-    suffix: "",
-    date_of_birth: "",
-    sex: "",
-    civilstatus: "",
     region: "",
     province: "",
     municipal: "",
@@ -35,18 +41,20 @@ export default function UpdateAdminAccount() {
     zipcode: "",
   });
 
+  useEffect(() => {
+    async function init() {
+      const data = await userDetails_Selected_Loader(id);
+      setGetData(data);
+    }
+    init();
+  }, []);
+
   const [errors, setErrors] = useState({
     user_image: null,
     user_name: null,
     email: null,
     password: null,
     confirmpassword: null,
-    first_name: null,
-    middle_name: null,
-    last_name: null,
-    date_of_birth: null,
-    sex: null,
-    civilstatus: null,
     province: null,
     municipal: null,
     barangay: null,
@@ -105,158 +113,47 @@ export default function UpdateAdminAccount() {
   useEffect(() => {
     region();
   }, []);
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
+    dataValidation(getData, setErrors, errors);
+    const formdata = new FormData();
 
-    let newErrors = { ...errors };
-
-    if (getData.user_image == "") {
-      newErrors.user_image = "Set user_image";
-    } else {
-      newErrors.user_image = "";
+    formdata.append("user_image",getData.user_image);
+    formdata.append("user_name",getData.user_name);
+    formdata.append("email",getData.email);
+    formdata.append("password",getData.password);
+    formdata.append("contactnumber",getData.contactnumber);
+    formdata.append("region",getData.region);
+    formdata.append("province",getData.province);
+    formdata.append("municipal",getData.municipal);
+    formdata.append("barangay",getData.barangay);
+    formdata.append("zone",getData.zone);
+    formdata.append("street",getData.street);
+    formdata.append("zipcode",getData.zipcode);
+    const response = await fetch(`http://localhost:3001/root/update/adminaccount/${id}`, {
+        method: 'PUT',
+        body: formdata
+      });
+    if(response.status == 200){
+      navigate(`/root/${id}`)
     }
-
-    if (getData.user_name.trim() == "") {
-      newErrors.user_name = "Set user_name";
-    } else {
-      newErrors.user_name = "";
+    else{
+      alert('Can\'t be found');
     }
-
-    if (getData.email.trim() == "") {
-      newErrors.email = "Set Email";
-    } else {
-      newErrors.email = "";
-    }
-
-    if (getData.password != getData.confirmpassword) {
-      alert("password not match!");
-    }
-
-    if (getData.password.trim() == "") {
-      newErrors.password = "Set Password";
-    } else {
-      newErrors.password = "";
-    }
-
-    if (getData.confirmpassword.trim() == "") {
-      newErrors.confirmpassword = "Set Confirm Password";
-    } else {
-      newErrors.confirmpassword = "";
-    }
-
-    if (getData.first_name.trim() == "") {
-      newErrors.first_name = "Set first_name";
-    } else {
-      newErrors.first_name = "";
-    }
-
-    if (getData.middle_name.trim() == "") {
-      newErrors.middle_name = "Set middle_name";
-    } else {
-      newErrors.middle_name = "";
-    }
-
-    if (getData.last_name.trim() == "") {
-      newErrors.last_name = "Set last_name";
-    } else {
-      newErrors.last_name = "";
-    }
-
-    if (getData.date_of_birth.trim() == "") {
-      newErrors.date_of_birth = "Set Birthday";
-    } else {
-      newErrors.date_of_birth = "";
-    }
-
-    if (getData.sex.trim() == "") {
-      newErrors.sex = "Set Sex";
-    } else {
-      newErrors.sex = "";
-    }
-
-    if (getData.civilstatus.trim() == "") {
-      newErrors.civilstatus = "Set Civil Status";
-    } else {
-      newErrors.civilstatus = "";
-    }
-
-    if (getData.region.trim() == "") {
-      newErrors.region = "Set Region";
-    } else {
-      newErrors.region = "";
-    }
-
-    if (getData.province.trim() == "") {
-      newErrors.province = "Set Province";
-    } else {
-      newErrors.province = "";
-    }
-
-    if (getData.municipal.trim() == "") {
-      newErrors.municipal = "Set Municipal";
-    } else {
-      newErrors.municipal = "";
-    }
-
-    if (getData.barangay.trim() == "") {
-      newErrors.barangay = "Set Barangay";
-    } else {
-      newErrors.barangay = "";
-    }
-
-    if (getData.zone.trim() == "") {
-      newErrors.zone = "Set Zone";
-    } else {
-      newErrors.zone = "";
-    }
-
-    if (getData.street.trim() == "") {
-      newErrors.street = "Set Street";
-    } else {
-      newErrors.street = "";
-    }
-
-    if (getData.zipcode.trim() == "") {
-      newErrors.zipcode = "Set Zipcode";
-    } else {
-      newErrors.zipcode = "";
-    }
-
-    setErrors(newErrors);
-
-    if (
-      errors.user_image === "" &&
-      errors.email === "" &&
-      errors.password === "" &&
-      errors.confirmpassword === "" &&
-      errors.first_name === "" &&
-      errors.middle_name === "" &&
-      errors.last_name === "" &&
-      errors.sex === "" &&
-      errors.date_of_birth === "" &&
-      errors.region === "" &&
-      errors.civilstatus === "" &&
-      errors.barangay === "" &&
-      errors.municipal === "" &&
-      errors.province === "" &&
-      errors.zone === "" &&
-      errors.street === "" &&
-      errors.zipcode === ""
-    ) {
-      alert("Form Submitted");
-    }
+    
   };
+  console.log(getData);
   return (
     <div className="block mt-8 p-6 bg-white border border-gray-200 rounded-lg shadow">
       <div className="w-full">
         <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
-        <ImageUpload
+          <ImageUpload
             getData={getData}
             setGetData={setGetData}
             errors={errors}
           />
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-            {accountInputFormData.map((formElements) => (
+            {commonInputFormData.map((formElements) => (
               <FormInput
                 key={formElements.id}
                 id={formElements.id}
@@ -276,7 +173,9 @@ export default function UpdateAdminAccount() {
                 onSelect={region}
                 className="inputText"
               >
-                <option>Select Region</option>
+                <option>
+                  {getData == "" ? "Select Region" : getData.region}
+                </option>
                 {regionData &&
                   regionData.length > 0 &&
                   regionData.map((item) => (
@@ -294,7 +193,9 @@ export default function UpdateAdminAccount() {
                 showRequired={true}
               />
               <select onChange={municipal} className="inputText">
-                <option>Select Province</option>
+                <option>
+                  {getData == "" ? "Select Province" : getData.province}
+                </option>
                 {provinceData &&
                   provinceData.length > 0 &&
                   provinceData.map((item) => (
@@ -312,7 +213,9 @@ export default function UpdateAdminAccount() {
                 showRequired={true}
               />
               <select onChange={barangay} className="inputText">
-                <option>Select Municipal</option>
+                <option>
+                  {getData == "" ? "Select Municipal" : getData.municipal}
+                </option>
                 {cityData &&
                   cityData.length > 0 &&
                   cityData.map((item) => (
@@ -330,7 +233,9 @@ export default function UpdateAdminAccount() {
                 showRequired={true}
               />
               <select onChange={brgy} className="inputText">
-                <option>Select Barangay</option>
+                <option>
+                  {getData == "" ? "Select Barangay" : getData.barangay}
+                </option>
                 {barangayData &&
                   barangayData.length > 0 &&
                   barangayData.map((item) => (
@@ -345,6 +250,9 @@ export default function UpdateAdminAccount() {
             <div>
               <FormLabel labelName="Zone" id="zone" showRequired={true} />
               <input
+                id="zone"
+                name="zone"
+                value={getData["zone"]}
                 type="text"
                 className="inputText"
                 onChange={handleChange}
@@ -354,7 +262,10 @@ export default function UpdateAdminAccount() {
             <div>
               <FormLabel labelName="Street" id="street" showRequired={true} />
               <input
+                id="street"
+                name="street"
                 type="text"
+                value={getData["street"]}
                 className="inputText"
                 onChange={handleChange}
               />
@@ -364,7 +275,10 @@ export default function UpdateAdminAccount() {
             <div>
               <FormLabel labelName="Zipcode" id="zipcode" showRequired={true} />
               <input
+                id="zipcode"
+                name="zipcode"
                 type="number"
+                value={getData["zipcode"]}
                 className="inputText"
                 onChange={handleChange}
               />
@@ -373,7 +287,7 @@ export default function UpdateAdminAccount() {
           </div>
           <div className="flex justify-between gap-4 flex-col sm:flex-row">
             <button
-               className="cancelBtn btnRadius"
+              className="cancelBtn btnRadius"
               onClick={() => (location.href = "/")}
             >
               Back

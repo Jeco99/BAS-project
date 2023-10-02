@@ -18,7 +18,7 @@ import UserSettings from "./pages/settings/user/UserSetting";
 import AdminHistory from "./pages/user/userHistory/AdminHistory";
 import UserHistory from "./pages/user/userHistory/UserHistory";
 
-
+import AdminSettings from "./pages/settings/admin/AdminSetting";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -61,9 +61,13 @@ const router = createBrowserRouter([
         element: <UserHistory />,
       },
       {
-        path: "settings",
+        path: "usersettings",
         element: <UserSettings />,
       },
+      {
+        path:'adminsetting',
+        element: <AdminSettings />
+      }
     ],
   }
 ]);

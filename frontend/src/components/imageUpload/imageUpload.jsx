@@ -6,12 +6,15 @@ const ImageUpload = ({ getData, setGetData, errors }) => {
   return (
     <div className="flex flex-col sm:flex-row justify-center items-center space-x-8">
       <div className="my-4">
+
         <img
           alt="user photo"
           src={
-            selectedImage == null
+            getData.user_image === "" && selectedImage == null
               ? "https://static.thenounproject.com/png/4035887-200.png"
-              : URL.createObjectURL(selectedImage)
+              : getData.user_image != "" && selectedImage != null
+              ? URL.createObjectURL(selectedImage)
+              : "http://localhost:3001/static/" + getData.user_image
           }
           className="image-holder-create-account"
         />
@@ -36,9 +39,9 @@ const ImageUpload = ({ getData, setGetData, errors }) => {
           }}
         />
 
-        {/* {errors.user_image && (
+        {errors.user_image && (
           <small className="text-center">Image is required!</small>
-        )} */}
+        )}
       </div>
     </div>
   );

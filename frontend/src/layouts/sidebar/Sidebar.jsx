@@ -10,6 +10,7 @@ import { NavLink } from "react-router-dom";
 import { motion } from "framer-motion";
 import "./Sidebar.css";
 
+
 const Sidebar = ({
   open,
   setOpen,
@@ -93,7 +94,7 @@ const Sidebar = ({
               </NavLink>
             </li>
             <li>
-              <NavLink to={"settings"} className="link sidebar-button">
+              <NavLink to={data.user_type == "admin" ? "adminsetting" : "usersettings"} className="link sidebar-button">
                 <MdSettings size={35} className="min-w-max" />
                 Account Settings
               </NavLink>

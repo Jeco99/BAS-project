@@ -107,7 +107,7 @@
     newErrors.street = "";
   }
 
-  if (getData.zipcode.trim() == "") {
+  if (getData.zipcode == "") {
     newErrors.zipcode = "Set Zipcode";
   } else {
     newErrors.zipcode = "";
