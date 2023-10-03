@@ -68,9 +68,18 @@ userDetails_Router.put(
   async (req, res) => {
     try {
       const { id } = req.params;
-      const { user_name, email, password, contactnumber } = req.body;
-      await sql`UPDATE user_details SET "user_image" = ${req.file.filename}, "user_name"=${user_name}, "email"=${email}, "password"=${password}, "contact_number"=${contactnumber} WHERE user_id = ${id}`;
-      res.send({ message: "Successfully Update" });
+      const { user_name, email, password, contactnumber, user_image } =
+        req.body;
+
+      if (!req.file || !req.file.filename) {
+        let updatewithImage = sql`user_image = ${user_image}`;
+        await sql`UPDATE user_details SET ${updatewithImage}, user_name=${user_name}, email=${email}, password=${password}, contact_number=${contactnumber} WHERE user_id = ${id}`;
+        res.send({ message: "Successfully Update" });
+      } else {
+        let updatewithImage = sql`user_image = ${req.file.filename}`;
+        await sql`UPDATE user_details SET ${updatewithImage}, user_name=${user_name}, email=${email}, password=${password}, contact_number=${contactnumber} WHERE user_id = ${id}`;
+        res.send({ message: "Successfully Update" });
+      }
     } catch (err) {
       console.error(err.message);
     }
@@ -136,15 +145,30 @@ userDetails_Router.put(
         zone,
         street,
         zipcode,
+        user_image,
       } = req.body;
-      await sql`UPDATE user_details SET "user_image" = ${req.file.filename}, "user_name"=${user_name}, "email"=${email}, "password"=${password}, "contact_number"=${contactnumber}, region = ${region},
-      province = ${province},
-      municipality = ${municipal},
-      barangay = ${barangay},
-      zone = ${zone},
-      street = ${street},
-      zipcode = ${zipcode} WHERE user_id = ${id}`;
-      res.send({ message: "Successfully Update" });
+
+      if (!req.file || !req.file.filename) {
+        let updatewithImage = sql`user_image = ${user_image}`;
+        await sql`UPDATE user_details SET ${updatewithImage}, "user_name"=${user_name}, "email"=${email}, "password"=${password}, "contact_number"=${contactnumber}, region = ${region},
+        province = ${province},
+        municipality = ${municipal},
+        barangay = ${barangay},
+        zone = ${zone},
+        street = ${street},
+        zipcode = ${zipcode} WHERE user_id = ${id}`;
+        res.send({ message: "Successfully Update" });
+      } else {
+        let updatewithImage = sql`user_image = ${req.file.filename}`;
+        await sql`UPDATE user_details SET ${updatewithImage}, "user_name"=${user_name}, "email"=${email}, "password"=${password}, "contact_number"=${contactnumber}, region = ${region},
+        province = ${province},
+        municipality = ${municipal},
+        barangay = ${barangay},
+        zone = ${zone},
+        street = ${street},
+        zipcode = ${zipcode} WHERE user_id = ${id}`;
+        res.send({ message: "Successfully Update" });
+      }
     } catch (err) {
       console.error(err.message);
     }
