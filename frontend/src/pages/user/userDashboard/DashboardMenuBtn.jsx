@@ -4,6 +4,7 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import EditPost from "./editpost";
+import { useParams } from "react-router-dom";
 
 const options = ["Edit", "Delete"];
 
@@ -11,6 +12,7 @@ export default function DashboardMenuBtn({ post_id }) {
   const [anchorEl, selector] = useState(null);
   const [isEditModalOpen, setEditModalOpen] = useState(false);
   const open = Boolean(anchorEl);
+  const { id } = useParams();
 
   const handleClick = (event) => {
     selector(event.currentTarget);
@@ -24,15 +26,12 @@ export default function DashboardMenuBtn({ post_id }) {
   };
 
   const handleDeleteBtn = async () => {
-
     try {
-    await fetch(`http://localhost:3001/post/delete/${post_id}`, {
+      await fetch(`http://localhost:3001/post/delete/${post_id}`, {
         method: "DELETE",
       });
 
-     
       return (location.href = `/root/${id}/dashboard`);
-      
     } catch (error) {
       console.error("Error:", error);
     }

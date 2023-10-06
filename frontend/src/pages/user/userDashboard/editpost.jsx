@@ -1,15 +1,27 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { useParams } from "react-router-dom";
 
+const postLoader = async (post_id) => {
+  const response = await fetch(`http://localhost:3001/post/fetch/${post_id}`);
+  const postData = await response.json();
+  return postData;
+};
 
 export default function EditPost({post_id}) {
   const { id } = useParams();
-
   const [postDetails, setPostDetails] = useState({
     title: "",
-    message: "", 
+    description: "", 
     user_id: id
   });
+
+  useEffect(() => {
+    async function init() {
+      const data = await postLoader(post_id);
+      setPostDetails(data);
+    }
+    init();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -41,7 +53,7 @@ export default function EditPost({post_id}) {
     }
   };
 
-  console.log(postDetails);
+  console.log(id);
   return (
     <div className="fixed block inset-0 flex items-center justify-center bg-gray-50 bg-opacity-90 overflow-hidden z-50">
       <div className="w-full mx-[700px]">
@@ -66,8 +78,8 @@ export default function EditPost({post_id}) {
             spellCheck="false"
             placeholder="Describe everything about this post here"
             onChange={handleChange}
-            name="message"
-            id="message"
+            name="description"
+            id="description"
           ></textarea>
 
           <div className="flex justify-between gap-1 mt-4">

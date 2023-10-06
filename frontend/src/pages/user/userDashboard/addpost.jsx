@@ -6,7 +6,7 @@ function BarangayAddPost({ setAddPost }) {
 
   const [postDetails, setPostDetails] = useState({
     title: "",
-    message: "", 
+    description: "", 
     user_id: id
   });
 
@@ -65,8 +65,8 @@ function BarangayAddPost({ setAddPost }) {
             spellCheck="false"
             placeholder="Describe everything about this post here"
             onChange={handleChange}
-            name="message"
-            id="message"
+            name="description"
+            id="description"
           ></textarea>
 
           <div className="flex justify-between gap-1 mt-4">

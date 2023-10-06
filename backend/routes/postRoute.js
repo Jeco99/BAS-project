@@ -28,11 +28,26 @@ postRouter.get("/:id", async (req, res) => {
 postRouter.post("/add/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const { title, message, user_id } = req.body;
+    const { title, description, user_id } = req.body;
     const newPost = await sql`INSERT INTO post (
          "title", "description", "user_id") VALUES (
-          ${title}, ${message}, ${user_id}) RETURNING *`;
+          ${title}, ${description}, ${user_id}) RETURNING *`;
     res.json(newPost);
+  } catch (err) {
+    console.error(err.message);
+  }
+});
+
+postRouter.get("/fetch/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const fetchPostIndividualData = await sql`SELECT
+    post.title AS title,
+    post.description AS description,
+    DATE( post_time_date_created) AS post_date_created,
+    TO_CHAR( post_time_date_created, 'HH:MI:SS') AS post_time_created
+  FROM post WHERE post_id=${id}`
+    res.json(fetchPostIndividualData);
   } catch (err) {
     console.error(err.message);
   }
@@ -41,8 +56,12 @@ postRouter.post("/add/:id", async (req, res) => {
 postRouter.put("/update/:id", async(req, res) => {
   try{
     const { id } = req.params;
-    const {title, message, user_id} =req.body;
-    await sql `UPDATE post SET "title" = ${title}, "description"=${message}, "user_id"=${user_id} WHERE post_id = ${id}`;
+    const {title, description, user_id} =req.body;
+    console.log(id)
+    console.log(title)
+    console.log(description)
+    console.log(user_id)
+    await sql `UPDATE post SET "title" = ${title}, "description"=${description}, "user_id"=${user_id} WHERE post_id = ${id}`;
     res.send({'message':'Successfully Update'});
   } catch(err){
     console.error(err.message);

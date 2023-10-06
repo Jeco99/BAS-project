@@ -25,10 +25,14 @@ appointmentRouter.get("/:id", async (req, res) => {
     WHERE barangay = ${filterAdminBrgy[0].barangay} 
           AND status = 'Pending'
     ORDER BY appointment_time_date_created;`;
-    res.json(appointmentData);
+
+    if (appointmentData.length == 0) {
+      return res.status(404).send("id doesn't exists");
+    }
+    res.status(200).json(appointmentData);
   } catch (err) {
     console.error(err.message);
-    console.log("Report ang may error");
+    res.status(500).send("Server Error");
   }
 });
 
@@ -48,42 +52,28 @@ appointmentRouter.post("/create/:id", async (req, res) => {
           appointment_time,
           appointment_date, user_id ) VALUES (
             ${request_type}, ${purpose}, ${appointment_time}, ${appointment_date}, ${user_id}) RETURNING *`;
-    res.status(200).json(newAppointment);
+
+    if (newAppointment.length == 0) {
+      return res.status(404).send("id doesn't exists");
+    }
+    res.status(201).json(newAppointment);
   } catch (err) {
     console.error(err.message);
+    res.status(500).send("Server Error");
   }
 });
 
-// appointmentRouter.get("/:id", async (req, res) => {
-//   try {
-//     const { id } = req.params;
-//     const selectAppointment =
-//       await sql`SELECT * FROM appointment WHERE appointment_id = ${id}`;
-//     res.json(selectAppointment);
-//   } catch (err) {
-//     console.error(err.message);
-//   }
-// });
 
 appointmentRouter.put("/:id", async (req, res) => {
-  const currentTimestamp = new Date();
-
-  const year = currentTimestamp.getFullYear();
-  const month = String(currentTimestamp.getMonth() + 1).padStart(2, "0");
-  const day = String(currentTimestamp.getDate()).padStart(2, "0");
-  const hours = String(currentTimestamp.getHours()).padStart(2, "0");
-  const minutes = String(currentTimestamp.getMinutes()).padStart(2, "0");
-  const seconds = String(currentTimestamp.getSeconds()).padStart(2, "0");
-
-  const formattedTimestamp = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-  console.log(formattedTimestamp);
-
   try {
     const { id } = req.params;
     const { status } = req.body;
     const updateStatus =
-      await sql`UPDATE appointment SET "status" = ${status}, "date_time_approval"=${formattedTimestamp} WHERE appointment_id = ${id}`;
-    res.json(updateStatus);
+      await sql`UPDATE appointment SET "status" = ${status}, "date_time_approval"= NOW() WHERE appointment_id = ${id}`;
+      if (updateStatus.length == 0) {
+        return res.status(404).send("id doesn't exists");
+      }
+      res.status(201).json(updateStatus);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
