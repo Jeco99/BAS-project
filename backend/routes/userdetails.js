@@ -25,7 +25,10 @@ userDetails_Router.get("/:id", async (req, res) => {
     const { id } = req.params;
     const selectedUser_details =
       await sql`SELECT * FROM user_details WHERE user_id=${id}`;
-    res.json(selectedUser_details[0]);
+      if (selectedUser_details.length == 0) {
+        return res.status(404).send("id doesn't exists");
+      }
+    res.status(200).json(selectedUser_details[0]);
   } catch (err) {
     console.error(err.message);
   }
@@ -56,6 +59,9 @@ userDetails_Router.get("/fetch/:id", async (req, res) => {
       street, 
       zipcode 
       FROM user_details WHERE user_id=${id}`;
+      if (selectedUser_details.length == 0) {
+        return res.status(404).send("id doesn't exists");
+      }
     res.json(selectedUser_details[0]);
   } catch (err) {
     console.error(err.message);

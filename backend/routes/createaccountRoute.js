@@ -23,9 +23,13 @@ const upload = multer({ storage: storage });
 createAccountRouter.get("/", async (req, res) => {
   try {
     const userData = await sql`SELECT * FROM user_details`;
-    res.json(userData);
+    if (userData.length == 0) {
+      return res.status(404).send("id doesn't exists");
+    }
+    res.status(200).json(userData);
   } catch (err) {
     console.error(err.message);
+    res.status(500).send("Server Error");
   }
 });
 
@@ -34,53 +38,31 @@ createAccountRouter.post(
   upload.single("user_image"),
   async (req, res) => {
     try {
+      if (!req.file || !req.file.filename) {
+        console.log("No file uploaded");
+        return res.status(400).send("No file uploaded.");
+      }
+      const {
+        user_type, user_name, email, password, first_name, middle_name, last_name, suffix, sex,
+        date_of_birth, civilstatus, contactnumber, region, province, municipal,
+        barangay, zone, street, zipcode,
+      } = req.body;
       const newUser = await sql`INSERT INTO user_details ( 
-      "user_type",
-      "user_image", 
-      "user_name",
-      "email",
-      "password", 
-      "first_name", 
-      "middle_name", 
-      "last_name",
-      "suffix", 
-      "sex", 
-      "date_of_birth",
-      "civil_status", 
-      "contact_number", 
-      "region", 
-      "province", 
-      "municipality", 
-      "barangay", 
-      "zone", 
-      "street", 
-      "zipcode"
+      "user_type", "user_image",  "user_name", "email", "password", "first_name", "middle_name", "last_name", "suffix", "sex", 
+      "date_of_birth","civil_status", "contact_number", "region", "province", "municipality", "barangay", 
+      "zone", "street","zipcode"
       ) VALUES(
-        ${req.body.user_type},
-        ${req.file.filename},
-        ${req.body.user_name},
-        ${req.body.email},
-        ${req.body.password},
-        ${req.body.first_name},
-        ${req.body.middle_name},
-        ${req.body.last_name},
-        ${req.body.suffix},
-        ${req.body.sex},
-        ${req.body.date_of_birth},
-        ${req.body.civilstatus},
-        ${req.body.contactnumber},
-        ${req.body.region},
-        ${req.body.province},
-        ${req.body.municipal},
-        ${req.body.barangay},
-        ${req.body.zone},
-        ${req.body.street},
-        ${req.body.zipcode}
+        ${user_type}, ${req.file.filename}, ${user_name}, ${email}, ${password}, ${first_name}, ${middle_name}, ${last_name}, ${suffix},
+        ${sex}, ${date_of_birth}, ${civilstatus}, ${contactnumber}, ${region}, ${province}, ${municipal},
+        ${barangay}, ${zone}, ${street}, ${zipcode}
       ) RETURNING *`;
-      res.status(200).json(newUser);
-      console.log(newUser);
+      if (newUser.length == 0) {
+        return res.status(404).send("id doesn't exists");
+      }
+      res.status(201).json(newUser);
     } catch (err) {
       console.error(err.message);
+      res.status(500).send("Server Error");
     }
   }
 );

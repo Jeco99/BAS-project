@@ -23,7 +23,7 @@ export default function FormInput({
       onChange={handleChange}
       value={value}
     />
-      {errors[id] && <small>{errorsmessage}</small>}
+      {errors[id] && <small>{errors[id]}</small>}
     </div>
   );
 }

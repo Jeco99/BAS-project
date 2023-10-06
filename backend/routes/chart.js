@@ -9,7 +9,11 @@ chartRouter.get("/sex", async (req, res) => {
       count(case when sex='Male' then 1 end) as male_cnt,
       count(case when sex='Female' then 1 end) as female_cnt  
     FROM user_details;`;
-    res.json(maleData);
+    if (maleData.length == 0) {
+      return res.status(404).send("id doesn't exists");
+    }
+
+    res.status(200).json(maleData);
   } catch (err) {
     console.error(err.message);
   }
@@ -22,7 +26,10 @@ chartRouter.get("/documents", async (req, res) => {
       count(case when request_type='barangay clearance' then 1 end) as brgyclearance_cnt,
       count(case when request_type='barangay permit' then 1 end) as brgypermit_cnt 
     FROM appointment;`;
-    res.json(brgyDocument);
+    if (brgyDocument.length == 0) {
+      return res.status(404).send("id doesn't exists");
+    }
+    res.status(200).json(brgyDocument);
   } catch (err) {
     console.error(err.message);
   }

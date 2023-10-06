@@ -26,9 +26,13 @@ historyRouter.get("/admin/:id", async (req, res) => {
     WHERE barangay = ${filterAdminBrgy[0].barangay}
     AND status IN ('Completed', 'Incomplete')
     ORDER BY date_time_approval DESC`;
-    res.json(completeStatusData);
+    if (completeStatusData.length == 0) {
+      return res.status(404).send("id doesn't exists");
+    }
+    res.status(200).json(completeStatusData);
   } catch (err) {
     console.error(err.message);
+    res.status(500).send("Server Error");
   }
 });
 
@@ -57,9 +61,13 @@ historyRouter.get("/user/:id", async (req, res) => {
   AND users.user_id = ${id}
   AND status IN ('Completed', 'Incomplete')
   ORDER BY date_time_approval DESC`;
-    res.json(completeStatusData);
+  if (completeStatusData.length == 0) {
+    return res.status(404).send("id doesn't exists");
+  }
+    res.status(200).json(completeStatusData);
   } catch (err) {
     console.error(err.message);
+    res.status(500).send("Server Error");
   }
 });
 
