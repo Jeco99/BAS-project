@@ -70,7 +70,8 @@ userDetails_Router.put(
       const { id } = req.params;
       const { user_name, email, password, contactnumber, user_image } =
         req.body;
-
+      console.log(!req.file);
+      console.log(!req.file.filename)
       if (!req.file || !req.file.filename) {
         let updatewithImage = sql`user_image = ${user_image}`;
         await sql`UPDATE user_details SET ${updatewithImage}, user_name=${user_name}, email=${email}, password=${password}, contact_number=${contactnumber} WHERE user_id = ${id}`;
