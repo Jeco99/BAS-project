@@ -5,12 +5,11 @@ import ActionButton from "./actionButton";
 import { useParams } from "react-router-dom";
 import { convertTo12HoursFormat } from "../../../utils/timeConversion";
 
-
-const appointmentLoader = async (id) =>{
+const appointmentLoader = async (id) => {
   const response = await fetch(`http://localhost:3001/appointment/${id}`);
   const appointmentData = await response.json();
-  return appointmentData
-}
+  return appointmentData;
+};
 
 function ReportPage() {
   const [data, setData] = useState([]);
@@ -114,14 +113,22 @@ function ReportPage() {
           <tbody className="text-lg">
             {data.map((item) => (
               <tr key={item.appointment_id}>
-                <td className="border px-4 py-2">{`${item.appointment_date_created.substr(0,10)} ${convertTo12HoursFormat(item.appointment_time_created)}`}</td>
+                <td className="border px-4 py-2">{`${item.appointment_date_created.substr(
+                  0,
+                  10
+                )} ${convertTo12HoursFormat(
+                  item.appointment_time_created
+                )}`}</td>
                 <td className="border px-4 py-2">{item.fullname}</td>
                 <td className="border px-4 py-2">{item.request_type}</td>
                 <td className="border px-4 py-2">{item.appointment_time}</td>
                 <td className="border px-4 py-2">{item.appointment_date}</td>
                 <td className="border px-4 py-2">{item.purpose}</td>
                 <td className="border">
-                  <ActionButton id={item.appointment_id} />
+                  <ActionButton
+                    appointment_id={item.appointment_id}
+                    user_id={item.user_id}
+                  />
                 </td>
                 <td className="border px-4 py-2">{item.status}</td>
                 {/* Add more table data (td) elements here */}

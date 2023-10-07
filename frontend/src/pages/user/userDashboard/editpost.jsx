@@ -11,9 +11,8 @@ export default function EditPost({post_id}) {
   const { id } = useParams();
   const [postDetails, setPostDetails] = useState({
     title: "",
-    description: "", 
-    user_id: id
-  });
+    description: ""
+  })
 
   useEffect(() => {
     async function init() {
@@ -53,7 +52,7 @@ export default function EditPost({post_id}) {
     }
   };
 
-  console.log(id);
+  console.log(postDetails);
   return (
     <div className="fixed block inset-0 flex items-center justify-center bg-gray-50 bg-opacity-90 overflow-hidden z-50">
       <div className="w-full mx-[700px]">
@@ -71,6 +70,7 @@ export default function EditPost({post_id}) {
             onChange={handleChange}
             name="title"
             id="title"
+            value={postDetails.title !== '' ? postDetails.title : ''}
           />
 
           <textarea
@@ -80,6 +80,7 @@ export default function EditPost({post_id}) {
             onChange={handleChange}
             name="description"
             id="description"
+            value={postDetails.description !== '' ? postDetails.description : ''}
           ></textarea>
 
           <div className="flex justify-between gap-1 mt-4">

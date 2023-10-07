@@ -18,7 +18,8 @@ appointmentRouter.get("/:id", async (req, res) => {
       DATE(appointment_time_date_created) AS appointment_date_created,
       TO_CHAR(appointment_time_date_created, 'HH:MI:SS') AS appointment_time_created,
       appoint.status AS status,
-      users.barangay AS barangay
+      users.barangay AS barangay, 
+      users.user_id
     FROM appointment AS appoint 
     INNER JOIN user_details AS users 
     ON appoint.user_id =users.user_id
@@ -63,17 +64,17 @@ appointmentRouter.post("/create/:id", async (req, res) => {
   }
 });
 
-
 appointmentRouter.put("/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const { status } = req.body;
     const updateStatus =
-      await sql`UPDATE appointment SET "status" = ${status}, "date_time_approval"= NOW() WHERE appointment_id = ${id}`;
-      if (updateStatus.length == 0) {
-        return res.status(404).send("id doesn't exists");
-      }
-      res.status(201).json(updateStatus);
+      await sql`UPDATE appointment SET "status" = ${status}, "date_time_approval"= NOW() WHERE appointment_id = ${id} RETURNING *`;
+
+    if (updateStatus.length == 0) {
+      return res.status(404).send("id doesn't exists");
+    }
+    res.status(201).json(updateStatus[0]);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");

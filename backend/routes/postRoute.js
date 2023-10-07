@@ -19,9 +19,14 @@ postRouter.get("/:id", async (req, res) => {
   INNER JOIN user_details AS users ON post.user_id = users.user_id
   WHERE barangay = ${filterAdminBrgy[0].barangay}
   ORDER BY post_time_date_created DESC`;
-    res.json(postData);
+    if (postData.length == 0) {
+      return res.status(404).send("id doesn't exists");
+    }
+
+    res.status(200).json(postData);
   } catch (err) {
     console.error(err.message);
+    res.status(500).send("Server Error");
   }
 });
 
@@ -32,9 +37,13 @@ postRouter.post("/add/:id", async (req, res) => {
     const newPost = await sql`INSERT INTO post (
          "title", "description", "user_id") VALUES (
           ${title}, ${description}, ${user_id}) RETURNING *`;
-    res.json(newPost);
+    if (title == "" || description === "") {
+      return res.status(404).send("Invalid Inputs");
+    }
+    res.status(201).json(newPost);
   } catch (err) {
     console.error(err.message);
+    res.status(500).send("Server Error");
   }
 });
 
@@ -46,33 +55,42 @@ postRouter.get("/fetch/:id", async (req, res) => {
     post.description AS description,
     DATE( post_time_date_created) AS post_date_created,
     TO_CHAR( post_time_date_created, 'HH:MI:SS') AS post_time_created
-  FROM post WHERE post_id=${id}`
-    res.json(fetchPostIndividualData);
+  FROM post WHERE post_id=${id}`;
+    if (fetchPostIndividualData.length == 0) {
+      return res.status(404).send("id doesn't exists");
+    }
+    res.status(200).json(fetchPostIndividualData[0]);
   } catch (err) {
     console.error(err.message);
+    res.status(500).send("Server Error");
   }
 });
 
-postRouter.put("/update/:id", async(req, res) => {
-  try{
+postRouter.put("/update/:id", async (req, res) => {
+  try {
     const { id } = req.params;
-    const {title, description, user_id} =req.body;
-    console.log(id)
-    console.log(title)
-    console.log(description)
-    console.log(user_id)
-    await sql `UPDATE post SET "title" = ${title}, "description"=${description}, "user_id"=${user_id} WHERE post_id = ${id}`;
-    res.send({'message':'Successfully Update'});
-  } catch(err){
+    const { title, description } = req.body;
+    const updatePost =
+      await sql`UPDATE post SET "title" = ${title}, "description"=${description} WHERE post_id = ${id} RETURNING *`;
+    if (updatePost.length == 0) {
+      return res.status(404).send("id doesn't exists");
+    }
+    res.status(200).json(updatePost);
+  } catch (err) {
     console.error(err.message);
+    res.status(500).send("Server Error");
   }
-})
+});
 
 postRouter.delete("/delete/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    await  sql`DELETE FROM post WHERE post_id = ${id}`;
-    res.json("User was deleted!");
+    const deletePost =
+      await sql`DELETE FROM post WHERE post_id = ${id} RETURNING *`;
+    if (deletePost.length == 0) {
+      return res.status(404).send("id doesn't exists");
+    }
+    res.status(200).json(deletePost);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");

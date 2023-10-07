@@ -1,32 +1,43 @@
 import { AiFillCheckSquare, AiOutlineCloseSquare } from "react-icons/ai";
-import { redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Tooltip, Button } from "@material-tailwind/react";
 
-export default function ActionButton({ id }) {
+export default function ActionButton({ appointment_id, user_id }) {
+  const navigate = useNavigate();
   const changeCompleteStatus = async () => {
-    await fetch(`http://localhost:3001/appointment/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        status: "Completed",
-      }),
-    });
-    return redirect("/admin/history");
+    const completeStatus = await fetch(
+      `http://localhost:3001/appointment/${appointment_id}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          status: "Completed",
+        }),
+      }
+    );
+    if (completeStatus.status == 201) {
+      navigate(`/root/${user_id}/adminhistory`);
+    }
   };
 
   const changeInCompleteStatus = async () => {
-    await fetch(`http://localhost:3001/appointment/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        status: "Incomplete",
-      }),
-    });
-    return redirect("root/:id/history");
+    const IncompleteStatus = await fetch(
+      `http://localhost:3001/appointment/${appointment_id}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          status: "Incomplete",
+        }),
+      }
+    );
+    if (IncompleteStatus.status == 201) {
+      navigate(`/root/${user_id}/adminhistory`);
+    }
   };
 
   return (
