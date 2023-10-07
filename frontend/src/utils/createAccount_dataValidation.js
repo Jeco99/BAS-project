@@ -1,13 +1,6 @@
-function isEmailValid(email) {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return emailRegex.test(email);
-}
+import isPasswordValid from "./isPasswordValid";
+import isEmailValid from "./isEmailValid";
 
-function isPasswordValid(password) {
-  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-  return passwordRegex.test(password);
-}
-  
  export function dataValidation(getData, setErrors, errors) {
   let newErrors = { ...errors };
 

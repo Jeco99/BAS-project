@@ -25,9 +25,9 @@ userDetails_Router.get("/:id", async (req, res) => {
     const { id } = req.params;
     const selectedUser_details =
       await sql`SELECT * FROM user_details WHERE user_id=${id}`;
-      if (selectedUser_details.length == 0) {
-        return res.status(404).send("id doesn't exists");
-      }
+    if (selectedUser_details.length == 0) {
+      return res.status(404).send("id doesn't exists");
+    }
     res.status(200).json(selectedUser_details[0]);
   } catch (err) {
     console.error(err.message);
@@ -59,12 +59,13 @@ userDetails_Router.get("/fetch/:id", async (req, res) => {
       street, 
       zipcode 
       FROM user_details WHERE user_id=${id}`;
-      if (selectedUser_details.length == 0) {
-        return res.status(404).send("id doesn't exists");
-      }
+    if (selectedUser_details.length == 0) {
+      return res.status(404).send("id doesn't exists");
+    }
     res.json(selectedUser_details[0]);
   } catch (err) {
     console.error(err.message);
+    res.status(500).send("Server Error");
   }
 });
 
@@ -72,23 +73,35 @@ userDetails_Router.put(
   "/update/useraccount/:id",
   upload.single("user_image"),
   async (req, res) => {
-    try {
-      const { id } = req.params;
-      const { user_name, email, password, contactnumber, user_image } =
-        req.body;
-      console.log(!req.file);
-      console.log(!req.file.filename)
-      if (!req.file || !req.file.filename) {
+    const { id } = req.params;
+    const { user_name, email, password, contactnumber, user_image } = req.body;
+
+    if (!req.file || !req.file.filename) {
+      try {
         let updatewithImage = sql`user_image = ${user_image}`;
-        await sql`UPDATE user_details SET ${updatewithImage}, user_name=${user_name}, email=${email}, password=${password}, contact_number=${contactnumber} WHERE user_id = ${id}`;
-        res.send({ message: "Successfully Update" });
-      } else {
-        let updatewithImage = sql`user_image = ${req.file.filename}`;
-        await sql`UPDATE user_details SET ${updatewithImage}, user_name=${user_name}, email=${email}, password=${password}, contact_number=${contactnumber} WHERE user_id = ${id}`;
-        res.send({ message: "Successfully Update" });
+        const updateWithExistingImage =
+          await sql`UPDATE user_details SET ${updatewithImage}, user_name=${user_name}, email=${email}, password=${password}, contact_number=${contactnumber} WHERE user_id = ${id} RETURNING *`;
+        if (updateWithExistingImage.length == 0) {
+          return res.status(404).send("id doesn't exists");
+        }
+        res.status(200).json(updateWithExistingImage);
+      } catch (err) {
+        console.error(err.message);
+        res.status(500).send("Server Error");
       }
-    } catch (err) {
-      console.error(err.message);
+    } else {
+      try {
+        let updatewithImage = sql`user_image = ${req.file.filename}`;
+        const updatedImage =
+          await sql`UPDATE user_details SET ${updatewithImage}, user_name=${user_name}, email=${email}, password=${password}, contact_number=${contactnumber} WHERE user_id = ${id}`;
+        if (updatedImage.length == 0) {
+          return res.status(404).send("id doesn't exists");
+        }
+        res.status(200).json(updatedImage);
+      } catch (err) {
+        console.error(err.message);
+        res.status(500).send("Server Error");
+      }
     }
   }
 );
@@ -112,25 +125,18 @@ userDetails_Router.put("/update/userpersonal/:id", async (req, res) => {
       street,
       zipcode,
     } = req.body;
-    await sql`UPDATE user_details SET 
-        first_name = ${first_name},
-        middle_name = ${middle_name},
-        last_name = ${last_name},
-        suffix = ${suffix},
-        date_of_birth = ${date_of_birth},
-        sex = ${sex},
-        civil_status = ${civilstatus},
-        region = ${region},
-        province = ${province},
-        municipality = ${municipal},
-        barangay = ${barangay},
-        zone = ${zone},
-        street = ${street},
-        zipcode = ${zipcode}
-      WHERE user_id = ${id}`;
-    res.send({ message: "Successfully Update" });
+    const updateUserPesonal = await sql`UPDATE user_details SET 
+        first_name = ${first_name}, middle_name = ${middle_name}, last_name = ${last_name}, suffix = ${suffix}, date_of_birth = ${date_of_birth}, sex = ${sex},
+        civil_status = ${civilstatus}, region = ${region}, province = ${province}, municipality = ${municipal}, barangay = ${barangay}, zone = ${zone},
+        street = ${street}, zipcode = ${zipcode}
+      WHERE user_id = ${id} RETURNING *`;
+    if (updateUserPesonal.length == 0) {
+      return res.status(404).send("id doesn't exists");
+    }
+    res.status(200).json(updateUserPesonal);
   } catch (err) {
     console.error(err.message);
+    res.status(500).send("Server Error");
   }
 });
 
@@ -138,46 +144,59 @@ userDetails_Router.put(
   "/update/adminaccount/:id",
   upload.single("user_image"),
   async (req, res) => {
-    try {
-      const { id } = req.params;
-      const {
-        user_name,
-        email,
-        password,
-        contactnumber,
-        region,
-        province,
-        municipal,
-        barangay,
-        zone,
-        street,
-        zipcode,
-        user_image,
-      } = req.body;
+    const { id } = req.params;
+    const {
+      user_name,
+      email,
+      password,
+      contactnumber,
+      region,
+      province,
+      municipal,
+      barangay,
+      zone,
+      street,
+      zipcode,
+      user_image,
+    } = req.body;
 
-      if (!req.file || !req.file.filename) {
+    if (!req.file || !req.file.filename) {
+      try {
         let updatewithImage = sql`user_image = ${user_image}`;
-        await sql`UPDATE user_details SET ${updatewithImage}, "user_name"=${user_name}, "email"=${email}, "password"=${password}, "contact_number"=${contactnumber}, region = ${region},
+        const updateWithExistingImage = sql`UPDATE user_details SET ${updatewithImage}, "user_name"=${user_name}, "email"=${email}, "password"=${password}, "contact_number"=${contactnumber}, region = ${region},
         province = ${province},
         municipality = ${municipal},
         barangay = ${barangay},
         zone = ${zone},
         street = ${street},
         zipcode = ${zipcode} WHERE user_id = ${id}`;
-        res.send({ message: "Successfully Update" });
-      } else {
-        let updatewithImage = sql`user_image = ${req.file.filename}`;
-        await sql`UPDATE user_details SET ${updatewithImage}, "user_name"=${user_name}, "email"=${email}, "password"=${password}, "contact_number"=${contactnumber}, region = ${region},
-        province = ${province},
-        municipality = ${municipal},
-        barangay = ${barangay},
-        zone = ${zone},
-        street = ${street},
-        zipcode = ${zipcode} WHERE user_id = ${id}`;
-        res.send({ message: "Successfully Update" });
+        if (updateWithExistingImage.length == 0) {
+          return res.status(404).send("id doesn't exists");
+        }
+        res.status(200).json(updateWithExistingImage);
+      } catch (err) {
+        console.error(err.message);
+        res.status(500).send("Server Error");
       }
-    } catch (err) {
-      console.error(err.message);
+    } else {
+      try {
+        let updatewithImage = sql`user_image = ${req.file.filename}`;
+        const updatedImage =
+          await sql`UPDATE user_details SET ${updatewithImage}, "user_name"=${user_name}, "email"=${email}, "password"=${password}, "contact_number"=${contactnumber}, region = ${region},
+        province = ${province},
+        municipality = ${municipal},
+        barangay = ${barangay},
+        zone = ${zone},
+        street = ${street},
+        zipcode = ${zipcode} WHERE user_id = ${id}`;
+        if (updatedImage.length == 0) {
+          return res.status(404).send("id doesn't exists");
+        }
+        res.status(200).json(updatedImage);
+      } catch (err) {
+        console.error(err.message);
+        res.status(500).send("Server Error");
+      }
     }
   }
 );

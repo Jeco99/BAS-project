@@ -1,14 +1,9 @@
-// TODO: may error sa pag insert
-
 import { useState, useEffect } from "react";
-
 import { AiOutlineCaretLeft } from "react-icons/ai";
-
 import ImageUpload from "../../../components/imageUpload/imageUpload";
 import AdminSignUp from "./adminAccount";
 import UserAccount from "./userAccount";
 import { dataValidation } from "../../../utils/createAccount_dataValidation";
-
 import {
   regions,
   provinces,
@@ -16,32 +11,32 @@ import {
   barangays,
 } from "select-philippines-address";
 import { useNavigate } from "react-router-dom";
+import FormLabel from "../../../components/label/formLabel";
 
 export default function CreateAccount() {
   const navigate = useNavigate();
   const [getData, setGetData] = useState({
-    user_type: '',    
-    user_image: '',
-    user_name: '',
-    email: '',
-    password: '',
-    confirmpassword: '',
-    first_name: '',
-    middle_name: '',
-    last_name: '',
-    suffix: '',
-    date_of_birth: '',
-    contactnumber: '',
-    sex: '',
-    civilstatus: '',
-    region: '',
-    province: '',
-    municipal: '',
-    barangay: '',
-    zone: '',
-    street: '',
-    zipcode: '',
-
+    user_type: "",
+    user_image: "",
+    user_name: "",
+    email: "",
+    password: "",
+    confirmpassword: "",
+    first_name: "",
+    middle_name: "",
+    last_name: "",
+    suffix: "",
+    date_of_birth: "",
+    contactnumber: "",
+    sex: "",
+    civilstatus: "",
+    region: "",
+    province: "",
+    municipal: "",
+    barangay: "",
+    zone: "",
+    street: "",
+    zipcode: "",
   });
   const [regionData, setRegion] = useState([]);
   const [provinceData, setProvince] = useState([]);
@@ -115,47 +110,43 @@ export default function CreateAccount() {
     zipcode: null,
   });
 
-  
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     dataValidation(getData, setErrors, errors);
     const formdata = new FormData();
-    formdata.append("user_type",getData.user_type);    
-    formdata.append("user_image",getData.user_image);
-    formdata.append("user_name",getData.user_name);
-    formdata.append("email",getData.email);
-    formdata.append("password",getData.password);
-    formdata.append("first_name",getData.first_name);
-    formdata.append("middle_name",getData.middle_name);
-    formdata.append("last_name",getData.last_name);
-    formdata.append("suffix",getData.suffix);
-    formdata.append("date_of_birth",getData.date_of_birth);
-    formdata.append("contactnumber",getData.contactnumber);
-    formdata.append("sex",getData.sex);
-    formdata.append("civilstatus",getData.civilstatus);
-    formdata.append("region",getData.region);
-    formdata.append("province",getData.province);
-    formdata.append("municipal",getData.municipal);
-    formdata.append("barangay",getData.barangay);
-    formdata.append("zone",getData.zone);
-    formdata.append("street",getData.street);
-    formdata.append("zipcode",getData.zipcode);
-  
+    formdata.append("user_type", getData.user_type);
+    formdata.append("user_image", getData.user_image);
+    formdata.append("user_name", getData.user_name);
+    formdata.append("email", getData.email);
+    formdata.append("password", getData.password);
+    formdata.append("first_name", getData.first_name);
+    formdata.append("middle_name", getData.middle_name);
+    formdata.append("last_name", getData.last_name);
+    formdata.append("suffix", getData.suffix);
+    formdata.append("date_of_birth", getData.date_of_birth);
+    formdata.append("contactnumber", getData.contactnumber);
+    formdata.append("sex", getData.sex);
+    formdata.append("civilstatus", getData.civilstatus);
+    formdata.append("region", getData.region);
+    formdata.append("province", getData.province);
+    formdata.append("municipal", getData.municipal);
+    formdata.append("barangay", getData.barangay);
+    formdata.append("zone", getData.zone);
+    formdata.append("street", getData.street);
+    formdata.append("zipcode", getData.zipcode);
 
-   const response = await fetch('http://localhost:3001/createaccount/create', {
-        method: 'POST',
-        body: formdata
-      });
+    const response = await fetch("http://localhost:3001/createaccount/create", {
+      method: "POST",
+      body: formdata,
+    });
     const result = await response.json();
     const path = result[0].user_id;
-    if(response.status == 200){
-      navigate(`/root/${path}`)
+    if (response.status == 201) {
+      navigate(`/root/${path}`);
+    } else {
+      alert("Can't be found");
     }
-    else{
-      alert('Can\'t be found');
-    }
-    
   };
 
   // console.log(getData);
@@ -180,7 +171,12 @@ export default function CreateAccount() {
               errors={errors}
             />
             <div className="flex space-x-3 labelText">
-              <p>Are you an official?</p>
+              <FormLabel
+                labelName={"Are you an official?"}
+                id={getData.user_type}
+                showRequired
+              />
+
               <input
                 type="radio"
                 id="yes"
@@ -233,12 +229,6 @@ export default function CreateAccount() {
                 errors={errors}
               />
             )}
-            {/* {userGetData.map( (data) => (
-              <div key={data.user_id}>
-                <li>{data.first_name}</li>
-              </div>
-            ))} */}
-
             <div className="flex justify-between gap-4 flex-col sm:flex-row">
               <button
                 className="cancelBtn btnRadius"

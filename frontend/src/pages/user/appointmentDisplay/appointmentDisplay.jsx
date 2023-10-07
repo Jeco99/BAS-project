@@ -3,12 +3,13 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 import FormLabel from "../../../components/label/formLabel";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { appointmentDataValidation } from "../../../utils/appointment_dataValidation";
 
 import { getTomorrowDate, DateFormatted } from "../../../utils/dateConversion";
 
 export default function AppointmentDisplay() {
+  const navigate = useNavigate();
   const [startDate, setStartDate] = useState(getTomorrowDate());
   const [request, setRequest] = useState("");
   const [purpose, setPurpose] = useState("");
@@ -41,21 +42,26 @@ export default function AppointmentDisplay() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await fetch(`http://localhost:3001/appointment/create/:${id}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        request_type: request,
-        purpose: purpose,
-        appointment_time: selectTime,
-        appointment_date: startDate.toDateString(),
-        user_id: id,
-      }),
-    });
+    const newAppointment = await fetch(
+      `http://localhost:3001/appointment/create/:${id}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          request_type: request,
+          purpose: purpose,
+          appointment_time: selectTime,
+          appointment_date: startDate.toDateString(),
+          user_id: id,
+        }),
+      }
+    );
 
-    return (window.location.href = `/root/${id}/appointment`);
+    if (newAppointment.status == 201) {
+      navigate(`/root/${id}/dashboard`);
+    }
   };
 
   const closeModal = () => {

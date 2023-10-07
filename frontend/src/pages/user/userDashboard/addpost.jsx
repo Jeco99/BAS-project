@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
+import { post_Validation } from "../../../utils/post_validation";
 
 function BarangayAddPost({ setAddPost }) {
   const { id } = useParams();
@@ -9,6 +10,14 @@ function BarangayAddPost({ setAddPost }) {
     description: "", 
     user_id: id
   });
+
+  const [errors, setErrors] = useState({
+    title: null,
+    description: null
+  });
+
+  console.log(errors);
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -20,7 +29,9 @@ function BarangayAddPost({ setAddPost }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
+   
+  
+      post_Validation(postDetails, errors, setErrors);
       const response = await fetch(`http://localhost:3001/post/add/${id}`, {
         method: "POST",
         headers: {
@@ -32,12 +43,8 @@ function BarangayAddPost({ setAddPost }) {
       if (response.status === 200) {
         alert("Data inserted successfully");
         return (location.href = `/root/${id}/dashboard`);
-      } else {
-        alert("Error inserting data");
       }
-    } catch (error) {
-      console.error("Error:", error);
-    }
+
   };
 
   console.log(postDetails);
@@ -59,6 +66,7 @@ function BarangayAddPost({ setAddPost }) {
             name="title"
             id="title"
           />
+          {errors.title && <small>{errors.title}</small>}
 
           <textarea
             className="bg-gray-100 sec p-3 h-60 border border-gray-300 outline-none mt-4 text-1xl btnRadius"
@@ -68,6 +76,7 @@ function BarangayAddPost({ setAddPost }) {
             name="description"
             id="description"
           ></textarea>
+           {errors.title && <small>{errors.description}</small>}
 
           <div className="flex justify-between gap-1 mt-4">
             <button
