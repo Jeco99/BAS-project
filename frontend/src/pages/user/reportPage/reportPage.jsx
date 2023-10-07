@@ -32,40 +32,38 @@ function ReportPage() {
     setFilterValue(event.target.value.toLowerCase());
   };
 
-  // const filteredData = appointData.filter((item) => {
-  //   if (filterValue === "date") {
-  //     return item.appointment_date_created.toLowerCase().includes(searchTerm);
-  //   }
-  //   if (filterValue === "type of request") {
-  //     return item.request_type.toLowerCase().includes(searchTerm);
-  //   }
+  console.log(data);
+  console.log(filterValue)
 
-  //   const timestampLower = item.timestamp.toLowerCase();
-  //   const nameLower = item.name.toLowerCase();
-  //   const type0fRequestLower = item.type0fRequest.toLowerCase();
-  //   const timeOfRequestLower = item.timeOfRequest.toString().toLowerCase();
-  //   const purposeLower = item.purpose.toLowerCase();
-  //   const actionButtonLower = item.actionButton.toLowerCase();
-  //   const requestStatusLower = item.requestStatus.toLowerCase();
+  const filteredData = data.filter((item) => {
+    const searchFilter = searchTerm.toLowerCase(); 
+    const appointment_date_created_filter = item.appointment_date_created.toLowerCase();
+    const fullName_filter = item.fullname.toLowerCase();
+    const purpose_filter = item.purpose.toLowerCase();
+    const request_type_filter = item.request_type.toLowerCase();
+    const status_filter = item.status.toLowerCase();
+    const appointment_time_filter = item.appointment_time.toLowerCase();
+    const appointment_date_filter = item.appointment_date.toLowerCase();
 
-  //   return (
-  //     (timestampLower.includes(searchTerm) ||
-  //       nameLower.includes(searchTerm) ||
-  //       type0fRequestLower.includes(searchTerm) ||
-  //       timeOfRequestLower.includes(searchTerm) ||
-  //       purposeLower.includes(searchTerm) ||
-  //       actionButtonLower.includes(searchTerm) ||
-  //       requestStatusLower.includes(searchTerm)) &&
-  //     (filterValue === "all" ||
-  //       timestampLower.includes(filterValue) ||
-  //       nameLower.includes(filterValue) ||
-  //       type0fRequestLower.includes(filterValue) ||
-  //       timeOfRequestLower.includes(filterValue) ||
-  //       purposeLower.includes(filterValue) ||
-  //       actionButtonLower.includes(filterValue) ||
-  //       requestStatusLower.includes(filterValue))
-  //   );
-  // });
+    // if(filterValue == 'oldesttolatest'){
+    //   return appointment_date_created_filter.sort();
+    // }
+
+    if(searchFilter === ''){
+      return true
+    }
+
+  
+    return(
+      fullName_filter.includes(searchFilter) ||
+      purpose_filter.includes(searchFilter) || 
+      appointment_date_created_filter.includes(searchFilter) || 
+      request_type_filter.includes(searchFilter) ||
+      status_filter.includes(searchFilter) || 
+      appointment_time_filter.includes(searchFilter) || 
+      appointment_date_filter.includes(searchFilter) 
+    )
+  })
 
   return (
     <div className="main-container">
@@ -89,8 +87,8 @@ function ReportPage() {
             onChange={handleFilter}
           >
             <option value="all">All</option>
-            <option value="date">Date</option>
-            <option value="type of request">Type of request</option>
+            <option value="latesttooldest">Latest to Oldest</option>
+            <option value="oldesttolatest">Oldest to Latest</option>
           </select>
         </div>
       </div>
@@ -111,7 +109,7 @@ function ReportPage() {
             </tr>
           </thead>
           <tbody className="text-lg">
-            {data.map((item) => (
+            {filteredData.map((item) => (
               <tr key={item.appointment_id}>
                 <td className="border px-4 py-2">{`${item.appointment_date_created.substr(
                   0,
@@ -131,54 +129,15 @@ function ReportPage() {
                   />
                 </td>
                 <td className="border px-4 py-2">{item.status}</td>
-                {/* Add more table data (td) elements here */}
+                
               </tr>
             ))}
           </tbody>
         </table>
       </div>
       <div className="flex flex-col items-center">
-        <span className="text-sm text-gray-700 dark:text-gray-400">
-          Page 1{" "}
-        </span>
-        <div className="inline-flex mt-2 xs:mt-0">
-          <button className="flex items-center justify-center px-3 h-8 text-sm font-medium text-white bg-beetleGreen rounded-l hover:bg-morningGlory hover:text-black">
-            <svg
-              className="w-3.5 h-3.5 mr-2"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 14 10"
-            >
-              <path
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M13 5H1m0 0 4 4M1 5l4-4"
-              />
-            </svg>
-            Prev
-          </button>
-          <button className="flex items-center justify-center px-3 h-8 text-sm font-medium text-white bg-beetleGreen border-0 border-l border-gray-700 rounded-r hover:bg-morningGlory hover:text-black">
-            Next
-            <svg
-              className="w-3.5 h-3.5 ml-2"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 14 10"
-            >
-              <path
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M1 5h12m0 0L9 1m4 4L9 9"
-              />
-            </svg>
-          </button>
-        </div>
+       
+            
       </div>
     </div>
   );
