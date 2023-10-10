@@ -15,14 +15,18 @@ import ImageUpload from "../../../components/imageUpload/imageUpload";
 import { useParams } from "react-router-dom";
 import { dataValidation } from "../../../utils/createAccount_dataValidation";
 import { useNavigate } from "react-router-dom";
+import useIsAuthenticated from "../../../hook/useIsAuthenticated";
 
 const userDetails_Selected_Loader = async (id) => {
-  const response = await fetch("http://localhost:3001/root/fetch/" + id);
+  const response = await fetch("http://localhost:3001/root/fetch/" + id,{
+    credentials: "include"
+  });
   const userDetails_data = await response.json();
   return userDetails_data;
 };
 
 export default function UpdateAdminAccount() {
+  useIsAuthenticated();
   const { id } = useParams();
   const navigate = useNavigate();
   const [getData, setGetData] = useState({
@@ -142,7 +146,6 @@ export default function UpdateAdminAccount() {
     }
     
   };
-  console.log(getData);
   return (
     <div className="block mt-8 p-6 bg-white border border-gray-200 rounded-lg shadow">
       <div className="w-full">
@@ -288,7 +291,7 @@ export default function UpdateAdminAccount() {
           <div className="flex justify-between gap-4 flex-col sm:flex-row">
             <button
               className="cancelBtn btnRadius"
-              onClick={() => (location.href = "/")}
+              onClick={() => (location.href = `/root/${id}/dashboard`)}
             >
               Back
             </button>

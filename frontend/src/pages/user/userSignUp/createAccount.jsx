@@ -120,6 +120,7 @@ export default function CreateAccount() {
     formdata.append("user_name", getData.user_name);
     formdata.append("email", getData.email);
     formdata.append("password", getData.password);
+    formdata.append("confirmpassword", getData.password);
     formdata.append("first_name", getData.first_name);
     formdata.append("middle_name", getData.middle_name);
     formdata.append("last_name", getData.last_name);
@@ -138,14 +139,19 @@ export default function CreateAccount() {
 
     const response = await fetch("http://localhost:3001/createaccount/create", {
       method: "POST",
+      credentials:'include',
       body: formdata,
     });
+    // const result = await response.json();
+    // const path = result[0].user_id;
     const result = await response.json();
-    const path = result[0].user_id;
     if (response.status == 201) {
-      navigate(`/root/${path}`);
-    } else {
-      alert("Can't be found");
+      //TODO: must be back to login 
+      console.log('Success');
+      location.href = "/success"
+      
+    } else if (response.status == 400) {
+      alert(result.message)
     }
   };
 
@@ -172,7 +178,7 @@ export default function CreateAccount() {
             />
             <div className="flex space-x-3 labelText">
               <FormLabel
-                labelName={"Are you an official?"}
+                labelName={"Are you a government official?"}
                 id={getData.user_type}
                 showRequired
               />

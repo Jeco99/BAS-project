@@ -1,13 +1,17 @@
 import { FaFemale } from "react-icons/fa";
 import { useEffect, useState } from "react";
+import useIsAuthenticated from "../../hook/useIsAuthenticated";
 
 const chartLoader = async () => {
-  const response = await fetch("http://localhost:3001/chart/sex");
+  const response = await fetch("http://localhost:3001/chart/sex", {
+    credentials: "include",
+  });
   const femaleData = await response.json();
   return femaleData;
 };
 
 export default function NumberOfFemales() {
+  useIsAuthenticated();
   const [female, setFemale] = useState([]);
   useEffect(() => {
     async function init() {

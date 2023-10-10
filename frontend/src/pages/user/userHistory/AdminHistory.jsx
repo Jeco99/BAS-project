@@ -1,14 +1,18 @@
 import { useState, useEffect } from "react";
 import { convertTo12HoursFormat } from "../../../utils/timeConversion";
 import { useParams } from "react-router-dom";
+import useIsAuthenticated from "../../../hook/useIsAuthenticated";
 
 const historyLoader = async (id) => {
-  const response = await fetch(`http://localhost:3001/history/admin/${id}`);
+  const response = await fetch(`http://localhost:3001/history/admin/${id}`,{
+    credentials: "include",
+  });
   const completedStatusData = await response.json();
   return completedStatusData;
 };
 
 export default function AdminHistory() {
+  useIsAuthenticated();
   const [data, setData] = useState([]);
   const { id } = useParams();
   useEffect(() => {

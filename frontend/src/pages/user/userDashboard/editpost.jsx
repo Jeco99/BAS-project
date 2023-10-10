@@ -1,13 +1,17 @@
 import { useState,useEffect } from "react";
 import { useParams } from "react-router-dom";
+import useIsAuthenticated from "../../../hook/useIsAuthenticated";
 
 const postLoader = async (post_id) => {
-  const response = await fetch(`http://localhost:3001/post/fetch/${post_id}`);
+  const response = await fetch(`http://localhost:3001/post/fetch/${post_id}`,{
+    credentials: 'include'
+  });
   const postData = await response.json();
   return postData;
 };
 
 export default function EditPost({post_id}) {
+  useIsAuthenticated();
   const { id } = useParams();
   const [postDetails, setPostDetails] = useState({
     title: "",
@@ -38,6 +42,7 @@ export default function EditPost({post_id}) {
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: 'include',
         body: JSON.stringify(postDetails),
       });
 

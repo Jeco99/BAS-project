@@ -2,14 +2,18 @@ import { useEffect, useState } from "react";
 import DashboardMenuBtn from "../../pages/user/userDashboard/DashboardMenuBtn";
 import { convertTo12HoursFormat } from "../../utils/timeConversion";
 import { useParams } from "react-router-dom";
+import useIsAuthenticated from "../../hook/useIsAuthenticated";
 
 const postLoader = async (id) => {
-  const response = await fetch(`http://localhost:3001/post/${id}`);
+  const response = await fetch(`http://localhost:3001/post/${id}`,{
+    credentials:'include',
+  });
   const postData = await response.json();
   return postData;
 };
 
 export default function Post() {
+  useIsAuthenticated();
   const [postData, setPostData] = useState([]);
   const { id } = useParams();
   useEffect(() => {

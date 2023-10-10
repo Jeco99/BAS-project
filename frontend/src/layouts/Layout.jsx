@@ -6,14 +6,18 @@ import { useEffect, useState } from "react";
 import { useRef } from "react";
 import { useMediaQuery } from "react-responsive";
 import { useParams } from "react-router-dom";
+import useIsAuthenticated from "../hook/useIsAuthenticated";
 
 const userDetails_Selected_Loader = async (id) => {
-  const response = await fetch("http://localhost:3001/root/" + id);
+  const response = await fetch("http://localhost:3001/root/" + id,{
+    credentials: "include",
+  });
   const userDetails_data = await response.json();
   return userDetails_data;
 };
 
 export default function RootLayout() {
+  useIsAuthenticated();
   const isTabletMid = useMediaQuery({ query: "(max-width: 767px)" });
   const [open, setOpen] = useState(isTabletMid ? false : true);
   const sidebarRef = useRef();

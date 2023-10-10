@@ -11,15 +11,17 @@ import BarangayPermit from "../../../components/chart/numberofBarangayPermit";
 
 import Post from "../../../components/post/post";
 import { useParams } from "react-router-dom";
-import { ClassNames } from "@emotion/react";
 
 const userDetails_Selected_Loader = async (id) => {
-  const response = await fetch(`http://localhost:3001/root/${id}`);
+  const response = await fetch(`http://localhost:3001/root/${id}`,{
+    credentials: 'include',
+  });
   const userDetails_data = await response.json();
   return userDetails_data;
 };
 
 export default function UserDashboard() {
+ 
   const [addPost, setAddPost] = useState(false);
   const { id } = useParams();
   const [data, setData] = useState([]);

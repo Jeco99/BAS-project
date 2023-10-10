@@ -11,7 +11,6 @@ const LogIn = () => {
     user_name: "",
     password: "",
   });
-  const [role, setRole] = useState('');
 
   const [errors, setError] = useState({
     user_name: "",
@@ -32,25 +31,34 @@ const LogIn = () => {
     logIn_dataValidation(logInData, errors, setError)
 
     try {
-      const response = await fetch('http://localhost:3001/login/', {
+      const response = await fetch('http://localhost:3001/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          credentials : "include"
         },
+        credentials:"include",
         body: JSON.stringify(logInData)
       });
-      const result = await response.json();
-      console.log(result);
-      setRole(result.user_type);
+       const authenticatedUser = await response.json();
+   
+      localStorage.setItem(
+        "authenticatedUser",
+        JSON.stringify(authenticatedUser)
+      );
+      console.log(authenticatedUser);
+      // setRole(result.user_type);
 
       if(response.status == 200){
-        const id = result.user_id;
+        const id = authenticatedUser.user_id;
+        // document.cookie = "token=abcd123"
+        // console.log(document.cookie)
         navigate('/root/'+id);
     
-      }
-      
+      }      
       if(response.status == 401){
-        alert("Status: " + response.status + " "+result.message);
+        alert("Status: " + response.status + " "+authenticatedUser.message);
+        navigate('/');
       }
     } catch (error) {
       console.error('Error:', error);
@@ -131,12 +139,6 @@ const LogIn = () => {
           </button>
         </div>
       </form>
-      {role && (
-        <div>
-          <h2>Welcome, {role === 'admin' ? 'Admin' : 'User'}</h2>
-          <p>Your role is: {role}</p>
-        </div>
-      )}
     </div>
   );
 };
