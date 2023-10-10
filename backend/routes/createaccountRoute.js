@@ -2,8 +2,12 @@ import express from "express";
 import sql from "../config/db.js";
 import multer from "multer";
 import path from "path";
+import bcrypt from "bcryptjs";
 import isEmailValid from "../../frontend/src/utils/isEmailValid.js";
 import isPasswordValid from "../../frontend/src/utils/isPasswordValid.js";
+import generateToken from "../middlewares/auth.js";
+import tokenValidator from "../services/tokenValidator.js";
+import authenticated from "../middlewares/authenticated.js";
 
 const createAccountRouter = express.Router();
 
@@ -45,42 +49,86 @@ createAccountRouter.post(
         return res.status(400).send("No file uploaded.");
       }
       const {
-        user_type, user_name, email, password, first_name, middle_name, last_name, suffix, sex,
-        date_of_birth, civilstatus, contactnumber, region, province, municipal,
-        barangay, zone, street, zipcode,
+        user_type,
+        user_name,
+        email,
+        password,
+        first_name,
+        middle_name,
+        last_name,
+        suffix,
+        sex,
+        date_of_birth,
+        civilstatus,
+        contactnumber,
+        region,
+        province,
+        municipal,
+        barangay,
+        zone,
+        street,
+        zipcode,
       } = req.body;
+
+      const hashPassword = await bcrypt.hash(password, 10);
+
+      if (!isEmailValid(email)) {
+        console.log("email is false");
+        return res.status(400).send("Email is not valid!");
+      }
+
+      if (!isPasswordValid(password)) {
+        console.log("password is false");
+        return res
+          .status(400)
+          .send(
+            " Password should be at least 8 characters long and include at least one lowercase, one uppercase, one number, and one special character"
+          );
+      }
+
       const newUser = await sql`INSERT INTO user_details ( 
       "user_type", "user_image",  "user_name", "email", "password", "first_name", "middle_name", "last_name", "suffix", "sex", 
       "date_of_birth","civil_status", "contact_number", "region", "province", "municipality", "barangay", 
       "zone", "street","zipcode"
       ) VALUES(
-        ${user_type}, ${req.file.filename}, ${user_name}, ${email}, ${password}, ${first_name}, ${middle_name}, ${last_name}, ${suffix},
+        ${user_type}, ${req.file.filename}, ${user_name}, ${email}, ${hashPassword}, ${first_name}, ${middle_name}, ${last_name}, ${suffix},
         ${sex}, ${date_of_birth}, ${civilstatus}, ${contactnumber}, ${region}, ${province}, ${municipal},
         ${barangay}, ${zone}, ${street}, ${zipcode}
       ) RETURNING *`;
-      if (newUser[0].length == 0) {
-        return res.status(404).send("id doesn't exists");
-      }
 
-      if(!isEmailValid(email)){
-        console.log('email is false')
-        return res.status(400).send("Email is not valid!");
-      }
+      // if (newUser[0].length == 0) {
+      //   return res.status(404).send("id doesn't exists");
+      // }
 
-      if(!isPasswordValid(password)){
-        console.log('password is false')
-        return res.status(400).send(" Password should be at least 8 characters long and include at least one lowercase, one uppercase, one number, and one special character");
-      }
-
-      
-
+      const token = generateToken(newUser);
+      console.log("-------");
+      console.log(token);
+      console.log("-------");
       console.log(newUser[0]);
-      res.status(201).json(newUser);
+      return res
+        .status(201)
+        .cookie("token", token, { httpOnly: true })
+        .json(newUser);
     } catch (err) {
       console.error(err.message);
       res.status(500).send("Server Error");
     }
   }
 );
+
+createAccountRouter.get("/verify", (req, res) => {
+  // console.log(req.cookies)
+  console.log(req.cookies.token);
+  const { isValid, ...props } = tokenValidator(req.cookies.token);
+  // console.log(isValid);
+
+  if (isValid) {
+    console.log('200');
+    return res.status(200).json(props);
+  } else {
+    console.log('Unauthorized');
+    return res.status(401).json(props);
+  }
+});
 
 export default createAccountRouter;

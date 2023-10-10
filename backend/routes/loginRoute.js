@@ -1,5 +1,7 @@
 import express from "express";
 import sql from "../config/db.js";
+import bcrypt from "bcryptjs";
+import generateToken from "../middlewares/auth.js";
 
 const logInRouter = express.Router();
 
@@ -9,15 +11,21 @@ logInRouter.post("/", async (req, res) => {
   try {
     const logInData =
       await sql`SELECT * FROM user_details WHERE user_name = ${user_name}`;
-    if (logInData.length === 0) {
-      return res.status(401).json({message: "Invalid credentials"});
+
+    const isPasswordMatch = await bcrypt.compare(
+      password,
+      logInData[0].password
+    );
+    if (!isPasswordMatch) {
+      return res.status(401).json({ message: "Incorrect Password" });
     }
 
-    if(password != logInData[0].password){
-        return res.status(401).json({message: "Invalid credentials"});
-    }
-    // console.log(logInData)
-    res
+    const token = generateToken(logInData[0]);
+    console.log("-LogIn---------");
+    console.log(token);
+    console.log("----------");
+    return res
+      .cookie("token", token, { httpOnly: true })
       .status(200)
       .send(logInData[0]);
   } catch (error) {

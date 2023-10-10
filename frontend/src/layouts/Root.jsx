@@ -6,14 +6,18 @@ import Sidebar from "./sidebar/Sidebar";
 import NavbarComponent from "./navbar/Navbar";
 import UserDashboard from "../pages/user/userDashboard/userDashboard";
 import { useParams } from "react-router-dom";
+import useIsAuthenticated from "../hook/useIsAuthenticated()";
 
 const userDetails_Selected_Loader = async (id) => {
-  const response = await fetch("http://localhost:3001/root/" + id);
+  const response = await fetch("http://localhost:3001/root/" + id,{
+    credentials: "include",
+  });
   const userDetails_data = await response.json();
   return userDetails_data;
 };
 
 function Root() {
+  useIsAuthenticated();
   const isTabletMid = useMediaQuery({ query: "(max-width: 767px)" });
   const [open, setOpen] = useState(isTabletMid ? false : true);
   const sidebarRef = useRef();

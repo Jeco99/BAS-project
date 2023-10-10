@@ -140,10 +140,17 @@ export default function CreateAccount() {
       method: "POST",
       body: formdata,
     });
-    const result = await response.json();
-    const path = result[0].user_id;
+    // const result = await response.json();
+    // const path = result[0].user_id;
     if (response.status == 201) {
-      navigate(`/root/${path}`);
+      //TODO: must be back to login 
+    // alert(
+    //   <>
+    //   <p>You have successfully log-in!</p>
+    //   <button type="button" onClick={()=>navigate(`/`)}></button>
+    //   </>
+    // )
+      
     } else {
       alert("Can't be found");
     }
@@ -172,7 +179,7 @@ export default function CreateAccount() {
             />
             <div className="flex space-x-3 labelText">
               <FormLabel
-                labelName={"Are you an official?"}
+                labelName={"Are you a government official?"}
                 id={getData.user_type}
                 showRequired
               />

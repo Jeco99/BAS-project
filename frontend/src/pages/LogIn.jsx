@@ -32,19 +32,27 @@ const LogIn = () => {
     logIn_dataValidation(logInData, errors, setError)
 
     try {
-      const response = await fetch('http://localhost:3001/login/', {
+      const response = await fetch('http://localhost:3001/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          credentials : "include"
         },
         body: JSON.stringify(logInData)
       });
-      const result = await response.json();
-      console.log(result);
-      setRole(result.user_type);
+       const authenticatedUser = await response.json();
+   
+      localStorage.setItem(
+        "authenticatedUser",
+        JSON.stringify(authenticatedUser)
+      );
+      console.log(authenticatedUser);
+      // setRole(result.user_type);
 
       if(response.status == 200){
-        const id = result.user_id;
+        const id = authenticatedUser.user_id;
+        // document.cookie = "token=abcd123"
+        // console.log(document.cookie)
         navigate('/root/'+id);
     
       }

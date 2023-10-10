@@ -1,13 +1,17 @@
 import { HiDocument } from "react-icons/hi";
 import { useEffect, useState } from "react";
+import useIsAuthenticated from "../../hook/useIsAuthenticated()";
 
 const chartLoader = async () => {
-  const response = await fetch("http://localhost:3001/chart/documents");
+  const response = await fetch("http://localhost:3001/chart/documents", {
+    credentials: "include",
+  });
   const barangayClearanceData = await response.json();
   return barangayClearanceData;
 };
 
 export default function NumberOfbarangayClearance() {
+  useIsAuthenticated();
   const [barangayClearance, setBarangayClearance] = useState([]);
   useEffect(() => {
     async function init() {
