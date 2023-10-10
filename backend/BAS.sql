@@ -225,5 +225,17 @@ WHERE post_id =2;
 ------
 CREATE TABLE notification(
   notification_id  SERIAL PRIMARY KEY,
-  notification_type VARCHAR(255)
+  message VARCHAR(255),
+  post_id INT NOT NULL,
+  appointment_id INT NOT NULL
 );
+
+ALTER TABLE notification
+ADD CONSTRAINT fk_post_id
+FOREIGN KEY (post_id)
+REFERENCES post(post_id);
+
+ALTER TABLE notification
+ADD CONSTRAINT fk_appointment_id
+FOREIGN KEY (appointment_id)
+REFERENCES appointment (appointment_id);

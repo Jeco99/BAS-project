@@ -7,6 +7,7 @@ import appointmentRouter from "./routes/appointmentRoute.js";
 import logInRouter from "./routes/loginRoute.js";
 import userDetails_Router from "./routes/userdetails.js";
 import chartRouter from "./routes/chart.js";
+import nofiticationRouter from "./routes/notificationRoute.js";
 
 const app = express();
 
@@ -26,6 +27,7 @@ app.use('/createaccount', createAccountRouter);
 app.use('/login', logInRouter);
 app.use('/root', userDetails_Router);
 app.use('/chart', chartRouter);
+app.use('/notification', nofiticationRouter);
 
 
 const PORT = 3001;

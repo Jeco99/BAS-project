@@ -3,6 +3,7 @@ import { BellIcon } from "@heroicons/react/24/solid";
 import logoImage from "/src/assets/images/BAS-Logo-1.2.png";
 import { MdMenu } from "react-icons/md";
 import { NavLink } from "react-router-dom";
+import Notification from "../../pages/user/notification/notification";
 import "./Navbar.css";
 
 export default function NavbarComponent({ setOpen, data }) {
@@ -23,7 +24,8 @@ export default function NavbarComponent({ setOpen, data }) {
         </div>
       </Navbar.Brand>
       <div className="flex items-center md:order-2">
-        <BellIcon className="hover:text-morningGlory mr-2 h-6 w-6" />
+      
+      <Notification />
         <div className="welcome-note flex items-center flex-col lg:flex-row">
           <p className="mr-1">Welcome,</p>
           <span className="mr-2">

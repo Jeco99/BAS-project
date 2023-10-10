@@ -19,6 +19,7 @@ import AdminHistory from "./pages/user/userHistory/AdminHistory";
 import UserHistory from "./pages/user/userHistory/UserHistory";
 
 import AdminSettings from "./pages/settings/admin/AdminSetting";
+
 const router = createBrowserRouter([
   {
     path: "/",
