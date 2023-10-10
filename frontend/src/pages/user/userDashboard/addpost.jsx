@@ -7,17 +7,16 @@ function BarangayAddPost({ setAddPost }) {
 
   const [postDetails, setPostDetails] = useState({
     title: "",
-    description: "", 
-    user_id: id
+    description: "",
+    user_id: id,
   });
 
   const [errors, setErrors] = useState({
     title: null,
-    description: null
+    description: null,
   });
 
   console.log(errors);
-
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -29,25 +28,22 @@ function BarangayAddPost({ setAddPost }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-   
-  
-      post_Validation(postDetails, errors, setErrors);
-      const response = await fetch(`http://localhost:3001/post/add/${id}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(postDetails),
-      });
 
-      if (response.status === 200) {
-        alert("Data inserted successfully");
-        return (location.href = `/root/${id}/dashboard`);
-      }
+    post_Validation(postDetails, errors, setErrors);
+    const response = await fetch(`http://localhost:3001/post/add/${id}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify(postDetails),
+    });
 
+    if (response.status === 201) {
+      alert("Data inserted successfully");
+      return (location.href = `/root/${id}/dashboard`);
+    }
   };
-
-  console.log(postDetails);
   return (
     <div className="fixed block inset-0 flex items-center justify-center bg-gray-50 bg-opacity-90 overflow-hidden z-50">
       <div className="w-full mx-[700px]">
@@ -76,7 +72,7 @@ function BarangayAddPost({ setAddPost }) {
             name="description"
             id="description"
           ></textarea>
-           {errors.title && <small>{errors.description}</small>}
+          {errors.title && <small>{errors.description}</small>}
 
           <div className="flex justify-between gap-1 mt-4">
             <button

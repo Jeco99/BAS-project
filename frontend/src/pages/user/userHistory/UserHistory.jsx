@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { convertTo12HoursFormat } from "../../../utils/timeConversion";
 import { useParams } from "react-router-dom";
+import useIsAuthenticated from "../../../hook/useIsAuthenticated";
 
 const historyLoader = async (id) => {
   const response = await fetch(`http://localhost:3001/history/user/${id}`,{
@@ -11,6 +12,7 @@ const historyLoader = async (id) => {
 };
 
 export default function UserHistory() {
+  useIsAuthenticated();
   const [data, setData] = useState([]);
   const { id } = useParams();
   useEffect(() => {

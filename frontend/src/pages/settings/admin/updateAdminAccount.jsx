@@ -291,7 +291,7 @@ export default function UpdateAdminAccount() {
           <div className="flex justify-between gap-4 flex-col sm:flex-row">
             <button
               className="cancelBtn btnRadius"
-              onClick={() => (location.href = "/")}
+              onClick={() => (location.href = `/root/${id}/dashboard`)}
             >
               Back
             </button>

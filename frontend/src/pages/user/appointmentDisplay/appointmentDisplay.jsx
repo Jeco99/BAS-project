@@ -49,6 +49,7 @@ export default function AppointmentDisplay() {
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: 'include',
         body: JSON.stringify({
           request_type: request,
           purpose: purpose,

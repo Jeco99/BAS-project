@@ -12,6 +12,7 @@ export default function ActionButton({ appointment_id, user_id }) {
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: 'include',
         body: JSON.stringify({
           status: "Completed",
         }),
@@ -30,6 +31,7 @@ export default function ActionButton({ appointment_id, user_id }) {
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: 'include',
         body: JSON.stringify({
           status: "Incomplete",
         }),

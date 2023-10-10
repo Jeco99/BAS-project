@@ -9,7 +9,9 @@ import { dataValidation } from "../../../utils/createAccount_dataValidation";
 import { useNavigate } from "react-router-dom";
 
 const userDetails_Selected_Loader = async (id) => {
-  const response = await fetch("http://localhost:3001/root/fetch/" + id);
+  const response = await fetch("http://localhost:3001/root/fetch/" + id,{
+    credentials:'include',
+  });
   const userDetails_data = await response.json();
   return userDetails_data;
 };
@@ -66,6 +68,7 @@ export default function UpdateUserAccount() {
 
     const response = await fetch(`http://localhost:3001/root/update/useraccount/${id}`, {
         method: 'PUT',
+        credentials: 'include',
         body: formdata
       });
     if(response.status == 200){
@@ -104,7 +107,7 @@ export default function UpdateUserAccount() {
           <div className="flex justify-between gap-4 flex-col sm:flex-row">
               <button
                  className="cancelBtn btnRadius"
-                onClick={() => (location.href = "/")}
+                onClick={() => (location.href = `/root/${id}/dashboard`)}
               >
                 Back
               </button>
