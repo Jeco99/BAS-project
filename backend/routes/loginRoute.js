@@ -16,6 +16,12 @@ logInRouter.post("/", async (req, res) => {
       password,
       logInData[0].password
     );
+   
+
+    if(user_name != logInData[0].user_name && !isPasswordMatch){
+      return res.status(401).json({ message: "Invalid Credentials" });
+    } 
+    
     if (!isPasswordMatch) {
       return res.status(401).json({ message: "Incorrect Password" });
     }

@@ -19,6 +19,8 @@ import AdminHistory from "./pages/user/userHistory/AdminHistory";
 import UserHistory from "./pages/user/userHistory/UserHistory";
 
 import AdminSettings from "./pages/settings/admin/AdminSetting";
+import LogInSuccess from "./pages/user/userSignUp/logInSuccess";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -69,6 +71,11 @@ const router = createBrowserRouter([
         element: <AdminSettings />
       }
     ],
+  },
+  {
+    path:'/success',
+    element:<LogInSuccess/>,
+    errorElement:<ErrorPage />
   }
 ]);
 

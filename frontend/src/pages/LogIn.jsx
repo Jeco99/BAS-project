@@ -55,10 +55,10 @@ const LogIn = () => {
         // console.log(document.cookie)
         navigate('/root/'+id);
     
-      }
-      
+      }      
       if(response.status == 401){
         alert("Status: " + response.status + " "+authenticatedUser.message);
+        navigate('/');
       }
     } catch (error) {
       console.error('Error:', error);

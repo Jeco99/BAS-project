@@ -43,6 +43,7 @@ createAccountRouter.post(
   "/create",
   upload.single("user_image"),
   async (req, res) => {
+    const error = ["duplicate key value violates unique constraint \"user_details_email_key\""]
     try {
       if (!req.file || !req.file.filename) {
         console.log("No file uploaded");
@@ -53,6 +54,7 @@ createAccountRouter.post(
         user_name,
         email,
         password,
+        confirmpassword,
         first_name,
         middle_name,
         last_name,
@@ -72,19 +74,29 @@ createAccountRouter.post(
 
       const hashPassword = await bcrypt.hash(password, 10);
 
-      if (!isEmailValid(email)) {
-        console.log("email is false");
-        return res.status(400).send("Email is not valid!");
+      if (password !== confirmpassword) {
+        return res.status(400).json({
+          message: "Password not match!",
+        });
       }
 
-      if (!isPasswordValid(password)) {
-        console.log("password is false");
-        return res
-          .status(400)
-          .send(
-            " Password should be at least 8 characters long and include at least one lowercase, one uppercase, one number, and one special character"
-          );
+      if (!isEmailValid(email)) {
+        console.log("email is false");
+        return res.status(400).json({
+          message: "Email is not valid!",
+        });
       }
+
+      // if (!isPasswordValid(password)) {
+      //   console.log("password is false");
+      //   return res
+      //     .status(400)
+
+      //     .json({
+      //       message:
+      //         " Password should be at least 8 characters long and include at least one lowercase, one uppercase, one number, and one special character",
+      //     });
+      // }
 
       const newUser = await sql`INSERT INTO user_details ( 
       "user_type", "user_image",  "user_name", "email", "password", "first_name", "middle_name", "last_name", "suffix", "sex", 
@@ -107,11 +119,18 @@ createAccountRouter.post(
       console.log(newUser[0]);
       return res
         .status(201)
-        .header('Access-Control-Allow-Credentials', true)
+        .header("Access-Control-Allow-Credentials", true)
         .cookie("token", token, { httpOnly: true })
         .json(newUser);
     } catch (err) {
+      if(error.includes(err.message)){
+        return res.status(400).json({
+          message: "Email must be unique!",
+        });
+      }
+      console.log('error:', err.message);
       console.error(err.message);
+    
       res.status(500).send("Server Error");
     }
   }
@@ -124,10 +143,10 @@ createAccountRouter.get("/verify", (req, res) => {
   // console.log(isValid);
 
   if (isValid) {
-    console.log('200');
+    console.log("200");
     return res.status(200).json(props);
   } else {
-    console.log('Unauthorized');
+    console.log("Unauthorized");
     return res.status(401).json(props);
   }
 });
