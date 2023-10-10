@@ -1,6 +1,6 @@
 import { HiDocument } from "react-icons/hi";
 import { useEffect, useState } from "react";
-import useIsAuthenticated from "../../hook/useIsAuthenticated()";
+import useIsAuthenticated from "../../hook/useIsAuthenticated";
 
 const chartLoader = async () => {
   const response = await fetch("http://localhost:3001/chart/documents",{

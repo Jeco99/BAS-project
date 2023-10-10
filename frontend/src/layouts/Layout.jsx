@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { useRef } from "react";
 import { useMediaQuery } from "react-responsive";
 import { useParams } from "react-router-dom";
-import useIsAuthenticated from "../hook/useIsAuthenticated()";
+import useIsAuthenticated from "../hook/useIsAuthenticated";
 
 const userDetails_Selected_Loader = async (id) => {
   const response = await fetch("http://localhost:3001/root/" + id,{

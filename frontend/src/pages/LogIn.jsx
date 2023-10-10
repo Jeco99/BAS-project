@@ -11,7 +11,6 @@ const LogIn = () => {
     user_name: "",
     password: "",
   });
-  const [role, setRole] = useState('');
 
   const [errors, setError] = useState({
     user_name: "",
@@ -38,6 +37,7 @@ const LogIn = () => {
           'Content-Type': 'application/json',
           credentials : "include"
         },
+        credentials:"include",
         body: JSON.stringify(logInData)
       });
        const authenticatedUser = await response.json();
@@ -58,7 +58,7 @@ const LogIn = () => {
       }
       
       if(response.status == 401){
-        alert("Status: " + response.status + " "+result.message);
+        alert("Status: " + response.status + " "+authenticatedUser.message);
       }
     } catch (error) {
       console.error('Error:', error);
@@ -139,12 +139,6 @@ const LogIn = () => {
           </button>
         </div>
       </form>
-      {role && (
-        <div>
-          <h2>Welcome, {role === 'admin' ? 'Admin' : 'User'}</h2>
-          <p>Your role is: {role}</p>
-        </div>
-      )}
     </div>
   );
 };

@@ -4,14 +4,19 @@ import { Input } from "@material-tailwind/react";
 import ActionButton from "./actionButton";
 import { useParams } from "react-router-dom";
 import { convertTo12HoursFormat } from "../../../utils/timeConversion";
+import useIsAuthenticated from "../../../hook/useIsAuthenticated";
+
 
 const appointmentLoader = async (id) => {
-  const response = await fetch(`http://localhost:3001/appointment/${id}`);
+  const response = await fetch(`http://localhost:3001/appointment/${id}`,{
+    credentials: "include",
+  });
   const appointmentData = await response.json();
   return appointmentData;
 };
 
 function ReportPage() {
+  useIsAuthenticated();
   const [data, setData] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [filterValue, setFilterValue] = useState("all");

@@ -4,7 +4,9 @@ import { convertTo12HoursFormat } from "../../utils/timeConversion";
 import { useParams } from "react-router-dom";
 
 const postLoader = async (id) => {
-  const response = await fetch(`http://localhost:3001/post/${id}`);
+  const response = await fetch(`/post/${id}`,{
+    credentials:'include',
+  });
   const postData = await response.json();
   return postData;
 };

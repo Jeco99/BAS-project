@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 async function checkIfAuthenticated() {
   try {
-    const response = await fetch("http://localhost:3001/createaccount/verify");
+    const response = await fetch("/createaccount/verify");
     return response.status === 200;
   } catch (e) {
     if (e.response.status === 401) {

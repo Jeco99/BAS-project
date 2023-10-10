@@ -3,7 +3,9 @@ import { convertTo12HoursFormat } from "../../../utils/timeConversion";
 import { useParams } from "react-router-dom";
 
 const historyLoader = async (id) => {
-  const response = await fetch(`http://localhost:3001/history/user/${id}`);
+  const response = await fetch(`http://localhost:3001/history/user/${id}`,{
+    credentials:"include",
+  });
   const completedStatusData = await response.json();
   return completedStatusData;
 };

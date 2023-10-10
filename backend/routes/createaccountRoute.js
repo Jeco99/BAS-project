@@ -107,6 +107,7 @@ createAccountRouter.post(
       console.log(newUser[0]);
       return res
         .status(201)
+        .header('Access-Control-Allow-Credentials', true)
         .cookie("token", token, { httpOnly: true })
         .json(newUser);
     } catch (err) {

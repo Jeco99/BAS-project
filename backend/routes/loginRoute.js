@@ -25,8 +25,9 @@ logInRouter.post("/", async (req, res) => {
     console.log(token);
     console.log("----------");
     return res
-      .cookie("token", token, { httpOnly: true })
       .status(200)
+      .header('Access-Control-Allow-Credentials', true)
+      .cookie("token", token, { httpOnly: true })
       .send(logInData[0]);
   } catch (error) {
     console.error("Error during login:", error);
