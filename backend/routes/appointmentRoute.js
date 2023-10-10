@@ -27,9 +27,9 @@ appointmentRouter.get("/:id", async (req, res) => {
           AND status = 'Pending'
     ORDER BY appointment_time_date_created;`;
 
-    if (appointmentData.length == 0) {
-      return res.status(404).send("id doesn't exists");
-    }
+    // if (appointmentData.length == 0) {
+    //   return res.status(404).send("id doesn't exists");
+    // }
     res.status(200).json(appointmentData);
   } catch (err) {
     console.error(err.message);
@@ -54,9 +54,9 @@ appointmentRouter.post("/create/:id", async (req, res) => {
           appointment_date, user_id ) VALUES (
             ${request_type}, ${purpose}, ${appointment_time}, ${appointment_date}, ${user_id}) RETURNING *`;
 
-    if (newAppointment.length == 0) {
-      return res.status(404).send("id doesn't exists");
-    }
+    // if (newAppointment.length == 0) {
+    //   return res.status(404).send("id doesn't exists");
+    // }
     res.status(201).json(newAppointment);
   } catch (err) {
     console.error(err.message);
@@ -71,9 +71,9 @@ appointmentRouter.put("/:id", async (req, res) => {
     const updateStatus =
       await sql`UPDATE appointment SET "status" = ${status}, "date_time_approval"= NOW() WHERE appointment_id = ${id} RETURNING *`;
 
-    if (updateStatus.length == 0) {
-      return res.status(404).send("id doesn't exists");
-    }
+    // if (updateStatus.length == 0) {
+    //   return res.status(404).send("id doesn't exists");
+    // }
     res.status(201).json(updateStatus[0]);
   } catch (err) {
     console.error(err.message);

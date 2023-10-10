@@ -81,9 +81,9 @@ userDetails_Router.put(
         let updatewithImage = sql`user_image = ${user_image}`;
         const updateWithExistingImage =
           await sql`UPDATE user_details SET ${updatewithImage}, user_name=${user_name}, email=${email}, password=${password}, contact_number=${contactnumber} WHERE user_id = ${id} RETURNING *`;
-        if (updateWithExistingImage.length == 0) {
-          return res.status(404).send("id doesn't exists");
-        }
+        // if (updateWithExistingImage.length == 0) {
+        //   return res.status(404).send("id doesn't exists");
+        // }
         res.status(200).json(updateWithExistingImage);
       } catch (err) {
         console.error(err.message);
@@ -94,9 +94,9 @@ userDetails_Router.put(
         let updatewithImage = sql`user_image = ${req.file.filename}`;
         const updatedImage =
           await sql`UPDATE user_details SET ${updatewithImage}, user_name=${user_name}, email=${email}, password=${password}, contact_number=${contactnumber} WHERE user_id = ${id}`;
-        if (updatedImage.length == 0) {
-          return res.status(404).send("id doesn't exists");
-        }
+        // if (updatedImage.length == 0) {
+        //   return res.status(404).send("id doesn't exists");
+        // }
         res.status(200).json(updatedImage);
       } catch (err) {
         console.error(err.message);
@@ -130,9 +130,9 @@ userDetails_Router.put("/update/userpersonal/:id", async (req, res) => {
         civil_status = ${civilstatus}, region = ${region}, province = ${province}, municipality = ${municipal}, barangay = ${barangay}, zone = ${zone},
         street = ${street}, zipcode = ${zipcode}
       WHERE user_id = ${id} RETURNING *`;
-    if (updateUserPesonal.length == 0) {
-      return res.status(404).send("id doesn't exists");
-    }
+    // if (updateUserPesonal.length == 0) {
+    //   return res.status(404).send("id doesn't exists");
+    // }
     res.status(200).json(updateUserPesonal);
   } catch (err) {
     console.error(err.message);
@@ -170,9 +170,9 @@ userDetails_Router.put(
         zone = ${zone},
         street = ${street},
         zipcode = ${zipcode} WHERE user_id = ${id}`;
-        if (updateWithExistingImage.length == 0) {
-          return res.status(404).send("id doesn't exists");
-        }
+        // if (updateWithExistingImage.length == 0) {
+        //   return res.status(404).send("id doesn't exists");
+        // }
         res.status(200).json(updateWithExistingImage);
       } catch (err) {
         console.error(err.message);
@@ -189,9 +189,9 @@ userDetails_Router.put(
         zone = ${zone},
         street = ${street},
         zipcode = ${zipcode} WHERE user_id = ${id}`;
-        if (updatedImage.length == 0) {
-          return res.status(404).send("id doesn't exists");
-        }
+        // if (updatedImage.length == 0) {
+        //   return res.status(404).send("id doesn't exists");
+        // }
         res.status(200).json(updatedImage);
       } catch (err) {
         console.error(err.message);
