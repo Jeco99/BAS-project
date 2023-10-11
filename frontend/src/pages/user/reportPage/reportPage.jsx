@@ -33,12 +33,12 @@ function ReportPage() {
   const handleSearch = (event) => {
     setSearchTerm(event.target.value.toLowerCase());
   };
-  const handleFilter = (event) => {
-    setFilterValue(event.target.value.toLowerCase());
-  };
+  // const handleFilter = (event) => {
+  //   setFilterValue(event.target.value.toLowerCase());
+  // };
 
-  console.log(data);
-  console.log(filterValue)
+  // console.log(data);
+  // console.log(filterValue)
 
   const filteredData = data.filter((item) => {
     const searchFilter = searchTerm.toLowerCase(); 
@@ -84,7 +84,7 @@ function ReportPage() {
             <CgSearch className="text-gray-400" />
           </div>
         </div>
-        <div className="relative p-2">
+        {/* <div className="relative p-2">
           <select
             id="filter"
             className="px-4 py-2 px-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
@@ -95,10 +95,10 @@ function ReportPage() {
             <option value="latesttooldest">Latest to Oldest</option>
             <option value="oldesttolatest">Oldest to Latest</option>
           </select>
-        </div>
+        </div> */}
       </div>
 
-      <div className="overflow-x-auto bg-gray-50 shadow-lg">
+      <div className="overflow-x-auto bg-gray-50 shadow-lg mb-7">
         <table className="table-auto w-full">
           <thead>
             <tr className="table-fixed bg-gray-400 min-w-full">
