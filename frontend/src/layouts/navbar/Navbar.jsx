@@ -23,7 +23,7 @@ export default function NavbarComponent({ setOpen, data }) {
         </div>
       </Navbar.Brand>
       <div className="flex items-center md:order-2">
-        <BellIcon className="hover:text-morningGlory mr-2 h-6 w-6" />
+        {/* <BellIcon className="hover:text-morningGlory mr-2 h-6 w-6" /> */}
         <div className="welcome-note flex items-center flex-col lg:flex-row">
           <p className="mr-1">Welcome,</p>
           <span className="mr-2">

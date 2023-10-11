@@ -51,7 +51,7 @@ export default function UserDashboard() {
           <div className="flex justify-between items-center">
             <h1 className="main-title">Latest News/Events</h1>
             <div className="flex flex-col lg:flex-row">
-              <div className="relative">
+              {/* <div className="relative">
                 <Input
                   label="Type to search"
                   // value={searchTerm}
@@ -60,7 +60,7 @@ export default function UserDashboard() {
                 <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
                   <CgSearch className="text-gray-400" />
                 </div>
-              </div>
+              </div> */}
               {data.user_type == "admin" ? (
                 <button
                   className="btn btnRadius ml-1"

@@ -16,8 +16,6 @@ import isEmailValid from "./isEmailValid";
     newErrors.user_name = "";
   }
 
-
-
   if (getData.email.trim() == "") {
     newErrors.email = "Email is Required!";
   } else if(!isEmailValid(getData.email)){
@@ -26,8 +24,13 @@ import isEmailValid from "./isEmailValid";
     newErrors.email = "";
   }
 
-  if (getData.password != getData.confirmpassword) {
+  if (getData.password !== getData.confirmpassword) {
     alert("Password not match!");
+    newErrors.password = "Password not match";
+    newErrors.confirmpassword = "Password not match";
+  } else{
+    newErrors.password = "";
+    newErrors.confirmpassword = "";
   }
 
   if (getData.password.trim() == "") {

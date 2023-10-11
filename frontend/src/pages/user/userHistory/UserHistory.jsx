@@ -2,6 +2,9 @@ import { useState, useEffect } from "react";
 import { convertTo12HoursFormat } from "../../../utils/timeConversion";
 import { useParams } from "react-router-dom";
 import useIsAuthenticated from "../../../hook/useIsAuthenticated";
+import { CgSearch } from "react-icons/cg";
+import { Input } from "@material-tailwind/react";
+
 
 const historyLoader = async (id) => {
   const response = await fetch(`http://localhost:3001/history/user/${id}`,{
@@ -15,6 +18,7 @@ export default function UserHistory() {
   useIsAuthenticated();
   const [data, setData] = useState([]);
   const { id } = useParams();
+  const [searchTerm, setSearchTerm] = useState("");
   useEffect(() => {
     async function init() {
       const data = await historyLoader(id);
@@ -22,10 +26,64 @@ export default function UserHistory() {
     }
     init();
   }, []);
+  const handleSearch = (event) => {
+    setSearchTerm(event.target.value.toLowerCase());
+  };
+  const filteredData = data.filter((item) => {
+    const searchFilter = searchTerm.toLowerCase(); 
+    const fullName_filter = item.fullname.toLowerCase();
+    const purpose_filter = item.purpose.toLowerCase();
+    const request_type_filter = item.request_type.toLowerCase();
+    const status_filter = item.status.toLowerCase();
+    const appointment_time_filter = item.appointment_time.toLowerCase();
+    const appointment_date_filter = item.appointment_date.toLowerCase();
+
+    // if(filterValue == 'oldesttolatest'){
+    //   return appointment_date_created_filter.sort();
+    // }
+
+    if(searchFilter === ''){
+      return true
+    }
+
+  
+    return(
+      fullName_filter.includes(searchFilter) ||
+      purpose_filter.includes(searchFilter) || 
+      request_type_filter.includes(searchFilter) ||
+      status_filter.includes(searchFilter) || 
+      appointment_time_filter.includes(searchFilter) || 
+      appointment_date_filter.includes(searchFilter) 
+    )
+  })
   return (
     <div className="main-container">
       <h1 className="main-title">History</h1>
-      <div className="overflow-x-auto bg-gray-50 shadow-lg">
+      <div className="flex flex-col sm:flex-row items-center mb-4">
+        <div className="relative">
+          <Input
+            label="Type to search"
+            value={searchTerm}
+            onChange={handleSearch}
+          />
+          <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+            <CgSearch className="text-gray-400" />
+          </div>
+        </div>
+        {/* <div className="relative p-2">
+          <select
+            id="filter"
+            className="px-4 py-2 px-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+            value={filterValue}
+            onChange={handleFilter}
+          >
+            <option value="all">All</option>
+            <option value="latesttooldest">Latest to Oldest</option>
+            <option value="oldesttolatest">Oldest to Latest</option>
+          </select>
+        </div> */}
+      </div>
+      <div className="overflow-x-auto bg-gray-50 shadow-lg mb-7">
         <table className="table-auto w-full">
           <thead>
             <tr className="table-fixed bg-gray-400 min-w-full">
@@ -39,7 +97,7 @@ export default function UserHistory() {
             </tr>
           </thead>
           <tbody className="text-lg">
-            {data.map((item) => (
+            {filteredData.map((item) => (
               <tr key={item.appointment_id}>
                 <td className="border px-4 py-2">{`${item.approval_date_created.substr(
                   0,
@@ -64,7 +122,7 @@ export default function UserHistory() {
           </tbody>
         </table>
       </div>
-      <div className="flex flex-col items-center">
+      {/* <div className="flex flex-col items-center">
         <span className="text-sm text-gray-700 dark:text-gray-400">
           Page 1{" "}
         </span>
@@ -106,7 +164,7 @@ export default function UserHistory() {
             </svg>
           </button>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

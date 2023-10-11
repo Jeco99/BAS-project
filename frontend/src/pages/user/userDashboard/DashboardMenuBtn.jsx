@@ -29,6 +29,7 @@ export default function DashboardMenuBtn({ post_id }) {
     try {
       await fetch(`http://localhost:3001/post/delete/${post_id}`, {
         method: "DELETE",
+        credentials: "include",
       });
 
       return (location.href = `/root/${id}/dashboard`);
