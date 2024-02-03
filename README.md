@@ -1,20 +1,25 @@
 # BAS-project
+
 # Capstone_Project
+
 This repo is for our capstone project.
 
 <h1>Project description:<h1>
-<b>Baranggay Appointment System</b> (BAS) is a web-based application that allows residents of local baranggay to schedule appointments to baranggay officials.
+<b>Barangay Appointment System</b> (BAS) is a web-based application that allows residents of local baranggay to schedule appointments with barangay officials.
 
 <h1>Dependencies: </h1>
-    <pre>git clone https://github.com/iBinbin08/Capstone_Project.git</pre>
+    <pre>git clone https://github.com/Jeco99/BAS-project</pre>
 <h4>To install node_modules</h4>
     <pre>npm install</pre>
 <h4>To run on browser:</h4>
     <pre>npm run dev</pre>
 
 <h1>Tech Stack:</h1>
+    <h3>PostgreSQL</h3>
+    <h3>ExpressJS</h3>
     <h3>ReactJS</h3>
-    <h3>Tailwind</h3>
+    <h3>NodeJS</h3>
+    
 
 <h1>Features:</h1>
     <ul>
@@ -26,5 +31,5 @@ This repo is for our capstone project.
     </ul>
     <h6>Admin POV</h6>
     <ul>
-        <li>Admin will receive a notification.</li>
+        <li>Admin will approve the appointment.</li>
     </ul>
