@@ -47,12 +47,10 @@ const LogIn = () => {
         JSON.stringify(authenticatedUser)
       );
       console.log(authenticatedUser);
-      // setRole(result.user_type);
+   
 
       if(response.status == 200){
         const id = authenticatedUser.user_id;
-        // document.cookie = "token=abcd123"
-        // console.log(document.cookie)
         navigate('/root/'+id);
     
       }      
